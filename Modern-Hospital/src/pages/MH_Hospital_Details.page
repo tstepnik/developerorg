@@ -1,0 +1,268 @@
+<apex:page id="MH_Hospital_Details" standardController="Hospital__c" extensions="MH_Hospital_Extension">
+
+    <apex:pageBlock >
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
+
+        <style></style>
+
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:form >
+
+            <apex:pageBlockSection title="{!$Label.hospital_detail_page_title}" columns="2" id="HospitalDetailSection">
+                <apex:outputField value="{!Hospital__c.Name}"/>
+                <apex:outputField value="{!Hospital__c.Website__c}"/>
+                <apex:outputField value="{!Hospital__c.Email__c}"/>
+
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.hospital_address_section_title}" columns="1">
+                <apex:pageBlockSection >
+                    <apex:outputField value="{!Hospital__c.Town__c}"/>
+                    <apex:outputField value="{!Hospital__c.Country__c}"/>
+                    <apex:outputField value="{!Hospital__c.Street__c}"/>
+                </apex:pageBlockSection>
+
+                <apex:outputPanel >
+                    <c:MH_Hospital_GoogleMap />
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.hospital_other_section_title}">
+                <apex:outputField value="{!Hospital__c.Street_Number__c}"/>
+                <apex:outputField value="{!Hospital__c.Postal_Code__c}"/>
+                <apex:outputField value="{!Hospital__c.Chief_Of_Medicine__c}"/>
+
+                <apex:outputField value="{!Hospital__c.Contracts_Number__c}"/>
+                <apex:outputField value="{!Hospital__c.Phone_Number_2__c}"/>
+                <apex:outputField value="{!Hospital__c.Teaching_Hospital__c}"/>
+
+                <apex:outputField value="{!Hospital__c.Fax_Number_1__c}"/>
+                <apex:outputField value="{!Hospital__c.Helicopter_Access__c}"/>
+                <apex:outputField value="{!Hospital__c.Fax_Number_2__c}"/>
+
+                <apex:outputField value="{!Hospital__c.Doctors_Number__c}"/>
+                <apex:outputField value="{!Hospital__c.Phone_Number_1__c}"/>
+
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection columns="1">
+                <apex:outputPanel >
+                    <div style="text-align: center; margin-right: 6rem">
+                        <apex:commandButton value="{!$Label.hospital_detail_edit_button}"
+                                            onclick="window.open('/{!Hospital__c.id}/e?retURL={!Hospital__c.id}')"/>
+
+                        <apex:commandButton value="{!$Label.MH_Hospital_HireButton}"
+                                            onclick="openHireHospitalPopup()" reRender="none"/>
+
+                        <apex:commandButton value="{!$Label.hospital_detail_delete_button}"
+                                            onClick="return confirm('{!$Label.popup_confirm_delete}')"
+                                            action="{!delete}"/>
+                    </div>
+                </apex:outputPanel>
+            </apex:pageBlockSection>
+
+            <apex:pageBlockSection title="{!$Label.Hospital_Contract_List}" columns="1">
+                <apex:pageBlockTable value="{!contracts}" var="contract">
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.MH_Actions}</apex:facet>
+                        <apex:commandLink value="{!$Label.View_Contract}"
+                                          onClick="window.open('/{!contract.Id}')"/>
+
+                        <apex:commandLink value="{!$Label.Dismiss_Contract}" action="{!dismiss}"
+                                          rendered="{!if(AND(contract.Expire_Date__c != null,contract.Expire_Date__c <= TODAY()),false,true)}">
+                            <apex:param value="{!contract.Id}" name="Name" assignTo="{!contractId}"/>
+                        </apex:commandLink>
+
+                            {!$Label.view_edit_separator}
+                        <apex:commandLink value="{!$Label.Edit_Contract}"
+                                          onclick="window.open('/{!contract.Id}/e?retURL={!contract.Id}')"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Contract_Name}</apex:facet>
+                        <apex:outputField value="{!contract.Name}"/>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Contract_Doctor}</apex:facet>
+                        <apex:outputField value="{!contract.Doctor_Full_Name__c}"/>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Contract_Date_Started}</apex:facet>
+                        <apex:outputField value="{!contract.Date_Started__c}"/>
+                    </apex:column>
+
+                    <apex:column >
+                        <apex:facet name="header">{!$Label.Contract_Expire_Date}</apex:facet>
+                        <apex:outputField value="{!contract.Expire_Date__c}"/>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+
+        </apex:form>
+
+        <div id="hospitalDialog" style="display: none" title="{!$Label.MH_Hire_Doctors_To}  {!Hospital__c.Name}">
+            <apex:pageBlock id="hospitalDialog-PageBlock">
+
+                <apex:form id="hospitalDialog-Form">
+
+                    <apex:pageBlockSection columns="1" title="{!$Label.MH_Hospital_SearchForDoctors}"
+                                           id="doctorSearch-Form">
+
+                        <apex:pageBlockSection columns="2">
+                            <apex:inputField value="{!searchedDoctor.Name}"/>
+                            <apex:inputField value="{!searchedDoctor.Search_Email__c}"/>
+                            <apex:inputField value="{!searchedDoctor.Searched_Last_Name__c}"/>
+                            <apex:inputField value="{!searchedDoctor.Country__c}"/>
+                        </apex:pageBlockSection>
+
+                        <apex:pageBlockSectionItem >
+                            <apex:outputPanel >
+                                <div style="text-align: center; margin-right: 2rem;">
+                                    <apex:commandButton value="{!$Label.Button_for_search_doctor}"
+                                                        action="{!findSearchedDoctors}"
+                                                        reRender="doctors-table"/>
+                                    <apex:commandButton value="{!$Label.Button_for_clear_data}"
+                                                        action="{!clearData}"
+                                                        reRender="doctors-table, hospitalDialog-Form"/>
+                                </div>
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+
+                    </apex:pageBlockSection>
+
+                    <apex:pageBlockSection columns="1" title="{!$Label.MH_Doctors}">
+                        <apex:pageBlockTable id="doctors-table" value="{!searchedDoctors}" var="doctor"
+                                             title="{!$Label.MH_Doctor_Results}">
+
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.doctor_tsearch_table_header_action}</apex:facet>
+                                <div>
+                                    <apex:commandLink value="{!$Label.MH_Doctor_SelectHospital}"
+                                                      reRender="doctors-table, hire-doctors-form"
+                                                      action="{!addDoctorToList}"
+                                                      onClick="showHireForm()"
+                                                      rendered="{!IF(doctor.Selected__c == '2',false,true)}"
+                                    >
+                                        <apex:param value="{!doctor.Id}" name="Id" assignTo="{!selectedDoctor.Id}"/>
+                                        <apex:param value="{!doctor.Selected__c}" name="Selected__c"
+                                                    assignTo="{!selectedDoctor.Selected__c}"/>
+                                        <apex:param value="{!doctor.Full_Name__c}" name="Full_Name__c"
+                                                    assignTo="{!selectedDoctor.Full_Name__c}"/>
+                                    </apex:commandLink>
+                                </div>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.doctor_full_name}</apex:facet>
+                                    {!doctor.Full_Name__c}
+                            </apex:column>
+
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.MH_Doctor_Email}</apex:facet>
+                                    {!doctor.Email__c}
+                            </apex:column>
+
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.MH_Doctor_Country}</apex:facet>
+                                    {!doctor.Country__c}
+                            </apex:column>
+                        </apex:pageBlockTable>
+                    </apex:pageBlockSection>
+                </apex:form>
+                <div id="hireDoctors-div" style="display: none">
+                    <apex:form id="hire-doctors-form">
+                        <apex:pageBlockSection columns="1" title="{!$Label.MH_Contracts}">
+                        <apex:pageBlockTable id="hire-doctors-table" value="{!doctorWrappers}" var="doctor">
+                            <apex:column id="hire-doctor-buttons">
+                                <apex:facet name="header">{!$Label.doctor_tsearch_table_header_action}</apex:facet>
+                                <div style="text-align: left">
+                                    <apex:commandButton value="{!$Label.Edit}"
+                                                        action="{!doctor.editBtnIsClicked}"
+                                                        rendered="{!doctor.showEditButton}"
+                                                        reRender="hire-doctor-buttons, doctors-table, hire-doctors-table"/>
+
+                                    <apex:commandButton value="{!$Label.doctor_save_button}"
+                                                        action="{!doctor.saveBtnIsClicked}"
+                                                        rendered="{!doctor.showSaveButton}"
+                                                        reRender="hire-doctor-buttons, doctors-table, hire-doctors-table"/>
+
+                                    <apex:commandButton value="{!$Label.Template}"/>
+
+                                    <apex:commandButton value="{!$Label.Remove}"
+                                                        action="{!removeDoctorFromList}"
+                                                        reRender="doctors-table, hire-doctor-buttons">
+
+                                        <apex:param value="{!doctor.Id}"
+                                                    name="selectedDoctor"
+                                                    assignTo="{!selectedDoctor.Id}"/>
+
+                                    </apex:commandButton>
+                                </div>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.doctor_full_name}</apex:facet>
+                                    {!doctor.FullName}
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.MH_Contract_Start_Date}</apex:facet>
+                                <apex:outputField value="{!doctor.contract.Date_Started__c}" rendered="{!doctor.showOutputFields}"/>
+                                <apex:inputField value="{!doctor.contract.Date_Started__c}" rendered="{!doctor.showInputFields}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.MH_Contract_End_Date}</apex:facet>
+                                <apex:outputField value="{!doctor.contract.Expire_Date__c}" rendered="{!doctor.showOutputFields}"/>
+                                <apex:inputField value="{!doctor.contract.Expire_Date__c}" rendered="{!doctor.showInputFields}"/>
+                            </apex:column>
+                            <apex:column >
+                                <apex:facet name="header">{!$Label.Contract_Status}</apex:facet>
+                                Success
+                            </apex:column>
+                        </apex:pageBlockTable>
+                        <apex:actionFunction name="addDoctorToList" action="{!addDoctorToList}"
+                                             reRender="hire-doctors-table"/>
+                                <apex:outputPanel >
+                                    <div style="text-align: center; margin-right: 2rem;">
+                                        <apex:commandButton value="{!$Label.MH_Doctor_HireButton}"
+                                                            action="{!hireDoctors}"
+                                                            reRender="hire-doctors-table, hire-doctors-form"
+                                        />
+                                        <apex:commandButton value="{!$Label.MH_Cancel}" action="{!cancel}"
+                                        />
+                                    </div>
+                                </apex:outputPanel>
+                        </apex:pageBlockSection>
+                    </apex:form>
+                </div>
+
+            </apex:pageBlock>
+        </div>
+        <script>
+
+
+            function openHireHospitalPopup() {
+                $("#hospitalDialog").dialog({
+                    modal: true,
+                    resize: true,
+                    width: 800,
+                    position: {my: "top", at: "top", of: window},
+                    open: function () {
+                        $('.ui-widget-overlay').addClass('custom-overlay');
+                        $('.ui-dialog').addClass('dialog');
+                    },
+                }).cssRules('display', 'block');
+            }
+
+            function showHireForm() {
+                let hireForm = document.getElementById("hireDoctors-div");
+                if (hireForm.style.display !== "block") {
+                    document.getElementById("hireDoctors-div").style.display = "block";
+                } else {
+                    return;
+                }
+
+            }
+        </script>
+    </apex:pageBlock>
+</apex:page>
