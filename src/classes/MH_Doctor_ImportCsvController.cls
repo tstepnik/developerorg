@@ -43,11 +43,6 @@ public with sharing class MH_Doctor_ImportCsvController {
     public void reverse() {
         for (MH_Doctor_Service.CsvWrapper wrapper : wrappers) {
             wrapper.toImport = !wrapper.toImport;
-            if (wrapper.toImport == true) {
-                wrapper.toImport = false;
-            } else {
-                wrapper.toImport = true;
-            }
         }
     }
 

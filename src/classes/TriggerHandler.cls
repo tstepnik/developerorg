@@ -15,7 +15,7 @@ public virtual class TriggerHandler {
     public void run() {
         String triggerObject = (String) Trigger.New.getSobjectType().getDescribe().getName();
         String searchedObject = triggerObject.substring(0, triggerObject.length() - 3) + 'Trigger__c';
-        Boolean isEnabled;
+        Boolean isEnabled = false;
         try {
         isEnabled =  (Boolean) MH_EnableTriggerConfiguration__c.getInstance().get(searchedObject);
         }catch (SObjectException sObjectException){
