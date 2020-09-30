@@ -21,13 +21,13 @@ global class MH_DoctorWebService {
         return wrappers;
     }
 
-    webService static String addDoctor(String firstName, String lastName, String country, String email, Date birthDate) {
+    webService static String addDoctor(String firstName, String lastName, String country, String email, String birthDate) {
         Doctor__c doctor = new Doctor__c(
                 Name = firstName,
                 LastName__c = lastName,
                 Country__c = country,
                 Email__c = email,
-                Birthday__c = birthDate
+                Birthday__c = Date.parse(birthDate)
         );
         Database.SaveResult result;
 
@@ -38,7 +38,7 @@ global class MH_DoctorWebService {
         return result.errors[0].getMessage();
     }
 
-    webService static String updateDoctor(String id, String firstName, String lastName, String country, String email, Date birthDate) {
+    webService static String updateDoctor(String id, String firstName, String lastName, String country, String email, String birthDate) {
         Doctor__c updatedDoctor = [
                 SELECT Name,LastName__c,Country__c,Email__c,Birthday__c
                 FROM Doctor__c
@@ -48,7 +48,7 @@ global class MH_DoctorWebService {
         updatedDoctor.LastName__c = lastName;
         updatedDoctor.Country__c = country;
         updatedDoctor.Email__c = email;
-        updatedDoctor.Birthday__c = birthDate;
+        updatedDoctor.Birthday__c = Date.parse(birthDate);
 
         Database.SaveResult result = Database.update(updatedDoctor);
 
@@ -77,7 +77,7 @@ global class MH_DoctorWebService {
         webService String lastName;
         webService String email;
         webService String country;
-        webService Date birthdate;
+        webService String birthdate;
 
         public MH_DoctorWebServiceWrapper(Doctor__c doctor){
             this.id=doctor.Id;
@@ -85,7 +85,7 @@ global class MH_DoctorWebService {
             this.lastName = doctor.LastName__c;
             this.email = doctor.Email__c;
             this.country = doctor.Country__c;
-            this.birthdate = doctor.Birthday__c;
+            this.birthdate = doctor.Birthday__c.format();
         }
     }
 }

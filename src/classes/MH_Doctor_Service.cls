@@ -162,17 +162,6 @@ public without sharing class MH_Doctor_Service {
         return doctor;
     }
 
-    public static List<Doctor__c> toDoctors(List<CsvWrapper> wrappers) {
-        List<Doctor__c> doctors = new List<Doctor__c>();
-        for (CsvWrapper wrapper : wrappers) {
-            if (wrapper.toImport == true) {
-                Doctor__c doctor = toDoctor(wrapper);
-                doctors.add(doctor);
-            }
-        }
-        return doctors;
-    }
-
     public static List<MH_Doctor_WrapperJSON> wrapDoctors(List<Doctor__c> doctors) {
         List<MH_Doctor_WrapperJSON> wrapDoctors = new List<MH_Doctor_Service.MH_Doctor_WrapperJSON>();
         for (Doctor__c doctor : doctors) {
@@ -189,8 +178,6 @@ public without sharing class MH_Doctor_Service {
         for (CsvWrapper wrapper : wrappers) {
             if (wrapper.toImport) {
                 wrapper.createDoctor();
-                System.debug('TS: Doctor z Wrappera: ');
-                System.debug(wrapper.doctor);
                 wrapperMap.put(wrapper.GUID, toDoctor(wrapper));
             }
         }
@@ -200,8 +187,10 @@ public without sharing class MH_Doctor_Service {
             results = Database.insert(wrapperMap.values(), false);
             Map<String, String> GUIDWithStatus = new Map<String, String>();
             Integer iterator = 0;
+
             for (String doctorGUI : wrapperMap.keySet()) {
-                String resultMessage = results[iterator].getErrors().get(0).getMessage();
+                List<Database.Error> DBErrors = results[iterator].getErrors();
+                String resultMessage = (DBErrors.size() > 0) ? DBErrors.get(0).getMessage() : System.Label.MH_Success_Message;
                 if (results[iterator].isSuccess()) {
                     GUIDWithStatus.put(doctorGUI, System.Label.MH_Success_Message);
                 }else if (resultMessage == System.Label.MH_Contract_Error_Specify_Id) {
