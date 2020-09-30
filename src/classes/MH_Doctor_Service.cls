@@ -136,36 +136,37 @@ public without sharing class MH_Doctor_Service {
             this.toImport = false;
         }
 
-        public createDoctor() {
+        public void createDoctor() {
             doctor = new Doctor__c();
             doctor.Name = firstName;
             doctor.LastName__c = lastName;
             doctor.Email__c = email;
             doctor.Country__c = country;
-            doctor.Birthday__c = birthdate;
         }
+    }
+
+    public static Doctor__c toDoctor(CsvWrapper wrapper) {
+        Doctor__c doctor = new Doctor__c();
+        doctor.Name = wrapper.firstName;
+        doctor.LastName__c = wrapper.lastName;
+        doctor.Email__c = wrapper.email;
+        doctor.Country__c = wrapper.country;
+        try {
+            Date docDate = Date.valueOf(wrapper.birthdate);
+            doctor.Birthday__c = docDate;
+        } catch (TypeException e) {
+            doctor.Birthday__c = null;
+        } catch (Exception e) {
+            System.debug(e.getMessage());
+        }
+        return doctor;
     }
 
     public static List<Doctor__c> toDoctors(List<CsvWrapper> wrappers) {
         List<Doctor__c> doctors = new List<Doctor__c>();
-
-
         for (CsvWrapper wrapper : wrappers) {
             if (wrapper.toImport == true) {
-                Doctor__c doctor = new Doctor__c();
-                doctor.Name = wrapper.firstName;
-                doctor.LastName__c = wrapper.lastName;
-                doctor.Email__c = wrapper.email;
-                doctor.Country__c = wrapper.country;
-                try {
-                    Date docDate = Date.valueOf(wrapper.birthdate);
-                    doctor.Birthday__c = docDate;
-                } catch (TypeException e) {
-                    doctor.Birthday__c = null;
-                } catch (Exception e) {
-                    System.debug(e.getMessage());
-                }
-
+                Doctor__c doctor = toDoctor(wrapper);
                 doctors.add(doctor);
             }
         }
@@ -190,90 +191,41 @@ public without sharing class MH_Doctor_Service {
                 wrapper.createDoctor();
                 System.debug('TS: Doctor z Wrappera: ');
                 System.debug(wrapper.doctor);
-                wrapperMap.put(wrapper.GUID, wrapper.doctor);
+                wrapperMap.put(wrapper.GUID, toDoctor(wrapper));
             }
         }
 
         List<Database.SaveResult> results;
         try {
-            results = Database.insert(wrapperMap.values());
-
-            for (Doctor__c doctor : wrapperMap.values()) {
-                results.
+            results = Database.insert(wrapperMap.values(), false);
+            Map<String, String> GUIDWithStatus = new Map<String, String>();
+            Integer iterator = 0;
+            for (String doctorGUI : wrapperMap.keySet()) {
+                String resultMessage = results[iterator].getErrors().get(0).getMessage();
+                if (results[iterator].isSuccess()) {
+                    GUIDWithStatus.put(doctorGUI, System.Label.MH_Success_Message);
+                }else if (resultMessage == System.Label.MH_Contract_Error_Specify_Id) {
+                    GUIDWithStatus.put(doctorGUI, System.Label.MH_Success_Message);
+                }
+                else {
+                    GUIDWithStatus.put(doctorGUI, resultMessage);
+                }
+                iterator++;
             }
 
-            for (Integer i = 0; i < wrapperMap.size(); i++) {
-
-                wrappersToImport[i].doctorId = doctors[i].Id;
-                String err = '';
-                if (!results[i].isSuccess()) {
-                    err = results[i].getErrors()[0].getMessage();
-                    err = err.replace('<br>' + '&nbsp;', '\n');
-                }
-                if (wrappersToImport[i].lackOfData == true) {
-                    wrappersToImport[i].status = System.Label.MH_Doctor_Wrapper_Error_Status1;
-                } else if (err == System.Label.MH_Contract_Error_Specify_Id) {
-                    wrappersToImport[i].status = System.Label.MH_Success_Message;
-                } else if (doctors[i].Birthday__c == null) {
-                    wrappersToImport[i].status = System.Label.MH_Doctor_Wrapper_Error_Status2;
-                } else {
-                    wrappersToImport[i].status = results[i].isSuccess() ? System.Label.MH_Success_Message : err;
+            List<Doctor__c> doctors = wrapperMap.values();
+            for (CsvWrapper wrapper : doctorCsvWrappers) {
+                if (GUIDWithStatus.containsKey(wrapper.GUID)) {
+                    wrapper.status = GUIDWithStatus.get(wrapper.GUID);
+                    wrapper.doctorId = wrapperMap.get(wrapper.GUID).Id;
                 }
             }
 
-        } catch (DmlException exception) {
-            System.debug(exception.getMessage());
+        } catch (DmlException eexception) {
+            System.debug(eexception.getMessage());
         }
 
-
-////////////////////////////////////////
-//        List<Doctor__c> doctors;
-//        List<CsvWrapper> csvWrappers = new List<MH_Doctor_Service.CsvWrapper>(wrappers);
-//        List<CsvWrapper> wrappersToImport = new List<MH_Doctor_Service.CsvWrapper>();
-//
-//        for (CsvWrapper wrapper : csvWrappers) {
-//            if (wrapper.toImport == true) {
-//                wrappersToImport.add(wrapper);
-//            }
-//        }
-//
-//        List<DataBase.SaveResult> results;
-//
-//        doctors = toDoctors(csvWrappers);
-//
-//        try {
-//            results = Database.insert(doctors, false);
-//            for (Integer i = 0; i < doctors.size(); i++) {
-//                wrappersToImport[i].doctorId = doctors[i].Id;
-//                String err = '';
-//                if (!results[i].isSuccess()) {
-//                    err = results[i].getErrors()[0].getMessage();
-//                    err = err.replace('<br>' + '&nbsp;', '\n');
-//                }
-//                if (wrappersToImport[i].lackOfData == true) {
-//                    wrappersToImport[i].status = System.Label.MH_Doctor_Wrapper_Error_Status1;
-//                } else if (err == System.Label.MH_Contract_Error_Specify_Id) {
-//                    wrappersToImport[i].status = System.Label.MH_Success_Message;
-//                } else if (doctors[i].Birthday__c == null) {
-//                    wrappersToImport[i].status = System.Label.MH_Doctor_Wrapper_Error_Status2;
-//                } else {
-//                    wrappersToImport[i].status = results[i].isSuccess() ? System.Label.MH_Success_Message : err;
-//                }
-//            }
-//        } catch (DmlException dmlException) {
-//            System.debug(dmlException.getMessage());
-//        }
-
-        Integer counter = 0;
-        for (CsvWrapper wrapper : csvWrappers) {
-            if (wrapper.toImport == true) {
-                wrapper = wrappersToImport.get(counter);
-                counter++;
-            }
-        }
-
-        return csvWrappers;
-
+        return doctorCsvWrappers;
     }
 
     public static CsvWrapper createWrapperFromArray(String[] csvRecord) {
