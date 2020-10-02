@@ -1,0 +1,137 @@
+<apex:page id="MH_Doctor_SearchRecordDifferentOrg" controller="MH_DoctorDifferentOrgController"
+           lightningStylesheets="true">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <style>
+        .slds-form-element__row{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .slds-button-group {
+            margin-top: 2rem;
+            margin-right: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .last-button{
+            margin-right: 2rem;
+        }
+
+    </style>
+    <apex:slds />
+    <div class="slds-scope">
+        <div class="slds-page-header slds-page-header_related-list">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <nav role="navigation" aria-label="Breadcrumbs">
+                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                            <li class="slds-breadcrumb__item">
+                                <a href="javascript:void(0);">Doctors</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="slds-media">
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Contacts (will truncate)">Kamils doctors</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-page-header__col-actions">
+                    <div class="slds-page-header__controls">
+                        <div class="slds-page-header__control">
+                            <ul class="slds-button-group-list">
+                                <li>
+                                    <button class="slds-button slds-button_neutral">Add Doctor</button>
+                                </li>
+                                <li>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-meta">
+                    <p class="slds-page-header__meta-text"></p>
+                </div>
+                <div class="slds-page-header__col-controls">
+                    <div class="slds-page-header__controls">
+                        <div class="slds-page-header__control">
+
+                        </div>
+                        <div class="slds-page-header__control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <apex:form >
+            <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address">
+                <legend class="slds-form-element__legend slds-form-element__label"><p>Search Doctors</p></legend>
+                <div class="slds-form-element__control">
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_1-of-1">
+                            <div class="slds-form-element">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_2-of-6">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="form-element-id-05">Billing City</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="form-element-id-05" required="" class="slds-input" value="Burlington" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_2-of-6">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="form-element-id-06">Billing State/Province</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="form-element-id-06" required="" class="slds-input" value="NC" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-form-element__row">
+                        <div class="slds-size_2-of-6">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="form-element-id-07">Billing Zip/Postal Code</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="form-element-id-07" required="" class="slds-input" value="27215" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-size_2-of-6">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="form-element-id-08">Billing Country</label>
+                                <div class="slds-form-element__control">
+                                    <input type="text" id="form-element-id-08" required="" class="slds-input" value="USA" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="slds-button-group" role="group">
+                <button class="slds-button slds-button_neutral first-button">Refresh</button>
+                <button class="slds-button slds-button_neutral">Edit</button>
+                <button class="slds-button slds-button_neutral last-button">Save</button>
+            </div>
+        </apex:form>
+
+    </div>
+
+
+    </html>
+</apex:page>

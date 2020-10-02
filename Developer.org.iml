@@ -119,6 +119,10 @@
                             <option name="name" value="MH_DoctorWebService" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="MH_DoctorDifferentOrgController" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
                         </list>
                       </option>
                       <option name="name" value="ApexClass" />
@@ -199,6 +203,10 @@
                           </MetadataEntry>
                           <MetadataEntry>
                             <option name="name" value="MH_Doctor_ImportCsv" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="MH_Doctor_SearchRecordDifferentOrg" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                         </list>

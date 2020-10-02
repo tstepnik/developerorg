@@ -14,11 +14,16 @@ public virtual class TriggerHandler {
 
     public void run() {
         String triggerObject = (String) Trigger.New.getSobjectType().getDescribe().getName();
-        String searchedObject = triggerObject.substring(0, triggerObject.length() - 3) + 'Trigger__c';
+        String searchedObject;
+        if (triggerObject.substring(triggerObject.length() - 3, triggerObject.length()).equals('__c')) {
+            searchedObject = triggerObject.substring(0, triggerObject.length() - 3) + 'Trigger__c';
+        } else {
+            searchedObject = triggerObject + 'Trigger__c';
+        }
         Boolean isEnabled = false;
         try {
-        isEnabled =  (Boolean) MH_EnableTriggerConfiguration__c.getInstance().get(searchedObject);
-        }catch (SObjectException sObjectException){
+            isEnabled = (Boolean) MH_EnableTriggerConfiguration__c.getInstance().get(searchedObject);
+        } catch (SObjectException sObjectException) {
             System.debug(sObjectException.getMessage());
         }
 

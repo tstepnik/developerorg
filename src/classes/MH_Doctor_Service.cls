@@ -143,6 +143,13 @@ public without sharing class MH_Doctor_Service {
             doctor.Email__c = email;
             doctor.Country__c = country;
         }
+
+        public Boolean isDataMalformed(){
+            if(birthdate == null || String.isEmpty(birthdate)){
+                return true;
+            }
+            return false;
+        }
     }
 
     public static Doctor__c toDoctor(CsvWrapper wrapper) {
