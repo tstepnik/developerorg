@@ -144,8 +144,8 @@ public without sharing class MH_Doctor_Service {
             doctor.Country__c = country;
         }
 
-        public Boolean isDataMalformed(){
-            if(birthdate == null || String.isEmpty(birthdate)){
+        public Boolean isDataMalformed() {
+            if (birthdate == null || String.isEmpty(birthdate)) {
                 return true;
             }
             return false;
@@ -200,10 +200,9 @@ public without sharing class MH_Doctor_Service {
                 String resultMessage = (DBErrors.size() > 0) ? DBErrors.get(0).getMessage() : System.Label.MH_Success_Message;
                 if (results[iterator].isSuccess()) {
                     GUIDWithStatus.put(doctorGUI, System.Label.MH_Success_Message);
-                }else if (resultMessage == System.Label.MH_Contract_Error_Specify_Id) {
+                } else if (resultMessage == System.Label.MH_Contract_Error_Specify_Id) {
                     GUIDWithStatus.put(doctorGUI, System.Label.MH_Success_Message);
-                }
-                else {
+                } else {
                     GUIDWithStatus.put(doctorGUI, resultMessage);
                 }
                 iterator++;
@@ -241,6 +240,83 @@ public without sharing class MH_Doctor_Service {
             }
         }
         return wrapper;
+    }
+
+    public static List<Doctor__c> soapGetDoctors(String firstName, String lastName, String country, String town, String email) {
+        List<Doctor__c> soapDoctors = new List<Doctor__c>();
+
+        List<String> parameters = new List<String>{
+                firstName,
+                email,
+                country,
+                lastName,
+                town
+        };
+
+        List<String> fields = new List<String>{
+                'Name',
+                'Email__c',
+                'Country__c',
+                'LastName__c',
+                'Town__c'
+        };
+        String searchQuery =
+                'SELECT ' +
+                        'Name,LastName__c,Country__c,Town__c,Email__c,Birthday__c,License_Number__c ' +
+                        'FROM Doctor__c ';
+
+        Boolean emptyParameters = true;
+        Boolean firstTimeQuery = true;
+
+
+        for (String param : parameters) {
+            if (!String.isBlank(param)) {
+                emptyParameters = false;
+                break;
+            }
+        }
+
+        if (!emptyParameters) {
+            searchQuery += 'WHERE ';
+            for (Integer i = 0; i < fields.size(); i++) {
+
+                if (firstTimeQuery && !String.isBlank(parameters.get(i))) {
+                    searchQuery += fields.get(i) + ' LIKE \'%' + parameters.get(i) + '%\' ';
+                    firstTimeQuery = false;
+                } else if (!String.isBlank(parameters.get(i))) {
+                    searchQuery += ' AND ' + fields.get(i) + ' LIKE \'%' + parameters.get(i) + '%\' ';
+                }
+            }
+        }
+        try {
+            soapDoctors = Database.query(searchQuery);
+        } catch (DmlException exc) {
+            System.debug(exc.getMessage());
+            throw exc;
+        }
+
+
+        return soapDoctors;
+
+    }
+
+    public static List<Doctor__c> fromSoapWrappersToDoctorsList(List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers) {
+        List<Id> doctorsIds = new List<Id>();
+
+        for (MH_DoctorWebService.MH_DoctorWebServiceWrapper wrapper : wrappers) {
+            doctorsIds.add(wrapper.id);
+        }
+
+        return [SELECT Id,Name,LastName__c,Town__c,Country__c,License_Number__c,Birthday__c,Email__c FROM Doctor__c WHERE Id IN :doctorsIds];
+    }
+
+    public static List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> fromDoctorsToWrappers(List<Doctor__c> doctors){
+        List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
+
+        for(Doctor__c doctor: doctors){
+            wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(doctor));
+        }
+        return wrappers;
     }
 
 }
