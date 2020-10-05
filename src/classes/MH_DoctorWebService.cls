@@ -8,7 +8,7 @@ global class MH_DoctorWebService {
         List<Doctor__c> doctors;
 
         try {
-            doctors = MH_Doctor_Service.soapGetDoctors(firstName,lastName,country,town,email);
+            doctors = MH_Doctor_Service.soapGetDoctors(firstName, lastName, country, town, email);
             List<MH_DoctorWebServiceWrapper> wrappers = MH_Doctor_Service.fromDoctorsToWrappers(doctors);
             return buildSuccessResponse(wrappers);
         } catch (Exception e) {
@@ -16,43 +16,32 @@ global class MH_DoctorWebService {
         }
     }
 
-    webService static MH_DoctorResponseWrapper addDoctor(String firstName, String lastName, String country, String town, String email, String birthDate) {
-        Doctor__c doctor = new Doctor__c(
-                Name = firstName,
-                LastName__c = lastName,
-                Country__c = country,
-                Email__c = email,
-                Town__c = town,
-                Birthday__c = Date.parse(birthDate)
-        );
-        Database.SaveResult result;
+    private static MH_DoctorResponseWrapper upsertDoctor(String id, String firstName, String lastName, String country, String town, String email, String birthDate) {
+        Doctor__c doctor;
 
         try {
-            result = Database.insert(doctor);
-            return  buildSuccessResponse(doctor);
+            doctor = new Doctor__c(
+                    Id = id,
+                    Name = firstName,
+                    LastName__c = lastName,
+                    Country__c = country,
+                    Email__c = email,
+                    Town__c = town,
+                    Birthday__c = Date.parse(birthDate)
+            );
+            Database.upsert(doctor);
+            return buildSuccessResponse(doctor);
         } catch (Exception e) {
             return buildErrorResponse(e.getMessage());
         }
     }
 
+    webService static MH_DoctorResponseWrapper addDoctor(String firstName, String lastName, String country, String town, String email, String birthDate) {
+        return upsertDoctor(null, firstName, lastName, country, town, email, birthDate);
+    }
+
     webService static MH_DoctorResponseWrapper updateDoctor(String id, String firstName, String lastName, String country, String town, String email, String birthDate) {
-        Doctor__c updatedDoctor = new Doctor__c(Id = id);
-        updatedDoctor.Name = firstName;
-        updatedDoctor.LastName__c = lastName;
-        updatedDoctor.Country__c = country;
-        updatedDoctor.Email__c = email;
-        updatedDoctor.Town__c = town;
-        updatedDoctor.Birthday__c = Date.parse(birthDate);
-
-        try {
-            Database.SaveResult result = Database.update(updatedDoctor);
-            return buildSuccessResponse(updatedDoctor);
-        } catch (Exception e) {
-            return buildErrorResponse(e.getMessage());
-
-        }
-
-
+        return upsertDoctor(id, firstName, lastName, country, town, email, birthDate);
     }
 
     webService static MH_DoctorResponseWrapper deleteDoctor(String id) {
@@ -67,19 +56,18 @@ global class MH_DoctorWebService {
             response = buildErrorResponse(e.getMessage());
             response.wrappers.add(new MH_DoctorWebServiceWrapper(deletedDoctor));
         }
-
         return response;
     }
 
     global class MH_DoctorWebServiceWrapper {
-        webService String id;
-        webService String firstName;
-        webService String lastName;
-        webService String email;
-        webService String country;
-        webService String town;
-        webService String birthdate;
-        webService String licenceNumber;
+        webService String id { get; set; }
+        webService String firstName { get; set; }
+        webService String lastName { get; set; }
+        webService String email { get; set; }
+        webService String country { get; set; }
+        webService String town { get; set; }
+        webService String birthdate { get; set; }
+        webService String licenceNumber { get; set; }
 
         public MH_DoctorWebServiceWrapper(Doctor__c doctor) {
             this.id = doctor.Id;
@@ -106,7 +94,7 @@ global class MH_DoctorWebService {
             this.statusMessage = statusMessage;
         }
     }
-    public static  MH_DoctorResponseWrapper buildSuccessResponse(List<MH_DoctorWebServiceWrapper> wrappers) {
+    public static MH_DoctorResponseWrapper buildSuccessResponse(List<MH_DoctorWebServiceWrapper> wrappers) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = true;
         response.statusMessage = 'Success.';
@@ -122,7 +110,7 @@ global class MH_DoctorWebService {
         return response;
     }
 
-    public static  MH_DoctorResponseWrapper buildErrorResponse(String errorMessage){
+    public static MH_DoctorResponseWrapper buildErrorResponse(String errorMessage) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = false;
         response.statusMessage = errorMessage;

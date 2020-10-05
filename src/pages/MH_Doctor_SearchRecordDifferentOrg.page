@@ -476,7 +476,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <apex:repeat value="{!doctors}" var="doctor">
+                <apex:repeat value="{!soapWrappers}" var="doctor">
                     <tr class="slds-hint-parent">
 
                         <td>
@@ -493,29 +493,29 @@
                         </td>
                         <td>
                             <div class="slds-truncate" title="First Name">
-                                <a target="_blank" href="/{!doctor.id}">{!doctor.Name}</a>
+                                {!doctor.firstName}
                             </div>
                         </td>
                         <td>
                             <div class="slds-truncate" title="Last Name">
-                                <a target="_blank" href="/{!doctor.id}">{!doctor.LastName__c}</a>
+                  {!doctor.lastName}
                             </div>
                         </td>
                         <td>
-                            <div class="slds-truncate" title="Town">{!doctor.Town__c}</div>
+                            <div class="slds-truncate" title="Town">{!doctor.town}</div>
                         </td>
                         <td>
-                            <div class="slds-truncate" title="Country">{!doctor.Country__c}</div>
+                            <div class="slds-truncate" title="Country">{!doctor.country}</div>
                         </td>
                         <td>
-                            <div class="slds-truncate" title="License Number">{!doctor.License_Number__c}</div>
+                            <div class="slds-truncate" title="License Number">{!doctor.licenceNumber}</div>
                         </td>
                         <td>
-                            <div class="slds-truncate" title="BirthDate">{!doctor.BirthDay__c}</div>
+                            <div class="slds-truncate" title="BirthDate">{!doctor.birthdate}</div>
                         </td>
                         <td role="gridcell">
                             <div class="slds-truncate" title="Email">
-                                <a href="javascript:void(0);" tabindex="0">{!doctor.Email__c}</a>
+                                <a href="javascript:void(0);" tabindex="0">{!doctor.email}</a>
                             </div>
                         </td>
                     </tr>

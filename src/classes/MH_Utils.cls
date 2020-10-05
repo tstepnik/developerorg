@@ -48,4 +48,8 @@ public with sharing class MH_Utils {
                         h.substring(20);
         return guid;
     }
+
+    public static ExternalServiceCredentials__c getExternalServiceCredentials(String credentialsName){
+        return ExternalServiceCredentials__c.getInstance(credentialsName);
+    }
 }
