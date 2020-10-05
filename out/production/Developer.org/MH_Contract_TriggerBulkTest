@@ -1,0 +1,64 @@
+Doctor__c doctorKamil = [SELECT Id, Name, LastName__c FROM Doctor__c WHERE Name='Tomasz' AND LastName__c='Stepnik'];
+Hospital__c hospital = [SELECT Id, Name from hospital__c where Name like '%S%' LIMIT 1];
+Hospital__c hospital2 = [SELECT Id, Name from hospital__c where Name like '%Woj%' LIMIT 1];
+List<Contract__c> contracts = new List<Contract__c>();
+
+Contract__c overlappedContract1 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c= Date.newInstance(2014,01,01), Expire_Date__c = Date.newInstance(2016,01,01)
+);
+Contract__c overlappedContract2 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2013,01,01), Expire_Date__c = Date.newInstance(2015,01,01)
+);
+Contract__c contract1 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2016,01,01), Expire_Date__c = Date.newInstance(2017,01,01)
+);
+Contract__c contract2 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2017,01,01), Expire_Date__c = Date.newInstance(2018,01,01)
+);
+Contract__c contract3 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2019,01,01), Expire_Date__c = Date.newInstance(2020,01,01)
+);
+Contract__c contract4 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2020,01,01), Expire_Date__c = Date.newInstance(2022,01,01)
+);
+Contract__c overlappedContract3 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2011,01,01), Expire_Date__c = Date.newInstance(2016,01,01)
+);
+Contract__c overlappedContractB1 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2030,01,01), Expire_Date__c = Date.newInstance(2035,01,01)
+);
+Contract__c overlappedContractB2 = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2032,01,01), Expire_Date__c = Date.newInstance(2034,01,01)
+);
+Contract__c allButOneOverlap = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2000,01,01), Expire_Date__c = Date.newInstance(2100,01,01)
+);
+Contract__c onlyOne = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital.Id,
+        Date_Started__c = Date.newInstance(2100,01,01), Expire_Date__c = Date.newInstance(2101,01,01)
+);
+Contract__c onlyOneFakeOverlapp = new Contract__c(Doctor__c= doctorKamil.Id, Hospital__c= hospital2.Id,
+        Date_Started__c = Date.newInstance(2100,01,01), Expire_Date__c = Date.newInstance(2101,01,01)
+);
+contracts.add(overlappedContract1);
+contracts.add(overlappedContract2);
+contracts.add(contract1);
+contracts.add(contract2);
+contracts.add(contract3);
+contracts.add(contract4);
+contracts.add(overlappedContract3);
+contracts.add(overlappedContractB1);
+contracts.add(overlappedContractB2);
+//contracts.add(allButOneOverlap);
+contracts.add(onlyOne);
+contracts.add(onlyOneFakeOverlapp);
+
+Database.upsert(contracts, false);
+
+//////////////
+Doctor__c doctorKamil = new Doctor__c();
+doctorKamil = [SELECT Id, Name, LastName__c FROM Doctor__c WHERE Name='Tomasz' AND LastName__c ='Stepnik'];
+System.debug(doctorKamil);
+List<Contract__c> contracts = [SELECT Id, Name FROM Contract__c WHERE Doctor__c = 'a022X00000mYOmB'];
+
+delete contracts;
+

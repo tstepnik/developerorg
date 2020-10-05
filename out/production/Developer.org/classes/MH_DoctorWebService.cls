@@ -69,8 +69,6 @@ global class MH_DoctorWebService {
         webService String birthdate { get; set; }
         webService String licenceNumber { get; set; }
 
-        public MH_DoctorWebServiceWrapper(){}
-
         public MH_DoctorWebServiceWrapper(Doctor__c doctor) {
             this.id = doctor.Id;
             this.firstName = doctor.Name;
@@ -90,9 +88,6 @@ global class MH_DoctorWebService {
             this.town = soapWrapper.town;
             this.birthdate = soapWrapper.birthdate;
             this.licenceNumber = soapWrapper.licenseNumber;
-        }
-        public void edit(){
-            MH_DoctorDifferentOrgController.pressedWrapperId = id;
         }
     }
 

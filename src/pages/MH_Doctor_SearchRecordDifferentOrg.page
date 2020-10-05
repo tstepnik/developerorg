@@ -2,6 +2,19 @@
            lightningStylesheets="true">
     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
     <style>
+
+    .column-title{
+        height: 2rem;
+    }
+.column-title div{
+    margin-left: 0.5rem;
+}
+
+.column-title-actions div{
+    margin-left: 2rem;
+}
+
+
         .slds-form-element__row{
             display: flex;
             justify-content: space-around;
@@ -24,539 +37,619 @@
             border-left: 1px solid rgb(221, 219, 218);
         }
         .slds-modal__container span {
-            margin-bottom: 24rem;
+            margin-bottom: 15rem;
         }
 
         #datePicker{
             z-index: 10000;
         }
+
     </style>
 
-    <apex:slds >
-    <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
-    <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
-    <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
-    <div class="slds-scope">
-        <div class="slds-page-header slds-page-header_related-list">
-            <div class="slds-page-header__row">
-                <div class="slds-page-header__col-title">
-                    <nav role="navigation" aria-label="Breadcrumbs">
-                        <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
-                            <li class="slds-breadcrumb__item">
-                                <a href="javascript:void(0);">Doctors</a>
-                            </li>
-                        </ol>
-                    </nav>
-                    <div class="slds-media">
-                        <div class="slds-media__body">
-                            <div class="slds-page-header__name">
-                                <div class="slds-page-header__name-title">
-                                    <h1>
+    <apex:slds>
+        <apex:includeScript
+                value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
+
+        <div class="slds-scope">
+
+            <div class="slds-page-header slds-page-header_related-list">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <nav role="navigation" aria-label="Breadcrumbs">
+                            <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <li class="slds-breadcrumb__item">
+                                    <a href="javascript:void(0);">Doctors</a>
+                                </li>
+                            </ol>
+                        </nav>
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
                                         <span class="slds-page-header__title slds-truncate"
                                               title="Contacts (will truncate)">Kamils doctors</span>
-                                    </h1>
+                                        </h1>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <ul class="slds-button-group-list">
+                                    <li>
+                                        <apex:form>
+                                            <apex:commandButton styleClass="slds-button slds-button_neutral"
+                                                                value="Add Doctor"
+                                                                onClick="openAddDoctorModal()"
+                                                                reRender="search-and-table-form"></apex:commandButton>
+                                        </apex:form>
+                                    </li>
+                                    <li>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-meta">
+                        <p class="slds-page-header__meta-text"></p>
+                    </div>
+                    <div class="slds-page-header__col-controls">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
 
-                <div class="slds-page-header__col-actions">
-                    <div class="slds-page-header__controls">
-                        <div class="slds-page-header__control">
-                            <ul class="slds-button-group-list">
-                                <li>
-                                    <apex:form >
-                                        <apex:commandButton styleClass="slds-button slds-button_neutral"
-                                                            value="Add Doctor"
-                                                            onClick="openEditContactModal()"
-                                                            reRender="main-form"></apex:commandButton>
-                                    </apex:form>
-                                </li>
-                                <li>
-
-                                </li>
-                            </ul>
+                            </div>
+                            <div class="slds-page-header__control">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="slds-page-header__row">
-                <div class="slds-page-header__col-meta">
-                    <p class="slds-page-header__meta-text"></p>
-                </div>
-                <div class="slds-page-header__col-controls">
-                    <div class="slds-page-header__controls">
-                        <div class="slds-page-header__control">
 
+            <apex:form id="search-and-table-form">
+                <apex:pageMessages/>
+                <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address">
+                    <legend class="slds-form-element__legend slds-form-element__label"><p>Search Doctors</p></legend>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_1-of-1">
+                                <div class="slds-form-element">
+                                </div>
+                            </div>
                         </div>
-                        <div class="slds-page-header__control">
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-05">First Name</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField id="form-element-id-05" styleClass="slds-input"
+                                                         value="{!searchedDoctor.Name}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-08">Country</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField id="form-element-id-08" styleClass="slds-input"
+                                                         value="{!searchedDoctor.Country__c}"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-07">Last Name</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField required="false" id="form-element-id-07"
+                                                         styleClass="slds-input"
+                                                         value="{!searchedDoctor.LastName__c}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-10">Town</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField id="form-element-id-10" styleClass="slds-input"
+                                                         value="{!searchedDoctor.Town__c}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-09">Email</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputField id="form-element-id-09" styleClass="slds-input"
+                                                         value="{!searchedDoctor.Search_Email__c}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+
+                                    <div class="slds-form-element__control">
+                                        <span/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <div class="slds-button-group" role="group">
+                    <apex:commandButton styleClass="slds-button slds-button_neutral" value="Clear"
+                                        action="{!clearEverything}"
+                                        reRender="search-and-table-form"
+                    ></apex:commandButton>
+                    <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
+                                        value="Search"
+                                        reRender="search-and-table-form"
+                                        action="{!searchDoctors}"
+                    ></apex:commandButton>
+                </div>
+
+                <table aria-multiselectable="true"
+                       class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
+                       role="grid"
+                       id="table">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+
+                        <th class="column-title column-title-actions" scope="col">
+                            <div class="slds-truncate">Actions</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">First Name</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Last Name</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Town</div>
+                        </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Country</div>
+                        </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">License Number</div>
+                        </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Birthdate</div>
+                        </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Email</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <apex:repeat value="{!soapWrappers}" var="doctor">
+                        <tr class="slds-hint-parent">
+
+                            <td>
+                                <div class="slds-truncate">
+                                    <apex:commandButton
+                                            value="Edit"
+                                            styleClass="slds-button slds-button_neutral"
+                                            action="{!doctor.edit}"
+                                            onClick="openEditDoctorModal()"
+                                            reRender="search-and-table-form"
+                                    >
+                                        <apex:param value="{!doctor.id}" name="id" assignTo="{!pressedDoctorWrapper.Id}"/>
+                                    </apex:commandButton>
+                                    <apex:commandButton value="Delete"
+                                                        styleClass="slds-button slds-button_neutral"
+                                                        onClick="openDeleteDoctorModal()"
+                                                        reRender="search-and-table-form"
+                                    >
+                                        <apex:param value="{!doctor.id}" name="id"
+                                                    assignTo="{!pressedDoctorWrapper.id}"></apex:param>
+
+                                    </apex:commandButton>
+                                </div>
+                            </td>
+                            <td>
+
+                                <div class="slds-truncate" title="First Name">
+                                        {!doctor.firstName}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Last Name">
+                                        {!doctor.lastName}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Town">{!doctor.town}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Country">{!doctor.country}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="License Number">{!doctor.licenceNumber}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="BirthDate">{!doctor.birthdate}</div>
+                            </td>
+                            <td role="gridcell">
+                                <div class="slds-truncate" title="Email">
+                                    <a href="javascript:void(0);" tabindex="0">{!doctor.email}</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    </tbody>
+                </table>
+
+                <apex:actionFunction action="{!deleteDoctor}"
+                                     name="deleteDoctor"
+                                     status="status"
+                />
+
+                <apex:actionFunction action="{!fillFieldsWithLastValue}" name="fillFieldsWithLastValue"/>
+                <apex:actionFunction reRender="search-and-table-form" name="rerenderTable"/>
+                <c:MH_Spinner id="searchSpinner"/>
+
+            </apex:form>
+
+            <apex:form id="add-doctor-form">
+                <div class="slds-modal" aria-hidden="false" role="dialog" id="addDoctorDialog">
+                    <div class="slds-modal__container">
+                        <apex:outputPanel id="editHospitalOutputDialog">
+                            <div class="slds-modal__header">
+                                <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
+                                                    onclick="closeDeleteDoctorModal();"
+                                                    action="{!clearAddPopup}"
+                                                    reRender="add-doctor-form"
+                                                    immediate="true"
+                                                    value="X">
+                                    <span class="slds-assistive-text">Close</span>
+                                </apex:commandButton>
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Add Doctor"
+                                />
+                            </div>
+                            <apex:pageMessages/>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-131">
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-131">
+                                    <fieldset
+                                            class="slds-form-element slds-form-element_compound slds-form-element_address">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_1-of-1">
+                                                    <div class="slds-form-element">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-132">First Name</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-132"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.Name}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-133">Country</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-133"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.Country__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-134">Last Name</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField required="false" id="form-element-id-134"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.LastName__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-135">Town</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-135"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.Town__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-136">Birthdate</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-136"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.Birthday__c}"
+                                                                             required="false"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-137">Email</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-137"
+                                                                             styleClass="slds-input"
+                                                                             value="{!createdDoctor.Email__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <center>
+                                        <apex:commandButton value="cancel"
+                                                            styleClass="slds-button slds-button--neutral"
+                                                            action="{!clearAddPopup}"
+                                                            reRender="add-doctor-form"
+                                        ></apex:commandButton>
+                                        <apex:commandButton value="save"
+                                                            action="{!addDoctor}"
+                                                            onComplete="closeAddDoctorModal();"
+                                                            reRender="search-and-table-form,add-doctor-form"
+                                                            styleClass="slds-button slds-button--brand"></apex:commandButton>
+                                    </center>
+                                </footer>
+                            </div>
+                        </apex:outputPanel>
                     </div>
                 </div>
-            </div>
+                <div class="slds-backdrop" id="addDoctorModalBackdrop"></div>
+            </apex:form>
+
+            <apex:form id="edit-doctor-form">
+                <div class="slds-modal" aria-hidden="false" role="dialog" id="editDoctorDialog">
+                    <div class="slds-modal__container">
+                        <apex:outputPanel id="editHospitalOutputDialog">
+                            <div class="slds-modal__header">
+                                <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
+                                                    onclick="closeDeleteDoctorModal();"
+                                                    action="{!clearEditPopup}"
+                                                    reRender="edit-doctor-form"
+                                                    value="X">
+                                    <span class="slds-assistive-text">Close</span>
+                                </apex:commandButton>
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Edit Doctor"
+                                />
+                            </div>
+                            <apex:pageMessages/>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <fieldset
+                                            class="slds-form-element slds-form-element_compound slds-form-element_address">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_1-of-1">
+                                                    <div class="slds-form-element">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-111">First Name</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-111"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.Name}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-112">Country</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-112"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.Country__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-113">Last Name</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField required="false" id="form-element-id-113"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.LastName__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-114">Town</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-114"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.Town__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-115">Birthdate</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-115"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.Birthday__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-09">Email</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputField id="form-element-id-09"
+                                                                             styleClass="slds-input"
+                                                                             value="{!editedDoctor.Search_Email__c}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <center>
+                                        <apex:commandButton value="cancel"
+                                                            reRender="edit-doctor-form"
+                                                            action="{!clearEditPopup}"
+                                                            styleClass="slds-button slds-button--neutral"></apex:commandButton>
+                                        <apex:commandButton value="save"
+                                                            action="{!editDoctor}"
+                                                            onComplete="closeEditDoctorModal();"
+                                                            reRender="search-and-table-form,edit-doctor-form"
+                                                            styleClass="slds-button slds-button--brand">
+                                        </apex:commandButton>
+                                    </center>
+                                </footer>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <div class="slds-backdrop" id="editDoctorModalBackdrop"></div>
+            </apex:form>
+
+            <apex:form id="delete-doctor-form">
+                <div class="slds-modal" aria-hidden="false" role="dialog" id="deleteDoctorDialog">
+                    <div class="slds-modal__container">
+                        <apex:outputPanel id="deleteDoctorOutputDialog">
+                            <div class="slds-modal__header">
+                                <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
+                                                    reRender="delete-doctor-form"
+                                                    onclick="closeDeleteDoctorModal();"
+                                                    value="X">
+                                    <span class="slds-assistive-text">Close</span>
+                                </apex:commandButton>
+                                <h2 class="slds-text-heading--medium">Are you sure you want to delete this Doctor?</h2>
+                            </div>
+                            <apex:pageMessages/>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <footer class="slds-modal__footer">
+
+                                    <center>
+                                        <apex:commandButton value="No"
+                                                            styleClass="slds-button slds-button--neutral"
+                                                            reRender="delete-doctor-form"
+                                        />
+                                        <apex:commandButton value="Yes"
+                                                            action="{!deleteDoctor}"
+                                                            reRender="search-and-table-form,delete-doctor-form"
+                                                            onClick="closeAddDoctorModal();"
+                                                            styleClass="slds-button slds-button--brand"/>
+                                    </center>
+                                </footer>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <div class="slds-backdrop" id="deleteDoctorModalBackdrop"></div>
+            </apex:form>
         </div>
 
-        <apex:form >
-            <div class="slds-modal" aria-hidden="false" role="dialog" id="editHospitalDialog">
-                <div class="slds-modal__container">
-                    <apex:outputPanel id="editHospitalOutputDialog">
-                        <div class="slds-modal__header">
-                            <apex:outputText styleClass="slds-text-heading--medium" value="Add Doctor"
-                                             />
+        <script>
+        j$ = jQuery.noConflict();
 
-                        </div>
-                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                            <div class="slds-form">
-                                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">First Name</label>
-                                                <apex:inputField id="text-input-id21"
-                                                                styleClass="slds-apex-input-field"
-                                                                value="{!createdDoctor.Name}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">Email</label>
-                                                <apex:inputField id="text-input-id22"
-                                                                styleClass="slds-apex-input-field"
-                                                                value="{!createdDoctor.Email__c}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">Last Name</label>
-                                                <apex:inputField id="text-input-id23"
-                                                                 required="false"
-                                                                styleClass="slds-apex-input-field"
-                                                                value="{!createdDoctor.LastName__c}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">Town</label>
-                                                <apex:inputField id="text-input-id26"
-                                                                 styleClass="slds-apex-input-field"
-                                                                 value="{!createdDoctor.Town__c}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">BirthDate</label>
-                                                <apex:inputField id="text-input-id25"
-                                                                styleClass="slds-apex-input-field"
-                                                                value="{!createdDoctor.Birthday__c}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                                <label class="slds-form-element__label"
-                                                       for="text-input-id-1">Country</label>
-                                                <apex:inputField id="text-input-id24"
-                                                                 styleClass="slds-apex-input-field"
-                                                                 value="{!createdDoctor.Country__c}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="slds-size_1-of-2">
-                                        <div class="slds-box_x-small slds-text-align_left slds-m-around_x-small">
-                                            <div class="slds-form-element_horizontal">
-                                               <span/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <footer class="slds-modal__footer">
-                                <center>
-                                    <apex:commandButton value="cancel"
-                                                        styleClass="slds-button slds-button--neutral"></apex:commandButton>
-                                    <apex:commandButton value="save"
-                                                        onClick="closeEditContactModal();"
-                                                        styleClass="slds-button slds-button--brand"></apex:commandButton>
-                                </center>
-                            </footer>
-                        </div>
-                    </apex:outputPanel>
-                </div>
-            </div>
-        </apex:form>
-
-        <apex:form id="main-form">
-            <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address">
-                <legend class="slds-form-element__legend slds-form-element__label"><p>Search Doctors</p></legend>
-                <div class="slds-form-element__control">
-                    <div class="slds-form-element__row">
-                        <div class="slds-size_1-of-1">
-                            <div class="slds-form-element">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slds-form-element__row">
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-                                <label class="slds-form-element__label" for="form-element-id-05">First Name</label>
-                                <div class="slds-form-element__control">
-                                    <apex:inputField id="form-element-id-05" styleClass="slds-input"
-                                                     value="{!searchedDoctor.Name}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-                                <label class="slds-form-element__label" for="form-element-id-08">Country</label>
-                                <div class="slds-form-element__control">
-                                    <apex:inputField id="form-element-id-08" styleClass="slds-input"
-                                                     value="{!searchedDoctor.Country__c}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slds-form-element__row">
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-                                <label class="slds-form-element__label" for="form-element-id-07">Last Name</label>
-                                <div class="slds-form-element__control">
-                                    <apex:inputField required="false" id="form-element-id-07" styleClass="slds-input"
-                                                     value="{!searchedDoctor.LastName__c}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-                                <label class="slds-form-element__label" for="form-element-id-10">Town</label>
-                                <div class="slds-form-element__control">
-                                    <apex:inputField id="form-element-id-10" styleClass="slds-input"
-                                                     value="{!searchedDoctor.Town__c}"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slds-form-element__row">
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-                                <label class="slds-form-element__label" for="form-element-id-09">Email</label>
-                                <div class="slds-form-element__control">
-                                    <apex:inputField id="form-element-id-09" styleClass="slds-input"
-                                                     value="{!searchedDoctor.Search_Email__c}"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slds-size_2-of-6">
-                            <div class="slds-form-element">
-
-                                <div class="slds-form-element__control">
-                                    <span/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </fieldset>
-
-            <div class="slds-button-group" role="group">
-                <apex:commandButton styleClass="slds-button slds-button_neutral" value="Clear"
-                                    action="{!clearEverything}"></apex:commandButton>
-                <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
-                        value="Search"
-                        action="{!searchDoctors}"
-                ></apex:commandButton>
-            </div>
-
-            <table aria-multiselectable="true"
-                   class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid"
-                   id="table">
-                <thead>
-                <tr class="slds-line-height_reset">
-
-                    <th aria-label="Actions" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Account Name">Actions</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Account Name column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1087"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-
-                    <th aria-label="First Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Account Name">First Name</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Account Name column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1087"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-                    <th aria-label="Last Name" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Account Name">Last Name</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Account Name column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1087"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-
-                    <th aria-label="Town" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Close Date">Town</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Close Date column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1088"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-
-                    <th aria-label="Country" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Stage">Country</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Stage column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1089"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-
-                    <th aria-label="Licence Number" aria-sort="none" class="slds-is-resizable slds-is-sortable"
-                        scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Confidence">Licence Number</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Confidence column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1090"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-
-                    <th aria-label="BirthDate" aria-sort="none" class="slds-is-resizable slds-is-sortable"
-                        scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Amount">Birthdate</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Amount column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1091"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-                    <th aria-label="Email" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
-                        <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button"
-                           tabindex="0">
-                            <span class="slds-assistive-text">Sort by: </span>
-                            <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
-                                <span class="slds-truncate" title="Contact">Email</span>
-                                <span class="slds-icon_container slds-icon-utility-arrowdown">
-              <svg class="slds-icon slds-icon-text-default slds-is-sortable__icon " aria-hidden="true">
-                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"></use>
-              </svg>
-            </span>
-                            </div>
-                        </a>
-                        <div class="slds-resizable">
-                            <input type="range" aria-label="Contact column width"
-                                   class="slds-resizable__input slds-assistive-text" id="cell-resize-handle-1092"
-                                   max="1000" min="20" tabindex="0"/>
-                            <span class="slds-resizable__handle">
-            <span class="slds-resizable__divider"></span>
-          </span>
-                        </div>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <apex:repeat value="{!soapWrappers}" var="doctor">
-                    <tr class="slds-hint-parent">
-
-                        <td>
-                            <div class="slds-truncate">
-                                <apex:commandButton value="Edit" styleClass="slds-button slds-button_neutral"/>
-                                <apex:commandButton value="Delete"
-                                                    styleClass="slds-button slds-button_neutral"
-                                                    onComplete="removeDoctor(); return false;"
-                                                    reRender="main-form"
-                                >
-                                    <apex:param value="{!doctor.id}" name="id" assignTo="{!deletedDoctor.Id}"/>
-                                </apex:commandButton>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="First Name">
-                                {!doctor.firstName}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="Last Name">
-                  {!doctor.lastName}
-                            </div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="Town">{!doctor.town}</div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="Country">{!doctor.country}</div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="License Number">{!doctor.licenceNumber}</div>
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="BirthDate">{!doctor.birthdate}</div>
-                        </td>
-                        <td role="gridcell">
-                            <div class="slds-truncate" title="Email">
-                                <a href="javascript:void(0);" tabindex="0">{!doctor.email}</a>
-                            </div>
-                        </td>
-                    </tr>
-                </apex:repeat>
-                </tbody>
-            </table>
-            <apex:actionFunction action="{!deleteDoctor}"
-                                 name="deleteDoctor"
-                                 status="status"
-            />
-            <apex:actionFunction reRender="main-form" name="rerenderTable"/>
-            <c:MH_Spinner id="searchSpinner"/>
-        </apex:form>
-    </div>
-
-    <script>
-    j$ = jQuery.noConflict();
-function removeDoctor() {
+        function removeDoctor() {
                 let confirmBtn = confirm('{!$Label.popup_confirm_delete}').valueOf();
                 if (confirmBtn) {
                     deleteDoctor();
 
                 }
                 return false;
-
             }
 
- function openEditContactModal(){
-             j$('#editHospitalDialog').addClass('slds-backdrop--open');
-             j$('#editContactModalBackdrop').addClass('slds-backdrop--open');
+        function openAddDoctorModal(){
+             j$('#addDoctorDialog').addClass('slds-backdrop--open');
+             j$('#addDoctorModalBackdrop').addClass('slds-backdrop--open');
              return false;
         }
 
-        function closeEditContactModal(){
-            j$('#editHospitalDialog').removeClass('slds-fade-in-open');
-            j$('#editContactModalBackdrop').removeClass('slds-fade-in-open');
+        function closeAddDoctorModal(){
+            j$('#editDoctorDialog').removeClass('slds-fade-in-open');
+            j$('#addDoctorModalBackdrop').removeClass('slds-fade-in-open');
+            return false;
+        }
+
+        function openEditDoctorModal(){
+             j$('#editDoctorDialog').addClass('slds-backdrop--open');
+             j$('#editDoctorModalBackdrop').addClass('slds-backdrop--open');
+             return false;
+        }
+
+        function closeEditDoctorModal(){
+            j$('#editDoctorDialog').removeClass('slds-fade-in-open');
+            j$('#editDoctorModalBackdrop').removeClass('slds-fade-in-open');
+            return false;
+        }
+
+         function openDeleteDoctorModal(){
+            j$('#deleteDoctorDialog').addClass('slds-backdrop--open');
+            j$('#deleteDoctorModalBackdrop').addClass('slds-backdrop--open');
+            return false;
+        }
+        function closeDeleteDoctorModal(){
+            j$('#deleteDoctorDialog').removeClass('slds-fade-in-open');
+            j$('#deleteDoctorModalBackdrop').removeClass('slds-fade-in-open');
             return false;
         }
 
 
-    </script>
+
+
+
+        </script>
     </apex:slds>
     </html>
 </apex:page>

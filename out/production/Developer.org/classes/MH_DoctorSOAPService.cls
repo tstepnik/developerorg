@@ -29,12 +29,12 @@ public with sharing class MH_DoctorSOAPService {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
                 soapDoctorWebService.getDoctors(searchItem.Name, searchItem.LastName__c, searchItem.Town__c, searchItem.Country__c, searchItem.Search_Email__c);
         List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
-        if(result.isSuccess && result.content != null) {
-            for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content ) {
+        if(result.isSuccess) {
+            for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
                 wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(wrapper));
             }
             return wrappers;
-        }else{
+        }else{//TODO what to do if failure
             return wrappers;
         }
     }
@@ -58,7 +58,7 @@ public with sharing class MH_DoctorSOAPService {
                 ));
             }
             return doctors;
-        }else{
+        }else{//TODO what to do if failure
             return doctors;
         }
     }
@@ -71,7 +71,7 @@ public with sharing class MH_DoctorSOAPService {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = soapDoctorWebService.deleteDoctor(doctorId);
         if(result.isSuccess) {
             return result.statusMessage;
-        }else{
+        }else{//TODO what to do if failure
             return result.statusMessage;
         }
     }
@@ -85,19 +85,20 @@ public with sharing class MH_DoctorSOAPService {
                         doctor.Birthday__c.format());
         if(result.isSuccess) {
             return result.statusMessage;
-        }else{
+        }else{//TODO what to do if failure
             return result.statusMessage;
         }
     }
 
 
-    public String updateDoctor(Doctor__c doctor,String id) {
+
+    public String updateDoctor(Doctor__c doctor) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
-                soapDoctorWebService.updateDoctor(id, doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
+                soapDoctorWebService.updateDoctor(doctor.Id, doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
                         doctor.Birthday__c.format());
         if(result.isSuccess) {
             return result.statusMessage;
-        }else{
+        }else{//TODO what to do if failure
             return result.statusMessage;
         }
     }
@@ -109,20 +110,5 @@ public with sharing class MH_DoctorSOAPService {
             wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(doctor));
         }
         return wrappers;
-    }
-
-    public Doctor__c fromWebServiceWrapperToDoctor(MH_DoctorWebService.MH_DoctorWebServiceWrapper wrapper,Boolean addId){
-        Doctor__c doctor = new Doctor__c(
-                Name=wrapper.firstName,
-                LastName__c=wrapper.lastName,
-                Email__c=wrapper.email,
-                Town__c=wrapper.town,
-                Country__c=wrapper.country,
-                Birthday__c=Date.parse(wrapper.birthdate)
-        );
-        if(addId){
-            doctor.Id=wrapper.id;
-        }
-        return doctor;
     }
 }
