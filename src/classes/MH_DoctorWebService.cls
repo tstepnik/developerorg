@@ -16,6 +16,17 @@ global class MH_DoctorWebService {
         }
     }
 
+    webService static List<String> getCountriesList(){
+        Schema.DescribeFieldResult picklistDescribe = Doctor__c.fields.Country__c.getDescribe();
+        Schema.sObjectField picklistField = picklistDescribe.getSObjectField();
+        List<PicklistEntry> picklistEntriesList = picklistField.getDescribe().getPicklistValues();
+        List<String> countriesLabelValueList = new List<String>();
+        for(PicklistEntry entry: picklistEntriesList){
+            countriesLabelValueList.add(entry.label + ';' + entry.value);
+        }
+        return countriesLabelValueList;
+    }
+
     private static MH_DoctorResponseWrapper upsertDoctor(String id, String firstName, String lastName, String country, String town, String email, String birthDate) {
         Doctor__c doctor;
 
