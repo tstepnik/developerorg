@@ -147,8 +147,8 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-05">First Name</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputField id="form-element-id-05" styleClass="slds-input"
-                                                         value="{!searchedDoctor.Name}"/>
+                                        <apex:inputText id="form-element-id-05" styleClass="slds-input"
+                                                         value="{!searchedDoctor.name}"/>
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +156,8 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-08">Country</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputField id="form-element-id-08" styleClass="slds-input"
-                                                         value="{!searchedDoctor.Country__c}"/>
+                                        <apex:inputText id="form-element-id-08" styleClass="slds-input"
+                                                         value="{!searchedDoctor.country}"/>
                                     </div>
                                 </div>
                             </div>
@@ -167,9 +167,9 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-07">Last Name</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputField required="false" id="form-element-id-07"
+                                        <apex:inputText required="false" id="form-element-id-07"
                                                          styleClass="slds-input"
-                                                         value="{!searchedDoctor.LastName__c}"/>
+                                                         value="{!searchedDoctor.lastName}"/>
                                     </div>
                                 </div>
                             </div>
@@ -177,8 +177,8 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-10">Town</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputField id="form-element-id-10" styleClass="slds-input"
-                                                         value="{!searchedDoctor.Town__c}"/>
+                                        <apex:inputText id="form-element-id-10" styleClass="slds-input"
+                                                         value="{!searchedDoctor.town}"/>
                                     </div>
                                 </div>
                             </div>
@@ -188,8 +188,8 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-09">Email</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputField id="form-element-id-09" styleClass="slds-input"
-                                                         value="{!searchedDoctor.Search_Email__c}"/>
+                                        <apex:inputText id="form-element-id-09" styleClass="slds-input"
+                                                         value="{!searchedDoctor.email}"/>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +208,7 @@
 
                 <div class="slds-button-group" role="group">
                     <apex:commandButton styleClass="slds-button slds-button_neutral" value="Clear"
-                                        action="{!clearEverything}"
+                                        action="{!clearTableAndSearchForm}"
                                         reRender="search-and-table-form"
                     ></apex:commandButton>
                     <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
@@ -217,7 +217,6 @@
                                         action="{!searchDoctors}"
                     ></apex:commandButton>
                 </div>
-
                 <table aria-multiselectable="true"
                        class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
                        role="grid"
@@ -255,7 +254,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <apex:repeat value="{!soapWrappers}" var="doctor">
+                    <apex:repeat value="{!searchedDoctors}" var="doctor">
                         <tr class="slds-hint-parent">
 
                             <td>
@@ -270,19 +269,19 @@
 
                                     >
                                         <apex:param value="{!doctor.id}" name="idParam"
-                                                    assignTo="{!pressedDoctorWrapper.Id}"/>
-                                        <apex:param value="{!doctor.firstName}" name="firstName"
-                                                    assignTo="{!upsertedDoctor.Name}"/>
+                                                    assignTo="{!upsertedDoctor.id}"/>
+                                        <apex:param value="{!doctor.name}" name="firstName"
+                                                    assignTo="{!upsertedDoctor.name}"/>
                                         <apex:param value="{!doctor.lastName}" name="lastName"
-                                                    assignTo="{!upsertedDoctor.LastName__c}"/>
+                                                    assignTo="{!upsertedDoctor.lastName}"/>
                                         <apex:param value="{!doctor.country}" name="country"
-                                                    assignTo="{!upsertedDoctor.Country__c}"/>
+                                                    assignTo="{!upsertedDoctor.country}"/>
                                         <apex:param value="{!doctor.town}" name="town"
-                                                    assignTo="{!upsertedDoctor.Town__c}"/>
+                                                    assignTo="{!upsertedDoctor.town}"/>
                                         <apex:param value="{!doctor.email}" name="email"
-                                                    assignTo="{!upsertedDoctor.Search_Email__c}"/>
+                                                    assignTo="{!upsertedDoctor.email}"/>
                                         <apex:param value="{!doctor.birthdate}" name="birthdate"
-                                                    assignTo="{!birthdateFromParam}"/>
+                                                    assignTo="{!upsertedDoctor.birthdate}"/>
 
                                     </apex:commandButton>
                                     <apex:commandButton
@@ -293,11 +292,11 @@
                                             reRender="deleteDoctorOutputDialog"
                                     >
                                         <apex:param value="{!doctor.id}" name="idDelParam"
-                                                    assignTo="{!pressedDoctorWrapper.id}"/>
-                                        <apex:param value="{!doctor.firstName}" name="firstNameDelParam"
-                                                    assignTo="{!upsertedDoctor.Name}"/>
+                                                    assignTo="{!deletedDoctorId}"/>
+                                        <apex:param value="{!doctor.name}" name="firstNameDelParam"
+                                                    assignTo="{!upsertedDoctor.name}"/>
                                         <apex:param value="{!doctor.lastName}" name="lastNameDelParam"
-                                                    assignTo="{!upsertedDoctor.LastName__c}"/>
+                                                    assignTo="{!upsertedDoctor.lastName}"/>
 
                                     </apex:commandButton>
                                 </div>
@@ -305,7 +304,7 @@
                             <td>
 
                                 <div class="slds-truncate" title="First Name">
-                                        {!doctor.firstName}
+                                        {!doctor.name}
                                 </div>
                             </td>
                             <td>
@@ -320,7 +319,7 @@
                                 <div class="slds-truncate" title="Country">{!doctor.country}</div>
                             </td>
                             <td>
-                                <div class="slds-truncate" title="License Number">{!doctor.licenceNumber}</div>
+                                <div class="slds-truncate" title="License Number">{!doctor.licenseNumber}</div>
                             </td>
                             <td>
                                 <div class="slds-truncate" title="BirthDate">{!doctor.birthdate}</div>
@@ -357,7 +356,7 @@
                             <div class="slds-modal__header">
                                 <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
                                                     onclick="closeUpsertDoctorModal();"
-                                                    action="{!clearUpsertPopup}"
+                                                    action="{!clearUpsertItem}"
                                                     reRender="upsert-doctor-form"
                                                     immediate="true"
                                                     value="X">
@@ -387,9 +386,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-111">First Name</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField id="form-element-id-111"
+                                                            <apex:inputText id="form-element-id-111"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.Name}"/>
+                                                                             value="{!upsertedDoctor.name}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -398,9 +397,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-112">Country</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField id="form-element-id-112"
+                                                            <apex:inputText id="form-element-id-112"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.Country__c}"/>
+                                                                             value="{!upsertedDoctor.country}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -411,9 +410,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-113">Last Name</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField required="false" id="form-element-id-113"
+                                                            <apex:inputText required="false" id="form-element-id-113"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.LastName__c}"/>
+                                                                             value="{!upsertedDoctor.lastName}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -422,9 +421,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-114">Town</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField id="form-element-id-114"
+                                                            <apex:inputText id="form-element-id-114"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.Town__c}"/>
+                                                                             value="{!upsertedDoctor.town}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -435,9 +434,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-115">Birthdate</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField id="form-element-id-115"
+                                                            <apex:inputText id="form-element-id-115"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.Birthday__c}"/>
+                                                                             value="{!upsertedDoctor.birthdate}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -446,9 +445,9 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-09">Email</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputField id="form-element-id-09"
+                                                            <apex:inputText id="form-element-id-09"
                                                                              styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.Email__c}"/>
+                                                                             value="{!upsertedDoctor.email}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -493,7 +492,7 @@
                                     <span class="slds-assistive-text">Close</span>
                                 </apex:commandButton>
                                 <h2 class="slds-text-heading--medium">Are you sure you want to
-                                    delete {!upsertedDoctor.Name} {!upsertedDoctor.LastName__c}?</h2>
+                                    delete {!upsertedDoctor.name} {!upsertedDoctor.lastName}?</h2>
                             </div>
                             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                                 <footer class="slds-modal__footer">
