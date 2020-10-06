@@ -45,16 +45,16 @@ global class MH_DoctorWebService {
     }
 
     webService static MH_DoctorResponseWrapper deleteDoctor(String id) {
-        Doctor__c deletedDoctor = new Doctor__c(Id = id);
+        Doctor__c deletedDoctor;
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
 
         try {
+            deletedDoctor = new Doctor__c(Id = id);
             Database.DeleteResult result = Database.delete(deletedDoctor);
             response.isSuccess = true;
             response.statusMessage = 'Success. Doctor is deleted.';
         } catch (Exception e) {
             response = buildErrorResponse(e.getMessage());
-            response.wrappers.add(new MH_DoctorWebServiceWrapper(deletedDoctor));
         }
         return response;
     }
@@ -91,9 +91,6 @@ global class MH_DoctorWebService {
             this.birthdate = soapWrapper.birthdate;
             this.licenceNumber = soapWrapper.licenseNumber;
         }
-        public void edit(){
-            MH_DoctorDifferentOrgController.pressedWrapperId = id;
-        }
     }
 
     global class MH_DoctorResponseWrapper {
@@ -109,7 +106,7 @@ global class MH_DoctorWebService {
             this.statusMessage = statusMessage;
         }
     }
-    public static MH_DoctorResponseWrapper buildSuccessResponse(List<MH_DoctorWebServiceWrapper> wrappers) {
+    private static MH_DoctorResponseWrapper buildSuccessResponse(List<MH_DoctorWebServiceWrapper> wrappers) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = true;
         response.statusMessage = 'Success.';
@@ -117,7 +114,7 @@ global class MH_DoctorWebService {
         return response;
     }
 
-    public static MH_DoctorResponseWrapper buildSuccessResponse(Doctor__c doctor) {
+    private static MH_DoctorResponseWrapper buildSuccessResponse(Doctor__c doctor) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = true;
         response.statusMessage = 'Success.';
@@ -125,7 +122,7 @@ global class MH_DoctorWebService {
         return response;
     }
 
-    public static MH_DoctorResponseWrapper buildErrorResponse(String errorMessage) {
+    private static MH_DoctorResponseWrapper buildErrorResponse(String errorMessage) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = false;
         response.statusMessage = errorMessage;

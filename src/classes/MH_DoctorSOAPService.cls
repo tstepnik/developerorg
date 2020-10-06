@@ -4,16 +4,12 @@ public with sharing class MH_DoctorSOAPService {
 
     public soapSforceComSchemasClassHcsDoctor.SessionHeader_element header { get; set; }
 
-
     public MH_DoctorSOAPService() {
         soapDoctorWebService = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebService();
         header = new soapSforceComSchemasClassHcsDoctor.SessionHeader_element();
         header.sessionId = getSessionId();
         soapDoctorWebService.SessionHeader = header;
     }
-
-
-
 
     public static String getSessionId() {
         ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials');
@@ -22,19 +18,16 @@ public with sharing class MH_DoctorSOAPService {
         return loginResult.sessionId;
     }
 
-
-
-
     public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> getDoctors(Doctor__c searchItem) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
                 soapDoctorWebService.getDoctors(searchItem.Name, searchItem.LastName__c, searchItem.Town__c, searchItem.Country__c, searchItem.Search_Email__c);
         List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
-        if(result.isSuccess && result.content != null) {
-            for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content ) {
+        if (result.isSuccess && result.content != null) {
+            for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
                 wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(wrapper));
             }
             return wrappers;
-        }else{
+        } else {
             return wrappers;
         }
     }
@@ -42,12 +35,12 @@ public with sharing class MH_DoctorSOAPService {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
                 soapDoctorWebService.getDoctors(searchItem.Name, searchItem.LastName__c, searchItem.Town__c, searchItem.Country__c, searchItem.Search_Email__c);
         List<Doctor__c> doctors = new List<Doctor__c>();
-        if(result.isSuccess) {
+        if (result.isSuccess) {
             for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
 
 
                 doctors.add(new Doctor__c(
-                        Id=wrapper.Id,
+                        Id = wrapper.Id,
                         Name = wrapper.Name,
                         LastName__c = wrapper.lastName,
                         Town__c = wrapper.town,
@@ -58,70 +51,50 @@ public with sharing class MH_DoctorSOAPService {
                 ));
             }
             return doctors;
-        }else{
+        } else {
             return doctors;
         }
     }
 
-
-
-
-
-    public String deleteDoctor(String doctorId) {
+    public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult deleteDoctor(String doctorId) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = soapDoctorWebService.deleteDoctor(doctorId);
-        if(result.isSuccess) {
-            return result.statusMessage;
-        }else{
-            return result.statusMessage;
-        }
+            return result;
     }
-
-
-
 
     public String addDoctor(Doctor__c doctor) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
                 soapDoctorWebService.addDoctor(doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
                         doctor.Birthday__c.format());
-        if(result.isSuccess) {
-            return result.statusMessage;
-        }else{
-            return result.statusMessage;
-        }
+        return result.statusMessage;
     }
 
-
-    public String updateDoctor(Doctor__c doctor,String id) {
+    public String updateDoctor(Doctor__c doctor, String id) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
                 soapDoctorWebService.updateDoctor(id, doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
                         doctor.Birthday__c.format());
-        if(result.isSuccess) {
-            return result.statusMessage;
-        }else{
-            return result.statusMessage;
-        }
+        return result.statusMessage;
+
     }
 
-
-    public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> toWrappers(List<Doctor__c> doctors){
+    public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> toWrappers(List<Doctor__c> doctors) {
         List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
-        for(Doctor__c doctor: doctors){
+        for (Doctor__c doctor : doctors) {
             wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(doctor));
         }
         return wrappers;
     }
 
-    public Doctor__c fromWebServiceWrapperToDoctor(MH_DoctorWebService.MH_DoctorWebServiceWrapper wrapper,Boolean addId){
+    public Doctor__c fromWebServiceWrapperToDoctor(MH_DoctorWebService.MH_DoctorWebServiceWrapper wrapper, Boolean addId) {
         Doctor__c doctor = new Doctor__c(
-                Name=wrapper.firstName,
-                LastName__c=wrapper.lastName,
-                Email__c=wrapper.email,
-                Town__c=wrapper.town,
-                Country__c=wrapper.country,
-                Birthday__c=Date.parse(wrapper.birthdate)
+                Name = wrapper.firstName,
+                LastName__c = wrapper.lastName,
+                Email__c = wrapper.email,
+                Town__c = wrapper.town,
+                Country__c = wrapper.country,
+                Birthday__c = Date.parse(wrapper.birthdate)
         );
-        if(addId){
-            doctor.Id=wrapper.id;
+        if (addId) {
+            doctor.Id = wrapper.id;
         }
         return doctor;
     }
