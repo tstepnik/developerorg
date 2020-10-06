@@ -1,4 +1,7 @@
 public with sharing class MH_DoctorDifferentOrgController {
+
+    public List<MH_>
+
     public String soapAction { get; set; }
     public String statusMessage { get; set; }
     public String birthdateFromParam { get; set; }

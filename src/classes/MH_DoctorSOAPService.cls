@@ -18,84 +18,123 @@ public with sharing class MH_DoctorSOAPService {
         return loginResult.sessionId;
     }
 
-    public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> getDoctors(Doctor__c searchItem) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
-                soapDoctorWebService.getDoctors(searchItem.Name, searchItem.LastName__c, searchItem.Town__c, searchItem.Country__c, searchItem.Search_Email__c);
-        List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
+    public List<MH_ExternalServiceParamWrapper> getDoctors(MH_ExternalServiceParamWrapper searchItem) {
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+
+        try {
+            result = soapDoctorWebService.getDoctors(
+                    searchItem.name,
+                    searchItem.lastName,
+                    searchItem.town,
+                    searchItem.country,
+                    searchItem.email
+            );
+        } catch (Exception e) {
+            System.debug(e);
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+            return null;
+        }
+
+        List<MH_ExternalServiceParamWrapper> wrappers = new List<MH_ExternalServiceParamWrapper>();
         if (result.isSuccess && result.content != null) {
             for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
-                wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(wrapper));
-            }
-            return wrappers;
-        } else {
-            return wrappers;
-        }
-    }
-    public List<Doctor__c> getDoctors2(Doctor__c searchItem) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
-                soapDoctorWebService.getDoctors(searchItem.Name, searchItem.LastName__c, searchItem.Town__c, searchItem.Country__c, searchItem.Search_Email__c);
-        List<Doctor__c> doctors = new List<Doctor__c>();
-        if (result.isSuccess) {
-            for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
-
-
-                doctors.add(new Doctor__c(
-                        Id = wrapper.Id,
-                        Name = wrapper.Name,
-                        LastName__c = wrapper.lastName,
-                        Town__c = wrapper.town,
-                        Country__c = wrapper.country,
-                        Email__c = wrapper.email,
-                        Birthday__c = Date.parse(wrapper.birthdate),
-                        License_Number__c = Integer.valueOf(wrapper.licenseNumber)
+                wrappers.add(new MH_ExternalServiceParamWrapper(
+                        wrapper.id,
+                        wrapper.firstName,
+                        wrapper.lastName,
+                        wrapper.town,
+                        wrapper.country,
+                        wrapper.email,
+                        wrapper.birthdate,
+                        wrapper.licenceNumber
                 ));
             }
-            return doctors;
-        } else {
-            return doctors;
-        }
-    }
 
-    public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult deleteDoctor(String doctorId) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = soapDoctorWebService.deleteDoctor(doctorId);
-            return result;
-    }
-
-    public String addDoctor(Doctor__c doctor) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
-                soapDoctorWebService.addDoctor(doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
-                        doctor.Birthday__c.format());
-        return result.statusMessage;
-    }
-
-    public String updateDoctor(Doctor__c doctor, String id) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result =
-                soapDoctorWebService.updateDoctor(id, doctor.Name, doctor.LastName__c, doctor.Town__c, doctor.Country__c, doctor.Email__c,
-                        doctor.Birthday__c.format());
-        return result.statusMessage;
-
-    }
-
-    public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> toWrappers(List<Doctor__c> doctors) {
-        List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> wrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
-        for (Doctor__c doctor : doctors) {
-            wrappers.add(new MH_DoctorWebService.MH_DoctorWebServiceWrapper(doctor));
         }
         return wrappers;
     }
 
-    public Doctor__c fromWebServiceWrapperToDoctor(MH_DoctorWebService.MH_DoctorWebServiceWrapper wrapper, Boolean addId) {
-        Doctor__c doctor = new Doctor__c(
-                Name = wrapper.firstName,
-                LastName__c = wrapper.lastName,
-                Email__c = wrapper.email,
-                Town__c = wrapper.town,
-                Country__c = wrapper.country,
-                Birthday__c = Date.parse(wrapper.birthdate)
-        );
-        if (addId) {
-            doctor.Id = wrapper.id;
+    public String deleteDoctor(String doctorId) {
+
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+
+        try {
+            result = soapDoctorWebService.deleteDoctor(doctorId);
+        } catch (Exception e) {
+            System.debug(e);
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+            return null;
         }
-        return doctor;
+        return result.statusMessage;
+    }
+
+    public String addDoctor(MH_ExternalServiceParamWrapper doctor) {
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+
+        try {
+            result = soapDoctorWebService.addDoctor(
+                    doctor.name,
+                    doctor.lastName,
+                    doctor.town,
+                    doctor.country,
+                    doctor.email,
+                    doctor.birthdate
+            );
+        } catch (Exception exc) {
+            System.debug(exc.getMessage());
+            ApexPages.addMessage(new ApexPages.message(ApexPages.Severity.ERROR, exc.getMessage()));
+            return null;
+        }
+        return result.statusMessage;
+    }
+
+    public String updateDoctor(MH_ExternalServiceParamWrapper doctor) {
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+
+        try{
+            result = soapDoctorWebService.updateDoctor(
+                    doctor.id,
+                    doctor.name,
+                    doctor.lastName,
+                    doctor.town,
+                    doctor.country,
+                    doctor.email,
+                    doctor.birthdate
+            );
+        } catch (Exception exc){
+            System.debug(exc.getMessage());
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+            return null;
+        }
+        return result.statusMessage;
+    }
+
+    class MH_ExternalServiceParamWrapper {
+        public String id { get; set; }
+        public String name { get; set; }
+        public String lastName { get; set; }
+        public String country { get; set; }
+        public String town { get; set; }
+        public String email { get; set; }
+        public String birthdate { get; set; }
+        public String licenseNumber { get; set; }
+
+        public MH_ExternalServiceParamWrapper() {
+        }
+        public MH_ExternalServiceParamWrapper(String id) {
+            this.id = id;
+        }
+
+        public MH_ExternalServiceParamWrapper(String id, String name, String lastName, String town, String country, String email, String birthdate, String licenseNumber) {
+            this.id = id;
+            this.name = name;
+            this.lastName = lastName;
+            this.town = town;
+            this.country = country;
+            this.email = email;
+            this.birthdate = birthdate;
+            this.licenseNumber = licenseNumber;
+        }
     }
 }
+
