@@ -1,50 +1,67 @@
 public with sharing class MH_DoctorDifferentOrgController {
 
-    public List<MH_>
+    public List<MH_DoctorSOAPService.MH_ExternalServiceParamWrapper> searchedDoctors { get; set; }
 
-    public String soapAction { get; set; }
-    public String statusMessage { get; set; }
-    public String birthdateFromParam { get; set; }
-    public Doctor__c searchedDoctor { get; set; }
-    public Doctor__c upsertedDoctor { get; set; }
+    public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper searchedDoctor { get; set; }
+    public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper upsertedDoctor { get; set; }
     public MH_DoctorSOAPService soapService { get; set; }
-    public List<MH_DoctorWebService.MH_DoctorWebServiceWrapper> soapWrappers { get; set; }
-    public MH_DoctorWebService.MH_DoctorWebServiceWrapper pressedDoctorWrapper { get; set; }
-    public MH_DoctorDifferentOrgController() {
-        this.searchedDoctor = new Doctor__c();
-        this.upsertedDoctor = new Doctor__c();
-        this.pressedDoctorWrapper = new MH_DoctorWebService.MH_DoctorWebServiceWrapper();
+    public String soapAction { get; set; }
+    public String deletedDoctorId { get; set; }
+    public String statusMessage { get; set; }
 
-        this.soapService = new MH_DoctorSOAPService();
+    public MH_DoctorDifferentOrgController() {
+
+        try {
+            this.soapService = new MH_DoctorSOAPService();
+        } catch (Exception e) {
+            System.debug(e);
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+        }
+
+        this.searchedDoctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
+        this.upsertedDoctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
+        this.searchedDoctors = new List<MH_DoctorSOAPService.MH_ExternalServiceParamWrapper>();
+        soapAction = '';
     }
 
     public void searchDoctors() {
-        soapWrappers = soapService.getDoctors(searchedDoctor);
+        searchedDoctors = soapService.getDoctors(searchedDoctor);
     }
 
     public void addDoctor() {
         statusMessage = soapService.addDoctor(upsertedDoctor);
-        soapWrappers = soapService.getDoctors(searchedDoctor);
+        if (statusMessage.contains('Success')) {
+            clearUpsertItem();
+        } else {
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
+        }
     }
 
     public void editDoctor() {
-        statusMessage = soapService.updateDoctor(upsertedDoctor, pressedDoctorWrapper.id);
-        soapWrappers = soapService.getDoctors(searchedDoctor);
+        statusMessage = soapService.updateDoctor(upsertedDoctor);
+
+        if (statusMessage.contains('Success')) {
+            searchDoctors();
+            clearUpsertItem();
+        } else {
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
+        }
     }
 
+    public void deleteDoctor() {
 
-    public void setActionTypeToADD() {
-        soapAction = 'ADD';
-        clearUpsertPopup();
-    }
-
-    public void setActionTypeToUPDATE() {
-        soapAction = 'UPDATE';
-        emptyAction();
+        statusMessage = soapService.deleteDoctor(deletedDoctorId);
+        if (statusMessage.contains('Success')) {
+            searchDoctors();
+            clearUpsertItem();
+        } else {
+            searchDoctors();
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
+        }
     }
 
     public void upsertDoctor() {
-        if (soapAction == 'ADD') {
+        if (soapAction.equals('ADD')) {
             addDoctor();
         } else {
             editDoctor();
@@ -52,31 +69,28 @@ public with sharing class MH_DoctorDifferentOrgController {
         clearUpsertPopup();
     }
 
-    public void deleteDoctor() {
-        String id = pressedDoctorWrapper.id;
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = soapService.deleteDoctor(id);
-        if (result.isSuccess) {
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, result.statusMessage));
-        }
-        soapWrappers = soapService.getDoctors(searchedDoctor);
-        System.debug(statusMessage);
+    public void setActionTypeToADD() {
+        soapAction = 'ADD';
+        clearUpsertItem();
     }
 
-    public void clearEverything() {
-        searchedDoctor = new Doctor__c();
-        upsertedDoctor = new Doctor__c();
-        pressedDoctorWrapper = new MH_DoctorWebService.MH_DoctorWebServiceWrapper();
-        soapWrappers = new List<MH_DoctorWebService.MH_DoctorWebServiceWrapper>();
-        soapWrappers.clear();
+    public void setActionTypeToUPDATE() {
+        soapAction = 'UPDATE';
+        emptyAction();
     }
 
-    public void clearUpsertPopup() {
-        upsertedDoctor = new Doctor__c();
+    public void clearTableAndSearchForm() {
+        searchedDoctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
+        searchedDoctors.clear();
     }
 
-    public PageReference emptyAction() {
-        upsertedDoctor.Birthday__c = Date.parse(birthdateFromParam);
-        return null;
-
+    public void clearUpsertItem() {
+        upsertedDoctor.email = null;
+        upsertedDoctor.name = null;
+        upsertedDoctor.lastName = null;
+        upsertedDoctor.town = null;
+        upsertedDoctor.country = null;
+        upsertedDoctor.birthdate = null;
+        deletedDoctorId = null;
     }
 }

@@ -1,7 +1,6 @@
 public with sharing class MH_DoctorSOAPService {
 
     public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebService soapDoctorWebService { get; set; }
-
     public soapSforceComSchemasClassHcsDoctor.SessionHeader_element header { get; set; }
 
     public MH_DoctorSOAPService() {
@@ -10,7 +9,6 @@ public with sharing class MH_DoctorSOAPService {
         header.sessionId = getSessionId();
         soapDoctorWebService.SessionHeader = header;
     }
-
     public static String getSessionId() {
         ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials');
         partnerSoapSforceCom.Soap sp = new partnerSoapSforceCom.Soap();
@@ -53,7 +51,6 @@ public with sharing class MH_DoctorSOAPService {
         }
         return wrappers;
     }
-
     public String deleteDoctor(String doctorId) {
 
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
@@ -67,7 +64,6 @@ public with sharing class MH_DoctorSOAPService {
         }
         return result.statusMessage;
     }
-
     public String addDoctor(MH_ExternalServiceParamWrapper doctor) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
 
@@ -87,7 +83,6 @@ public with sharing class MH_DoctorSOAPService {
         }
         return result.statusMessage;
     }
-
     public String updateDoctor(MH_ExternalServiceParamWrapper doctor) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
 
