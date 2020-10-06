@@ -1,9 +1,9 @@
 public with sharing class MH_DoctorDifferentOrgController {
 
     public List<MH_DoctorSOAPService.MH_ExternalServiceParamWrapper> searchedDoctors { get; set; }
-
     public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper searchedDoctor { get; set; }
     public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper upsertedDoctor { get; set; }
+
     public MH_DoctorSOAPService soapService { get; set; }
     public String soapAction { get; set; }
     public String deletedDoctorId { get; set; }
@@ -66,7 +66,7 @@ public with sharing class MH_DoctorDifferentOrgController {
         } else {
             editDoctor();
         }
-        clearUpsertPopup();
+        clearUpsertItem();
     }
 
     public void setActionTypeToADD() {
@@ -76,7 +76,6 @@ public with sharing class MH_DoctorDifferentOrgController {
 
     public void setActionTypeToUPDATE() {
         soapAction = 'UPDATE';
-        emptyAction();
     }
 
     public void clearTableAndSearchForm() {

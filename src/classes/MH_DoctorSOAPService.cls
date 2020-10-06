@@ -38,13 +38,13 @@ public with sharing class MH_DoctorSOAPService {
             for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {
                 wrappers.add(new MH_ExternalServiceParamWrapper(
                         wrapper.id,
-                        wrapper.firstName,
+                        wrapper.name,
                         wrapper.lastName,
                         wrapper.town,
                         wrapper.country,
                         wrapper.email,
                         wrapper.birthdate,
-                        wrapper.licenceNumber
+                        wrapper.licenseNumber
                 ));
             }
 
@@ -86,7 +86,7 @@ public with sharing class MH_DoctorSOAPService {
     public String updateDoctor(MH_ExternalServiceParamWrapper doctor) {
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
 
-        try{
+        try {
             result = soapDoctorWebService.updateDoctor(
                     doctor.id,
                     doctor.name,
@@ -96,15 +96,15 @@ public with sharing class MH_DoctorSOAPService {
                     doctor.email,
                     doctor.birthdate
             );
-        } catch (Exception exc){
+        } catch (Exception exc) {
             System.debug(exc.getMessage());
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, exc.getMessage()));
             return null;
         }
         return result.statusMessage;
     }
 
-    class MH_ExternalServiceParamWrapper {
+    public class MH_ExternalServiceParamWrapper {
         public String id { get; set; }
         public String name { get; set; }
         public String lastName { get; set; }
