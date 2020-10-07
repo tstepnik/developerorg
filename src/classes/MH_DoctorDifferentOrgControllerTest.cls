@@ -10,24 +10,26 @@ private class MH_DoctorDifferentOrgControllerTest {
     static void shouldSuccessWhenRetrieveDoctorList() {
         SetupData setupData = new SetupData();
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
+        System.debug(result);
         Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
 
         MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
-        doctor.name = 'Marek';
-        doctor.lastName = 'Kowalski';
-        doctor.country = 'PL';
-        doctor.town = 'Kielce';
-        doctor.email = 'kowalskim@gmail.com';
+        doctor.name = '';
+        doctor.lastName = '';
+        doctor.country = '';
+        doctor.town = '';
+        doctor.email = '';
 
         MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
         controller.setSearchedDoctor(doctor);
 
         Test.startTest();
         controller.searchDoctors();
+        System.debug(controller.searchedDoctors);
         Test.stopTest();
-//
-//        Integer size = controller.searchedDoctors.size();
-//        System.assertEquals(0, size,'List return some doctors.');
+
+        Integer size = controller.searchedDoctors.size();
+        System.assertEquals(2, size,'List is empty');
 
     }
 

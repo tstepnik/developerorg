@@ -42,7 +42,6 @@
             z-index: 10000;
         }
 
-
     </style>
 
     <apex:slds >

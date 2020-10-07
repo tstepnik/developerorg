@@ -6,10 +6,14 @@ public with sharing class MH_DoctorSOAPService {
     public MH_DoctorSOAPService() {
         soapDoctorWebService = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebService();
         header = new soapSforceComSchemasClassHcsDoctor.SessionHeader_element();
-        header.sessionId = getSessionId();
+//        header.sessionId = getSessionId();
         soapDoctorWebService.SessionHeader = header;
     }
     public static String getSessionId() {
+        if (!Test.isRunningTest()) {
+            return '';
+        }
+
         ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials');
         partnerSoapSforceCom.Soap sp = new partnerSoapSforceCom.Soap();
         partnerSoapSforceCom.LoginResult loginResult = sp.login(credentials.Username__c, credentials.Password__c);
@@ -17,7 +21,7 @@ public with sharing class MH_DoctorSOAPService {
     }
 
     public List<MH_ExternalServiceParamWrapper> getDoctors(MH_ExternalServiceParamWrapper searchItem) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
 
         try {
             result = soapDoctorWebService.getDoctors(
@@ -32,7 +36,8 @@ public with sharing class MH_DoctorSOAPService {
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
             return null;
         }
-
+        System.debug('DOCTORSOAPSERVICE : ');
+        System.debug(result);
         List<MH_ExternalServiceParamWrapper> wrappers = new List<MH_ExternalServiceParamWrapper>();
         if (result.isSuccess && result.content != null) {
             for (soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper : result.content) {

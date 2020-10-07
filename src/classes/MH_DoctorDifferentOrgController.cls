@@ -28,11 +28,12 @@ public with sharing class MH_DoctorDifferentOrgController {
     }
 
     private List<SelectOption> getCountriesOptions() {
-//        countries = soapService.getCountries();
-        if (countries == null) {
+        if (Test.isRunningTest()) {
             countries = new List<String>{
                     'PL', 'UK', 'UA'
             };
+        } else {
+            countries = soapService.getCountries();
         }
         countriesOptions = new List<SelectOption>();
         countriesOptions.add(new SelectOption('', '--none--'));
@@ -45,7 +46,9 @@ public with sharing class MH_DoctorDifferentOrgController {
     }
 
     public void searchDoctors() {
+
         searchedDoctors = soapService.getDoctors(searchedDoctor);
+        System.debug(searchedDoctors);
     }
 
     public void addDoctor() {

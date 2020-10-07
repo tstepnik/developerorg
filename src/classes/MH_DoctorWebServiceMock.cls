@@ -19,6 +19,6 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
                 new soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element();
 
         responseElement.result = responseWrapper;
-        response.put('response_getDoctors', responseElement);
+        response.put('response_x', responseElement);
     }
 }
