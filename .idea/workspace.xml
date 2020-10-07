@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="MH_DoctorDifferentOrgController.cls:&#10;- repair syntax and compile errors&#10;&#10;MH_DoctorSOAPService.cls:&#10;- repair syntax and compile errors">
+    <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgController.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgController.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,60 +72,60 @@
                 <ConnectionWorkspaceSettings>
                   <option name="buildSuccessDatesBySourceRootRelativePath">
                     <map>
-                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602018309640" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602018267396" />
-                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602011841002" />
-                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1601988488000" />
+                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602026439000" />
                       <entry key="CLASSES/MH_TRIGGEREXCEPITON.CLS" value="1600417489000" />
-                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1601988488000" />
-                      <entry key="CLASSES/MH_UTILS.CLS" value="1601988488000" />
-                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1601988488000" />
-                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1601988489000" />
-                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602023047659" />
-                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1601988489000" />
-                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1601988489000" />
-                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1601988489000" />
-                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1601988489000" />
-                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1601988489000" />
+                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602026439000" />
+                      <entry key="CLASSES/MH_UTILS.CLS" value="1602026439000" />
+                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602026439000" />
+                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602026440000" />
+                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602026857078" />
+                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602026440000" />
+                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602026440000" />
+                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602026440000" />
+                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602026440000" />
+                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602026440000" />
                     </map>
                   </option>
                   <option name="lastBuildScope" value="CONTEXT" />
@@ -4061,6 +4063,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -4146,7 +4151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602018419255</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="MH_Doctor_SearchRecordDifferentOrg.page:&#10;- change every inputField to inputText,&#10;- page compile but it's not ready yet.">
+      <created>1602023147571</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1602023147571</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -4168,7 +4180,8 @@
       <path value="$PROJECT_DIR$/Modern-Hospital" />
     </ignored-roots>
     <MESSAGE value="MH_DoctorDifferentOrgController.cls:&#10;- repair syntax and compile errors&#10;&#10;MH_DoctorSOAPService.cls:&#10;- repair syntax and compile errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="MH_DoctorDifferentOrgController.cls:&#10;- repair syntax and compile errors&#10;&#10;MH_DoctorSOAPService.cls:&#10;- repair syntax and compile errors" />
+    <MESSAGE value="MH_Doctor_SearchRecordDifferentOrg.page:&#10;- change every inputField to inputText,&#10;- page compile but it's not ready yet." />
+    <option name="LAST_COMMIT_MESSAGE" value="MH_Doctor_SearchRecordDifferentOrg.page:&#10;- change every inputField to inputText,&#10;- page compile but it's not ready yet." />
   </component>
   <component name="WindowStateProjectService">
     <state x="2472" y="178" key="#Illuminated_Cloud" timestamp="1600324698851">
@@ -4197,15 +4210,16 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2586" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1598867431907" />
-    <state x="2270" y="0" width="1357" height="1040" key="CommitChangelistDialog2" timestamp="1602022569426">
+    <state x="2270" y="0" width="1357" height="688" key="CommitChangelistDialog2" timestamp="1602023147096">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="280" y="0" width="838" height="824" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602011758369" />
-    <state x="2270" y="0" width="1357" height="1040" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602022569426" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1602011754655">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="2270" y="0" width="1357" height="688" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602023147096" />
+    <state x="2036" y="117" width="1350" height="638" key="DiffContextDialog" timestamp="1602023078579">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602011754655" />
+    <state x="2036" y="117" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602023078579" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1601533953471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

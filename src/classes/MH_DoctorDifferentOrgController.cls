@@ -4,6 +4,8 @@ public with sharing class MH_DoctorDifferentOrgController {
     public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper searchedDoctor { get; set; }
     public MH_DoctorSOAPService.MH_ExternalServiceParamWrapper upsertedDoctor { get; set; }
 
+    public List<String> countries { get; set; }
+    public List<SelectOption> countriesOptions { get; set; }
     public MH_DoctorSOAPService soapService { get; set; }
     public String soapAction { get; set; }
     public String deletedDoctorId { get; set; }
@@ -21,7 +23,27 @@ public with sharing class MH_DoctorDifferentOrgController {
         this.searchedDoctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
         this.upsertedDoctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
         this.searchedDoctors = new List<MH_DoctorSOAPService.MH_ExternalServiceParamWrapper>();
+        this.countries = soapService.getCountries();
+        this.countriesOptions = getCountriesOptions();
         soapAction = '';
+    }
+
+    private List<SelectOption> getCountriesOptions() {
+        countriesOptions = new List<SelectOption>();
+        countriesOptions.add(new SelectOption('','--none--'));
+        if (countries != null && !countries.isEmpty()) {
+            for (String country : countries) {
+                countriesOptions.add(new SelectOption(country.substring(0,2),country.substring(0,2)));
+            }
+        }
+        return countriesOptions;
+    }
+
+    public void getCountries() {
+        countries = soapService.getCountries();
+        if (countries == null) {
+
+        }
     }
 
     public void searchDoctors() {

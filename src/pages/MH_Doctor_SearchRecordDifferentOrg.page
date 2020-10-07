@@ -42,6 +42,7 @@
             z-index: 10000;
         }
 
+
     </style>
 
     <apex:slds>
@@ -148,7 +149,7 @@
                                     <label class="slds-form-element__label" for="form-element-id-05">First Name</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-05" styleClass="slds-input"
-                                                         value="{!searchedDoctor.name}"/>
+                                                        value="{!searchedDoctor.name}"/>
                                     </div>
                                 </div>
                             </div>
@@ -156,8 +157,9 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-08">Country</label>
                                     <div class="slds-form-element__control">
-                                        <apex:inputText id="form-element-id-08" styleClass="slds-input"
-                                                         value="{!searchedDoctor.country}"/>
+                                        <apex:selectList styleClass="slds-select" value="{!searchedDoctor.country}" size="1">
+                                            <apex:selectOptions value="{!countriesOptions}"/>
+                                        </apex:selectList>
                                     </div>
                                 </div>
                             </div>
@@ -168,8 +170,8 @@
                                     <label class="slds-form-element__label" for="form-element-id-07">Last Name</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText required="false" id="form-element-id-07"
-                                                         styleClass="slds-input"
-                                                         value="{!searchedDoctor.lastName}"/>
+                                                        styleClass="slds-input"
+                                                        value="{!searchedDoctor.lastName}"/>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +180,7 @@
                                     <label class="slds-form-element__label" for="form-element-id-10">Town</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-10" styleClass="slds-input"
-                                                         value="{!searchedDoctor.town}"/>
+                                                        value="{!searchedDoctor.town}"/>
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +191,7 @@
                                     <label class="slds-form-element__label" for="form-element-id-09">Email</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-09" styleClass="slds-input"
-                                                         value="{!searchedDoctor.email}"/>
+                                                        value="{!searchedDoctor.email}"/>
                                     </div>
                                 </div>
                             </div>
@@ -352,6 +354,7 @@
                             <apex:pageMessages id="upsertDoctorErrorMessage"/>
                             <script>
                             let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
+
                             </script>
                             <div class="slds-modal__header">
                                 <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
@@ -387,8 +390,8 @@
                                                                for="form-element-id-111">First Name</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="form-element-id-111"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.name}"/>
+                                                                            styleClass="slds-input"
+                                                                            value="{!upsertedDoctor.name}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -397,9 +400,10 @@
                                                         <label class="slds-form-element__label"
                                                                for="form-element-id-112">Country</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputText id="form-element-id-112"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.country}"/>
+                                                            <apex:selectList styleClass="slds-select"
+                                                                             value="{!upsertedDoctor.country}" size="1">
+                                                                <apex:selectOptions value="{!countriesOptions}"/>
+                                                            </apex:selectList>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -411,8 +415,8 @@
                                                                for="form-element-id-113">Last Name</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText required="false" id="form-element-id-113"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.lastName}"/>
+                                                                            styleClass="slds-input"
+                                                                            value="{!upsertedDoctor.lastName}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -422,8 +426,8 @@
                                                                for="form-element-id-114">Town</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="form-element-id-114"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.town}"/>
+                                                                            styleClass="slds-input"
+                                                                            value="{!upsertedDoctor.town}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -435,8 +439,8 @@
                                                                for="form-element-id-115">Birthdate</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="form-element-id-115"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.birthdate}"/>
+                                                                            styleClass="slds-input"
+                                                                            value="{!upsertedDoctor.birthdate}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -446,8 +450,8 @@
                                                                for="form-element-id-09">Email</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="form-element-id-09"
-                                                                             styleClass="slds-input"
-                                                                             value="{!upsertedDoctor.email}"/>
+                                                                            styleClass="slds-input"
+                                                                            value="{!upsertedDoctor.email}"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -469,7 +473,7 @@
                                                             reRender="search-and-table-form, upsertDoctorOutputDialog "
                                                             styleClass="slds-button slds-button--brand">
                                         </apex:commandButton>
-                                        <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form" />
+                                        <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form"/>
                                     </center>
                                 </footer>
                             </div>
@@ -515,7 +519,7 @@
                     </div>
                 </div>
                 <div class="slds-backdrop" id="deleteDoctorModalBackdrop"></div>
-                <apex:actionFunction name="rerenderDeleteForm"  reRender="delete-doctor-form" />
+                <apex:actionFunction name="rerenderDeleteForm" reRender="delete-doctor-form"/>
 
             </apex:form>
         </div>
@@ -587,6 +591,7 @@ function tryToCloseModal(){
            hideSuccessToast();
                 }, 3000);
               }
-        </script>
+
+    </script>
     </html>
 </apex:page>

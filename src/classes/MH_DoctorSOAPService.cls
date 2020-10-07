@@ -103,7 +103,16 @@ public with sharing class MH_DoctorSOAPService {
         }
         return result.statusMessage;
     }
-
+    public List<String> getCountries(){
+        List<String> countries;
+        try{
+            countries = soapDoctorWebService.getCountriesList();
+        }catch (Exception e){
+            System.debug(e.getMessage());
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+        }
+        return countries;
+    }
     public class MH_ExternalServiceParamWrapper {
         public String id { get; set; }
         public String name { get; set; }
