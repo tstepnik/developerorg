@@ -39,21 +39,23 @@ public with sharing class MH_DoctorDifferentOrgController {
         countriesOptions.add(new SelectOption('', '--none--'));
         if (countries != null && !countries.isEmpty()) {
             for (String country : countries) {
-                countriesOptions.add(new SelectOption(country.substring(0, 2), country.substring(0, 2)));
+                String cString = country.split(';')[0];
+                countriesOptions.add(new SelectOption(cString, cString));
             }
         }
         return countriesOptions;
     }
 
     public void searchDoctors() {
-
         searchedDoctors = soapService.getDoctors(searchedDoctor);
-        System.debug('searchedDoctor');
-        System.debug(searchedDoctor);
     }
 
     public void addDoctor() {
+        System.debug('Upserted Doctor');
+        System.debug(upsertedDoctor);
         statusMessage = soapService.addDoctor(upsertedDoctor);
+        System.debug('statusMessage');
+        System.debug(statusMessage);
         if (statusMessage.contains('Success')) {
             clearUpsertItem();
         } else {
@@ -63,9 +65,8 @@ public with sharing class MH_DoctorDifferentOrgController {
 
     public void editDoctor() {
         statusMessage = soapService.updateDoctor(upsertedDoctor);
-
         if (statusMessage.contains('Success')) {
-            searchDoctors();
+            refreshTable();
             clearUpsertItem();
         } else {
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
@@ -74,11 +75,10 @@ public with sharing class MH_DoctorDifferentOrgController {
 
     public void deleteDoctor() {
         statusMessage = soapService.deleteDoctor(deletedDoctorId);
+        refreshTable();
         if (statusMessage.contains('Success')) {
-            searchDoctors();
             clearUpsertItem();
         } else {
-            searchDoctors();
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
         }
     }
@@ -115,11 +115,10 @@ public with sharing class MH_DoctorDifferentOrgController {
         deletedDoctorId = null;
     }
 
-    public void setSearchedDoctor(MH_DoctorSOAPService.MH_ExternalServiceParamWrapper wrapper) {
-        searchedDoctor = wrapper;
+    public void refreshTable() {
+        if (!Test.isRunningTest()) {
+            searchedDoctors = soapService.getDoctors(searchedDoctor);
+        }
     }
 
-    public void setDeletedDoctorId(String id) {
-        deletedDoctorId = id;
-    }
 }

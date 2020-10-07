@@ -24,7 +24,6 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
         doctorWrapper.licenseNumber = '123123123';
         doctorWrapper.town = 'Kielce';
 
-
         if (type == 'Get') {
             soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element responseElement = new soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element();
             soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
@@ -42,6 +41,7 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
 
             responseWrapper.content = wrappers;
             responseWrapper.isSuccess = true;
+            responseWrapper.statusMessage = 'Success';
             responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
@@ -52,6 +52,7 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
 
             responseWrapper.content = wrappers;
             responseWrapper.isSuccess = true;
+            responseWrapper.statusMessage = 'Success';
             responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
@@ -60,7 +61,7 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
             soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
 
             responseWrapper.isSuccess = true;
-            responseWrapper.statusMessage='Success. Doctor is deleted.';
+            responseWrapper.statusMessage= 'Success';
             responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }

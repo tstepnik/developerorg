@@ -14,24 +14,15 @@ public with sharing class MH_DoctorSOAPService {
             return '';
         }
 
-        ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials');
+        ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials'); //todo 
         partnerSoapSforceCom.Soap sp = new partnerSoapSforceCom.Soap();
         partnerSoapSforceCom.LoginResult loginResult = sp.login(credentials.Username__c, credentials.Password__c);
         return loginResult.sessionId;
     }
 
     public List<MH_ExternalServiceParamWrapper> getDoctors(MH_ExternalServiceParamWrapper searchItem) {
-        System.debug('searchItem');
-        System.debug(searchItem);
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
-        System.debug('result');
-        System.debug(soapDoctorWebService.getDoctors(
-                searchItem.name,
-                searchItem.lastName,
-                searchItem.town,
-                searchItem.country,
-                searchItem.email
-        ));
+
         try {
             result = soapDoctorWebService.getDoctors(
                     searchItem.name,
@@ -60,7 +51,6 @@ public with sharing class MH_DoctorSOAPService {
                         wrapper.licenseNumber
                 ));
             }
-
         }
         return wrappers;
     }
@@ -78,7 +68,7 @@ public with sharing class MH_DoctorSOAPService {
         return result.statusMessage;
     }
     public String addDoctor(MH_ExternalServiceParamWrapper doctor) {
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result;
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
 
         try {
             result = soapDoctorWebService.addDoctor(
@@ -90,7 +80,6 @@ public with sharing class MH_DoctorSOAPService {
                     doctor.birthdate
             );
         } catch (Exception exc) {
-            System.debug(exc.getMessage());
             ApexPages.addMessage(new ApexPages.message(ApexPages.Severity.ERROR, exc.getMessage()));
             return null;
         }

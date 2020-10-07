@@ -63,7 +63,7 @@ global class MH_DoctorWebService {
             deletedDoctor = new Doctor__c(Id = id);
             Database.DeleteResult result = Database.delete(deletedDoctor);
             response.isSuccess = true;
-            response.statusMessage = 'Success. Doctor is deleted.';
+            response.statusMessage = System.Label.Delete_Success;
         } catch (Exception e) {
             response = buildErrorResponse(e.getMessage());
         }
@@ -142,16 +142,16 @@ global class MH_DoctorWebService {
 
     private static String rewordStatusMessage(String statusMessage){
         if(statusMessage.contains('INVALID_EMAIL_ADDRESS')){
-            statusMessage = 'Invalid E-mail address.';
+            statusMessage = System.Label.Invalid_Email_Address;
         }else if(statusMessage.contains('INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST')){
-            statusMessage = 'Invalid or null value for restricted picklist Country.';
+            statusMessage = System.Label.Invalid_Or_Null_Picklist;
         }else if(statusMessage.contains('REQUIRED_FIELD_MISSING')){
             if(statusMessage.contains('Required fields are missing: [LastName__c]'))
-                statusMessage = 'Required field missing: Last Name.';
+                statusMessage = System.Label.Required_Field_Missing;
         }else if(statusMessage.contains('DUPLICATES_DETECTED')){
-            statusMessage = 'Duplicate Doctor record detected in external Database.';
+            statusMessage = System.Label.Duplicates_Detected;
         }else if(statusMessage.contains('ENTITY_IS_DELETED')) {
-            statusMessage = 'Doctor record is already deleted.';
+            statusMessage = System.Label.Entity_Is_Deleted;
         }
         return statusMessage;
     }

@@ -58,7 +58,6 @@ public with sharing class MH_Hospital_Extension {
     }
 
     public void dismiss() {
-        System.debug('BUTTON IS CLICKED');
         contracts = MH_Hospital_Service.dismiss(contractId, hospital);
     }
 

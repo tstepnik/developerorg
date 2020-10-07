@@ -60,7 +60,7 @@
                         </svg>
                     </span>
                         <span class="slds-notify__content slds-align_absolute-center">
-                        <h2 class="slds-text-heading_small">Success</h2>
+                        <h2 class="slds-text-heading_small">{!$Label.MH_Success_Message}</h2>
                     </span>
                         <apex:commandLink styleClass="slds-notify__close" value="X" onClick="hideSuccessToast()"
                                           reRender="none" immediate="true"/>
@@ -75,7 +75,7 @@
                         <nav role="navigation" aria-label="Breadcrumbs">
                             <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
                                 <li class="slds-breadcrumb__item">
-                                    <a href="javascript:void(0);">Doctors</a>
+                                    <a href="javascript:void(0);">{!$Label.MH_Doctors}</a>
                                 </li>
                             </ol>
                         </nav>
@@ -85,7 +85,7 @@
                                     <div class="slds-page-header__name-title">
                                         <h1>
                                         <span class="slds-page-header__title slds-truncate"
-                                              title="Contacts (will truncate)">Kamils doctors</span>
+                                              title="Contacts (will truncate)">{!$Label.Kamils_Doctors}</span>
                                         </h1>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
 
                                             <apex:commandButton action="{!setActionTypeToADD}"
                                                     styleClass="slds-button slds-button_neutral"
-                                                    value="Add Doctor"
+                                                    value="{!$Label.Add_Doctor}"
                                                     onClick="openAddDoctorModal()"
                                                     reRender="upsertDoctorOutputDialog, mainlayoutErrors"
                                             ></apex:commandButton>
@@ -134,7 +134,7 @@
             <apex:form id="search-and-table-form">
 
                 <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address">
-                    <legend class="slds-form-element__legend slds-form-element__label"><p>Search Doctors</p></legend>
+                    <legend class="slds-form-element__legend slds-form-element__label"><p>{!$Label.Search_Doctors}</p></legend>
                     <div class="slds-form-element__control">
                         <div class="slds-form-element__row">
                             <div class="slds-size_1-of-1">
@@ -145,7 +145,7 @@
                         <div class="slds-form-element__row">
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-05">First Name</label>
+                                    <label class="slds-form-element__label" for="form-element-id-05">{!$Label.MH_Doctor_First_Name}</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-05" styleClass="slds-input"
                                                         value="{!searchedDoctor.name}"/>
@@ -154,7 +154,7 @@
                             </div>
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-08">Country</label>
+                                    <label class="slds-form-element__label" for="form-element-id-08">{!$Label.MH_Doctor_Country}</label>
                                     <div class="slds-form-element__control">
                                         <apex:selectList styleClass="slds-select" value="{!searchedDoctor.country}" size="1">
                                             <apex:selectOptions value="{!countriesOptions}"/>
@@ -166,7 +166,7 @@
                         <div class="slds-form-element__row">
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-07">Last Name</label>
+                                    <label class="slds-form-element__label" for="form-element-id-07">{!$Label.MH_Doctor_Last_Name}</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText required="false" id="form-element-id-07"
                                                         styleClass="slds-input"
@@ -176,7 +176,7 @@
                             </div>
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-10">Town</label>
+                                    <label class="slds-form-element__label" for="form-element-id-10">{!$Label.Town}</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-10" styleClass="slds-input"
                                                         value="{!searchedDoctor.town}"/>
@@ -187,7 +187,7 @@
                         <div class="slds-form-element__row">
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-09">Email</label>
+                                    <label class="slds-form-element__label" for="form-element-id-09">{!$Label.MH_Doctor_Email}</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText id="form-element-id-09" styleClass="slds-input"
                                                         value="{!searchedDoctor.email}"/>
@@ -208,12 +208,12 @@
                 </fieldset>
 
                 <div class="slds-button-group" role="group">
-                    <apex:commandButton styleClass="slds-button slds-button_neutral" value="Clear"
+                    <apex:commandButton styleClass="slds-button slds-button_neutral" value="{!$Label.Clear}"
                                         action="{!clearTableAndSearchForm}"
                                         reRender="search-and-table-form,mainlayoutErrors"
                     ></apex:commandButton>
                     <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
-                                        value="Search"
+                                        value="{!$Label.Search}"
                                         reRender="search-and-table-form,mainlayoutErrors"
                                         action="{!searchDoctors}"
                     ></apex:commandButton>
@@ -436,14 +436,7 @@
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="datePicker"
                                                                             styleClass="slds-input"
-                                                                            onMouseOver="openDatePicker()"
                                                                             value="{!upsertedDoctor.birthdate}"/>
-                                                            <script>
-                                                        function openDatePicker(){
-                                                            var dtpckr= document.getElementById('{!$Component.datePicker}');
-                                                            j$(dtpckr).datepicker();
-                                                        }
-                                                    </script>
 
                                                         </div>
                                                     </div>
@@ -478,7 +471,7 @@
                                                             styleClass="slds-button slds-button--brand">
                                         </apex:commandButton>
                                         <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form"/>
-                                        <apex:actionFunction name="clearUpsertItem" action="{!clearUpsertItem}"/>
+                                        <apex:actionFunction name="clearUpsertItem"  reRender="upsert-doctor-form" action="{!clearUpsertItem}"/>
                                     </center>
                                 </footer>
                             </div>
