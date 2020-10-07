@@ -41,9 +41,6 @@ public with sharing class MH_DoctorDifferentOrgController {
 
     public void getCountries() {
         countries = soapService.getCountries();
-        if (countries == null) {
-
-        }
     }
 
     public void searchDoctors() {

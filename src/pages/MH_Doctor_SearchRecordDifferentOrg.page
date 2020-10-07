@@ -45,15 +45,14 @@
 
     </style>
 
-    <apex:slds>
-        <apex:includeScript
-                value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
+    <apex:slds >
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
         <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
         <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
 
         <div class="slds-scope">
 
-            <apex:form>
+            <apex:form >
                 <div class="slds-notify_container slds-hide" aria-hidden="true" id="successToast">
                     <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
                     <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-align-top">
@@ -69,7 +68,7 @@
                     </div>
                 </div>
             </apex:form>
-            <apex:form>
+            <apex:form >
                 <apex:pageMessages id="mainlayoutErrors"/>
             <div class="slds-page-header slds-page-header_related-list">
                 <div class="slds-page-header__row">
@@ -101,8 +100,7 @@
                                 <ul class="slds-button-group-list">
                                     <li>
 
-                                            <apex:commandButton
-                                                    action="{!setActionTypeToADD}"
+                                            <apex:commandButton action="{!setActionTypeToADD}"
                                                     styleClass="slds-button slds-button_neutral"
                                                     value="Add Doctor"
                                                     onClick="openAddDoctorModal()"
@@ -264,8 +262,7 @@
                             <td>
                                 <div class="slds-truncate">
 
-                                    <apex:commandButton
-                                            action="{!setActionTypeToUPDATE}"
+                                    <apex:commandButton action="{!setActionTypeToUPDATE}"
                                             styleClass="slds-button slds-button_neutral"
                                             value="Edit"
                                             onClick="openEditDoctorModal()"
@@ -288,8 +285,7 @@
                                                     assignTo="{!upsertedDoctor.birthdate}"/>
 
                                     </apex:commandButton>
-                                    <apex:commandButton
-                                            styleClass="slds-button slds-button_neutral"
+                                    <apex:commandButton styleClass="slds-button slds-button_neutral"
                                             value="Delete"
                                             onClick="openDeleteDoctorModal()"
                                             reRender="deleteDoctorOutputDialog"

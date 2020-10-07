@@ -141,4 +141,3 @@ public with sharing class MH_DoctorSOAPService {
         }
     }
 }
-
