@@ -22,9 +22,9 @@ private class MH_DoctorDifferentOrgControllerTest {
         MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
         controller.setSearchedDoctor(doctor);
 
-//        Test.startTest();
-//        controller.searchDoctors();
-//        Test.stopTest();
+        Test.startTest();
+        controller.searchDoctors();
+        Test.stopTest();
 //
 //        Integer size = controller.searchedDoctors.size();
 //        System.assertEquals(0, size,'List return some doctors.');

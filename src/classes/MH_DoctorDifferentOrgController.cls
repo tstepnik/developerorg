@@ -28,7 +28,7 @@ public with sharing class MH_DoctorDifferentOrgController {
     }
 
     private List<SelectOption> getCountriesOptions() {
-        countries = soapService.getCountries();
+//        countries = soapService.getCountries();
         if (countries == null) {
             countries = new List<String>{
                     'PL', 'UK', 'UA'

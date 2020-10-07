@@ -136,7 +136,23 @@ global class MH_DoctorWebService {
     private static MH_DoctorResponseWrapper buildErrorResponse(String errorMessage) {
         MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
         response.isSuccess = false;
-        response.statusMessage = errorMessage;
+        response.statusMessage = rewordStatusMessage(errorMessage);
         return response;
     }
-}
+
+    private static String rewordStatusMessage(String statusMessage){
+        if(statusMessage.contains('INVALID_EMAIL_ADDRESS')){
+            statusMessage = 'Invalid E-mail address.';
+        }else if(statusMessage.contains('INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST')){
+            statusMessage = 'Invalid or null value for restricted picklist Country.';
+        }else if(statusMessage.contains('REQUIRED_FIELD_MISSING')){
+            if(statusMessage.contains('Required fields are missing: [Last_Name__c]'))
+                statusMessage = 'Required field missing: Last Name.';
+        }else if(statusMessage.contains('DUPLICATES_DETECTED')){
+            statusMessage = 'Duplicate Doctor record detected in external Database.';
+        }else if(statusMessage.contains('ENTITY_IS_DELETED')) {
+            statusMessage = 'Doctor record is already deleted.';
+        }
+        return statusMessage;
+    }
+}j
