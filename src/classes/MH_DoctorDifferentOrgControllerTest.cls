@@ -9,8 +9,9 @@ private class MH_DoctorDifferentOrgControllerTest {
     @isTest
     static void shouldSuccessWhenRetrieveDoctorList() {
         Boolean operationStatus = true;
+        SetupData setupData = new SetupData();
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
         Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(operationStatus));
-
         MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
         doctor.name = 'Marek';
         doctor.lastName = 'Kowalski';
@@ -22,13 +23,11 @@ private class MH_DoctorDifferentOrgControllerTest {
         controller.searchedDoctor = doctor;
 
         Test.startTest();
-
-
-
-//        Boolean isSuccess = controller.searchDoctors().isSuccess;
+        controller.searchDoctors();
         Test.stopTest();
 
-//        System.assertEquals(operationStatus, isSuccess);
+        Integer size = controller.searchedDoctors.size();
+        System.assertEquals(0, size,'List return some doctors.');
 
     }
 
@@ -38,12 +37,11 @@ private class MH_DoctorDifferentOrgControllerTest {
         SetupData setupData = new SetupData();
 //        List <> = setupData.createDoctorRecord();
 
-
     }
 
     //ADD
     @isTest
-    static void should_ReturnUpdatedDoctorWithSameId_When_update(){
+    static void should_ReturnUpdatedDoctorWithSameId_When_update() {
 
     }
 

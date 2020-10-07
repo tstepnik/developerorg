@@ -1,8 +1,8 @@
 global class MH_DoctorWebServiceMock implements WebServiceMock {
-    public Boolean status;
+    public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper;
 
-    public MH_DoctorWebServiceMock(Boolean bool){
-        this.status = bool;
+    public MH_DoctorWebServiceMock(soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult response){
+        this.responseWrapper = response;
     }
 
     global void doInvoke(
@@ -18,7 +18,7 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
         soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element  responseElement =
                 new soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element();
 
-        responseElement.result.isSuccess = status;
-        response.put('response_getDoctors', response);
+        responseElement.result = responseWrapper;
+        response.put('response_getDoctors', responseElement);
     }
 }
