@@ -24,7 +24,14 @@ public with sharing class MH_DoctorSOAPService {
         System.debug('searchItem');
         System.debug(searchItem);
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
-
+        System.debug('result');
+        System.debug(soapDoctorWebService.getDoctors(
+                searchItem.name,
+                searchItem.lastName,
+                searchItem.town,
+                searchItem.country,
+                searchItem.email
+        ));
         try {
             result = soapDoctorWebService.getDoctors(
                     searchItem.name,

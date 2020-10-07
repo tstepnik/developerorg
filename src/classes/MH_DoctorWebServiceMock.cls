@@ -27,32 +27,41 @@ global class MH_DoctorWebServiceMock implements WebServiceMock {
 
         if (type == 'Get') {
             soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element responseElement = new soapSforceComSchemasClassHcsDoctor.getDoctorsResponse_element();
-            responseElement.result.content = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{
-                    doctorWrapper
-            };
-            responseElement.result.isSuccess = true;
+            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
+            List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper> wrappers = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{doctorWrapper};
+
+            responseWrapper.content = wrappers;
+            responseWrapper.isSuccess = true;
+            responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
         if (type == 'Create') {
             soapSforceComSchemasClassHcsDoctor.addDoctorResponse_element responseElement = new soapSforceComSchemasClassHcsDoctor.addDoctorResponse_element();
-            responseElement.result.content = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{
-                    doctorWrapper
-            };
-            responseElement.result.isSuccess = true;
+            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
+            List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper> wrappers = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{doctorWrapper};
+
+            responseWrapper.content = wrappers;
+            responseWrapper.isSuccess = true;
+            responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
         if (type == 'Update') {
             soapSforceComSchemasClassHcsDoctor.updateDoctorResponse_element responseElement = new soapSforceComSchemasClassHcsDoctor.updateDoctorResponse_element();
-            responseElement.result.content = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{
-                    doctorWrapper
-            };
-            responseElement.result.isSuccess = true;
+            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
+            List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper> wrappers = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>{doctorWrapper};
+
+            responseWrapper.content = wrappers;
+            responseWrapper.isSuccess = true;
+            responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
         if (type == 'Delete') {
             soapSforceComSchemasClassHcsDoctor.deleteDoctorResponse_element responseElement = new soapSforceComSchemasClassHcsDoctor.deleteDoctorResponse_element();
-            responseElement.result.isSuccess = true;
-            responseElement.result.statusMessage = 'Success. Doctor is deleted.';
+            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult responseWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
+
+            responseWrapper.isSuccess = true;
+            responseWrapper.statusMessage='Success. Doctor is deleted.';
+            responseElement.result = responseWrapper;
             response.put('response_x', responseElement);
         }
     }
