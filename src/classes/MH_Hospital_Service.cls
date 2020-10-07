@@ -11,7 +11,6 @@ public with sharing class MH_Hospital_Service {
                 update contract;
             }
         }catch (DmlException ex){
-            System.debug('DML EXCEPTION');
             System.debug(ex.getMessage());
         }
     }

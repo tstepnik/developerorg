@@ -71,12 +71,15 @@ public with sharing class MH_DoctorDifferentOrgController {
     }
 
     public void deleteDoctor() {
-
         statusMessage = soapService.deleteDoctor(deletedDoctorId);
+        System.debug('delete Doctor status message: ');
+        System.debug(statusMessage);
         if (statusMessage.contains('Success')) {
+            System.debug('inside success if');
             searchDoctors();
             clearUpsertItem();
         } else {
+            System.debug('inside fail else');
             searchDoctors();
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, statusMessage));
         }
@@ -88,7 +91,6 @@ public with sharing class MH_DoctorDifferentOrgController {
         } else {
             editDoctor();
         }
-        clearUpsertItem();
     }
 
     public void setActionTypeToADD() {

@@ -69,6 +69,8 @@
                     </div>
                 </div>
             </apex:form>
+            <apex:form>
+                <apex:pageMessages id="mainlayoutErrors"/>
             <div class="slds-page-header slds-page-header_related-list">
                 <div class="slds-page-header__row">
                     <div class="slds-page-header__col-title">
@@ -98,15 +100,14 @@
                             <div class="slds-page-header__control">
                                 <ul class="slds-button-group-list">
                                     <li>
-                                        <apex:form>
+
                                             <apex:commandButton
                                                     action="{!setActionTypeToADD}"
                                                     styleClass="slds-button slds-button_neutral"
                                                     value="Add Doctor"
                                                     onClick="openAddDoctorModal()"
-                                                    reRender="upsertDoctorOutputDialog"
+                                                    reRender="upsertDoctorOutputDialog, mainlayoutErrors"
                                             ></apex:commandButton>
-                                        </apex:form>
                                     </li>
                                     <li>
 
@@ -131,6 +132,7 @@
                     </div>
                 </div>
             </div>
+            </apex:form>
 
             <apex:form id="search-and-table-form">
 
@@ -211,11 +213,11 @@
                 <div class="slds-button-group" role="group">
                     <apex:commandButton styleClass="slds-button slds-button_neutral" value="Clear"
                                         action="{!clearTableAndSearchForm}"
-                                        reRender="search-and-table-form"
+                                        reRender="search-and-table-form,mainlayoutErrors"
                     ></apex:commandButton>
                     <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
                                         value="Search"
-                                        reRender="search-and-table-form"
+                                        reRender="search-and-table-form,mainlayoutErrors"
                                         action="{!searchDoctors}"
                     ></apex:commandButton>
                 </div>
@@ -289,10 +291,10 @@
                                     <apex:commandButton
                                             styleClass="slds-button slds-button_neutral"
                                             value="Delete"
-                                            action="{!deleteDoctor}"
                                             onClick="openDeleteDoctorModal()"
                                             reRender="deleteDoctorOutputDialog"
                                     >
+
                                         <apex:param value="{!doctor.id}" name="idDelParam"
                                                     assignTo="{!deletedDoctorId}"/>
                                         <apex:param value="{!doctor.name}" name="firstNameDelParam"
@@ -351,11 +353,6 @@
                     <div class="slds-modal__container">
 
                         <apex:outputPanel id="upsertDoctorOutputDialog">
-                            <apex:pageMessages id="upsertDoctorErrorMessage"/>
-                            <script>
-                            let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
-
-                            </script>
                             <div class="slds-modal__header">
                                 <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
                                                     onclick="closeUpsertDoctorModal();"
@@ -372,7 +369,11 @@
                             </div>
 
                             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <apex:pageMessages id="upsertDoctorErrorMessage"/>
+                                <script>
+                            let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
 
+                            </script>
                                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                                     <fieldset
                                             class="slds-form-element slds-form-element_compound slds-form-element_address">
@@ -474,6 +475,7 @@
                                                             styleClass="slds-button slds-button--brand">
                                         </apex:commandButton>
                                         <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form"/>
+                                        <apex:actionFunction name="clearUpsertItem" action="{!clearUpsertItem}"/>
                                     </center>
                                 </footer>
                             </div>
@@ -509,7 +511,7 @@
                                         />
                                         <apex:commandButton value="Yes"
                                                             action="{!deleteDoctor}"
-                                                            reRender="search-and-table-form,delete-doctor-form"
+                                                            reRender="search-and-table-form,delete-doctor-form,mainlayoutErrors"
                                                             onClick="closeDeleteDoctorModal();"
                                                             styleClass="slds-button slds-button--brand"/>
                                     </center>
@@ -568,7 +570,9 @@ function tryToCloseModal(){
                     closeUpsertDoctorModal();
                     reRenderDoctorForm();
                      if(isInsert || isUpdate){
+                     clearUpsertItem();
                      showSuccessToast();
+
             }
           }
         }
