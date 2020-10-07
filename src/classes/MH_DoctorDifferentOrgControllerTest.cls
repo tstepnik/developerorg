@@ -10,7 +10,6 @@ private class MH_DoctorDifferentOrgControllerTest {
     static void shouldSuccessWhenRetrieveDoctorList() {
         SetupData setupData = new SetupData();
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
-        System.debug(result);
         Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
 
         MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
@@ -25,11 +24,10 @@ private class MH_DoctorDifferentOrgControllerTest {
 
         Test.startTest();
         controller.searchDoctors();
-        System.debug(controller.searchedDoctors);
         Test.stopTest();
 
         Integer size = controller.searchedDoctors.size();
-        System.assertEquals(2, size,'List is empty');
+        System.assertEquals(2, size, 'List is empty');
 
     }
 
@@ -43,7 +41,21 @@ private class MH_DoctorDifferentOrgControllerTest {
 
     //ADD
     @isTest
-    static void should_ReturnUpdatedDoctorWithSameId_When_update() {
+    static void should_returnSuccess_whenDelete() {
+//        SetupData setupData = new SetupData();
+//        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
+//        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
+//
+//        MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
+//        doctor.id = 'a027R00000nkR31';
+//        MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
+//        controller.setDeletedDoctorId(doctor.id);
+//        Test.startTest();
+//        controller.deleteDoctor();
+//        Test.stopTest();
+//        System.debug('COntroller status message');
+//        System.debug(controller.statusMessage);
+
 
     }
 
@@ -77,6 +89,12 @@ private class MH_DoctorDifferentOrgControllerTest {
             response.content = wrappers;
             response.isSuccess = true;
             response.statusMessage = 'Success';
+            return response;
+        }
+        public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult createDeleteResponse() {
+            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult response = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
+            response.isSuccess = true;
+            response.statusMessage = 'Success. Doctor is deleted.';
             return response;
         }
     }

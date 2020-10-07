@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgControllerTest.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgControllerTest.cls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorWebService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorWebService.cls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorWebServiceMock.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorWebServiceMock.cls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,63 +75,63 @@
                 <ConnectionWorkspaceSettings>
                   <option name="buildSuccessDatesBySourceRootRelativePath">
                     <map>
-                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602063849646" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602064353838" />
-                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602063653000" />
+                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602066852770" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602066542460" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602066330933" />
+                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602065387816" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_TRIGGEREXCEPITON.CLS" value="1600417489000" />
-                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602063653000" />
-                      <entry key="CLASSES/MH_UTILS.CLS" value="1602063653000" />
-                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602063653000" />
-                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602063653000" />
-                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602063654000" />
-                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602063654000" />
-                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602063654000" />
-                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602063654000" />
-                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602063654000" />
-                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602063654000" />
+                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602064984000" />
+                      <entry key="CLASSES/MH_UTILS.CLS" value="1602064984000" />
+                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602064984000" />
+                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602064984000" />
+                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602064985000" />
+                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602065175273" />
+                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602064985000" />
+                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602064985000" />
+                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602064985000" />
+                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602064985000" />
+                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602064985000" />
                     </map>
                   </option>
                   <option name="lastBuildScope" value="CONTEXT" />
@@ -3902,38 +3901,7 @@
       <recent name="C:\Users\BRITENET\IdeaProjects\Developer.org\src\pages" />
     </key>
   </component>
-  <component name="RunManager" selected="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldSuccessWhenRetrieveDoctorList">
-    <configuration name="MH_ContractOverlappingHandlerTest" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
-      <option name="allTests" value="false" />
-      <option name="allowRunningInParallel" value="false" />
-      <option name="apexLogLevel" value="DEBUG" />
-      <option name="calloutsLogLevel" value="INFO" />
-      <option name="connectionName" value="Dev1.org" />
-      <option name="contextConfiguration" value="true" />
-      <option name="databaseLogLevel" value="INFO" />
-      <option name="logLevelsInitialized" value="false" />
-      <option name="moduleToTestClassNames">
-        <map>
-          <entry key="Developer.org">
-            <value>
-              <set>
-                <option value="MH_ContractOverlappingHandlerTest" />
-              </set>
-            </value>
-          </entry>
-        </map>
-      </option>
-      <option name="profilingLogLevel" value="INFO" />
-      <option name="systemLogLevel" value="DEBUG" />
-      <option name="testClassToTestMethodNames">
-        <map />
-      </option>
-      <option name="testSuiteName" />
-      <option name="validationLogLevel" value="INFO" />
-      <option name="visualforceLogLevel" value="INFO" />
-      <option name="workflowLogLevel" value="INFO" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_returnSuccess_whenDelete">
     <configuration name="MH_ContractOverlappingHandlerTest.shouldAddNewContract" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
       <option name="allTests" value="false" />
       <option name="allowRunningInParallel" value="false" />
@@ -4082,13 +4050,52 @@
       <option name="workflowLogLevel" value="INFO" />
       <method v="2" />
     </configuration>
+    <configuration name="MH_DoctorDifferentOrgControllerTest.should_returnSuccess_whenDelete" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Dev1.org" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Developer.org">
+            <value>
+              <set>
+                <option value="MH_DoctorDifferentOrgControllerTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map>
+          <entry key="MH_DoctorDifferentOrgControllerTest">
+            <value>
+              <set>
+                <option value="should_returnSuccess_whenDelete" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_returnSuccess_whenDelete" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldSuccessWhenRetrieveDoctorList" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_ReturnUpdatedDoctorWithSameId_When_update" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest" />
         <item itemvalue="Apex Unit Tests.MH_ContractOverlappingHandlerTest.shouldAddNewContract" />
-        <item itemvalue="Apex Unit Tests.MH_ContractOverlappingHandlerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -4265,7 +4272,7 @@
     </state>
     <state x="240" y="174" key="FileDocumentManager.FileCacheConflict/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1598119771167" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601533953471" />
-    <state width="1877" height="198" key="GridCell.Tab.0.bottom" timestamp="1602063866283">
+    <state width="1877" height="198" key="GridCell.Tab.0.bottom" timestamp="1602067026008">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862777" />
@@ -4273,9 +4280,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="198" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602063866283" />
+    <state width="1877" height="198" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067026008" />
     <state width="1493" height="325" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896269" />
-    <state width="1877" height="198" key="GridCell.Tab.0.center" timestamp="1602063866283">
+    <state width="1877" height="198" key="GridCell.Tab.0.center" timestamp="1602067026008">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.center/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862774" />
@@ -4283,9 +4290,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="198" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602063866283" />
+    <state width="1877" height="198" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067026008" />
     <state width="1493" height="325" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="1877" height="198" key="GridCell.Tab.0.left" timestamp="1602063866283">
+    <state width="1877" height="198" key="GridCell.Tab.0.left" timestamp="1602067026008">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.left/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862774" />
@@ -4293,9 +4300,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420122" />
     <state width="1877" height="531" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="198" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602063866283" />
+    <state width="1877" height="198" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067026008" />
     <state width="1493" height="325" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="1877" height="198" key="GridCell.Tab.0.right" timestamp="1602063866283">
+    <state width="1877" height="198" key="GridCell.Tab.0.right" timestamp="1602067026008">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.right/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862777" />
@@ -4303,7 +4310,7 @@
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="198" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602063866283" />
+    <state width="1877" height="198" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067026008" />
     <state width="1493" height="325" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602061016890">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -4444,6 +4451,6 @@
     <state x="2543" y="239" width="1008" height="681" key="search.everywhere.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1600169668478" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest_shouldSuccessWhenRetrieveDoctorList.null" NAME="Dev1.org Coverage Results" MODIFIED="1602063866283" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
+    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest_should_returnSuccess_whenDelete.null" NAME="Dev1.org Coverage Results" MODIFIED="1602067026008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
   </component>
 </project>

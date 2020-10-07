@@ -432,11 +432,19 @@
                                                 <div class="slds-size_2-of-6">
                                                     <div class="slds-form-element">
                                                         <label class="slds-form-element__label"
-                                                               for="form-element-id-115">Birthdate</label>
+                                                               for="datePicker">Birthdate</label>
                                                         <div class="slds-form-element__control">
-                                                            <apex:inputText id="form-element-id-115"
+                                                            <apex:inputText id="datePicker"
                                                                             styleClass="slds-input"
+                                                                            onMouseOver="openDatePicker()"
                                                                             value="{!upsertedDoctor.birthdate}"/>
+                                                            <script>
+                                                        function openDatePicker(){
+                                                            var dtpckr= document.getElementById('{!$Component.datePicker}');
+                                                            j$(dtpckr).datepicker();
+                                                        }
+                                                    </script>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -590,7 +598,6 @@ function tryToCloseModal(){
            hideSuccessToast();
                 }, 3000);
               }
-
     </script>
     </html>
 </apex:page>
