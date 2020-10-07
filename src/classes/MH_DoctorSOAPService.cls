@@ -21,6 +21,8 @@ public with sharing class MH_DoctorSOAPService {
     }
 
     public List<MH_ExternalServiceParamWrapper> getDoctors(MH_ExternalServiceParamWrapper searchItem) {
+        System.debug('searchItem');
+        System.debug(searchItem);
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
 
         try {

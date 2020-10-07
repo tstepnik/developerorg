@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgController.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgController.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgControllerTest.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorDifferentOrgControllerTest.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorSOAPService.cls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/classes/MH_DoctorWebServiceMock.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_DoctorWebServiceMock.cls" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,13 +81,14 @@
                       <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602064984000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602066852770" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602067206558" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602070839403" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602070786164" />
                       <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602064984000" />
-                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602066330933" />
+                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602070882397" />
                       <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602065387816" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602069275019" />
                       <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602064984000" />
                       <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602064984000" />
@@ -3896,47 +3900,8 @@
       <recent name="C:\Users\BRITENET\IdeaProjects\Developer.org\src\pages" />
     </key>
   </component>
-  <component name="RunManager" selected="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_returnSuccess_whenDelete">
-    <configuration name="MH_ContractOverlappingHandlerTest.shouldAddNewContract" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
-      <option name="allTests" value="false" />
-      <option name="allowRunningInParallel" value="false" />
-      <option name="apexLogLevel" value="DEBUG" />
-      <option name="calloutsLogLevel" value="INFO" />
-      <option name="connectionName" value="Dev1.org" />
-      <option name="contextConfiguration" value="true" />
-      <option name="databaseLogLevel" value="INFO" />
-      <option name="logLevelsInitialized" value="false" />
-      <option name="moduleToTestClassNames">
-        <map>
-          <entry key="Developer.org">
-            <value>
-              <set>
-                <option value="MH_ContractOverlappingHandlerTest" />
-              </set>
-            </value>
-          </entry>
-        </map>
-      </option>
-      <option name="profilingLogLevel" value="INFO" />
-      <option name="systemLogLevel" value="DEBUG" />
-      <option name="testClassToTestMethodNames">
-        <map>
-          <entry key="MH_ContractOverlappingHandlerTest">
-            <value>
-              <set>
-                <option value="shouldAddNewContract" />
-              </set>
-            </value>
-          </entry>
-        </map>
-      </option>
-      <option name="testSuiteName" />
-      <option name="validationLogLevel" value="INFO" />
-      <option name="visualforceLogLevel" value="INFO" />
-      <option name="workflowLogLevel" value="INFO" />
-      <method v="2" />
-    </configuration>
-    <configuration name="MH_DoctorDifferentOrgControllerTest" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+  <component name="RunManager" selected="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldReturnSearchedDoctorFromDoctorsList">
+    <configuration name="MH_DoctorDifferentOrgControllerTest.shouldReturnSearchedDoctorFromDoctorsList" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
       <option name="allTests" value="false" />
       <option name="allowRunningInParallel" value="false" />
       <option name="apexLogLevel" value="DEBUG" />
@@ -3959,7 +3924,54 @@
       <option name="profilingLogLevel" value="INFO" />
       <option name="systemLogLevel" value="DEBUG" />
       <option name="testClassToTestMethodNames">
-        <map />
+        <map>
+          <entry key="MH_DoctorDifferentOrgControllerTest">
+            <value>
+              <set>
+                <option value="shouldReturnSearchedDoctorFromDoctorsList" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="testSuiteName" />
+      <option name="validationLogLevel" value="INFO" />
+      <option name="visualforceLogLevel" value="INFO" />
+      <option name="workflowLogLevel" value="INFO" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MH_DoctorDifferentOrgControllerTest.shouldReturnUpdatedDoctorId" type="com.illuminatedcloud.intellij" factoryName="Apex Unit Tests" temporary="true" show_console_on_std_err="false" show_console_on_std_out="false">
+      <option name="allTests" value="false" />
+      <option name="allowRunningInParallel" value="false" />
+      <option name="apexLogLevel" value="DEBUG" />
+      <option name="calloutsLogLevel" value="INFO" />
+      <option name="connectionName" value="Dev1.org" />
+      <option name="contextConfiguration" value="true" />
+      <option name="databaseLogLevel" value="INFO" />
+      <option name="logLevelsInitialized" value="false" />
+      <option name="moduleToTestClassNames">
+        <map>
+          <entry key="Developer.org">
+            <value>
+              <set>
+                <option value="MH_DoctorDifferentOrgControllerTest" />
+              </set>
+            </value>
+          </entry>
+        </map>
+      </option>
+      <option name="profilingLogLevel" value="INFO" />
+      <option name="systemLogLevel" value="DEBUG" />
+      <option name="testClassToTestMethodNames">
+        <map>
+          <entry key="MH_DoctorDifferentOrgControllerTest">
+            <value>
+              <set>
+                <option value="shouldReturnUpdatedDoctorId" />
+              </set>
+            </value>
+          </entry>
+        </map>
       </option>
       <option name="testSuiteName" />
       <option name="validationLogLevel" value="INFO" />
@@ -4086,11 +4098,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldReturnSearchedDoctorFromDoctorsList" />
+        <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldReturnUpdatedDoctorId" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_returnSuccess_whenDelete" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.shouldSuccessWhenRetrieveDoctorList" />
         <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest.should_ReturnUpdatedDoctorWithSameId_When_update" />
-        <item itemvalue="Apex Unit Tests.MH_DoctorDifferentOrgControllerTest" />
-        <item itemvalue="Apex Unit Tests.MH_ContractOverlappingHandlerTest.shouldAddNewContract" />
       </list>
     </recent_temporary>
   </component>
@@ -4196,7 +4208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602054323537</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ZMiana mocka">
+      <created>1602069136593</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602069136593</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -4222,7 +4241,8 @@
     <MESSAGE value="MH_DoctorDifferentOrgController.cls:&#10;- repair syntax and compile errors&#10;&#10;MH_DoctorSOAPService.cls:&#10;- repair syntax and compile errors" />
     <MESSAGE value="MH_Doctor_SearchRecordDifferentOrg.page:&#10;- change every inputField to inputText,&#10;- page compile but it's not ready yet." />
     <MESSAGE value="testowy commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="testowy commit" />
+    <MESSAGE value="ZMiana mocka" />
+    <option name="LAST_COMMIT_MESSAGE" value="ZMiana mocka" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2472" y="178" key="#Illuminated_Cloud" timestamp="1600324698851">
@@ -4251,23 +4271,24 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2586" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1598867431907" />
-    <state x="2270" y="0" width="1357" height="688" key="CommitChangelistDialog2" timestamp="1602023147096">
+    <state x="2270" y="0" width="1357" height="688" key="CommitChangelistDialog2" timestamp="1602069136030">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="280" y="0" width="838" height="824" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602011758369" />
     <state x="2270" y="0" width="1357" height="688" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602023147096" />
-    <state x="2036" y="117" width="1350" height="638" maximized="true" key="DiffContextDialog" timestamp="1602069121600">
+    <state x="2270" y="0" key="CommitChangelistDialog2/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602069136030" />
+    <state x="2036" y="117" width="1350" height="638" maximized="true" key="DiffContextDialog" timestamp="1602071039434">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602011754655" />
     <state x="2036" y="117" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602023078579" />
-    <state x="2036" y="117" width="1350" height="638" maximized="true" key="DiffContextDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602069121600" />
+    <state x="2036" y="117" width="1350" height="638" maximized="true" key="DiffContextDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602071039434" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict" timestamp="1601533953471">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="240" y="174" key="FileDocumentManager.FileCacheConflict/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1598119771167" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601533953471" />
-    <state width="1877" height="21" key="GridCell.Tab.0.bottom" timestamp="1602067204561">
+    <state width="1877" height="502" key="GridCell.Tab.0.bottom" timestamp="1602070969390">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862777" />
@@ -4275,9 +4296,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="21" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067204561" />
+    <state width="1877" height="502" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602070969390" />
     <state width="1493" height="325" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896269" />
-    <state width="1877" height="21" key="GridCell.Tab.0.center" timestamp="1602067204561">
+    <state width="1877" height="502" key="GridCell.Tab.0.center" timestamp="1602070969389">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.center/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862774" />
@@ -4285,9 +4306,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="21" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067204561" />
+    <state width="1877" height="502" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602070969389" />
     <state width="1493" height="325" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="1877" height="21" key="GridCell.Tab.0.left" timestamp="1602067204561">
+    <state width="1877" height="502" key="GridCell.Tab.0.left" timestamp="1602070969389">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.left/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862774" />
@@ -4295,9 +4316,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420122" />
     <state width="1877" height="531" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="21" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067204561" />
+    <state width="1877" height="502" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602070969389" />
     <state width="1493" height="325" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="1877" height="21" key="GridCell.Tab.0.right" timestamp="1602067204561">
+    <state width="1877" height="502" key="GridCell.Tab.0.right" timestamp="1602070969389">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1237" height="282" key="GridCell.Tab.0.right/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1599214862777" />
@@ -4305,7 +4326,7 @@
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="21" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067204561" />
+    <state width="1877" height="502" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602070969389" />
     <state width="1493" height="325" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602061016890">
       <screen x="1920" y="0" width="1920" height="1040" />
@@ -4348,7 +4369,7 @@
     <state x="4374" y="278" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602054814129" />
     <state x="4374" y="278" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1601359447979" />
     <state x="668" y="347" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1601378014149" />
-    <state x="859" y="187" width="911" height="720" maximized="true" key="dock-window-1" timestamp="1602067897324">
+    <state x="318" y="128" width="911" height="720" maximized="true" key="dock-window-1" timestamp="1602070320047">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1374" y="0" width="1081" height="811" key="dock-window-1/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1598121004143" />
@@ -4361,7 +4382,7 @@
     <state x="1986" y="2" width="1049" height="691" maximized="true" key="dock-window-1/1874.1080.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597909693134" />
     <state x="351" y="244" width="1049" height="691" key="dock-window-1/1874.1080.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597909966257" />
     <state x="1943" y="0" width="1893" height="1027" key="dock-window-1/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601534602386" />
-    <state x="859" y="187" width="911" height="720" maximized="true" key="dock-window-1/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602067897324" />
+    <state x="318" y="128" width="911" height="720" maximized="true" key="dock-window-1/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602070320047" />
     <state x="1976" y="0" width="1459" height="1027" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1601383146795" />
     <state x="2613" y="0" width="1078" height="1027" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1600171507009" />
     <state x="332" y="82" width="1476" height="519" maximized="true" key="dock-window-2" timestamp="1602056913967">
@@ -4446,6 +4467,6 @@
     <state x="2543" y="239" width="1008" height="681" key="search.everywhere.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1600169668478" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest_should_returnSuccess_whenDelete.null" NAME="Dev1.org Coverage Results" MODIFIED="1602067026008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
+    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest_shouldReturnSearchedDoctorFromDoctorsList.null" NAME="Dev1.org Coverage Results" MODIFIED="1602070927999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
   </component>
 </project>

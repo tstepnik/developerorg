@@ -48,7 +48,8 @@ public with sharing class MH_DoctorDifferentOrgController {
     public void searchDoctors() {
 
         searchedDoctors = soapService.getDoctors(searchedDoctor);
-        System.debug(searchedDoctors);
+        System.debug('searchedDoctor');
+        System.debug(searchedDoctor);
     }
 
     public void addDoctor() {

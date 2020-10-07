@@ -4,99 +4,79 @@
 @isTest
 private class MH_DoctorDifferentOrgControllerTest {
 
-
-    //GET
-    @isTest
-    static void shouldSuccessWhenRetrieveDoctorList() {
-        SetupData setupData = new SetupData();
-        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
-        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
-
-        MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
-        doctor.name = '';
-        doctor.lastName = '';
-        doctor.country = '';
-        doctor.town = '';
-        doctor.email = '';
+    @IsTest
+    static void shouldReturnSearchedDoctorFromDoctorsList() {
+        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock('Get'));
+        // given
+        soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper doctorWrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper();
 
         MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
-        controller.setSearchedDoctor(doctor);
+        doctorWrapper.name = 'Name';
+        doctorWrapper.lastName = 'Surname';
+        doctorWrapper.country = 'USA';
+        doctorWrapper.email = 'test@test.com';
+        controller.searchedDoctor.name = doctorWrapper.name;
+        controller.searchedDoctor.lastName = doctorWrapper.lastName;
+        controller.searchedDoctor.country = doctorWrapper.country;
+        controller.searchedDoctor.email = doctorWrapper.email;
 
-        Test.startTest();
+        // when
         controller.searchDoctors();
-        Test.stopTest();
-
-        Integer size = controller.searchedDoctors.size();
-        System.assertEquals(2, size, 'List is empty');
-
+// then
+//        System.assertEquals(doctorWrapper.name, controller.searchedDoctor.Name);
+//        System.assertEquals(doctorWrapper.lastName, controller.searchedDoctor.lastName);
+//        System.assertEquals(doctorWrapper.country, controller.searchedDoctor.country);
+//        System.assertEquals(doctorWrapper.email, controller.searchedDoctor.email);
     }
-
-    @isTest
-    static void shouldReturn2WhenCheckListSize() {
-//        MH_DoctorResponseWrapper response = new MH_DoctorResponseWrapper();
-        SetupData setupData = new SetupData();
-//        List <> = setupData.createDoctorRecord();
-
-    }
-
-    //ADD
-    @isTest
-    static void should_returnSuccess_whenDelete() {
-//        SetupData setupData = new SetupData();
-//        soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
-//        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
-//
-//        MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
-//        doctor.id = 'a027R00000nkR31';
+//    @IsTest
+//    static void shouldReturnCreatedDoctorId() {
+//        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock('Create'));
+//// given
+//        HD_HXDoctorsSoapWebService.doctorWrapper doctorWrapper = new HD_HXDoctorsSoapWebService.doctorWrapper();
 //        MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
-//        controller.setDeletedDoctorId(doctor.id);
-//        Test.startTest();
+//        doctorWrapper.Id = '12345';
+//        doctorWrapper.name = 'Name';
+//        doctorWrapper.lastName = 'Surname';
+//        doctorWrapper.country = 'USA';
+//        doctorWrapper.email = 'test@test.com';
+//        controller.doctorForCRUD = doctorWrapper;
+//// when
+//        controller.addDoctor();
+//// then
+//        System.assertEquals(doctorWrapper.Id, controller.doctorForCRUD.Id);
+//    }
+//    @IsTest
+//    static void shouldReturnUpdatedDoctorId() {
+//        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock('Update'));
+//// given
+//        HD_HXDoctorsSoapWebService.doctorWrapper doctorWrapper = new HD_HXDoctorsSoapWebService.doctorWrapper();
+//        MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
+//        doctorWrapper.Id = '12345';
+//        doctorWrapper.name = 'Name';
+//        doctorWrapper.lastName = 'Surname';
+//        doctorWrapper.country = 'USA';
+//        doctorWrapper.email = 'test@test.com';
+//        controller.doctorForCRUD = doctorWrapper;
+//// when
+//        controller.updateDoctor();
+//// then
+//        System.assertEquals(doctorWrapper.Id, controller.doctorForCRUD.Id);
+//    }
+//    @IsTest
+//    static void shouldReturnExpectedMessageAfterDeleting() {
+//        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock('Delete'));
+//// given
+//        HD_HXDoctorsSoapWebService.doctorWrapper doctorWrapper = new HD_HXDoctorsSoapWebService.doctorWrapper();
+//        MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
+//        doctorWrapper.Id = '12345';
+//        doctorWrapper.name = 'Name';
+//        doctorWrapper.lastName = 'Surname';
+//        doctorWrapper.country = 'USA';
+//        doctorWrapper.email = 'test@test.com';
+//        controller.doctorForCRUD = doctorWrapper;
+//// when
 //        controller.deleteDoctor();
-//        Test.stopTest();
-//        System.debug('COntroller status message');
-//        System.debug(controller.statusMessage);
-
-
-    }
-
-    class SetupData {
-        public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult createDoctorRecord() {
-            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult response = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
-            List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper> wrappers = new List<soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper>();
-
-            soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper();
-            wrapper.birthdate = '11/11/2001';
-            wrapper.country = 'PL';
-            wrapper.email = 'example1@gmail.com';
-            wrapper.id = '';
-            wrapper.lastName = 'Nowak';
-            wrapper.name = 'Jan';
-            wrapper.licenseNumber = '123123123';
-            wrapper.town = 'Warszawa';
-            wrappers.add(wrapper);
-
-            soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper wrapper2 = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorWrapper();
-            wrapper2.birthdate = '14/01/1995';
-            wrapper2.country = 'UK';
-            wrapper2.email = 'example2@gmail.com';
-            wrapper2.id = '';
-            wrapper2.lastName = 'Kowalski';
-            wrapper2.name = 'Kamil';
-            wrapper2.licenseNumber = '435435435';
-            wrapper2.town = 'Kraków';
-            wrappers.add(wrapper2);
-
-            response.content = wrappers;
-            response.isSuccess = true;
-            response.statusMessage = 'Success';
-            return response;
-        }
-        public soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult createDeleteResponse() {
-            soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult response = new soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult();
-            response.isSuccess = true;
-            response.statusMessage = 'Success. Doctor is deleted.';
-            return response;
-        }
-    }
-
+//// then
+//        System.assert(true, System.Label.Doctor_Successfully_Deleted);
+//    }
 }
