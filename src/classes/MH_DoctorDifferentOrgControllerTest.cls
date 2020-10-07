@@ -8,10 +8,9 @@ private class MH_DoctorDifferentOrgControllerTest {
     //GET
     @isTest
     static void shouldSuccessWhenRetrieveDoctorList() {
-        Boolean operationStatus = true;
         SetupData setupData = new SetupData();
         soapSforceComSchemasClassHcsDoctor.HCS_DoctorsWebServiceResult result = setupData.createDoctorRecord();
-        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(operationStatus));
+        Test.setMock(WebServiceMock.class, new MH_DoctorWebServiceMock(result));
         MH_DoctorSOAPService.MH_ExternalServiceParamWrapper doctor = new MH_DoctorSOAPService.MH_ExternalServiceParamWrapper();
         doctor.name = 'Marek';
         doctor.lastName = 'Kowalski';
@@ -20,7 +19,7 @@ private class MH_DoctorDifferentOrgControllerTest {
         doctor.email = 'kowalskim@gmail.com';
 
         MH_DoctorDifferentOrgController controller = new MH_DoctorDifferentOrgController();
-        controller.searchedDoctor = doctor;
+        controller.setSearchedDoctor(doctor);
 
         Test.startTest();
         controller.searchDoctors();
