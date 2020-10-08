@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="90% Controller methods is tested.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/MH_Doctor_SearchRecordDifferentOrg.page" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +78,7 @@
                       <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602165501000" />
                       <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602165501000" />
                       <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602165501000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602171408645" />
                       <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602165501000" />
                       <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602165501000" />
                       <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602165501000" />
@@ -117,7 +116,7 @@
                       <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602165502000" />
                       <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602165502000" />
                       <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602165502000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602170803356" />
                       <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602165502000" />
                       <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602165502000" />
                       <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602165502000" />
@@ -4325,7 +4324,7 @@
     </state>
     <state x="240" y="174" key="FileDocumentManager.FileCacheConflict/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1598119771167" />
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601533953471" />
-    <state width="584" height="280" key="GridCell.Tab.0.bottom" timestamp="1602106201600">
+    <state width="1877" height="186" key="GridCell.Tab.0.bottom" timestamp="1602171420759">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1602078800386" />
@@ -4335,9 +4334,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="763" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602073560205" />
+    <state width="1877" height="186" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602171420759" />
     <state width="1493" height="325" key="GridCell.Tab.0.bottom/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896269" />
-    <state width="584" height="280" key="GridCell.Tab.0.center" timestamp="1602106201600">
+    <state width="1877" height="186" key="GridCell.Tab.0.center" timestamp="1602171420759">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1602078800386" />
@@ -4347,9 +4346,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="763" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602073560205" />
+    <state width="1877" height="186" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602171420759" />
     <state width="1493" height="325" key="GridCell.Tab.0.center/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="584" height="280" key="GridCell.Tab.0.left" timestamp="1602106201600">
+    <state width="1877" height="186" key="GridCell.Tab.0.left" timestamp="1602171420759">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1602078800386" />
@@ -4359,9 +4358,9 @@
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420122" />
     <state width="1877" height="531" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="763" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602073560205" />
+    <state width="1877" height="186" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602171420759" />
     <state width="1493" height="325" key="GridCell.Tab.0.left/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
-    <state width="584" height="280" key="GridCell.Tab.0.right" timestamp="1602106201600">
+    <state width="1877" height="186" key="GridCell.Tab.0.right" timestamp="1602171420759">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1536.824/0.-1080.1280.680@0.-1080.1280.680" timestamp="1602078800386" />
@@ -4371,7 +4370,7 @@
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1600341824156" />
     <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600327420123" />
     <state width="1877" height="531" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602059028813" />
-    <state width="1877" height="763" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602073560205" />
+    <state width="1877" height="186" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602171420759" />
     <state width="1493" height="325" key="GridCell.Tab.0.right/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1599482896268" />
     <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1602078800386">
       <screen x="0" y="-1080" width="1280" height="680" />
@@ -4526,6 +4525,6 @@
     <state x="2543" y="239" width="1008" height="681" key="search.everywhere.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1600169668478" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest.null" NAME="Dev1.org Coverage Results" MODIFIED="1602103458204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
+    <SUITE FILE_PATH="coverage/Developer_org$MH_DoctorDifferentOrgControllerTest.null" NAME="Dev1.org Coverage Results" MODIFIED="1602171420756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="Apex" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="true" PROJECT_NAME="Developer.org" CONNECTION_NAME="Dev1.org" />
   </component>
 </project>

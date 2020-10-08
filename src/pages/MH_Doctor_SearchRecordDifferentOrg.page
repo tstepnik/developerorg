@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </apex:form>
+
             <apex:form >
                 <apex:pageMessages id="mainlayoutErrors"/>
             <div class="slds-page-header slds-page-header_related-list">
@@ -343,7 +344,6 @@
             </apex:form>
 
             <apex:form id="upsert-doctor-form">
-
                 <div class="slds-modal" aria-hidden="false" role="dialog" id="upsertDoctorDialog">
                     <div class="slds-modal__container">
 
@@ -479,7 +479,6 @@
                     </div>
                 </div>
                 <div class="slds-backdrop" id="upsertDoctorModalBackdrop"></div>
-
             </apex:form>
 
             <apex:form id="delete-doctor-form">
@@ -524,6 +523,7 @@
 
     </apex:slds>
     <script>
+
         j$ = jQuery.noConflict();
    let isInserted;
    let isUpdate;
