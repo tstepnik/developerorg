@@ -41,9 +41,9 @@ public with sharing class MH_HospitalRESTServiceHelper {
         return doctorsResponseWrappers;
     }
 
-    public static MH_HospitalRESTWebServiceResponse upsertDoctor(String id, String name, String country, String town, String street) {
+    public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String name, String country, String town, String street) {
         Hospital__c hospital;
-        List<Hospital__c> hospitals = [SELECT Id, Name, Country__c, Town__c, Street__c FROM Hospital__c];
+        List<Hospital__c> hospitals = [SELECT Id, Name, Country__c, Town__c, Street__c FROM Hospital__c WHERE Id = :id];
 
         if (hospitals.isEmpty()) {
             hospital = new Hospital__c(Name = name, Country__C = country, Town__c = town, Street__c = street);
