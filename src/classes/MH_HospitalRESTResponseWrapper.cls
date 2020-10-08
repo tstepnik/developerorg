@@ -1,4 +1,4 @@
-public with sharing class MH_HospitalRESTResponseWrapper {
+global class MH_HospitalRESTResponseWrapper {
 
     public String id {get; set;}
     public String name {get; set;}
@@ -13,7 +13,6 @@ public with sharing class MH_HospitalRESTResponseWrapper {
 
     public MH_HospitalRESTResponseWrapper(){}
     public MH_HospitalRESTResponseWrapper(String id, String name, String country, String town, String street, String postalCode, String email, String phone, String faxNumber, String website){
-
         this.id = id;
         this.name = name;
         this.country = country;
@@ -24,6 +23,15 @@ public with sharing class MH_HospitalRESTResponseWrapper {
         this.phone = phone;
         this.faxNumber = faxNumber;
         this.website = website;
-
     }
+
+    public MH_HospitalRESTResponseWrapper(String id, String name, String country, String town, String street){
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.town = town;
+        this.street = street;
+    }
+
+
 }

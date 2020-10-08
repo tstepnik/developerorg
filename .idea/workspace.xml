@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTResponseWrapper.cls" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTResponseWrapper.cls-meta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls-meta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls-meta.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTWebServiceResponse.cls" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTWebServiceResponse.cls-meta.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Developer.org.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Developer.org.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTResponseWrapper.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTResponseWrapper.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTService.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTWebServiceResponse.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTWebServiceResponse.cls" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,66 +74,67 @@
                 <ConnectionWorkspaceSettings>
                   <option name="buildSuccessDatesBySourceRootRelativePath">
                     <map>
-                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602102285400" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602102998067" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602099907872" />
-                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602077201911" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602097544637" />
-                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTRESPONSEWRAPPER.CLS" value="1602144743976" />
-                      <entry key="CLASSES/MH_HOSPITALRESTSERVICE.CLS" value="1602103586000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTWEBSERVICERESPONSE.CLS" value="1602144745905" />
-                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602071951000" />
+                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTRESPONSEWRAPPER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTSERVICE.CLS" value="1602165674273" />
+                      <entry key="CLASSES/MH_HOSPITALRESTSERVICEHELPER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTWEBSERVICERESPONSE.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602165501000" />
                       <entry key="CLASSES/MH_TRIGGEREXCEPITON.CLS" value="1600417489000" />
-                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602071951000" />
-                      <entry key="CLASSES/MH_UTILS.CLS" value="1602071951000" />
-                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602071951000" />
-                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602071951000" />
-                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602071952000" />
-                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602075988721" />
-                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602071952000" />
-                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602071952000" />
-                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602071952000" />
-                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602071952000" />
-                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602071952000" />
+                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602165501000" />
+                      <entry key="CLASSES/MH_UTILS.CLS" value="1602165501000" />
+                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602165501000" />
+                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602165501000" />
+                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602165502000" />
+                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602165502000" />
+                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602165502000" />
+                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602165502000" />
+                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602165502000" />
+                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602165502000" />
                     </map>
                   </option>
                   <option name="lastBuildScope" value="CONTEXT" />
@@ -368,88 +364,9 @@
             <entry key="Dev1.org">
               <value>
                 <MetadataContents>
-                  <option name="lastPopulated" value="1602055103477" />
+                  <option name="lastPopulated" value="1602143759259" />
                   <option name="metadataTypes">
                     <set>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Custom%3A Support Profile" />
-                            <option value="Customer Community Plus Login User" />
-                            <option value="High Volume Customer Portal User" />
-                            <option value="Analytics Cloud Integration User" />
-                            <option value="Cross Org Data Proxy User" />
-                            <option value="Force%2Ecom - Free User" />
-                            <option value="PlatformPortal" />
-                            <option value="External Identity User" />
-                            <option value="Force%2Ecom - App Subscription User" />
-                            <option value="Standard" />
-                            <option value="Chatter External User" />
-                            <option value="Minimum Access - Salesforce" />
-                            <option value="Identity User" />
-                            <option value="Custom%3A Sales Profile" />
-                            <option value="Partner Community Login User" />
-                            <option value="ContractManager" />
-                            <option value="Customer Community Plus User" />
-                            <option value="Random Doctors Profile" />
-                            <option value="Partner Community User" />
-                            <option value="StandardAul" />
-                            <option value="Gold Partner User" />
-                            <option value="Chatter Moderator User" />
-                            <option value="ReadOnly" />
-                            <option value="SolutionManager" />
-                            <option value="Chatter Free User" />
-                            <option value="Guest" />
-                            <option value="HighVolumePortal" />
-                            <option value="MarketingProfile" />
-                            <option value="Customer Community Login User" />
-                            <option value="Customer Portal Manager Standard" />
-                            <option value="Analytics Cloud Security User" />
-                            <option value="Admin" />
-                            <option value="Silver Partner User" />
-                            <option value="Work%2Ecom Only User" />
-                            <option value="Partner App Subscription User" />
-                            <option value="Authenticated Website" />
-                            <option value="Customer Community User" />
-                            <option value="Custom%3A Marketing Profile" />
-                            <option value="Customer Portal Manager Custom" />
-                          </set>
-                        </option>
-                        <option name="name" value="Profile" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Doctor__c.Email_Birthday_alert" />
-                            <option value="Doctor__c.Email_Birthday_alertttt" />
-                            <option value="Doctor__c.Birthday_Alert" />
-                            <option value="Doctor__c.OneTime_Email_Reminder" />
-                            <option value="Opportunity.Alert_Sales_Rep_of_Close_Date" />
-                            <option value="Doctor__c.Email_Biirthday_alert" />
-                            <option value="Doctor__c.Birthday_reminder_message" />
-                          </set>
-                        </option>
-                        <option name="name" value="WorkflowAlert" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Doctor__c.Send Email 1 day before next birthday" />
-                          </set>
-                        </option>
-                        <option name="name" value="WorkflowRule" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Lead.Standard_Lead_Duplicate_Rule" />
-                            <option value="Account.Standard_Account_Duplicate_Rule" />
-                            <option value="Doctor__c.MH_Doctor_Same_FN_LN_Email" />
-                            <option value="Contact.Standard_Contact_Duplicate_Rule" />
-                          </set>
-                        </option>
-                        <option name="name" value="DuplicateRule" />
-                      </MetadataType>
                       <MetadataType>
                         <option name="members">
                           <set>
@@ -466,19 +383,19 @@
                             <option value="Address" />
                             <option value="Product" />
                             <option value="Security" />
-                            <option value="ChatterEmailsMD" />
-                            <option value="OrderManagement" />
                             <option value="DevHub" />
                             <option value="Ideas" />
+                            <option value="ChatterEmailsMD" />
+                            <option value="OrderManagement" />
                             <option value="EmailAdministration" />
-                            <option value="TrialOrg" />
                             <option value="Privacy" />
+                            <option value="TrialOrg" />
                             <option value="Sharing" />
-                            <option value="Currency" />
                             <option value="ExternalServices" />
+                            <option value="Currency" />
                             <option value="PardotEinstein" />
-                            <option value="FileUploadAndDownloadSecurity" />
                             <option value="EnhancedNotes" />
+                            <option value="FileUploadAndDownloadSecurity" />
                             <option value="GoogleApps" />
                             <option value="Actions" />
                             <option value="EAC" />
@@ -486,8 +403,8 @@
                             <option value="ObjectLinking" />
                             <option value="UserInterface" />
                             <option value="Forecasting" />
-                            <option value="Survey" />
                             <option value="PlatformEncryption" />
+                            <option value="Survey" />
                             <option value="PredictionBuilder" />
                             <option value="LightningExperience" />
                             <option value="Contract" />
@@ -496,8 +413,8 @@
                             <option value="Site" />
                             <option value="PartyDataModel" />
                             <option value="Case" />
-                            <option value="MyDomain" />
                             <option value="OmniChannel" />
+                            <option value="MyDomain" />
                             <option value="ConnectedApp" />
                             <option value="WebToX" />
                             <option value="Apex" />
@@ -513,8 +430,8 @@
                             <option value="Event" />
                             <option value="InvocableAction" />
                             <option value="PathAssistant" />
-                            <option value="Trailhead" />
                             <option value="AccountIntelligence" />
+                            <option value="Trailhead" />
                             <option value="Company" />
                             <option value="Communities" />
                             <option value="Schema" />
@@ -554,8 +471,8 @@
                             <option value="DocumentChecklist" />
                             <option value="Analytics" />
                             <option value="Chatter" />
-                            <option value="Quote" />
                             <option value="ExperienceBundle" />
+                            <option value="Quote" />
                             <option value="DataDotCom" />
                             <option value="Entitlement" />
                             <option value="Voice" />
@@ -586,24 +503,24 @@
                             <option value="AnswersHome" />
                             <option value="MH_Doctor_Details" />
                             <option value="MH_Hospital_EditRecord" />
-                            <option value="MH_Doctor_SearchRecord" />
                             <option value="MH_Doctor_SearchRecordDifferentOrg" />
+                            <option value="MH_Doctor_SearchRecord" />
                             <option value="SiteLogin" />
                             <option value="Unauthorized" />
                             <option value="MH_Doctor_ExportJSON" />
                             <option value="MH_Doctor_ImportCsv" />
-                            <option value="MH_Hospital_Details" />
                             <option value="SiteRegisterConfirm" />
+                            <option value="MH_Hospital_Details" />
                             <option value="UnderConstruction" />
                             <option value="MH_Doctor_ExportCSV" />
                             <option value="FileNotFound" />
                             <option value="MH_Doctor_EditRecord" />
                             <option value="ForgotPassword" />
-                            <option value="MH_Hospital_GoogleMap" />
                             <option value="Exception" />
+                            <option value="MH_Hospital_GoogleMap" />
                             <option value="IdeasHome" />
-                            <option value="ForgotPasswordConfirm" />
                             <option value="BandwidthExceeded" />
+                            <option value="ForgotPasswordConfirm" />
                             <option value="MyProfilePage" />
                             <option value="MH_Doctor_popup" />
                             <option value="MH_Doctor_ExportXLS" />
@@ -632,15 +549,15 @@
                           <set>
                             <option value="DirectorDirectSales" />
                             <option value="SVPSalesMarketing" />
-                            <option value="MarketingTeam" />
                             <option value="COO" />
+                            <option value="MarketingTeam" />
                             <option value="DirectorChannelSales" />
                             <option value="InstallationRepairServices" />
                             <option value="SVPHumanResources" />
                             <option value="SVPCustomerServiceSupport" />
                             <option value="VPInternationalSales" />
-                            <option value="ChannelSalesTeam" />
                             <option value="EasternSalesTeam" />
+                            <option value="ChannelSalesTeam" />
                             <option value="CEO" />
                             <option value="CFO" />
                             <option value="CustomerSupportInternational" />
@@ -651,15 +568,6 @@
                           </set>
                         </option>
                         <option name="name" value="Role" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="SolarBot_App_Icon" />
-                            <option value="exp" />
-                          </set>
-                        </option>
-                        <option name="name" value="ContentAsset" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -701,20 +609,48 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Accounts_with_Invoices_with_Invoice_Products" />
-                            <option value="screen_flows_prebuilt_crt" />
+                            <option value="Custom%3A Support Profile" />
+                            <option value="Customer Community Plus Login User" />
+                            <option value="Analytics Cloud Integration User" />
+                            <option value="High Volume Customer Portal User" />
+                            <option value="Force%2Ecom - Free User" />
+                            <option value="Cross Org Data Proxy User" />
+                            <option value="PlatformPortal" />
+                            <option value="External Identity User" />
+                            <option value="Force%2Ecom - App Subscription User" />
+                            <option value="Chatter External User" />
+                            <option value="Standard" />
+                            <option value="Minimum Access - Salesforce" />
+                            <option value="Identity User" />
+                            <option value="Custom%3A Sales Profile" />
+                            <option value="Partner Community Login User" />
+                            <option value="ContractManager" />
+                            <option value="Customer Community Plus User" />
+                            <option value="Random Doctors Profile" />
+                            <option value="Partner Community User" />
+                            <option value="StandardAul" />
+                            <option value="Gold Partner User" />
+                            <option value="Chatter Moderator User" />
+                            <option value="SolutionManager" />
+                            <option value="ReadOnly" />
+                            <option value="Chatter Free User" />
+                            <option value="Guest" />
+                            <option value="HighVolumePortal" />
+                            <option value="Customer Portal Manager Standard" />
+                            <option value="Customer Community Login User" />
+                            <option value="MarketingProfile" />
+                            <option value="Analytics Cloud Security User" />
+                            <option value="Admin" />
+                            <option value="Partner App Subscription User" />
+                            <option value="Silver Partner User" />
+                            <option value="Work%2Ecom Only User" />
+                            <option value="Authenticated Website" />
+                            <option value="Customer Community User" />
+                            <option value="Custom%3A Marketing Profile" />
+                            <option value="Customer Portal Manager Custom" />
                           </set>
                         </option>
-                        <option name="name" value="ReportType" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Salesforce1" />
-                            <option value="AppSwitcher" />
-                          </set>
-                        </option>
-                        <option name="name" value="AppMenu" />
+                        <option name="name" value="Profile" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -727,6 +663,16 @@
                           </set>
                         </option>
                         <option name="name" value="RemoteSiteSetting" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="Account" />
+                            <option value="Opportunity" />
+                            <option value="Doctor__c" />
+                          </set>
+                        </option>
+                        <option name="name" value="Workflow" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -748,428 +694,35 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Account" />
-                            <option value="Opportunity" />
-                            <option value="Doctor__c" />
+                            <option value="Doctor__c.Email_Birthday_alert" />
+                            <option value="Doctor__c.Email_Birthday_alertttt" />
+                            <option value="Doctor__c.Birthday_Alert" />
+                            <option value="Doctor__c.OneTime_Email_Reminder" />
+                            <option value="Opportunity.Alert_Sales_Rep_of_Close_Date" />
+                            <option value="Doctor__c.Email_Biirthday_alert" />
+                            <option value="Doctor__c.Birthday_reminder_message" />
                           </set>
                         </option>
-                        <option name="name" value="Workflow" />
+                        <option name="name" value="WorkflowAlert" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="ConsumptionSchedule" />
-                            <option value="Account" />
-                            <option value="Invoice" />
-                            <option value="ServiceTerritoryWorkType" />
-                            <option value="CaseContactRole" />
-                            <option value="EngagementChannelType" />
-                            <option value="Activity" />
-                            <option value="MessagingEndUser" />
-                            <option value="Image" />
-                            <option value="Document" />
-                            <option value="ContactCleanInfo" />
-                            <option value="ScorecardMetric" />
-                            <option value="SkillRequirement" />
-                            <option value="PushTopic" />
-                            <option value="Asset" />
-                            <option value="Invoice_Product__c" />
-                            <option value="PromptAction" />
-                            <option value="ContactPointTypeConsent" />
-                            <option value="OrgMetricScanResult" />
-                            <option value="CampaignMember" />
-                            <option value="ExternalServiceCredentials__c" />
-                            <option value="WorkTypeGroup" />
-                            <option value="CollaborationGroupMember" />
-                            <option value="AccountContactRole" />
-                            <option value="StreamingChannel" />
-                            <option value="Pricebook2" />
-                            <option value="ContactPointAddress" />
-                            <option value="Recommendation" />
-                            <option value="PricebookEntry" />
-                            <option value="Refund" />
-                            <option value="Idea" />
-                            <option value="ServiceResourceSkill" />
-                            <option value="ContactPointPhone" />
-                            <option value="ExpressionFilter" />
-                            <option value="PaymentLineInvoice" />
-                            <option value="QuickTextUsage" />
-                            <option value="MH_Configuration__c" />
-                            <option value="ChatterActivity" />
-                            <option value="Contract" />
-                            <option value="ScorecardAssociation" />
-                            <option value="RecordMergeHistory" />
-                            <option value="Site" />
-                            <option value="ContactPointEmail" />
-                            <option value="CreditMemoLine" />
-                            <option value="Product2" />
-                            <option value="MH_EnableTriggerConfiguration__c" />
-                            <option value="ProductConsumptionSchedule" />
-                            <option value="ResourceAbsence" />
-                            <option value="PartyConsent" />
-                            <option value="Case" />
-                            <option value="AuthorizationFormText" />
-                            <option value="DigitalWallet" />
-                            <option value="ContentVersion" />
-                            <option value="Lead" />
-                            <option value="ServiceResource" />
-                            <option value="DuplicateRecordSet" />
-                            <option value="ExternalEventMapping" />
-                            <option value="Solution" />
-                            <option value="AssetRelationship" />
-                            <option value="QuickText" />
-                            <option value="DataUseLegalBasis" />
-                            <option value="AuthorizationFormDataUse" />
-                            <option value="ServiceAppointment" />
-                            <option value="CommSubscriptionTiming" />
-                            <option value="ResourcePreference" />
-                            <option value="WorkTypeGroupMember" />
-                            <option value="CommSubscriptionChannelType" />
-                            <option value="OrderItem" />
-                            <option value="ConsumptionRate" />
-                            <option value="Event" />
-                            <option value="CollaborationGroup" />
-                            <option value="Task" />
-                            <option value="AuthorizationFormConsent" />
-                            <option value="OpportunityLineItem" />
-                            <option value="TimeSlot" />
-                            <option value="Invoice__c" />
-                            <option value="FeedItem" />
-                            <option value="ContractContactRole" />
-                            <option value="ExchangeUserMapping" />
-                            <option value="SocialPersona" />
-                            <option value="Order" />
-                            <option value="ServiceTerritory" />
-                            <option value="EmailMessage" />
-                            <option value="AccountCleanInfo" />
-                            <option value="InvoiceLine" />
-                            <option value="UserProvisioningRequest" />
-                            <option value="ServiceTerritoryMember" />
-                            <option value="OrgDeleteRequest" />
-                            <option value="Payment" />
-                            <option value="RefundLinePayment" />
-                            <option value="LeadCleanInfo" />
-                            <option value="Campaign" />
-                            <option value="AuthorizationForm" />
-                            <option value="Individual" />
-                            <option value="OrgMetricScanSummary" />
-                            <option value="MacroUsage" />
-                            <option value="PaymentMethod" />
-                            <option value="SolarBot_Status__c" />
-                            <option value="Hospital__c" />
-                            <option value="PartnerRole" />
-                            <option value="OpportunityCompetitor" />
-                            <option value="MacroAction" />
-                            <option value="DataUsePurpose" />
-                            <option value="ContactRequest" />
-                            <option value="User" />
-                            <option value="CommSubscription" />
-                            <option value="Macro" />
-                            <option value="CardPaymentMethod" />
-                            <option value="MacroInstruction" />
-                            <option value="DuplicateRecordItem" />
-                            <option value="ExpressionFilterCriteria" />
-                            <option value="Contract__c" />
-                            <option value="CaseComment" />
-                            <option value="OperatingHours" />
-                            <option value="PaymentGateway" />
-                            <option value="Opportunity" />
-                            <option value="CreditMemo" />
-                            <option value="CommSubscriptionConsent" />
-                            <option value="Scorecard" />
-                            <option value="Topic" />
-                            <option value="PaymentGroup" />
-                            <option value="StreamActivityAccess" />
-                            <option value="DandBCompany" />
-                            <option value="OpportunityContactRole" />
-                            <option value="WorkType" />
-                            <option value="ContactPointConsent" />
-                            <option value="AssignedResource" />
-                            <option value="Contact" />
-                            <option value="PaymentAuthorization" />
-                            <option value="Doctor__c" />
-                            <option value="MessagingSession" />
-                            <option value="AssistantProgress" />
-                            <option value="RecordAction" />
-                            <option value="SolarBot__c" />
-                            <option value="TopicAssignment" />
+                            <option value="Doctor__c.Send Email 1 day before next birthday" />
                           </set>
                         </option>
-                        <option name="name" value="CustomObject" />
+                        <option name="name" value="WorkflowRule" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="SolarBot_Status__c-SolarBot Status Layout" />
-                            <option value="Contact-Contact Layout" />
-                            <option value="Case-Case %28Sales%29 Layout" />
-                            <option value="Lead-Lead %28Support%29 Layout" />
-                            <option value="ServiceResource-Service Resource Layout" />
-                            <option value="Refund-Refund Layout" />
-                            <option value="AssetRelationship-Asset Relationship Layout" />
-                            <option value="Order-Order Layout" />
-                            <option value="Invoice__c-Invoice Layout" />
-                            <option value="Solution-Solution Layout" />
-                            <option value="Pricebook2-Price Book Layout" />
-                            <option value="UserProvAccount-User Provisioning Account Layout" />
-                            <option value="SolarBot__c-SolarBot Layout" />
-                            <option value="InvoiceLine-Invoice Line Layout" />
-                            <option value="Doctor__c-Doctor Layout" />
-                            <option value="ContactPointTypeConsent-Contact Point Type Consent Layout" />
-                            <option value="ContactPointPhone-Contact Point Phone Layout" />
-                            <option value="AssignedResource-Assigned Resource Layout" />
-                            <option value="PaymentAuthorization-Payment Authorization Layout" />
-                            <option value="Hospital__c-Hospital Layout" />
-                            <option value="DataUsePurpose-Data Use Purpose Layout" />
-                            <option value="Opportunity-Opportunity Layout" />
-                            <option value="DuplicateRecordSet-Duplicate Record Set Layout" />
-                            <option value="Payment-Payment Layout" />
-                            <option value="Case-Case Layout" />
-                            <option value="CreditMemoLine-Credit Memo Line Layout" />
-                            <option value="Campaign-Campaign Layout" />
-                            <option value="UserAlt-User Profile Layout" />
-                            <option value="DuplicateRecordItem-Duplicate Record Item Layout" />
-                            <option value="Contact-Student Contact Layout" />
-                            <option value="CommunityMemberLayout-Community Member Layout" />
-                            <option value="Opportunity-Opportunity %28Sales%29 Layout" />
-                            <option value="ServiceAppointment-Service Appointment Layout" />
-                            <option value="CredentialStuffingEventStore-Credential Stuffing Event Store Layout" />
-                            <option value="PricebookEntry-Price Book Entry Layout" />
-                            <option value="Contract__c-Contract Layout" />
-                            <option value="FeedItem-Feed Item Layout" />
-                            <option value="Idea-Idea Layout" />
-                            <option value="WorkType-Work Type Layout" />
-                            <option value="Opportunity-Opportunity %28Support%29 Layout" />
-                            <option value="RefundLinePayment-Refund Line Payment Layout" />
-                            <option value="Account-Account %28Marketing%29 Layout" />
-                            <option value="ServiceTerritoryMember-Service Territory Member Layout" />
-                            <option value="ReportAnomalyEventStore-Report Anomaly Event Store Layout" />
-                            <option value="EmailMessage-Email Message Layout" />
-                            <option value="Individual-Individual Layout" />
-                            <option value="CampaignMember-Campaign Member Page Layout" />
-                            <option value="QuickText-Quick Text Layout" />
-                            <option value="Contact-Employee Contact Layout" />
-                            <option value="Account-Copy of Account Layoutttttttt" />
-                            <option value="Contact-HR Employee Contact Layout" />
-                            <option value="User-User Layout" />
-                            <option value="Contact-Contact %28Sales%29 Layout" />
-                            <option value="WorkTypeGroupMember-Work Type Group Member Layout" />
-                            <option value="AuthorizationFormDataUse-Authorization Form Data Use Layout" />
-                            <option value="Invoice-Invoice Layout" />
-                            <option value="AuthorizationForm-Authorization Form Layout" />
-                            <option value="ThreatDetectionFeedback-Threat Detection Feedback Layout" />
-                            <option value="AuthorizationFormText-Authorization Form Text Layout" />
-                            <option value="PaymentGroup-Payment Group Layout" />
-                            <option value="Account-Account %28Sales%29 Layout" />
-                            <option value="Invoice_Product__c-Invoice Product Layout" />
-                            <option value="Contact-Contact %28Support%29 Layout" />
-                            <option value="PaymentGatewayLog-Payment Gateway Log Layout" />
-                            <option value="Product2-Product Layout" />
-                            <option value="Lead-Lead Layout" />
-                            <option value="ConsumptionRate-Consumption Rate Layout" />
-                            <option value="CollaborationGroup-Group Layout" />
-                            <option value="OperatingHours-Operating Hours Layout" />
-                            <option value="AuthorizationFormConsent-Authorization Form Consent Layout" />
-                            <option value="DandBCompany-D%26B Company Layout" />
-                            <option value="Case-Case %28Support%29 Layout" />
-                            <option value="DataUseLegalBasis-Data Use Legal Basis Layout" />
-                            <option value="Macro-Macro Layout" />
-                            <option value="ServiceTerritory-Service Territory Layout" />
-                            <option value="ScorecardMetric-Scorecard Metric Layout" />
-                            <option value="UserProvisioningRequest-User Provisioning Request Layout" />
-                            <option value="Event-Event Layout" />
-                            <option value="UserProvisioningLog-User Provisioning Log Layout" />
-                            <option value="Contact-Contact %28Marketing%29 Layout" />
-                            <option value="Task-Task Layout" />
-                            <option value="WorkTypeGroup-Work Type Group Layout" />
-                            <option value="ConsumptionSchedule-Consumption Schedule Layout" />
-                            <option value="Asset-Asset Layout" />
-                            <option value="OrderItem-Order Product Layout" />
-                            <option value="ContactPointEmail-Contact Point Email Layout" />
-                            <option value="OpportunityLineItem-Opportunity Product Layout" />
-                            <option value="Contract-Contract Layout" />
-                            <option value="Account-Account Layout" />
-                            <option value="CardPaymentMethod-Card Payment Method Layout" />
-                            <option value="ScorecardAssociation-Scorecard Association Layout" />
-                            <option value="SocialPersona-Social Persona Layout" />
-                            <option value="Scorecard-Scorecard Layout" />
-                            <option value="Case-Case %28Marketing%29 Layout" />
-                            <option value="DigitalWallet-Digital Wallet Layout" />
-                            <option value="ContactPointAddress-Contact Point Address Layout" />
-                            <option value="SessionHijackingEventStore-Session Hijacking Event Store Layout" />
-                            <option value="ResourceAbsence-Resource Absence Layout" />
-                            <option value="CaseClose-Close Case Layout" />
-                            <option value="ContentVersion-Content Version Layout" />
-                            <option value="ResourcePreference-Resource Preference Layout" />
-                            <option value="SkillRequirement-Skill Requirement Layout" />
-                            <option value="Global-Global Layout" />
-                            <option value="Lead-Lead %28Sales%29 Layout" />
-                            <option value="CreditMemo-Credit Memo Layout" />
-                            <option value="ServiceResourceSkill-Service Resource Skill Layout" />
-                            <option value="ProductConsumptionSchedule-Product Consumption Schedule Layout" />
-                            <option value="Account-Account %28Support%29 Layout" />
-                            <option value="Lead-Lead %28Marketing%29 Layout" />
-                            <option value="PaymentGateway-Payment Gateway Layout" />
-                            <option value="TimeSlot-Time Slot Layout" />
-                            <option value="Opportunity-Opportunity %28Marketing%29 Layout" />
-                            <option value="PaymentLineInvoice-Payment Line Invoice Layout" />
+                            <option value="Lead.Standard_Lead_Duplicate_Rule" />
+                            <option value="Account.Standard_Account_Duplicate_Rule" />
+                            <option value="Doctor__c.MH_Doctor_Same_FN_LN_Email" />
+                            <option value="Contact.Standard_Contact_Duplicate_Rule" />
                           </set>
                         </option>
-                        <option name="name" value="Layout" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="SiteFooter" />
-                            <option value="MH_Spinner" />
-                            <option value="SitePoweredBy" />
-                            <option value="SiteLogin" />
-                            <option value="SiteHeader" />
-                            <option value="MH_Hospital_GoogleMap" />
-                          </set>
-                        </option>
-                        <option name="name" value="ApexComponent" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="Invoice_Product__c.Invoice__c" />
-                            <option value="Doctor__c.Department__c" />
-                            <option value="Doctor__c.Contracts_Number__c" />
-                            <option value="ExternalServiceCredentials__c.Password__c" />
-                            <option value="SolarBot_Status__c.Kilowatt_Hours__c" />
-                            <option value="MH_EnableTriggerConfiguration__c.DoctorTrigger__c" />
-                            <option value="Invoice_Product__c.Product_Name__c" />
-                            <option value="Doctor__c.Private_Phone__c" />
-                            <option value="Account.NumberofLocations__c" />
-                            <option value="Contract__c.Hospital__c" />
-                            <option value="Contract__c.Doctor_Full_Name__c" />
-                            <option value="Hospital__c.Phone_Number_2__c" />
-                            <option value="Doctor__c.Home_Consult__c" />
-                            <option value="SolarBot__c.Account__c" />
-                            <option value="Invoice_Product__c.Unit_Price__c" />
-                            <option value="Doctor__c.Email__c" />
-                            <option value="Opportunity.OrderNumber__c" />
-                            <option value="Doctor__c.Street_Number__c" />
-                            <option value="Hospital__c.GPS_Address__c" />
-                            <option value="Doctor__c.Search_Email__c" />
-                            <option value="Hospital__c.Biggest_Contract__c" />
-                            <option value="Invoice__c.Notes__c" />
-                            <option value="SolarBot__c.kWh_Roll_Up__c" />
-                            <option value="Doctor__c.House_Number__c" />
-                            <option value="Invoice__c.Status__c" />
-                            <option value="SolarBot_Status__c.SolarBot__c" />
-                            <option value="Case.PotentialLiability__c" />
-                            <option value="Hospital__c.Search_Email__c" />
-                            <option value="Doctor__c.Searched_Last_Name__c" />
-                            <option value="SolarBot__c.Number_of_Status_Records__c" />
-                            <option value="Doctor__c.Supervisor__c" />
-                            <option value="Contract__c.Position__c" />
-                            <option value="SolarBot__c.All_Time_Temperature_Average__c" />
-                            <option value="SolarBot__c.Obscured_Roll_Up__c" />
-                            <option value="SolarBot__c.All_Time_kWh_Average__c" />
-                            <option value="CaseComment.ParentOrigin" />
-                            <option value="Opportunity.DeliveryInstallationStatus__c" />
-                            <option value="Doctor__c.License_Number__c" />
-                            <option value="SolarBot__c.Warranty_Expiration__c" />
-                            <option value="Doctor__c.Available_Date__c" />
-                            <option value="Goal.OrigGoalId__c" />
-                            <option value="Contract__c.Doctor__c" />
-                            <option value="Doctor__c.Body__c" />
-                            <option value="Account.SLA__c" />
-                            <option value="Doctor__c.Work_Phone__c" />
-                            <option value="Hospital__c.Total_Obligation__c" />
-                            <option value="Doctor__c.Reset_Birthday_Email_System__c" />
-                            <option value="Doctor__c.Position__c" />
-                            <option value="Doctor__c.Lowest_Contract__c" />
-                            <option value="Invoice__c.Contact__c" />
-                            <option value="Doctor__c.Postal_Code__c" />
-                            <option value="Hospital__c.Email__c" />
-                            <option value="Account.Total_Invoiced__c" />
-                            <option value="Doctor__c.LastName__c" />
-                            <option value="CaseComment.CommentBody" />
-                            <option value="Contract__c.Home_Consult__c" />
-                            <option value="Opportunity.CurrentGenerators__c" />
-                            <option value="Invoice__c.Invoice_Date__c" />
-                            <option value="Hospital__c.Phone_Number_1__c" />
-                            <option value="Lead.ProductInterest__c" />
-                            <option value="Lead.NumberofLocations__c" />
-                            <option value="Case.Product__c" />
-                            <option value="ExternalServiceCredentials__c.Username__c" />
-                            <option value="Doctor__c.total_profit__c" />
-                            <option value="Invoice__c.Total__c" />
-                            <option value="Hospital__c.Lowest_Contract__c" />
-                            <option value="SolarBot__c.All_Time_Obscured_Percent_Average__c" />
-                            <option value="Case.SLAViolation__c" />
-                            <option value="Hospital__c.Contracts_Number__c" />
-                            <option value="Lead.Primary__c" />
-                            <option value="SolarBot_Status__c.Status_Date__c" />
-                            <option value="Lead.CurrentGenerators__c" />
-                            <option value="Doctor__c.Country__c" />
-                            <option value="Hospital__c.Website__c" />
-                            <option value="Contract__c.Status__c" />
-                            <option value="Opportunity.MainCompetitors__c" />
-                            <option value="Account.SLASerialNumber__c" />
-                            <option value="Account.UpsellOpportunity__c" />
-                            <option value="MH_EnableTriggerConfiguration__c.ContractTrigger__c" />
-                            <option value="Account.CustomerPriority__c" />
-                            <option value="Doctor__c.Selected__c" />
-                            <option value="Hospital__c.Fax_Number_2__c" />
-                            <option value="SolarBot__c.SolarBot_Model__c" />
-                            <option value="SolarBot_Status__c.Maintenance_Requested__c" />
-                            <option value="Contract__c.Supervisor__c" />
-                            <option value="Contract__c.Price__c" />
-                            <option value="Hospital__c.Postal_Code__c" />
-                            <option value="Hospital__c.Street__c" />
-                            <option value="Case.EngineeringReqNumber__c" />
-                            <option value="Metric.OrigMetricId__c" />
-                            <option value="Hospital__c.Sales_Rep__c" />
-                            <option value="Doctor__c.Specialization__c" />
-                            <option value="Invoice__c.Account__c" />
-                            <option value="Doctor__c.Recieve_Birthday_Emails__c" />
-                            <option value="Account.SLAExpirationDate__c" />
-                            <option value="Hospital__c.Town__c" />
-                            <option value="Doctor__c.Birthday__c" />
-                            <option value="Contract__c.Date_Started_MultiHire__c" />
-                            <option value="Hospital__c.Beds_Number__c" />
-                            <option value="Doctor__c.Title__c" />
-                            <option value="Doctor__c.Street__c" />
-                            <option value="Invoice__c.Billing_Country__c" />
-                            <option value="Invoice_Product__c.Qty__c" />
-                            <option value="Hospital__c.Helicopter_Access__c" />
-                            <option value="Doctor__c.Is_Available__c" />
-                            <option value="SolarBot_Status__c.Percent_Obscured__c" />
-                            <option value="Opportunity.TrackingNumber__c" />
-                            <option value="Hospital__c.Country__c" />
-                            <option value="Contract__c.Hospital_Name__c" />
-                            <option value="Account.Active__c" />
-                            <option value="Contract__c.Department__c" />
-                            <option value="Invoice__c.Sub_Status__c" />
-                            <option value="Opportunity.SolarBot_Model__c" />
-                            <option value="Hospital__c.Teaching_Hospital__c" />
-                            <option value="Doctor__c.Next_Birthday__c" />
-                            <option value="Doctor__c.Subject__c" />
-                            <option value="Account.Number_of_SolarBots__c" />
-                            <option value="Doctor__c.Biggest_Contract__c" />
-                            <option value="Contact.Level__c" />
-                            <option value="Contract__c.Date_Started__c" />
-                            <option value="Hospital__c.Chief_Of_Medicine__c" />
-                            <option value="Lead.SICCode__c" />
-                            <option value="Invoice_Product__c.Total__c" />
-                            <option value="SolarBot_Status__c.Panel_Temperature__c" />
-                            <option value="Contact.Languages__c" />
-                            <option value="Doctor__c.Town__c" />
-                            <option value="Hospital__c.Doctors_Number__c" />
-                            <option value="SolarBot__c.Under_Warranty__c" />
-                            <option value="Hospital__c.Street_Number__c" />
-                            <option value="MH_Configuration__c.Value__c" />
-                            <option value="SolarBot__c.Temp_Rollup__c" />
-                            <option value="Contract__c.Expire_Date__c" />
-                            <option value="Doctor__c.Full_Name__c" />
-                            <option value="Hospital__c.Fax_Number_1__c" />
-                          </set>
-                        </option>
-                        <option name="name" value="CustomField" />
+                        <option name="name" value="DuplicateRule" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1185,8 +738,8 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Opportunity.DeliveryStatus" />
                             <option value="Campaign.ViewCampaignInfluenceReport" />
+                            <option value="Opportunity.DeliveryStatus" />
                             <option value="Case.UpsellCrosssellOpportunity" />
                             <option value="Account.Billing" />
                             <option value="Contract__c.Dismiss" />
@@ -1197,8 +750,8 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="CommSubscription.All_CommSubscriptions" />
                             <option value="Order.AllActivatedOrders" />
+                            <option value="CommSubscription.All_CommSubscriptions" />
                             <option value="SolarBot__c.All" />
                             <option value="ContactPointConsent.All_ContactPointConsents" />
                             <option value="Case.MyCases" />
@@ -1222,13 +775,13 @@
                             <option value="Event.TodaysAgenda" />
                             <option value="Opportunity.AllOpportunities" />
                             <option value="Task.OverdueTasks" />
-                            <option value="ServiceTerritory.All_ServiceTerritories" />
                             <option value="WorkTypeGroup.All_WorkTypeGroups" />
-                            <option value="WorkTypeGroup.My_WorkTypeGroups" />
+                            <option value="ServiceTerritory.All_ServiceTerritories" />
                             <option value="WorkType.My_WorkTypes" />
+                            <option value="WorkTypeGroup.My_WorkTypeGroups" />
                             <option value="PartyConsent.All_PartyConsents" />
-                            <option value="ServiceAppointment.All_ServiceAppointments" />
                             <option value="Contact.BirthdaysThisMonth" />
+                            <option value="ServiceAppointment.All_ServiceAppointments" />
                             <option value="ContactRequest.My_ContactRequests" />
                             <option value="CommSubscriptionChannelType.All_CommSubscriptionChannelTypes" />
                             <option value="Activity.AllActivities" />
@@ -1253,14 +806,14 @@
                             <option value="WorkFeedbackRequest.All" />
                             <option value="ServiceAppointment.MyPendingAppointments" />
                             <option value="SolarBot_Status__c.All" />
-                            <option value="Opportunity.NewThisWeek" />
                             <option value="CommSubscriptionTiming.All_CommSubscriptionTimings" />
+                            <option value="Opportunity.NewThisWeek" />
                             <option value="Case.AllOpenCases" />
                             <option value="Contract__c.All" />
                             <option value="Refund.Refund" />
                             <option value="Order.AllOrders" />
-                            <option value="ServiceAppointment.MyScheduledAppointments" />
                             <option value="PaymentAuthorization.PaymentAuthorization" />
+                            <option value="ServiceAppointment.MyScheduledAppointments" />
                             <option value="Opportunity.ClosingNextMonth" />
                             <option value="Opportunity.Default_Opportunity_Pipeline" />
                             <option value="Opportunity.Private" />
@@ -1268,8 +821,8 @@
                             <option value="CreditMemo.mine" />
                             <option value="Contract.MyActivatedContracts" />
                             <option value="Contract.AllDraftContracts" />
-                            <option value="WorkFeedbackRequest.AboutTopics" />
                             <option value="DataUsePurpose.All_DataUsePurposes" />
+                            <option value="WorkFeedbackRequest.AboutTopics" />
                             <option value="Doctor__c.Integration_View" />
                             <option value="Task.DelegatedTasks" />
                             <option value="SocialPersona.AllSocialPersonas" />
@@ -1283,14 +836,14 @@
                             <option value="Activity.UpcomingEvents" />
                             <option value="Task.OpenTasks" />
                             <option value="CardPaymentMethod.CardPaymentMethod" />
-                            <option value="Opportunity.ClosingThisMonth" />
                             <option value="Account.AllAccounts" />
+                            <option value="Opportunity.ClosingThisMonth" />
                             <option value="Contact.NewThisWeek" />
                             <option value="CollaborationGroup.All_ChatterGroups" />
                             <option value="Event.MyRecentEvents" />
                             <option value="Asset.AllAssets" />
-                            <option value="AuthorizationFormConsent.All_AuthorizationFormConsents" />
                             <option value="Scorecard.AllScorecards" />
+                            <option value="AuthorizationFormConsent.All_AuthorizationFormConsents" />
                             <option value="Campaign.MyActiveCampaigns" />
                             <option value="Opportunity.MyOpportunities" />
                             <option value="WorkType.All_WorkTypes" />
@@ -1301,8 +854,8 @@
                             <option value="Activity.TodaysTasks" />
                             <option value="Doctor__c.All" />
                             <option value="Task.RecurringTasks" />
-                            <option value="Case.AllClosedCases" />
                             <option value="Opportunity.Won" />
+                            <option value="Case.AllClosedCases" />
                             <option value="PaymentGateway.PaymentGateway" />
                             <option value="Activity.MyActivities" />
                             <option value="Contract.MyInApprovalContracts" />
@@ -1315,8 +868,8 @@
                             <option value="Lead.ViewCustom1" />
                             <option value="Idea.Ideas_Last_7_Days" />
                             <option value="Event.MyUpcomingEvents" />
-                            <option value="Lead.ViewCustom2" />
                             <option value="Contract.AllActivatedContracts" />
+                            <option value="Lead.ViewCustom2" />
                           </set>
                         </option>
                         <option name="name" value="ListView" />
@@ -1342,21 +895,21 @@
                             <option value="Account" />
                             <option value="TodayGoal" />
                             <option value="Invoice" />
-                            <option value="AuthorizationFormConsent" />
                             <option value="ActivityRecurrence2" />
+                            <option value="AuthorizationFormConsent" />
                             <option value="AssistantInteraction" />
                             <option value="EngagementChannelType" />
-                            <option value="Image" />
                             <option value="MessagingEndUser" />
+                            <option value="Image" />
                             <option value="ExchangeUserMapping" />
                             <option value="Asset" />
-                            <option value="ContactPointTypeConsent" />
                             <option value="PromptAction" />
+                            <option value="ContactPointTypeConsent" />
                             <option value="UserEmailPreferredPerson" />
                             <option value="WorkTypeGroup" />
                             <option value="Order" />
-                            <option value="StreamingChannel" />
                             <option value="ServiceTerritory" />
+                            <option value="StreamingChannel" />
                             <option value="UserProvisioningRequest" />
                             <option value="OrgDeleteRequest" />
                             <option value="CleanLeadBackup" />
@@ -1365,14 +918,14 @@
                             <option value="AuthorizationForm" />
                             <option value="Individual" />
                             <option value="MacroUsage" />
-                            <option value="QuickTextUsage" />
                             <option value="Hospital__c" />
+                            <option value="QuickTextUsage" />
                             <option value="UserAppMenuCustomization" />
                             <option value="RecordMergeHistory" />
                             <option value="DataUsePurpose" />
                             <option value="User" />
-                            <option value="CommSubscription" />
                             <option value="ContactRequest" />
+                            <option value="CommSubscription" />
                             <option value="AssistantRecommendation" />
                             <option value="SiqUserBlacklist" />
                             <option value="Macro" />
@@ -1385,8 +938,8 @@
                             <option value="CreditMemo" />
                             <option value="CommSubscriptionConsent" />
                             <option value="ServiceResource" />
-                            <option value="ReportResultBlob" />
                             <option value="Scorecard" />
+                            <option value="ReportResultBlob" />
                             <option value="ExternalEventMapping" />
                             <option value="QuickText" />
                             <option value="StreamActivityAccess" />
@@ -1419,6 +972,15 @@
                       <MetadataType>
                         <option name="members">
                           <set>
+                            <option value="SolarBot_App_Icon" />
+                            <option value="exp" />
+                          </set>
+                        </option>
+                        <option name="name" value="ContentAsset" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
                             <option value="Account" />
                             <option value="Task" />
                             <option value="ResourceAbsence" />
@@ -1428,8 +990,8 @@
                             <option value="Opportunity" />
                             <option value="Lead" />
                             <option value="Asset" />
-                            <option value="ServiceResource" />
                             <option value="Invoice_Product__c" />
+                            <option value="ServiceResource" />
                             <option value="Solution" />
                             <option value="Order" />
                             <option value="ServiceTerritory" />
@@ -1441,8 +1003,8 @@
                             <option value="ResourcePreference" />
                             <option value="ServiceResourceSkill" />
                             <option value="Doctor__c" />
-                            <option value="SolarBot_Status__c" />
                             <option value="Event" />
+                            <option value="SolarBot_Status__c" />
                             <option value="SolarBot__c" />
                             <option value="Hospital__c" />
                             <option value="Contract" />
@@ -1537,8 +1099,8 @@
                             <option value="Doctor__c" />
                             <option value="standard-Payment" />
                             <option value="standard-Opportunity" />
-                            <option value="SolarBot__c" />
                             <option value="Kamils_Doctors" />
+                            <option value="SolarBot__c" />
                             <option value="standard-ContactPointTypeConsent" />
                           </set>
                         </option>
@@ -1555,11 +1117,20 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="DataImportTab" />
-                            <option value="ServerActionService" />
+                            <option value="Accounts_with_Invoices_with_Invoice_Products" />
+                            <option value="screen_flows_prebuilt_crt" />
                           </set>
                         </option>
-                        <option name="name" value="AuraDefinitionBundle" />
+                        <option name="name" value="ReportType" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="Salesforce1" />
+                            <option value="AppSwitcher" />
+                          </set>
+                        </option>
+                        <option name="name" value="AppMenu" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1568,6 +1139,15 @@
                           </set>
                         </option>
                         <option name="name" value="ApprovalProcess" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="DataImportTab" />
+                            <option value="ServerActionService" />
+                          </set>
+                        </option>
+                        <option name="name" value="AuraDefinitionBundle" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1590,33 +1170,18 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="MH_Spinner" />
-                            <option value="JQueryUIjs" />
-                            <option value="JQueryUIcss" />
-                            <option value="MH_Doctor_Default_Photo" />
-                            <option value="JQueryUI" />
-                            <option value="SiteSamples" />
-                            <option value="JQuery" />
-                            <option value="JQuery_UI" />
-                          </set>
-                        </option>
-                        <option name="name" value="StaticResource" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
                             <option value="MH_Contract_End_Date" />
                             <option value="doctor_street" />
                             <option value="MH_Doctor_Upload_Photo_Error" />
                             <option value="doctor_house_number" />
-                            <option value="MH_Doctor_All" />
                             <option value="Edit" />
+                            <option value="MH_Doctor_All" />
                             <option value="Remove" />
                             <option value="doctor_contract_list_column_star_date" />
                             <option value="view_doctor_record" />
                             <option value="hospital_contract_list_column_name" />
-                            <option value="hospital_last_modified_by" />
                             <option value="hospital_street_number" />
+                            <option value="hospital_last_modified_by" />
                             <option value="doctor_search_results_title" />
                             <option value="hospital_contracts_list" />
                             <option value="MH_Doctor_Choose_Csv_File" />
@@ -1624,28 +1189,30 @@
                             <option value="hospital_fax_number_1" />
                             <option value="MH_Doctor_CopyAlert" />
                             <option value="MH_Doctor_Upload_Photo" />
-                            <option value="MH_Hospital_SearchForDoctors" />
                             <option value="hospital_helicopter_access" />
                             <option value="MH_Contract_Error_Message3" />
+                            <option value="MH_Hospital_SearchForDoctors" />
                             <option value="hospital_created_by" />
                             <option value="MH_Contract_Error_Message2" />
                             <option value="MH_Doctor_SelectHospital" />
                             <option value="hospital_contract_list_column_hospital_name" />
-                            <option value="doctor_tsearch_table_header_action" />
+                            <option value="Search_Doctors" />
                             <option value="MH_Doctor_Birthdate" />
+                            <option value="doctor_tsearch_table_header_action" />
                             <option value="doctor_last_name" />
                             <option value="doctor_is_available" />
                             <option value="hospital_detail_delete_button" />
+                            <option value="Entity_Is_Deleted" />
                             <option value="MH_Hire_Doctors_To" />
                             <option value="MH_Contract_Dates_Are_Null_Error" />
                             <option value="hospital_chief_of_medicine" />
                             <option value="doctor_contract_list_column_hospital_name" />
-                            <option value="Doctor_JSON" />
                             <option value="doctor_save_button" />
+                            <option value="Doctor_JSON" />
                             <option value="MH_Contract_Error_Msg1" />
                             <option value="MH_Contracts" />
-                            <option value="doctor_list_contracts" />
                             <option value="doctor_license_number" />
+                            <option value="doctor_list_contracts" />
                             <option value="MH_Doctor_First_Name" />
                             <option value="MH_Contract_Error_Specify_Id" />
                             <option value="doctor_search_form_title" />
@@ -1664,42 +1231,46 @@
                             <option value="MH_Contract_Error_Msg_Equal_Dates" />
                             <option value="Doctor_CSV_Double_Pipe" />
                             <option value="doctor_detail_page_title" />
-                            <option value="hospital_name" />
                             <option value="doctor_street_number" />
+                            <option value="hospital_name" />
                             <option value="hospital_phone_number_2" />
                             <option value="doctor_detail_delete_button" />
                             <option value="hospital_phone_number_1" />
-                            <option value="doctor_address_section_title" />
                             <option value="doctor_work_phone" />
+                            <option value="doctor_address_section_title" />
                             <option value="MH_Doctor_History" />
                             <option value="MH_Doctor_Status" />
                             <option value="MH_Doctor_Last_Name" />
-                            <option value="MH_Hospital_HireButton" />
                             <option value="hospital_email" />
+                            <option value="MH_Hospital_HireButton" />
                             <option value="doctor_full_name" />
+                            <option value="Invalid_Or_Null_Picklist" />
                             <option value="hospital_street" />
                             <option value="New" />
                             <option value="MH_Doctor_Is_To_Import" />
                             <option value="doctor_email" />
-                            <option value="doctor_private_phone" />
                             <option value="hospital_contract_list_column_doctor_full_name" />
+                            <option value="doctor_private_phone" />
                             <option value="MH_Cancel" />
-                            <option value="Template" />
                             <option value="Contract_Status" />
+                            <option value="Template" />
                             <option value="hospital_detail_edit_button" />
                             <option value="hospital_contracts_number" />
-                            <option value="Doctor_CSV" />
-                            <option value="doctor_detail_edit_button" />
+                            <option value="Town" />
                             <option value="doctor_birthday" />
+                            <option value="Doctor_CSV" />
+                            <option value="Search" />
+                            <option value="doctor_detail_edit_button" />
                             <option value="Edit_Contract" />
                             <option value="Doctor_CSV_Separator" />
                             <option value="Contract_Name" />
                             <option value="MH_Doctor_HireButton" />
                             <option value="view_edit_separator" />
                             <option value="hospital_country" />
-                            <option value="doctor_contract_list" />
                             <option value="hospital_doctors_number" />
+                            <option value="doctor_contract_list" />
                             <option value="MH_Doctor_Email" />
+                            <option value="Add_Doctor" />
                             <option value="Hospital_Contract_List" />
                             <option value="hospital_detail_page_title" />
                             <option value="doctor_position" />
@@ -1713,9 +1284,10 @@
                             <option value="MH_Doctor_Import" />
                             <option value="MH_Results" />
                             <option value="doctor_total_profit" />
-                            <option value="Send_Email" />
+                            <option value="Duplicates_Detected" />
                             <option value="MH_Search_Email" />
                             <option value="Contract_Doctor" />
+                            <option value="Send_Email" />
                             <option value="MH_Error_Message" />
                             <option value="doctor_cancel_button" />
                             <option value="doctor_last_modified_by" />
@@ -1725,13 +1297,17 @@
                             <option value="MH_Doctor" />
                             <option value="MH_Contract_Start_Date" />
                             <option value="hospital_postal_code" />
+                            <option value="Clear" />
                             <option value="MH_Doctor_To_Import" />
-                            <option value="MH_Doctor_Reverse" />
+                            <option value="Required_Field_Missing" />
                             <option value="MH_Hospitals" />
+                            <option value="MH_Doctor_Reverse" />
+                            <option value="Invalid_Email_Address" />
                             <option value="Body" />
                             <option value="View_Contract" />
                             <option value="doctor_contract_list_column_end_date" />
                             <option value="Contract_Expire_Date" />
+                            <option value="Delete_Success" />
                             <option value="Contract_Date_Started" />
                             <option value="hospital_teaching_hospital" />
                             <option value="MH_Doctor_Results" />
@@ -1745,8 +1321,9 @@
                             <option value="Copy_Button" />
                             <option value="doctor_other_section_title" />
                             <option value="Button_for_clear_data" />
-                            <option value="MH_Doctor_None" />
                             <option value="MH_Hospital_Column_Action" />
+                            <option value="MH_Doctor_None" />
+                            <option value="Kamils_Doctors" />
                             <option value="doctor_available_date" />
                             <option value="Button_for_search_doctor" />
                             <option value="doctor_first_name" />
@@ -1754,6 +1331,23 @@
                           </set>
                         </option>
                         <option name="name" value="CustomLabel" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="Invoice__c-en_US" />
+                            <option value="ExternalServiceCredentials__c-en_US" />
+                            <option value="Invoice_Product__c-en_US" />
+                            <option value="MH_EnableTriggerConfiguration__c-en_US" />
+                            <option value="Hospital__c-en_US" />
+                            <option value="SolarBot__c-en_US" />
+                            <option value="MH_Configuration__c-en_US" />
+                            <option value="Contract__c-en_US" />
+                            <option value="Doctor__c-en_US" />
+                            <option value="SolarBot_Status__c-en_US" />
+                          </set>
+                        </option>
+                        <option name="name" value="CustomObjectTranslation" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1766,35 +1360,18 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Invoice__c-en_US" />
-                            <option value="ExternalServiceCredentials__c-en_US" />
-                            <option value="Invoice_Product__c-en_US" />
-                            <option value="MH_EnableTriggerConfiguration__c-en_US" />
-                            <option value="Hospital__c-en_US" />
-                            <option value="SolarBot__c-en_US" />
-                            <option value="MH_Configuration__c-en_US" />
-                            <option value="SolarBot_Status__c-en_US" />
-                            <option value="Doctor__c-en_US" />
-                            <option value="Contract__c-en_US" />
-                          </set>
-                        </option>
-                        <option name="name" value="CustomObjectTranslation" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
                             <option value="MH_DoctorDifferentOrgControllerTest" />
+                            <option value="MH_ContractTriggerHandler" />
                             <option value="PicklistUtil" />
                             <option value="MH_HospitalBuilder" />
-                            <option value="MH_ContractTriggerHandler" />
                             <option value="MH_TriggerException" />
                             <option value="MH_DoctorOverlappingHandler" />
-                            <option value="MH_DoctorSOAPService" />
                             <option value="soapSforceComSchemasClassHcsDoctor" />
-                            <option value="SiteRegisterControllerTest" />
+                            <option value="MH_DoctorSOAPService" />
                             <option value="ForgotPasswordControllerTest" />
-                            <option value="MyProfilePageController" />
+                            <option value="SiteRegisterControllerTest" />
                             <option value="MH_Utils" />
+                            <option value="MyProfilePageController" />
                             <option value="MH_ContractOverlappingHandler" />
                             <option value="AsyncPartnerSoapSforceCom" />
                             <option value="ChangePasswordControllerTest" />
@@ -1806,17 +1383,19 @@
                             <option value="partnerSoapSforceCom" />
                             <option value="MH_Hospital_GoogleMapController" />
                             <option value="SiteRegisterController" />
-                            <option value="MH_DoctorDifferentOrgController" />
                             <option value="MH_ContractBuilder" />
+                            <option value="MH_DoctorDifferentOrgController" />
                             <option value="MH_Doctor_ImportCsvController" />
                             <option value="SolarBotStatusFactory" />
                             <option value="MH_ContractOverlappingHandlerTest" />
+                            <option value="MH_HospitalRESTResponseWrapper" />
                             <option value="AsyncSoapSforceComSchemasClassHcsDoctor" />
                             <option value="AccountFactory" />
                             <option value="OpportunityFactory" />
                             <option value="MH_Attachment_Service" />
                             <option value="TriggerHandler" />
                             <option value="SolarBotFactory" />
+                            <option value="MH_HospitalRESTService" />
                             <option value="SiteLoginControllerTest" />
                             <option value="sobjectPartnerSoapSforceCom" />
                             <option value="MH_Doctor_Service" />
@@ -1829,9 +1408,10 @@
                             <option value="MH_DoctorTriggerHandler" />
                             <option value="MyProfilePageControllerTest" />
                             <option value="MH_Doctor_SearchController_Test" />
+                            <option value="MH_HospitalRESTWebServiceResponse" />
                             <option value="MH_DoctorBuilder" />
-                            <option value="faultPartnerSoapSforceCom" />
                             <option value="DataImportController" />
+                            <option value="faultPartnerSoapSforceCom" />
                             <option value="DataFactory" />
                             <option value="SiteLoginController" />
                             <option value="BatchRecordCreator" />
@@ -1862,18 +1442,14 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="NotificationTypeConfig" />
+                            <option value="Account" />
+                            <option value="Individual" />
+                            <option value="Lead" />
+                            <option value="Doctor__c" />
+                            <option value="Contact" />
                           </set>
                         </option>
-                        <option name="name" value="NotificationTypeConfig" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="default_appointment_scheduling_policy" />
-                          </set>
-                        </option>
-                        <option name="name" value="AppointmentSchedulingPolicy" />
+                        <option name="name" value="MatchingRules" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1887,22 +1463,10 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Account" />
-                            <option value="Individual" />
-                            <option value="Lead" />
-                            <option value="Doctor__c" />
-                            <option value="Contact" />
-                          </set>
-                        </option>
-                        <option name="name" value="MatchingRules" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
                             <option value="Doctor__c.MH_Doctor_Same_FN_LN_Email_matching_rule" />
                             <option value="Contact.Standard_Contact_Match_Rule_v1_1" />
-                            <option value="Lead.Standard_Lead_Match_Rule_v1_0" />
                             <option value="Account.Standard_Account_Match_Rule_v1_0" />
+                            <option value="Lead.Standard_Lead_Match_Rule_v1_0" />
                           </set>
                         </option>
                         <option name="name" value="MatchingRule" />
@@ -1910,8 +1474,8 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="Case.Standard" />
                             <option value="Lead.Standard" />
+                            <option value="Case.Standard" />
                           </set>
                         </option>
                         <option name="name" value="AssignmentRule" />
@@ -1932,28 +1496,20 @@
                             <option value="standard__Chatter" />
                             <option value="standard__LightningInstrumentation" />
                             <option value="standard__Platform" />
-                            <option value="standard__Service" />
                             <option value="standard__LightningSales" />
+                            <option value="standard__Service" />
                             <option value="standard__AllTabSet" />
                             <option value="standard__Commerce" />
                             <option value="Hospital" />
-                            <option value="standard__Marketing" />
                             <option value="standard__Content" />
+                            <option value="standard__Marketing" />
                             <option value="standard__Sites" />
                             <option value="standard__Insights" />
-                            <option value="standard__LightningBolt" />
                             <option value="standard__LightningSalesConsole" />
+                            <option value="standard__LightningBolt" />
                           </set>
                         </option>
                         <option name="name" value="CustomApplication" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="IframeWhiteListUrlSettings" />
-                          </set>
-                        </option>
-                        <option name="name" value="IframeWhiteListUrlSettings" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -1966,21 +1522,455 @@
                       <MetadataType>
                         <option name="members">
                           <set>
+                            <option value="IframeWhiteListUrlSettings" />
+                          </set>
+                        </option>
+                        <option name="name" value="IframeWhiteListUrlSettings" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="news" />
+                            <option value="cms_document" />
+                            <option value="cms_image" />
+                          </set>
+                        </option>
+                        <option name="name" value="ManagedContentType" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="ConsumptionSchedule" />
+                            <option value="Account" />
+                            <option value="Invoice" />
+                            <option value="CaseContactRole" />
+                            <option value="ServiceTerritoryWorkType" />
+                            <option value="EngagementChannelType" />
+                            <option value="Activity" />
+                            <option value="MessagingEndUser" />
+                            <option value="Image" />
+                            <option value="Document" />
+                            <option value="ContactCleanInfo" />
+                            <option value="ScorecardMetric" />
+                            <option value="SkillRequirement" />
+                            <option value="PushTopic" />
+                            <option value="Asset" />
+                            <option value="Invoice_Product__c" />
+                            <option value="ContactPointTypeConsent" />
+                            <option value="PromptAction" />
+                            <option value="CampaignMember" />
+                            <option value="OrgMetricScanResult" />
+                            <option value="ExternalServiceCredentials__c" />
+                            <option value="WorkTypeGroup" />
+                            <option value="CollaborationGroupMember" />
+                            <option value="StreamingChannel" />
+                            <option value="AccountContactRole" />
+                            <option value="Pricebook2" />
+                            <option value="ContactPointAddress" />
+                            <option value="Recommendation" />
+                            <option value="PricebookEntry" />
+                            <option value="Refund" />
+                            <option value="Idea" />
+                            <option value="ServiceResourceSkill" />
+                            <option value="ContactPointPhone" />
+                            <option value="ExpressionFilter" />
+                            <option value="QuickTextUsage" />
+                            <option value="MH_Configuration__c" />
+                            <option value="PaymentLineInvoice" />
+                            <option value="ChatterActivity" />
+                            <option value="ScorecardAssociation" />
+                            <option value="Contract" />
+                            <option value="RecordMergeHistory" />
+                            <option value="Site" />
+                            <option value="ContactPointEmail" />
+                            <option value="Product2" />
+                            <option value="CreditMemoLine" />
+                            <option value="ProductConsumptionSchedule" />
+                            <option value="MH_EnableTriggerConfiguration__c" />
+                            <option value="ResourceAbsence" />
+                            <option value="PartyConsent" />
+                            <option value="Case" />
+                            <option value="DigitalWallet" />
+                            <option value="AuthorizationFormText" />
+                            <option value="ContentVersion" />
+                            <option value="Lead" />
+                            <option value="ServiceResource" />
+                            <option value="DuplicateRecordSet" />
+                            <option value="ExternalEventMapping" />
+                            <option value="Solution" />
+                            <option value="AssetRelationship" />
+                            <option value="QuickText" />
+                            <option value="DataUseLegalBasis" />
+                            <option value="AuthorizationFormDataUse" />
+                            <option value="ServiceAppointment" />
+                            <option value="ResourcePreference" />
+                            <option value="CommSubscriptionTiming" />
+                            <option value="WorkTypeGroupMember" />
+                            <option value="CommSubscriptionChannelType" />
+                            <option value="OrderItem" />
+                            <option value="ConsumptionRate" />
+                            <option value="Event" />
+                            <option value="Task" />
+                            <option value="CollaborationGroup" />
+                            <option value="AuthorizationFormConsent" />
+                            <option value="OpportunityLineItem" />
+                            <option value="TimeSlot" />
+                            <option value="Invoice__c" />
+                            <option value="ContractContactRole" />
+                            <option value="FeedItem" />
+                            <option value="ExchangeUserMapping" />
+                            <option value="SocialPersona" />
+                            <option value="Order" />
+                            <option value="ServiceTerritory" />
+                            <option value="EmailMessage" />
+                            <option value="AccountCleanInfo" />
+                            <option value="InvoiceLine" />
+                            <option value="UserProvisioningRequest" />
+                            <option value="ServiceTerritoryMember" />
+                            <option value="OrgDeleteRequest" />
+                            <option value="RefundLinePayment" />
+                            <option value="Payment" />
+                            <option value="LeadCleanInfo" />
+                            <option value="Campaign" />
+                            <option value="AuthorizationForm" />
+                            <option value="Individual" />
+                            <option value="OrgMetricScanSummary" />
+                            <option value="MacroUsage" />
+                            <option value="SolarBot_Status__c" />
+                            <option value="PaymentMethod" />
+                            <option value="Hospital__c" />
+                            <option value="OpportunityCompetitor" />
+                            <option value="PartnerRole" />
+                            <option value="MacroAction" />
+                            <option value="DataUsePurpose" />
+                            <option value="User" />
+                            <option value="ContactRequest" />
+                            <option value="CommSubscription" />
+                            <option value="Macro" />
+                            <option value="CardPaymentMethod" />
+                            <option value="MacroInstruction" />
+                            <option value="DuplicateRecordItem" />
+                            <option value="Contract__c" />
+                            <option value="ExpressionFilterCriteria" />
+                            <option value="CaseComment" />
+                            <option value="OperatingHours" />
+                            <option value="PaymentGateway" />
+                            <option value="Opportunity" />
+                            <option value="CreditMemo" />
+                            <option value="CommSubscriptionConsent" />
+                            <option value="Scorecard" />
+                            <option value="Topic" />
+                            <option value="PaymentGroup" />
+                            <option value="StreamActivityAccess" />
+                            <option value="DandBCompany" />
+                            <option value="WorkType" />
+                            <option value="OpportunityContactRole" />
+                            <option value="ContactPointConsent" />
+                            <option value="AssignedResource" />
+                            <option value="Contact" />
+                            <option value="PaymentAuthorization" />
+                            <option value="Doctor__c" />
+                            <option value="MessagingSession" />
+                            <option value="AssistantProgress" />
+                            <option value="RecordAction" />
+                            <option value="SolarBot__c" />
+                            <option value="TopicAssignment" />
+                          </set>
+                        </option>
+                        <option name="name" value="CustomObject" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="SolarBot_Status__c-SolarBot Status Layout" />
+                            <option value="Contact-Contact Layout" />
+                            <option value="Case-Case %28Sales%29 Layout" />
+                            <option value="Lead-Lead %28Support%29 Layout" />
+                            <option value="ServiceResource-Service Resource Layout" />
+                            <option value="Refund-Refund Layout" />
+                            <option value="AssetRelationship-Asset Relationship Layout" />
+                            <option value="Invoice__c-Invoice Layout" />
+                            <option value="Order-Order Layout" />
+                            <option value="Solution-Solution Layout" />
+                            <option value="Pricebook2-Price Book Layout" />
+                            <option value="UserProvAccount-User Provisioning Account Layout" />
+                            <option value="SolarBot__c-SolarBot Layout" />
+                            <option value="Doctor__c-Doctor Layout" />
+                            <option value="InvoiceLine-Invoice Line Layout" />
+                            <option value="ContactPointTypeConsent-Contact Point Type Consent Layout" />
+                            <option value="ContactPointPhone-Contact Point Phone Layout" />
+                            <option value="AssignedResource-Assigned Resource Layout" />
+                            <option value="PaymentAuthorization-Payment Authorization Layout" />
+                            <option value="Hospital__c-Hospital Layout" />
+                            <option value="DataUsePurpose-Data Use Purpose Layout" />
+                            <option value="Opportunity-Opportunity Layout" />
+                            <option value="DuplicateRecordSet-Duplicate Record Set Layout" />
+                            <option value="Payment-Payment Layout" />
+                            <option value="Case-Case Layout" />
+                            <option value="CreditMemoLine-Credit Memo Line Layout" />
+                            <option value="Campaign-Campaign Layout" />
+                            <option value="UserAlt-User Profile Layout" />
+                            <option value="DuplicateRecordItem-Duplicate Record Item Layout" />
+                            <option value="Contact-Student Contact Layout" />
+                            <option value="CommunityMemberLayout-Community Member Layout" />
+                            <option value="Opportunity-Opportunity %28Sales%29 Layout" />
+                            <option value="ServiceAppointment-Service Appointment Layout" />
+                            <option value="CredentialStuffingEventStore-Credential Stuffing Event Store Layout" />
+                            <option value="PricebookEntry-Price Book Entry Layout" />
+                            <option value="Contract__c-Contract Layout" />
+                            <option value="FeedItem-Feed Item Layout" />
+                            <option value="Idea-Idea Layout" />
+                            <option value="WorkType-Work Type Layout" />
+                            <option value="RefundLinePayment-Refund Line Payment Layout" />
+                            <option value="Opportunity-Opportunity %28Support%29 Layout" />
+                            <option value="Account-Account %28Marketing%29 Layout" />
+                            <option value="ServiceTerritoryMember-Service Territory Member Layout" />
+                            <option value="EmailMessage-Email Message Layout" />
+                            <option value="ReportAnomalyEventStore-Report Anomaly Event Store Layout" />
+                            <option value="Individual-Individual Layout" />
+                            <option value="CampaignMember-Campaign Member Page Layout" />
+                            <option value="QuickText-Quick Text Layout" />
+                            <option value="Contact-Employee Contact Layout" />
+                            <option value="Account-Copy of Account Layoutttttttt" />
+                            <option value="Contact-Contact %28Sales%29 Layout" />
+                            <option value="User-User Layout" />
+                            <option value="Contact-HR Employee Contact Layout" />
+                            <option value="WorkTypeGroupMember-Work Type Group Member Layout" />
+                            <option value="AuthorizationFormDataUse-Authorization Form Data Use Layout" />
+                            <option value="Invoice-Invoice Layout" />
+                            <option value="AuthorizationForm-Authorization Form Layout" />
+                            <option value="ThreatDetectionFeedback-Threat Detection Feedback Layout" />
+                            <option value="AuthorizationFormText-Authorization Form Text Layout" />
+                            <option value="PaymentGroup-Payment Group Layout" />
+                            <option value="Account-Account %28Sales%29 Layout" />
+                            <option value="Invoice_Product__c-Invoice Product Layout" />
+                            <option value="Contact-Contact %28Support%29 Layout" />
+                            <option value="PaymentGatewayLog-Payment Gateway Log Layout" />
+                            <option value="Product2-Product Layout" />
+                            <option value="Lead-Lead Layout" />
+                            <option value="ConsumptionRate-Consumption Rate Layout" />
+                            <option value="CollaborationGroup-Group Layout" />
+                            <option value="OperatingHours-Operating Hours Layout" />
+                            <option value="AuthorizationFormConsent-Authorization Form Consent Layout" />
+                            <option value="DandBCompany-D%26B Company Layout" />
+                            <option value="Case-Case %28Support%29 Layout" />
+                            <option value="Macro-Macro Layout" />
+                            <option value="DataUseLegalBasis-Data Use Legal Basis Layout" />
+                            <option value="ServiceTerritory-Service Territory Layout" />
+                            <option value="UserProvisioningRequest-User Provisioning Request Layout" />
+                            <option value="ScorecardMetric-Scorecard Metric Layout" />
+                            <option value="Event-Event Layout" />
+                            <option value="UserProvisioningLog-User Provisioning Log Layout" />
+                            <option value="Contact-Contact %28Marketing%29 Layout" />
+                            <option value="Task-Task Layout" />
+                            <option value="WorkTypeGroup-Work Type Group Layout" />
+                            <option value="ConsumptionSchedule-Consumption Schedule Layout" />
+                            <option value="Asset-Asset Layout" />
+                            <option value="OrderItem-Order Product Layout" />
+                            <option value="ContactPointEmail-Contact Point Email Layout" />
+                            <option value="OpportunityLineItem-Opportunity Product Layout" />
+                            <option value="Contract-Contract Layout" />
+                            <option value="Account-Account Layout" />
+                            <option value="CardPaymentMethod-Card Payment Method Layout" />
+                            <option value="ScorecardAssociation-Scorecard Association Layout" />
+                            <option value="SocialPersona-Social Persona Layout" />
+                            <option value="Scorecard-Scorecard Layout" />
+                            <option value="Case-Case %28Marketing%29 Layout" />
+                            <option value="DigitalWallet-Digital Wallet Layout" />
+                            <option value="ContactPointAddress-Contact Point Address Layout" />
+                            <option value="ResourceAbsence-Resource Absence Layout" />
+                            <option value="SessionHijackingEventStore-Session Hijacking Event Store Layout" />
+                            <option value="CaseClose-Close Case Layout" />
+                            <option value="ContentVersion-Content Version Layout" />
+                            <option value="ResourcePreference-Resource Preference Layout" />
+                            <option value="Global-Global Layout" />
+                            <option value="SkillRequirement-Skill Requirement Layout" />
+                            <option value="Lead-Lead %28Sales%29 Layout" />
+                            <option value="CreditMemo-Credit Memo Layout" />
+                            <option value="ServiceResourceSkill-Service Resource Skill Layout" />
+                            <option value="ProductConsumptionSchedule-Product Consumption Schedule Layout" />
+                            <option value="Account-Account %28Support%29 Layout" />
+                            <option value="Lead-Lead %28Marketing%29 Layout" />
+                            <option value="PaymentGateway-Payment Gateway Layout" />
+                            <option value="TimeSlot-Time Slot Layout" />
+                            <option value="Opportunity-Opportunity %28Marketing%29 Layout" />
+                            <option value="PaymentLineInvoice-Payment Line Invoice Layout" />
+                          </set>
+                        </option>
+                        <option name="name" value="Layout" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="MH_Spinner" />
+                            <option value="SiteFooter" />
+                            <option value="SitePoweredBy" />
+                            <option value="SiteLogin" />
+                            <option value="SiteHeader" />
+                            <option value="MH_Hospital_GoogleMap" />
+                          </set>
+                        </option>
+                        <option name="name" value="ApexComponent" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="Doctor__c.Department__c" />
+                            <option value="Invoice_Product__c.Invoice__c" />
+                            <option value="Doctor__c.Contracts_Number__c" />
+                            <option value="ExternalServiceCredentials__c.Password__c" />
+                            <option value="SolarBot_Status__c.Kilowatt_Hours__c" />
+                            <option value="MH_EnableTriggerConfiguration__c.DoctorTrigger__c" />
+                            <option value="Invoice_Product__c.Product_Name__c" />
+                            <option value="Doctor__c.Private_Phone__c" />
+                            <option value="Contract__c.Hospital__c" />
+                            <option value="Account.NumberofLocations__c" />
+                            <option value="Contract__c.Doctor_Full_Name__c" />
+                            <option value="Hospital__c.Phone_Number_2__c" />
+                            <option value="Doctor__c.Home_Consult__c" />
+                            <option value="SolarBot__c.Account__c" />
+                            <option value="Doctor__c.Email__c" />
+                            <option value="Invoice_Product__c.Unit_Price__c" />
+                            <option value="Opportunity.OrderNumber__c" />
+                            <option value="Doctor__c.Street_Number__c" />
+                            <option value="Hospital__c.GPS_Address__c" />
+                            <option value="Hospital__c.Biggest_Contract__c" />
+                            <option value="Doctor__c.Search_Email__c" />
+                            <option value="Invoice__c.Notes__c" />
+                            <option value="Doctor__c.House_Number__c" />
+                            <option value="SolarBot__c.kWh_Roll_Up__c" />
+                            <option value="Invoice__c.Status__c" />
+                            <option value="SolarBot_Status__c.SolarBot__c" />
+                            <option value="Case.PotentialLiability__c" />
+                            <option value="Hospital__c.Search_Email__c" />
+                            <option value="SolarBot__c.Number_of_Status_Records__c" />
+                            <option value="Doctor__c.Searched_Last_Name__c" />
+                            <option value="Doctor__c.Supervisor__c" />
+                            <option value="Contract__c.Position__c" />
+                            <option value="SolarBot__c.All_Time_Temperature_Average__c" />
+                            <option value="SolarBot__c.Obscured_Roll_Up__c" />
+                            <option value="SolarBot__c.All_Time_kWh_Average__c" />
+                            <option value="CaseComment.ParentOrigin" />
+                            <option value="Opportunity.DeliveryInstallationStatus__c" />
+                            <option value="Doctor__c.License_Number__c" />
+                            <option value="SolarBot__c.Warranty_Expiration__c" />
+                            <option value="Doctor__c.Available_Date__c" />
+                            <option value="Goal.OrigGoalId__c" />
+                            <option value="Contract__c.Doctor__c" />
+                            <option value="Doctor__c.Body__c" />
+                            <option value="Account.SLA__c" />
+                            <option value="Doctor__c.Work_Phone__c" />
+                            <option value="Hospital__c.Total_Obligation__c" />
+                            <option value="Doctor__c.Lowest_Contract__c" />
+                            <option value="Doctor__c.Position__c" />
+                            <option value="Doctor__c.Reset_Birthday_Email_System__c" />
+                            <option value="Invoice__c.Contact__c" />
+                            <option value="Doctor__c.Postal_Code__c" />
+                            <option value="Hospital__c.Email__c" />
+                            <option value="Account.Total_Invoiced__c" />
+                            <option value="Doctor__c.LastName__c" />
+                            <option value="CaseComment.CommentBody" />
+                            <option value="Contract__c.Home_Consult__c" />
+                            <option value="Opportunity.CurrentGenerators__c" />
+                            <option value="Invoice__c.Invoice_Date__c" />
+                            <option value="Hospital__c.Phone_Number_1__c" />
+                            <option value="Lead.ProductInterest__c" />
+                            <option value="Lead.NumberofLocations__c" />
+                            <option value="Doctor__c.total_profit__c" />
+                            <option value="Case.Product__c" />
+                            <option value="ExternalServiceCredentials__c.Username__c" />
+                            <option value="Invoice__c.Total__c" />
+                            <option value="Hospital__c.Lowest_Contract__c" />
+                            <option value="SolarBot__c.All_Time_Obscured_Percent_Average__c" />
+                            <option value="Case.SLAViolation__c" />
+                            <option value="Hospital__c.Contracts_Number__c" />
+                            <option value="Lead.Primary__c" />
+                            <option value="SolarBot_Status__c.Status_Date__c" />
+                            <option value="Lead.CurrentGenerators__c" />
+                            <option value="Doctor__c.Country__c" />
+                            <option value="Contract__c.Status__c" />
+                            <option value="Hospital__c.Website__c" />
+                            <option value="Opportunity.MainCompetitors__c" />
+                            <option value="Account.UpsellOpportunity__c" />
+                            <option value="Account.SLASerialNumber__c" />
+                            <option value="MH_EnableTriggerConfiguration__c.ContractTrigger__c" />
+                            <option value="Account.CustomerPriority__c" />
+                            <option value="Doctor__c.Selected__c" />
+                            <option value="Hospital__c.Fax_Number_2__c" />
+                            <option value="SolarBot__c.SolarBot_Model__c" />
+                            <option value="SolarBot_Status__c.Maintenance_Requested__c" />
+                            <option value="Contract__c.Supervisor__c" />
+                            <option value="Hospital__c.Postal_Code__c" />
+                            <option value="Contract__c.Price__c" />
+                            <option value="Metric.OrigMetricId__c" />
+                            <option value="Hospital__c.Street__c" />
+                            <option value="Case.EngineeringReqNumber__c" />
+                            <option value="Hospital__c.Sales_Rep__c" />
+                            <option value="Doctor__c.Specialization__c" />
+                            <option value="Invoice__c.Account__c" />
+                            <option value="Doctor__c.Recieve_Birthday_Emails__c" />
+                            <option value="Account.SLAExpirationDate__c" />
+                            <option value="Hospital__c.Town__c" />
+                            <option value="Contract__c.Date_Started_MultiHire__c" />
+                            <option value="Doctor__c.Birthday__c" />
+                            <option value="Hospital__c.Beds_Number__c" />
+                            <option value="Doctor__c.Title__c" />
+                            <option value="Doctor__c.Street__c" />
+                            <option value="Invoice__c.Billing_Country__c" />
+                            <option value="Invoice_Product__c.Qty__c" />
+                            <option value="Hospital__c.Helicopter_Access__c" />
+                            <option value="Doctor__c.Is_Available__c" />
+                            <option value="SolarBot_Status__c.Percent_Obscured__c" />
+                            <option value="Opportunity.TrackingNumber__c" />
+                            <option value="Hospital__c.Country__c" />
+                            <option value="Contract__c.Hospital_Name__c" />
+                            <option value="Account.Active__c" />
+                            <option value="Contract__c.Department__c" />
+                            <option value="Opportunity.SolarBot_Model__c" />
+                            <option value="Invoice__c.Sub_Status__c" />
+                            <option value="Hospital__c.Teaching_Hospital__c" />
+                            <option value="Doctor__c.Next_Birthday__c" />
+                            <option value="Doctor__c.Subject__c" />
+                            <option value="Doctor__c.Biggest_Contract__c" />
+                            <option value="Account.Number_of_SolarBots__c" />
+                            <option value="Contact.Level__c" />
+                            <option value="Contract__c.Date_Started__c" />
+                            <option value="Hospital__c.Chief_Of_Medicine__c" />
+                            <option value="Lead.SICCode__c" />
+                            <option value="Invoice_Product__c.Total__c" />
+                            <option value="SolarBot_Status__c.Panel_Temperature__c" />
+                            <option value="Contact.Languages__c" />
+                            <option value="Doctor__c.Town__c" />
+                            <option value="Hospital__c.Doctors_Number__c" />
+                            <option value="SolarBot__c.Under_Warranty__c" />
+                            <option value="Hospital__c.Street_Number__c" />
+                            <option value="MH_Configuration__c.Value__c" />
+                            <option value="SolarBot__c.Temp_Rollup__c" />
+                            <option value="Contract__c.Expire_Date__c" />
+                            <option value="Doctor__c.Full_Name__c" />
+                            <option value="Hospital__c.Fax_Number_1__c" />
+                          </set>
+                        </option>
+                        <option name="name" value="CustomField" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
                             <option value="NewGroup" />
                             <option value="SendEmail" />
                             <option value="NewLead" />
                             <option value="NewOpportunity" />
                             <option value="NewTask" />
-                            <option value="NewAccount" />
                             <option value="Task.UpdatePriority_1" />
+                            <option value="NewAccount" />
                             <option value="Task.UpdatePriority" />
                             <option value="Task.UpdatePriority_0" />
                             <option value="Task.Defer" />
                             <option value="Task.EditDescription" />
                             <option value="FeedItem.NewTaskFromFeedItem" />
                             <option value="NewNote" />
-                            <option value="Task.EditDescription_0" />
                             <option value="CollaborationGroup.NewGroupMember" />
+                            <option value="Task.EditDescription_0" />
                             <option value="Task.EditDescription_1" />
                             <option value="CollaborationGroup.NewGroupRecord" />
                             <option value="Task.UpdateStatus" />
@@ -1988,12 +1978,12 @@
                             <option value="Task.Defer_1" />
                             <option value="Task.UpdateStatus_0" />
                             <option value="Task.UpdateStatus_1" />
-                            <option value="Case.LogACall" />
                             <option value="Case.NewChildCase" />
+                            <option value="Case.LogACall" />
                             <option value="NewContact" />
                             <option value="NewCase" />
-                            <option value="LogACall" />
                             <option value="NewEvent" />
+                            <option value="LogACall" />
                           </set>
                         </option>
                         <option name="name" value="QuickAction" />
@@ -2010,12 +2000,33 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="news" />
-                            <option value="cms_document" />
-                            <option value="cms_image" />
+                            <option value="MH_Spinner" />
+                            <option value="JQueryUIjs" />
+                            <option value="JQueryUIcss" />
+                            <option value="JQueryUI" />
+                            <option value="MH_Doctor_Default_Photo" />
+                            <option value="JQuery" />
+                            <option value="SiteSamples" />
+                            <option value="JQuery_UI" />
                           </set>
                         </option>
-                        <option name="name" value="ManagedContentType" />
+                        <option name="name" value="StaticResource" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="default_appointment_scheduling_policy" />
+                          </set>
+                        </option>
+                        <option name="name" value="AppointmentSchedulingPolicy" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="NotificationTypeConfig" />
+                          </set>
+                        </option>
+                        <option name="name" value="NotificationTypeConfig" />
                       </MetadataType>
                       <MetadataType>
                         <option name="members">
@@ -2114,45 +2125,6 @@
                       <MetadataType>
                         <option name="members">
                           <set>
-                            <option value="unfiled$public/RejectionEmail" />
-                            <option value="unfiled$public/SUPPORTSelfServiceResetPasswordSAMPLE" />
-                            <option value="unfiled$public/SupportSelfServiceResetPassword" />
-                            <option value="unfiled$public/DeactivationEmail" />
-                            <option value="unfiled$public/UpdateConnEmail" />
-                            <option value="unfiled$public/SupportCaseCreatedPhoneInquiries" />
-                            <option value="unfiled$public/SupportSelfServiceNewLoginandPassword" />
-                            <option value="unfiled$public/SUPPORTSelfServiceNewUserLoginInformationSAMPLE" />
-                            <option value="unfiled$public/SupportCaseAssignmentNotification" />
-                            <option value="unfiled$public/SupportCaseResponse" />
-                            <option value="unfiled$public/InvitationEmail" />
-                            <option value="unfiled$public/SalesNewCustomerEmail" />
-                            <option value="unfiled$public/SUPPORTSelfServiceNewCommentNotificationSAMPLE" />
-                            <option value="unfiled$public/SupportEscalatedCaseNotification" />
-                            <option value="unfiled$public/SupportCaseCreatedWebInquiries" />
-                            <option value="unfiled$public/Notify_Opp_Close_Date_Expiry" />
-                            <option value="unfiled$public/SupportEscalatedCaseReassignment" />
-                            <option value="unfiled$public/MarketingProductInquiryResponse" />
-                            <option value="unfiled$public/Birthday_reminder_Email" />
-                            <option value="unfiled$public/AcceptanceEmail" />
-                          </set>
-                        </option>
-                        <option name="name" value="EmailTemplate" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
-                            <option value="unfiled$public/flow_screen_prebuilt_report" />
-                            <option value="Acquisition_Reports/Erins_SolarBot_Opportunity_Matrix_Cj" />
-                            <option value="Acquisition_Reports/Potential_SolarBot_Product_Names_Hn" />
-                            <option value="Acquisition_Reports/Lances_SolarBot_Lead_Report_LW" />
-                            <option value="Acquisition_Reports/Lincolns_SolarBot_Research_Hi" />
-                          </set>
-                        </option>
-                        <option name="name" value="Report" />
-                      </MetadataType>
-                      <MetadataType>
-                        <option name="members">
-                          <set>
                             <option value="Logos/Hospital_Logo.png" />
                             <option value="Images/Color_Green.png" />
                             <option value="Logos/Radnip_Studios_Logo.png" />
@@ -2161,6 +2133,45 @@
                           </set>
                         </option>
                         <option name="name" value="Document" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="unfiled$public/flow_screen_prebuilt_report" />
+                            <option value="Acquisition_Reports/Erins_SolarBot_Opportunity_Matrix_Cj" />
+                            <option value="Acquisition_Reports/Potential_SolarBot_Product_Names_Hn" />
+                            <option value="Acquisition_Reports/Lincolns_SolarBot_Research_Hi" />
+                            <option value="Acquisition_Reports/Lances_SolarBot_Lead_Report_LW" />
+                          </set>
+                        </option>
+                        <option name="name" value="Report" />
+                      </MetadataType>
+                      <MetadataType>
+                        <option name="members">
+                          <set>
+                            <option value="unfiled$public/SUPPORTSelfServiceResetPasswordSAMPLE" />
+                            <option value="unfiled$public/RejectionEmail" />
+                            <option value="unfiled$public/SupportSelfServiceResetPassword" />
+                            <option value="unfiled$public/DeactivationEmail" />
+                            <option value="unfiled$public/UpdateConnEmail" />
+                            <option value="unfiled$public/SupportSelfServiceNewLoginandPassword" />
+                            <option value="unfiled$public/SupportCaseCreatedPhoneInquiries" />
+                            <option value="unfiled$public/SUPPORTSelfServiceNewUserLoginInformationSAMPLE" />
+                            <option value="unfiled$public/SupportCaseAssignmentNotification" />
+                            <option value="unfiled$public/SupportCaseResponse" />
+                            <option value="unfiled$public/InvitationEmail" />
+                            <option value="unfiled$public/SalesNewCustomerEmail" />
+                            <option value="unfiled$public/SUPPORTSelfServiceNewCommentNotificationSAMPLE" />
+                            <option value="unfiled$public/SupportCaseCreatedWebInquiries" />
+                            <option value="unfiled$public/SupportEscalatedCaseNotification" />
+                            <option value="unfiled$public/Notify_Opp_Close_Date_Expiry" />
+                            <option value="unfiled$public/MarketingProductInquiryResponse" />
+                            <option value="unfiled$public/SupportEscalatedCaseReassignment" />
+                            <option value="unfiled$public/Birthday_reminder_Email" />
+                            <option value="unfiled$public/AcceptanceEmail" />
+                          </set>
+                        </option>
+                        <option name="name" value="EmailTemplate" />
                       </MetadataType>
                     </set>
                   </option>
@@ -3901,6 +3912,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
@@ -4261,12 +4275,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="90% Controller methods is tested." />
   </component>
   <component name="WindowStateProjectService">
-    <state x="2472" y="178" key="#Illuminated_Cloud" timestamp="1600324698851">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="552" y="178" key="#Illuminated_Cloud" timestamp="1602155874994">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="2472" y="178" key="#Illuminated_Cloud/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@1920.0.1920.1040" timestamp="1600324698851" />
     <state x="552" y="178" key="#Illuminated_Cloud/1874.1080.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1597730272529" />
-    <state x="552" y="178" key="#Illuminated_Cloud/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599223280182" />
+    <state x="552" y="178" key="#Illuminated_Cloud/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602155874994" />
     <state x="2472" y="178" key="#Illuminated_Cloud_(Developer.org)" timestamp="1600324706624">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -4279,6 +4293,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Plugins/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1599459352982" />
+    <state x="552" y="178" key="#Project_Structure" timestamp="1602150212232">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Project_Structure/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602150212232" />
     <state x="552" y="178" key="#Template_Data_Languages" timestamp="1597759229452">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -4378,6 +4396,10 @@
     <state x="819" y="139" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040/3840.0.1536.824@0.0.1920.1040" timestamp="1600323712564" />
     <state x="463" y="165" key="SettingsEditor/1874.1080.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597675767205" />
     <state x="819" y="139" key="SettingsEditor/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599223179072" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602166022230">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1602166022230" />
     <state x="2588" y="347" key="com.intellij.ide.util.TipDialog" timestamp="1602139425403">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
@@ -4399,7 +4421,7 @@
     <state x="4374" y="278" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@3840.0.1536.832" timestamp="1601359447979" />
     <state x="668" y="347" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1601378014149" />
     <state x="2588" y="347" key="com.intellij.ide.util.TipDialog/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1602139425403" />
-    <state x="176" y="120" width="1319" height="1027" key="dock-window-1" timestamp="1602144925647">
+    <state x="176" y="120" width="1319" height="1027" maximized="true" key="dock-window-1" timestamp="1602157520276">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1374" y="0" width="1081" height="811" key="dock-window-1/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1598121004143" />
@@ -4414,8 +4436,8 @@
     <state x="351" y="244" width="1049" height="691" key="dock-window-1/1874.1080.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1597909966257" />
     <state x="1943" y="0" width="1893" height="1027" key="dock-window-1/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601534602386" />
     <state x="318" y="128" width="911" height="720" key="dock-window-1/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602073580578" />
-    <state x="176" y="120" width="1319" height="1027" maximized="true" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602142521520" />
-    <state x="176" y="120" width="1319" height="1027" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1602144925647" />
+    <state x="176" y="120" width="1319" height="1027" maximized="true" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602157520276" />
+    <state x="176" y="120" width="1319" height="1027" key="dock-window-1/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1602146824549" />
     <state x="332" y="82" width="1476" height="519" maximized="true" key="dock-window-2" timestamp="1602056913967">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -4449,7 +4471,7 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="1920" y="10" width="1432" height="680" maximized="true" key="dock-window-6/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1600670860899" />
-    <state x="2484" y="0" width="737" height="909" key="find.popup" timestamp="1602143299011">
+    <state x="2484" y="0" width="737" height="909" key="find.popup" timestamp="1602158948098">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1356" y="0" width="923" height="910" key="find.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1598210615937" />
@@ -4465,12 +4487,13 @@
     <state x="564" y="0" width="737" height="909" key="find.popup/1874.1080.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1597904584458" />
     <state x="1024" y="123" width="737" height="909" key="find.popup/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1601468306731" />
     <state x="2110" y="18" width="1295" height="909" key="find.popup/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1602071805030" />
-    <state x="564" y="0" width="737" height="909" key="find.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602141158355" />
-    <state x="2484" y="0" width="737" height="909" key="find.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1602143299011" />
-    <state x="2262" y="206" key="new project wizard" timestamp="1599464830248">
-      <screen x="1920" y="0" width="1920" height="1040" />
+    <state x="564" y="0" width="737" height="909" key="find.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602156419637" />
+    <state x="2484" y="0" width="737" height="909" key="find.popup/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1602158948098" />
+    <state x="342" y="206" key="new project wizard" timestamp="1602150418432">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="2262" y="206" key="new project wizard/3840.0.1536.832/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1599464830248" />
+    <state x="342" y="206" key="new project wizard/3840.0.1536.832/1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1602150418432" />
     <state x="2536" y="240" key="run.anything.popup" timestamp="1602063250723">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>

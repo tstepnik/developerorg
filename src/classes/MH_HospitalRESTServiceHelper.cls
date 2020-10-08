@@ -1,68 +1,65 @@
-/**
- * Created by BRITENET on 08.10.2020.
- */
-
 public with sharing class MH_HospitalRESTServiceHelper {
+
     public static String generateQuery(Map <String, String> parameters) {
         Map<String, Schema.SObjectField> objectsTypes = Schema.getGlobalDescribe().get('Hospital__c').getDescribe().fields.getMap();
         String query = 'SELECT Id, Name, Country__c, Town__c, Street__c, Email__c, Phone_Number_1__c FROM Hospital__c WHERE ';
         Set<String> queryParameters = new Set<String>();
-        for (String field : objectsTypes.keySet()){
-            for (String param : parameters.keySet()){
-                if(objectsTypes.get(field).getDescribe().label.toLowerCase().contains(param.toLowerCase())){
-                    if (objectsTypes.get(field).getDescribe().getType() == DisplayType.STRING || objectsTypes.get(field).getDescribe().getType() == DisplayType.EMAIL || objectsTypes.get(field).getDescribe().getType() == DisplayType.URL) {
-                        queryParameters.add(objectsTypes.get(field).getDescribe().name+' LIKE \''+parameters.get(param)+'%\'');
-                    }else if(objectsTypes.get(field).getDescribe().getType() == DisplayType.PHONE){
-                        queryParameters.add(objectsTypes.get(field).getDescribe().name+' LIKE \'+'+parameters.get(param).trim()+'%\'');
-                    }
-                    else{
-                        queryParameters.add(objectsTypes.get(field).getDescribe().name+' = \''+parameters.get(param)+'\'');
+        for (String field : objectsTypes.keySet()) {
+            for (String param : parameters.keySet()) {
+                if (objectsTypes.get(field).getDescribe().label.toLowerCase().contains(param.toLowerCase())) {
+                    if (objectsTypes.get(field).getDescribe().getType() == DisplayType.PICKLIST || objectsTypes.get(field).getDescribe().getType() == DisplayType.STRING || objectsTypes.get(field).getDescribe().getType() == DisplayType.EMAIL || objectsTypes.get(field).getDescribe().getType() == DisplayType.URL) {
+                        String x = parameters.get(param);
+                        queryParameters.add(objectsTypes.get(field).getDescribe().name + ' LIKE \'' + parameters.get(param) + '%' + '\'');
+                    } else if (objectsTypes.get(field).getDescribe().getType() == DisplayType.PHONE) {
+                        queryParameters.add(objectsTypes.get(field).getDescribe().name + ' LIKE \'+' + parameters.get(param).trim() + '%\'');
+                    } else {
+                        queryParameters.add(objectsTypes.get(field).getDescribe().name + ' = \'' + parameters.get(param) + '\'');
                     }
                 }
             }
         }
-        query += String.join((Iterable<String>)queryParameters,' AND ');
+        query += String.join((Iterable<String>) queryParameters, ' AND ');
         System.debug(query);
         return query;
     }
 
-    public static Boolean checkGetFieldsEmpty(String firstName, String lastName, String email, String country){
-        return String.isBlank(firstName) && String.isBlank(lastName) && String.isBlank(email) && String.isBlank(country);
+    public static Boolean checkGetFieldsEmpty(String name, String country, String email, String phone) {
+        return String.isBlank(name) && String.isBlank(country) && String.isBlank(email) && String.isBlank(phone);
     }
 
-    public static Boolean checkUpsertFieldsEmpty(String id, String firstName, String lastName, String email, String country, String street, String city){
-        return String.isBlank(id) && String.isBlank(firstName) && String.isBlank(lastName) && String.isBlank(email) && String.isBlank(country) && String.isBlank(street) && String.isBlank(city);
+    public static Boolean checkUpsertFieldsEmpty(String id, String name, String country, String town, String street) {
+        return String.isBlank(id) && String.isBlank(name) && String.isBlank(country) && String.isBlank(town) && String.isBlank(street);
     }
 
-    public static List<MH_HospitalRESTResponseWrapper> convertDoctorsToDoctorsServiceWrapper(List<Doctor__c> doctors){
+    public static List<MH_HospitalRESTResponseWrapper> convertDoctorsToDoctorsServiceWrapper(List<Hospital__c> hospitals) {
         List<MH_HospitalRESTResponseWrapper> doctorsResponseWrappers = new List<MH_HospitalRESTResponseWrapper>();
-        for(Doctor__c doctor : doctors){
-            MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(doctor.Id, doctor.FirstName__c, doctor.LastName__c, doctor.Country__c, doctor.Email__c);
+        for (Hospital__c hospital : hospitals) {
+            MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(
+                    hospital.Id, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c);
             doctorsResponseWrappers.add(doctorsResponseWrapper);
         }
         return doctorsResponseWrappers;
     }
 
-    public static MH_HospitalRESTWebServiceResponse upsertDoctor(String id, String firstName, String lastName, String email, String country, String street, String city, String externalId){
-        Doctor__c doctor;
-        if(!String.isBlank(externalId)) {
-            List<Doctor__c> doctors = [SELECT Id, FirstName__c, LastName__c, Email__c, Country__c, Street__c, City__c, ExternalDoctorId__c FROM Doctor__c WHERE ExternalDoctorId__c = :externalId];
-            if (doctors.isEmpty()) {
-                doctor = new Doctor__c(FirstName__c = firstName, LastName__c = lastName, Email__c = email, Country__c = country, Street__c = street, City__c = city, ExternalDoctorId__c = externalId);
-            } else {
-                doctor = doctors[0];
-                doctor.FirstName__c = firstName;
-                doctor.LastName__c = lastName;
-                doctor.Email__c = email;
-                doctor.Country__c = country;
-                doctor.City__c = city;
-            }
+    public static MH_HospitalRESTWebServiceResponse upsertDoctor(String id, String name, String country, String town, String street) {
+        Hospital__c hospital;
+        List<Hospital__c> hospitals = [SELECT Id, Name, Country__c, Town__c, Street__c FROM Hospital__c];
+
+        if (hospitals.isEmpty()) {
+            hospital = new Hospital__c(Name = name, Country__C = country, Town__c = town, Street__c = street);
+        } else {
+            hospital = hospitals[0];
+            hospital.Name = Name;
+            hospital.Country__c = country;
+            hospital.Town__c = town;
+            hospital.Street__c = street;
         }
-        else{
-            doctor = new Doctor__c(Id = id, FirstName__c = firstName, LastName__c = lastName, Email__c = email, Country__c = country, Street__c = street, City__c = city, ExternalDoctorId__c = externalId);
-        }
-        Database.UpsertResult result = Database.upsert(doctor);
-        MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(doctor.Id, result.success, result.success ? '': result.getErrors()[0].getMessage());
+
+        Database.UpsertResult result = Database.upsert(hospital);
+        MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
+                ((String) hospital.Id,
+                        result.success,
+                        result.success ? '' : result.getErrors()[0].getMessage());
         return webServiceResponse;
     }
 
