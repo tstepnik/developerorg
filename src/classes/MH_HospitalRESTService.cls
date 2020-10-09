@@ -1,4 +1,4 @@
-@RestResource(urlMapping = '/hospitals/*')
+@RestResource(urlMapping = '/v1/hospitals/*')
 global with sharing class MH_HospitalRESTService {
 
     @HttpGet
@@ -8,67 +8,63 @@ global with sharing class MH_HospitalRESTService {
         Map<String, String> parameters = request.params;
 
         List<Hospital__c> hospitals = Database.query(MH_HospitalRESTServiceHelper.generateQuery(parameters));
-        List<MH_HospitalRESTResponseWrapper> hospitalsResponseWrappers = MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
 
-        return hospitalsResponseWrappers;
-
+        return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
 
     @HttpPost
-    global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country,String town, String street) {
-        if(MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)){
+    global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country, String town, String street) {
+
+        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)) {
             return null;
-        }
-        else {
+        } else {
             try {
-                MH_HospitalRESTWebServiceResponse webServiceResponse = MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street);
-                return webServiceResponse;
+                RestContext.response.statusCode = 201;
+                return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street);
             } catch (Exception e) {
-                MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
-                return webServiceResponse;
+                RestContext.response.statusCode = 409;
+                return new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
             }
         }
     }
 
-//
+
     @HttpPut
-    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country,String town, String street) {
-        if(MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)){
+    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country, String town, String street) {
+        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)) {
             return null;
-        }
-        else {
+        } else {
             try {
                 MH_HospitalRESTWebServiceResponse webServiceResponse = MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street);
                 return webServiceResponse;
             } catch (Exception e) {
                 MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
+                RestContext.response.statusCode = 204;
                 return webServiceResponse;
             }
         }
     }
 
-
     @HttpDelete
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
+
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
-        if(String.isBlank(hospitalId)){
+        if (String.isBlank(hospitalId)) {
             return null;
-        }
-        else {
+        } else {
             try {
-                Hospital__c hospital = [SELECT Id FROM Hospital__c WHERE Id = :hospitalId];
-                    if(hospital == null) {
-                        hospital = new Hospital__c(Id = hospitalId);
-                    }
-
+                Hospital__c hospital = new Hospital__c(Id = hospitalId);
                 Database.DeleteResult result = Database.delete(hospital);
-                MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(hospitalId, result.isSuccess(), result.isSuccess() ? '' : result.getErrors()[0].getMessage());
-                return webServiceResponse;
+                RestContext.response.statusCode = 204;
+                return new MH_HospitalRESTWebServiceResponse(
+                        hospitalId,
+                        result.isSuccess(),
+                        result.isSuccess() ? 'Success' : result.getErrors()[0].getMessage());
             } catch (Exception e) {
-                MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
-                return webServiceResponse;
+                RestContext.response.statusCode = 400;
+                return new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
             }
         }
     }
