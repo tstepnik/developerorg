@@ -1,12 +1,20 @@
 public with sharing class MH_HospitalRESTServiceHelper {
 
     public static String generateQuery(Map <String, String> parameters) {
+        System.debug('HELPER');
+        System.debug('parameters');
+        System.debug(parameters);
         Map<String, Schema.SObjectField> objectsTypes = Schema.getGlobalDescribe().get('Hospital__c').getDescribe().fields.getMap();
+
+
         String query = 'SELECT Id, Name, Country__c, Town__c, Street__c, Email__c, Phone_Number_1__c FROM Hospital__c WHERE ';
         Set<String> queryParameters = new Set<String>();
         for (String field : objectsTypes.keySet()) {
             for (String param : parameters.keySet()) {
-                if (objectsTypes.get(field).getDescribe().label.toLowerCase().contains(param.toLowerCase())) {
+                //todo
+                if (objectsTypes.get(field).getDescribe().label.toLowerCase().contains(param.toLowerCase()) && !param.equals('street')) {
+                    System.debug('param');
+                    System.debug(param);
                     if (objectsTypes.get(field).getDescribe().getType() == DisplayType.PICKLIST || objectsTypes.get(field).getDescribe().getType() == DisplayType.STRING || objectsTypes.get(field).getDescribe().getType() == DisplayType.EMAIL || objectsTypes.get(field).getDescribe().getType() == DisplayType.URL) {
                         String x = parameters.get(param);
                         queryParameters.add(objectsTypes.get(field).getDescribe().name + ' LIKE \'' + parameters.get(param) + '%' + '\'');
@@ -19,6 +27,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
             }
         }
         query += String.join((Iterable<String>) queryParameters, ' AND ');
+        System.debug('query');
         System.debug(query);
         return query;
     }

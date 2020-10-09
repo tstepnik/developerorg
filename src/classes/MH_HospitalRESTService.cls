@@ -48,7 +48,6 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpDelete
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
-
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
         if (String.isBlank(hospitalId)) {

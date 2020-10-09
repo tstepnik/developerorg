@@ -37,19 +37,40 @@ public with sharing class MH_Utils {
         return generateRandomString(10) + '@' + generateRandomString(10) + '.com';
     }
 
-    public static String generateGUID(){
+    public static String generateGUID() {
         Blob b = Crypto.GenerateAESKey(128);
         String h = EncodingUtil.ConvertTohex(b);
         String guid =
-                        h.SubString(0,8)+ '-' +
-                        h.SubString(8,12) + '-' +
-                        h.SubString(12,16) + '-' +
-                        h.SubString(16,20) + '-' +
+                h.SubString(0, 8) + '-' +
+                        h.SubString(8, 12) + '-' +
+                        h.SubString(12, 16) + '-' +
+                        h.SubString(16, 20) + '-' +
                         h.substring(20);
         return guid;
     }
 
-    public static ExternalServiceCredentials__c getExternalServiceCredentials(String credentialsName){
+    public static ExternalServiceCredentials__c getExternalServiceCredentials(String credentialsName) {
         return ExternalServiceCredentials__c.getInstance(credentialsName);
     }
+    public static String getCUstoSettingValue(String settingName) {
+
+        return MH_HospitalRESTEndpoint__c.getInstance(settingName).Endpoint__c;
+    }
+
+   public static List<String> getCountriesList() {
+        Schema.DescribeFieldResult picklistDescribe = Doctor__c.fields.Country__c.getDescribe();
+        Schema.sObjectField picklistField = picklistDescribe.getSObjectField();
+        List<PicklistEntry> picklistEntriesList = picklistField.getDescribe().getPicklistValues();
+        List<String> countriesLabelValueList = new List<String>();
+        for (PicklistEntry entry : picklistEntriesList) {
+            countriesLabelValueList.add(entry.label);
+        }
+        return countriesLabelValueList;
+    }
+
+    public static MH_ExternalOauth2Credentials__c getExternalOauth2Credentials(String customSetting) {
+        return MH_ExternalOauth2Credentials__c.getInstance(customSetting);
+    }
+
+
 }

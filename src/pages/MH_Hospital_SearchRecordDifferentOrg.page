@@ -1,0 +1,571 @@
+<apex:page id="MH_Hospital_SearchRecordDifferentOrg" controller="MH_HospitalRestController">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <style>
+
+  .column-title{
+        height: 2rem;
+    }
+.column-title div{
+    margin-left: 0.5rem;
+}
+
+.column-title-actions div{
+    margin-left: 2rem;}
+
+        .slds-form-element__row{
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .slds-button-group {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .search-button{
+            margin-right: 0.7rem !important;
+        }
+
+        .slds-table_bordered {
+            border-right: 1px solid rgb(221, 219, 218);
+            border-left: 1px solid rgb(221, 219, 218);
+        }
+        .slds-modal__container span {
+            margin-bottom: 15rem;
+        }
+
+        #datePicker{
+            z-index: 10000;
+        }
+
+    </style>
+
+    <apex:slds >
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
+
+        <div class="slds-scope">
+
+            <apex:form >
+                <div class="slds-notify_container slds-hide" aria-hidden="true" id="successToast">
+                    <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
+                    <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-align-top">
+                        <svg class="slds-icon slds-icon_small">
+                          <use xlink:href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#success')}"></use>
+                        </svg>
+                    </span>
+                        <span class="slds-notify__content slds-align_absolute-center">
+                        <h2 class="slds-text-heading_small">{!$Label.MH_Success_Message}</h2>
+                    </span>
+                        <apex:commandLink styleClass="slds-notify__close" value="X" onClick="hideSuccessToast()"
+                                          reRender="none" immediate="true"/>
+                    </div>
+                </div>
+            </apex:form>
+
+            <apex:form >
+                <apex:pageMessages id="mainlayoutErrors"/>
+                <div class="slds-page-header slds-page-header_related-list">
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-title">
+                            <nav role="navigation" aria-label="Breadcrumbs">
+                                <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                    <li class="slds-breadcrumb__item">
+                                        <a href="javascript:void(0);">Hospitals</a>
+                                    </li>
+                                </ol>
+                            </nav>
+                            <div class="slds-media">
+                                <div class="slds-media__body">
+                                    <div class="slds-page-header__name">
+                                        <div class="slds-page-header__name-title">
+                                            <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                              title="Contacts (will truncate)">Kamils Hospitals</span>
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-page-header__col-actions">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+                                    <ul class="slds-button-group-list">
+                                        <li>
+
+                                            <apex:commandButton action="{!prepareInsertModal}"
+                                                                styleClass="slds-button slds-button_neutral"
+                                                                value="Add Hospital"
+                                                                onClick="openAddDoctorModal()"
+                                                                reRender="upsertDoctorOutputDialog, mainlayoutErrors"
+                                            ></apex:commandButton>
+                                        </li>
+                                        <li>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__row">
+                        <div class="slds-page-header__col-meta">
+                            <p class="slds-page-header__meta-text"></p>
+                        </div>
+                        <div class="slds-page-header__col-controls">
+                            <div class="slds-page-header__controls">
+                                <div class="slds-page-header__control">
+
+                                </div>
+                                <div class="slds-page-header__control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </apex:form>
+
+            <apex:form id="search-and-table-form">
+
+                <fieldset class="slds-form-element slds-form-element_compound slds-form-element_address">
+                    <legend class="slds-form-element__legend slds-form-element__label"><p>Search Hospitals</p></legend>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_1-of-1">
+                                <div class="slds-form-element">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-05">Name</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputText id="form-element-id-05" styleClass="slds-input"
+                                                        value="{!hospitalSearchItem.name}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-08">Country</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:selectList styleClass="slds-select" value="{!hospitalSearchItem.country}" size="1">
+                                            <apex:selectOptions value="{!options}"/>
+                                        </apex:selectList>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-07">{!$Label.Town}</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputText required="false" id="form-element-id-07"
+                                                        styleClass="slds-input"
+                                                        value="{!hospitalSearchItem.town}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-10">Street</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputText id="form-element-id-10" styleClass="slds-input"
+                                                        value="{!hospitalSearchItem.street}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<!--                        <div class="slds-form-element__row">-->
+<!--                            <div class="slds-size_2-of-6">-->
+<!--                                <div class="slds-form-element">-->
+<!--                                    <label class="slds-form-element__label" for="form-element-id-09">Email</label>-->
+<!--                                    <div class="slds-form-element__control">-->
+<!--                                        <apex:inputText id="form-element-id-09" styleClass="slds-input"-->
+<!--                                                        value="{!hospitalSearchItem.}"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="slds-size_2-of-6">-->
+<!--                                <div class="slds-form-element">-->
+
+<!--                                    <div class="slds-form-element__control">-->
+<!--                                        <span/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+                    </div>
+                </fieldset>
+
+                <div class="slds-button-group" role="group">
+                    <apex:commandButton styleClass="slds-button slds-button_neutral" value="{!$Label.Clear}"
+
+                                        reRender="search-and-table-form,mainlayoutErrors"
+                    ></apex:commandButton>
+                    <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
+                                        value="{!$Label.Search}"
+                                        reRender="search-and-table-form,mainlayoutErrors"
+                                        action="{!searchForHospitals}"
+                    ></apex:commandButton>
+                </div>
+                <table aria-multiselectable="true"
+                       class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols"
+                       role="grid"
+                       id="table">
+                    <thead>
+                    <tr class="slds-line-height_reset">
+
+                        <th class="column-title column-title-actions" scope="col">
+                            <div class="slds-truncate">Actions</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Name</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Country</div>
+                        </th>
+
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Town</div>
+                        </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Street</div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <apex:repeat value="{!searchedHospitals}" var="hospital">
+                        <tr class="slds-hint-parent">
+
+                            <td>
+                                <div class="slds-truncate">
+
+                                    <apex:commandButton action="{!prepareUpdateModal}"
+                                                        styleClass="slds-button slds-button_neutral"
+                                                        value="Edit"
+                                                        onClick="openEditDoctorModal()"
+                                                        reRender="upsertDoctorOutputDialog"
+                                    >
+                                        <apex:param value="{!hospital.id}" name="idParam"
+                                                    assignTo="{!hospitalOperationItem.id}"/>
+                                        <apex:param value="{!hospital.name}" name="firstName"
+                                                    assignTo="{!hospitalOperationItem.name}"/>
+                                        <apex:param value="{!hospital.country}" name="country"
+                                                    assignTo="{!hospitalOperationItem.country}"/>
+                                        <apex:param value="{!hospital.town}" name="town"
+                                                    assignTo="{!hospitalOperationItem.town}"/>
+                                        <apex:param value="{!hospital.street}" name="street"
+                                                    assignTo="{!hospitalOperationItem.street}"/>
+                                    </apex:commandButton>
+                                    <apex:commandButton styleClass="slds-button slds-button_neutral"
+                                                        value="Delete"
+                                                        onClick="openDeleteDoctorModal()"
+                                                        reRender="deleteDoctorOutputDialog"
+                                    >
+
+                                        <apex:param value="{!hospital.id}" name="idDelParam"
+                                                    assignTo="{!operationHospitalId}"/>
+                                        <apex:param value="{!hospital.name}" name="firstNameDelParam"
+                                                    assignTo="{!hospitalOperationItem.name}"/>
+                                        <apex:param value="{!hospital.country}" name="lastNameDelParam"
+                                                    assignTo="{!hospitalOperationItem.country}"/>
+
+                                    </apex:commandButton>
+                                </div>
+                            </td>
+                            <td>
+
+                                <div class="slds-truncate" title="Name">
+                                        {!hospital.name}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Country">
+                                        {!hospital.country}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Town">{!hospital.town}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title="Street">{!hospital.street}</div>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                    </tbody>
+                </table>
+
+                <apex:actionFunction action="{!deleteHospital}"
+                                     name="deleteDoctor"
+                                     status="status"
+                />
+                <apex:actionFunction reRender="search-and-table-form" name="rerenderTable"/>
+                <c:MH_Spinner id="searchSpinner"/>
+
+            </apex:form>
+
+            <apex:form id="upsert-doctor-form">
+                <div class="slds-modal" aria-hidden="false" role="dialog" id="upsertDoctorDialog">
+                    <div class="slds-modal__container">
+
+                        <apex:outputPanel id="upsertDoctorOutputDialog">
+                            <div class="slds-modal__header">
+                                <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
+                                                    onclick="closeUpsertDoctorModal();"
+                                                    action="{!clearUpsertItem}"
+                                                    reRender="upsert-doctor-form"
+                                                    immediate="true"
+                                                    value="X">
+                                    <span class="slds-assistive-text">Close</span>
+                                </apex:commandButton>
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Edit Doctor"
+                                                 />
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Add Doctor"
+                                                 />
+                            </div>
+
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <apex:pageMessages id="upsertDoctorErrorMessage"/>
+                                <script>
+                            let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
+
+                            </script>
+                                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                    <fieldset
+                                            class="slds-form-element slds-form-element_compound slds-form-element_address">
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_1-of-1">
+                                                    <div class="slds-form-element">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-111">Name</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputText id="form-element-id-111"
+                                                                            styleClass="slds-input"
+                                                                            value="{!hospitalOperationItem.name}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-112">Country</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:selectList styleClass="slds-select"
+                                                                             value="{!hospitalOperationItem.country}" size="1">
+                                                                <apex:selectOptions value="{!options}"/>
+                                                            </apex:selectList>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-113">Town</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputText required="false" id="form-element-id-113"
+                                                                            styleClass="slds-input"
+                                                                            value="{!hospitalOperationItem.town}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-114">Street</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputText id="form-element-id-114"
+                                                                            styleClass="slds-input"
+                                                                            value="{!hospitalOperationItem.street}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+<!--                                            <div class="slds-form-element__row">-->
+<!--                                                <div class="slds-size_2-of-6">-->
+<!--                                                    <div class="slds-form-element">-->
+<!--                                                        <label class="slds-form-element__label"-->
+<!--                                                               for="datePicker">Birthdate</label>-->
+<!--                                                        <div class="slds-form-element__control">-->
+<!--                                                            <apex:inputText id="datePicker"-->
+<!--                                                                            styleClass="slds-input"-->
+<!--                                                                            value="{!hospitalOperationItem.birthdate}"/>-->
+
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="slds-size_2-of-6">-->
+<!--                                                    <div class="slds-form-element">-->
+<!--                                                        <label class="slds-form-element__label"-->
+<!--                                                               for="form-element-id-09">Email</label>-->
+<!--                                                        <div class="slds-form-element__control">-->
+<!--                                                            <apex:inputText id="form-element-id-09"-->
+<!--                                                                            styleClass="slds-input"-->
+<!--                                                                            value="{!hospitalOperationItem.email}"/>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+
+<!--                                            </div>-->
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <footer class="slds-modal__footer">
+                                    <center>
+                                        <apex:commandButton value="cancel"
+                                                            reRender="upsert-doctor-form"
+                                                            onClick="closeUpsertDoctorModal()"
+                                                            immediate="true"
+                                                            styleClass="slds-button slds-button--neutral"></apex:commandButton>
+                                        <apex:commandButton value="save"
+                                                            action="{!upsertHospital}"
+                                                            onComplete="tryToCloseModal();"
+                                                            reRender="search-and-table-form, upsertDoctorOutputDialog "
+                                                            styleClass="slds-button slds-button--brand">
+                                        </apex:commandButton>
+                                        <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form"/>
+                                        <apex:actionFunction name="clearUpsertItem"  reRender="upsert-doctor-form" action="{!clearUpsertItem}"/>
+                                    </center>
+                                </footer>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <div class="slds-backdrop" id="upsertDoctorModalBackdrop"></div>
+            </apex:form>
+
+            <apex:form id="delete-doctor-form">
+                <div class="slds-modal" aria-hidden="false" role="dialog" id="deleteDoctorDialog">
+                    <div class="slds-modal__container">
+                        <apex:outputPanel id="deleteDoctorOutputDialog">
+                            <div class="slds-modal__header">
+                                <apex:commandButton styleClass="slds-button slds-button--icon-inverse slds-modal__close"
+                                                    reRender="delete-doctor-form"
+                                                    onclick="closeDeleteDoctorModal();"
+                                                    value="X">
+                                    <span class="slds-assistive-text">Close</span>
+                                </apex:commandButton>
+                                <h2 class="slds-text-heading--medium">Are you sure you want to
+                                    delete {!hospitalOperationItem.name} ?</h2>
+                            </div>
+                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                <footer class="slds-modal__footer">
+
+                                    <center>
+
+                                        <apex:commandButton value="No"
+                                                            styleClass="slds-button slds-button--neutral"
+                                                            reRender="delete-doctor-form"
+                                        />
+                                        <apex:commandButton value="Yes"
+                                                            action="{!deleteHospital}"
+                                                            reRender="search-and-table-form,delete-doctor-form,mainlayoutErrors"
+                                                            onClick="closeDeleteDoctorModal();"
+                                                            styleClass="slds-button slds-button--brand"/>
+                                    </center>
+                                </footer>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+                <div class="slds-backdrop" id="deleteDoctorModalBackdrop"></div>
+                <apex:actionFunction name="rerenderDeleteForm" reRender="delete-doctor-form"/>
+
+            </apex:form>
+        </div>
+
+    </apex:slds>
+    <script>
+
+        j$ = jQuery.noConflict();
+   let isInserted;
+   let isUpdate;
+
+         function openAddDoctorModal(){
+             hideSuccessToast();
+             isInsert = true;
+             isUpdate = false;
+             j$('#upsertDoctorDialog').addClass('slds-backdrop--open');
+             j$('#upsertDoctorModalBackdrop').addClass('slds-backdrop--open');
+             return false;
+        }
+
+        function openEditDoctorModal(){
+            isInsert = false;
+            isUpdate = true;
+             j$('#upsertDoctorDialog').addClass('slds-backdrop--open');
+             j$('#upsertDoctorModalBackdrop').addClass('slds-backdrop--open');
+             return false;
+        }
+
+         function openDeleteDoctorModal(){
+
+            j$('#deleteDoctorDialog').addClass('slds-backdrop--open');
+            j$('#deleteDoctorModalBackdrop').addClass('slds-backdrop--open');
+
+            return false;
+        }
+        function closeDeleteDoctorModal(){
+            j$('#deleteDoctorDialog').removeClass('slds-fade-in-open');
+            j$('#deleteDoctorModalBackdrop').removeClass('slds-fade-in-open');
+            return false;
+        }
+
+function tryToCloseModal(){
+
+    let errorMessages = document.getElementById(upsertDoctorError).textContent;
+    console.log(errorMessages.indexOf('Er'));
+                if (errorMessages.indexOf('Er') == -1) {
+                    closeUpsertDoctorModal();
+                    reRenderDoctorForm();
+                     if(isInsert || isUpdate){
+                     clearUpsertItem();
+                     showSuccessToast();
+
+            }
+          }
+        }
+
+        function closeUpsertDoctorModal(){
+            j$('#upsertDoctorDialog').removeClass('slds-fade-in-open');
+            j$('#upsertDoctorModalBackdrop').removeClass('slds-fade-in-open');
+
+            return false;
+        }
+
+        function  hideSuccessToast(){
+            j$('#successToast').addClass('slds-hide');
+        }
+
+        function  showSuccessToast(){
+            j$('#successToast').removeClass('slds-hide');
+            setTimeout(
+        function() {
+           hideSuccessToast();
+                }, 3000);
+              }
+    </script>
+    </html>
+
+</apex:page>

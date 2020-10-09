@@ -160,7 +160,11 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
-                            <option name="name" value="MH_DoctorRESTHandler" />
+                            <option name="name" value="MH_HospitalRESTHandler" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="MH_UtilsRESTService" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                         </list>
@@ -247,6 +251,10 @@
                           </MetadataEntry>
                           <MetadataEntry>
                             <option name="name" value="MH_Doctor_SearchRecordDifferentOrg" />
+                            <option name="selected" value="true" />
+                          </MetadataEntry>
+                          <MetadataEntry>
+                            <option name="name" value="MH_Hospital_SearchRecordDifferentOrg" />
                             <option name="selected" value="true" />
                           </MetadataEntry>
                         </list>
