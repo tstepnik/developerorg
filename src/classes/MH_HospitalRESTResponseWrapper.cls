@@ -25,12 +25,13 @@ global class MH_HospitalRESTResponseWrapper {
         this.website = website;
     }
 
-    public MH_HospitalRESTResponseWrapper(String id, String name, String country, String town, String street){
+    public MH_HospitalRESTResponseWrapper(String id, String name, String country, String town, String street,String email){
         this.id = id;
         this.name = name;
         this.country = country;
         this.town = town;
         this.street = street;
+        this.email = email;
     }
 
 

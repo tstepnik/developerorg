@@ -42,16 +42,18 @@
             z-index: 10000;
         }
 
+
     </style>
 
-    <apex:slds >
-        <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
+    <apex:slds>
+        <apex:includeScript
+                value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/external/jquery/jquery.js')}"/>
         <apex:includeScript value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.js')}"/>
         <apex:stylesheet value="{!URLFOR($Resource.JQuery_UI,'jquery-ui-1.12.1/jquery-ui-1.12.1/jquery-ui.css')}"/>
 
         <div class="slds-scope">
 
-            <apex:form >
+            <apex:form>
                 <div class="slds-notify_container slds-hide" aria-hidden="true" id="successToast">
                     <div class="slds-notify slds-notify_toast slds-theme_success" role="status">
                     <span class="slds-icon_container slds-icon-utility-success slds-m-right_small slds-align-top">
@@ -68,7 +70,7 @@
                 </div>
             </apex:form>
 
-            <apex:form >
+            <apex:form>
                 <apex:pageMessages id="mainlayoutErrors"/>
                 <div class="slds-page-header slds-page-header_related-list">
                     <div class="slds-page-header__row">
@@ -157,7 +159,8 @@
                                 <div class="slds-form-element">
                                     <label class="slds-form-element__label" for="form-element-id-08">Country</label>
                                     <div class="slds-form-element__control">
-                                        <apex:selectList styleClass="slds-select" value="{!hospitalSearchItem.country}" size="1">
+                                        <apex:selectList styleClass="slds-select" value="{!hospitalSearchItem.country}"
+                                                         size="1">
                                             <apex:selectOptions value="{!options}"/>
                                         </apex:selectList>
                                     </div>
@@ -167,7 +170,8 @@
                         <div class="slds-form-element__row">
                             <div class="slds-size_2-of-6">
                                 <div class="slds-form-element">
-                                    <label class="slds-form-element__label" for="form-element-id-07">{!$Label.Town}</label>
+                                    <label class="slds-form-element__label"
+                                           for="form-element-id-07">{!$Label.Town}</label>
                                     <div class="slds-form-element__control">
                                         <apex:inputText required="false" id="form-element-id-07"
                                                         styleClass="slds-input"
@@ -185,33 +189,34 @@
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="slds-form-element__row">-->
-<!--                            <div class="slds-size_2-of-6">-->
-<!--                                <div class="slds-form-element">-->
-<!--                                    <label class="slds-form-element__label" for="form-element-id-09">Email</label>-->
-<!--                                    <div class="slds-form-element__control">-->
-<!--                                        <apex:inputText id="form-element-id-09" styleClass="slds-input"-->
-<!--                                                        value="{!hospitalSearchItem.}"/>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="slds-size_2-of-6">-->
-<!--                                <div class="slds-form-element">-->
+                        <div class="slds-form-element__row">
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="form-element-id-09">Email</label>
+                                    <div class="slds-form-element__control">
+                                        <apex:inputText id="form-element-id-09" styleClass="slds-input"
+                                                        value="{!hospitalSearchItem.email}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-size_2-of-6">
+                                <div class="slds-form-element">
 
-<!--                                    <div class="slds-form-element__control">-->
-<!--                                        <span/>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                                    <div class="slds-form-element__control">
+                                        <span/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </fieldset>
 
                 <div class="slds-button-group" role="group">
-                    <apex:commandButton styleClass="slds-button slds-button_neutral" value="{!$Label.Clear}"
-
+                    <apex:commandButton styleClass="slds-button slds-button_neutral"
+                                        value="{!$Label.Clear}"
                                         reRender="search-and-table-form,mainlayoutErrors"
+                                        action="{!clearSearchData}"
                     ></apex:commandButton>
                     <apex:commandButton styleClass="slds-button slds-button_neutral last-button search-button"
                                         value="{!$Label.Search}"
@@ -244,6 +249,9 @@
                         <th class="column-title" scope="col">
                             <div class="slds-truncate">Street</div>
                         </th>
+                        <th class="column-title" scope="col">
+                            <div class="slds-truncate">Email</div>
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -269,6 +277,8 @@
                                                     assignTo="{!hospitalOperationItem.town}"/>
                                         <apex:param value="{!hospital.street}" name="street"
                                                     assignTo="{!hospitalOperationItem.street}"/>
+                                        <apex:param value="{!hospital.email}" name="email"
+                                                    assignTo="{!hospitalOperationItem.email}"/>
                                     </apex:commandButton>
                                     <apex:commandButton styleClass="slds-button slds-button_neutral"
                                                         value="Delete"
@@ -303,6 +313,9 @@
                             <td>
                                 <div class="slds-truncate" title="Street">{!hospital.street}</div>
                             </td>
+                            <td>
+                                <div class="slds-truncate" title="Street">{!hospital.email}</div>
+                            </td>
                         </tr>
                     </apex:repeat>
                     </tbody>
@@ -332,9 +345,9 @@
                                     <span class="slds-assistive-text">Close</span>
                                 </apex:commandButton>
                                 <apex:outputText styleClass="slds-text-heading--medium" value="Edit Doctor"
-                                                 />
+                                />
                                 <apex:outputText styleClass="slds-text-heading--medium" value="Add Doctor"
-                                                 />
+                                />
                             </div>
 
                             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
@@ -342,7 +355,8 @@
                                 <script>
                             let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
 
-                            </script>
+
+                                </script>
                                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                                     <fieldset
                                             class="slds-form-element slds-form-element_compound slds-form-element_address">
@@ -371,7 +385,8 @@
                                                                for="form-element-id-112">Country</label>
                                                         <div class="slds-form-element__control">
                                                             <apex:selectList styleClass="slds-select"
-                                                                             value="{!hospitalOperationItem.country}" size="1">
+                                                                             value="{!hospitalOperationItem.country}"
+                                                                             size="1">
                                                                 <apex:selectOptions value="{!options}"/>
                                                             </apex:selectList>
                                                         </div>
@@ -402,32 +417,27 @@
                                                     </div>
                                                 </div>
                                             </div>
-<!--                                            <div class="slds-form-element__row">-->
-<!--                                                <div class="slds-size_2-of-6">-->
-<!--                                                    <div class="slds-form-element">-->
-<!--                                                        <label class="slds-form-element__label"-->
-<!--                                                               for="datePicker">Birthdate</label>-->
-<!--                                                        <div class="slds-form-element__control">-->
-<!--                                                            <apex:inputText id="datePicker"-->
-<!--                                                                            styleClass="slds-input"-->
-<!--                                                                            value="{!hospitalOperationItem.birthdate}"/>-->
+                                            <div class="slds-form-element__row">
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
+                                                        <label class="slds-form-element__label"
+                                                               for="form-element-id-09">Email</label>
+                                                        <div class="slds-form-element__control">
+                                                            <apex:inputText id="form-element-id-09"
+                                                                            styleClass="slds-input"
+                                                                            value="{!hospitalOperationItem.email}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-size_2-of-6">
+                                                    <div class="slds-form-element">
 
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                                <div class="slds-size_2-of-6">-->
-<!--                                                    <div class="slds-form-element">-->
-<!--                                                        <label class="slds-form-element__label"-->
-<!--                                                               for="form-element-id-09">Email</label>-->
-<!--                                                        <div class="slds-form-element__control">-->
-<!--                                                            <apex:inputText id="form-element-id-09"-->
-<!--                                                                            styleClass="slds-input"-->
-<!--                                                                            value="{!hospitalOperationItem.email}"/>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-
-<!--                                            </div>-->
+                                                        <div class="slds-form-element__control">
+                                                            <span/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </fieldset>
                                 </div>
@@ -445,7 +455,8 @@
                                                             styleClass="slds-button slds-button--brand">
                                         </apex:commandButton>
                                         <apex:actionFunction name="reRenderDoctorForm" reRender="upsert-doctor-form"/>
-                                        <apex:actionFunction name="clearUpsertItem"  reRender="upsert-doctor-form" action="{!clearUpsertItem}"/>
+                                        <apex:actionFunction name="clearUpsertItem" reRender="upsert-doctor-form"
+                                                             action="{!clearUpsertItem}"/>
                                     </center>
                                 </footer>
                             </div>
@@ -565,6 +576,7 @@ function tryToCloseModal(){
            hideSuccessToast();
                 }, 3000);
               }
+
     </script>
     </html>
 

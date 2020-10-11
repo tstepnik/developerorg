@@ -93,7 +93,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setEndpoint(requestEndpoint);
         HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == 204) {
             return 'Success';
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
@@ -111,9 +111,9 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setHeader('Content-Type', contentType);
         request.setEndpoint(mainEndpoint);
-        request.setBody(JSON.serialize(hospitalWrapper));
+        request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 200) {
+        if (response.getStatusCode() == 201) {
             return 'Success';
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
@@ -131,7 +131,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setHeader('Content-Type', contentType);
         request.setEndpoint(mainEndpoint);
-        request.setBody(JSON.serialize(hospitalWrapper));
+        request.setBody(JSONSerializerForUPDATEHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 200) {
             return 'Success';
@@ -140,5 +140,30 @@ public with sharing class MH_HospitalRESTHandler {
                     JSON.deserialize( response.getBody(), MH_HospitalRESTWebServiceResponse.class );
             return responseWrapper.statusMessage;
         }
+    }
+
+    private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper){
+        Map<String,String> jsonMap = new Map<String, String>();
+
+        jsonMap.put('name',wrapper.name);
+        jsonMap.put('country',wrapper.country);
+        jsonMap.put('town',wrapper.town);
+        jsonMap.put('street',wrapper.street);
+        jsonMap.put('email',wrapper.email);
+
+        return JSON.serialize(jsonMap);
+    }
+
+    private String JSONSerializerForUPDATEHospital(MH_HospitalRESTResponseWrapper wrapper){
+        Map<String,String> jsonMap = new Map<String, String>();
+
+        jsonMap.put('id',wrapper.id);
+        jsonMap.put('name',wrapper.name);
+        jsonMap.put('country',wrapper.country);
+        jsonMap.put('town',wrapper.town);
+        jsonMap.put('street',wrapper.street);
+        jsonMap.put('email',wrapper.email);
+
+        return JSON.serialize(jsonMap);
     }
 }

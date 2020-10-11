@@ -6,7 +6,8 @@ global with sharing class MH_HospitalRESTService {
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         Map<String, String> parameters = request.params;
-
+        System.debug('SERVICE params');
+        System.debug(parameters);
         List<Hospital__c> hospitals = Database.query(MH_HospitalRESTServiceHelper.generateQuery(parameters));
 
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
@@ -14,14 +15,15 @@ global with sharing class MH_HospitalRESTService {
 
 
     @HttpPost
-    global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country, String town, String street) {
+    global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country, String town, String street, String email) {
+        System.debug('HTTP POST INSIDE');
 
-        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)) {
+        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street, email)) {
             return null;
         } else {
             try {
                 RestContext.response.statusCode = 201;
-                return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street);
+                return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street, email);
             } catch (Exception e) {
                 RestContext.response.statusCode = 409;
                 return new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
@@ -31,12 +33,13 @@ global with sharing class MH_HospitalRESTService {
 
 
     @HttpPut
-    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country, String town, String street) {
-        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street)) {
+    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country, String town, String street, String email) {
+        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street, email)) {
             return null;
         } else {
             try {
-                MH_HospitalRESTWebServiceResponse webServiceResponse = MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street);
+                RestContext.response.statusCode = 200;
+                MH_HospitalRESTWebServiceResponse webServiceResponse = MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street, email);
                 return webServiceResponse;
             } catch (Exception e) {
                 MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());

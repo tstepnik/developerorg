@@ -7,6 +7,7 @@ public with sharing class MH_HospitalRestController {
     public List<SelectOption> options { get; set; }
     public List<String> countries { get; set; }
     private MH_HospitalRESTHandler restService;
+
     public MH_HospitalRestController() {
         try {
             restService = new MH_HospitalRESTHandler();
@@ -34,27 +35,14 @@ public with sharing class MH_HospitalRestController {
         if (hospitalSearchItem.street != null) {
             parameters.put('street', hospitalSearchItem.street);
         }
+        if (hospitalSearchItem.email != null) {
+            parameters.put('email', hospitalSearchItem.email);
+        }
         searchedHospitals = restService.getHospitals(parameters);
     }
+
     public void searchForHospitals() {
         refreshSearchedHospitals();
-    }
-    public void deleteHospital() {
-        String resultMessage = restService.deleteHospital(operationHospitalId);
-        if (resultMessage.contains('Success')) {
-            refreshSearchedHospitals();
-            clearUpsertItem();
-        } else {
-            refreshSearchedHospitals();
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
-        }
-    }
-    public void upsertHospital() {
-        if (upsertOperationType.equals('INSERT')) {
-            addHospital();
-        } else if (upsertOperationType.equals('UPDATE')) {
-            updateHospital();
-        }
     }
     public void addHospital() {
         String resultMessage = restService.addHospital(hospitalOperationItem);
@@ -71,6 +59,24 @@ public with sharing class MH_HospitalRestController {
             clearUpsertItem();
         } else {
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+        }
+    }
+    public void deleteHospital() {
+        String resultMessage = restService.deleteHospital(operationHospitalId);
+        if (resultMessage.contains('Success')) {
+            refreshSearchedHospitals();
+            clearUpsertItem();
+        } else {
+            refreshSearchedHospitals();
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+        }
+    }
+
+    public void upsertHospital() {
+        if (upsertOperationType.equals('INSERT')) {
+            addHospital();
+        } else if (upsertOperationType.equals('UPDATE')) {
+            updateHospital();
         }
     }
     public void clearUpsertItem() {
