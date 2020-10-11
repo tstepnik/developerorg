@@ -43,6 +43,7 @@
         }
 
 
+
     </style>
 
     <apex:slds>
@@ -356,6 +357,7 @@
                             let upsertDoctorError = '{!$Component.upsertDoctorErrorMessage}';
 
 
+
                                 </script>
                                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
                                     <fieldset
@@ -375,7 +377,8 @@
                                                         <div class="slds-form-element__control">
                                                             <apex:inputText id="form-element-id-111"
                                                                             styleClass="slds-input"
-                                                                            value="{!hospitalOperationItem.name}"/>
+                                                                            value="{!hospitalOperationItem.name}"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -576,6 +579,7 @@ function tryToCloseModal(){
            hideSuccessToast();
                 }, 3000);
               }
+
 
     </script>
     </html>

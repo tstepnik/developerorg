@@ -72,5 +72,21 @@ public with sharing class MH_Utils {
         return MH_ExternalOauth2Credentials__c.getInstance(customSetting);
     }
 
+    public static String rewordStatusMessage(String statusMessage){
+        if(statusMessage.contains('INVALID_EMAIL_ADDRESS')){
+            statusMessage = System.Label.Invalid_Email_Address;
+        }else if(statusMessage.contains('INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST')){
+            statusMessage = System.Label.Invalid_Or_Null_Picklist;
+        }else if(statusMessage.contains('REQUIRED_FIELD_MISSING')){
+            if(statusMessage.contains('Required fields are missing: [LastName__c]'))
+                statusMessage = System.Label.Required_Field_Missing;
+        }else if(statusMessage.contains('DUPLICATES_DETECTED')){
+            statusMessage = System.Label.Duplicates_Detected;
+        }else if(statusMessage.contains('ENTITY_IS_DELETED')) {
+            statusMessage = System.Label.Entity_Is_Deleted;
+        }
+        return statusMessage;
+    }
+
 
 }

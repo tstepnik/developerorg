@@ -1,68 +1,58 @@
 public with sharing class MH_HospitalRESTServiceHelper {
 
-    public static Boolean isExpectedType(DisplayType type){
-        return type == DisplayType.PICKLIST
-                || type == DisplayType.STRING
-                || type == DisplayType.EMAIL
-                || type == DisplayType.URL;
-    }
-
     public static String generateQuery(Map <String, String> parameters) {
-        System.debug('generateQuery paraeters');
-        System.debug(parameters);
-        Map<String, Schema.SObjectField> objectsTypes = Schema.getGlobalDescribe().get('Hospital__c').getDescribe().fields.getMap();
 
+        String query = 'SELECT Id,Name,Country__c,Town__c,Street__c,Email__c FROM Hospital__c ';
+        Boolean firstQuery = true;
 
-        String query = 'SELECT' +
+        if (emptyParameters(parameters)) {
+            return query;
+        }
 
-                ' Id,' +
-                ' Name,' +
-                ' Country__c,' +
-                ' Town__c,' +
-                ' Street__c,' +
-                ' Email__c,' +
-                ' Phone_Number_1__c ' +
+        Map<String, String> params = new Map<String, String>();
 
-                'FROM Hospital__c ' +
-                'WHERE ';
+        params.put('name', 'Name');
+        params.put('country', 'Country__c');
+        params.put('town', 'Town__c');
+        params.put('street', 'Street__c');
+        params.put('email', 'Email__c');
 
-        Set<String> queryParameters = new Set<String>();
+        query += 'WHERE ';
 
-        for (String field : objectsTypes.keySet()) {
-
-            for (String param : parameters.keySet()) {
-
-                //todo
-                String objType = objectsTypes.get(field).getDescribe().label.toLowerCase();
-                String fieldName = objectsTypes.get(field).getDescribe().name;
-                Boolean hasValidType = isExpectedType(objectsTypes.get(field).getDescribe().getType());
-
-                if (objType.contains(param.toLowerCase()) && !fieldName.equals('Street_Number__c') && !fieldName.equals('Search_Email__c')) {
-
-                    if (hasValidType) {
-
-                        String x = parameters.get(param);
-                        System.debug('parameters.get(param)');
-                        System.debug(x);
-                        queryParameters.add(fieldName + ' LIKE \'' + parameters.get(param) + '%' + '\'');
-                    } else if (objectsTypes.get(field).getDescribe().getType() == DisplayType.PHONE) {
-                        queryParameters.add(fieldName + ' LIKE \'+' + parameters.get(param).trim() + '%\'');
-                    } else {
-                        queryParameters.add(fieldName + ' = \'' + parameters.get(param) + '\'');
-                    }
+        for (String key : parameters.keySet()) {
+            if (String.isNotEmpty(parameters.get(key))) {
+                if (!firstQuery) {
+                    query += ' AND ' + params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                } else {
+                    query += params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                    firstQuery = false;
                 }
             }
         }
-        query += String.join((Iterable<String>) queryParameters, ' AND ');
-        System.debug('query');
-        System.debug(query);
+
         return query;
     }
 
-
-
     public static Boolean checkGetFieldsEmpty(String name, String country, String town, String street, String email) {
         return String.isBlank(name) && String.isBlank(country) && String.isBlank(town) && String.isBlank(street) && String.isBlank(email);
+    }
+    public static void throwErrorIfEmptyBody(String id, String name, String country, String town, String street, String email) {
+        if (String.isBlank(id) &&
+                String.isBlank(name) &&
+                String.isBlank(country) &&
+                String.isBlank(town) &&
+                String.isBlank(street) &&
+                String.isBlank(email)
+                ) {
+            throw new DmlException('Object cannot be empty.');
+        }
+    }
+
+
+    public static void throwErrorIfEmptyName(String name) {
+        if (String.isBlank(name)) {
+            throw new DmlException('Name field is required.');
+        }
     }
 
     public static Boolean checkUpsertFieldsEmpty(String id, String name, String country, String town, String street, String email) {
@@ -80,26 +70,35 @@ public with sharing class MH_HospitalRESTServiceHelper {
     }
 
     public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String name, String country, String town, String street, String email) {
-        Hospital__c hospital;
-        List<Hospital__c> hospitals = [SELECT Id, Name, Country__c, Town__c, Street__c, Email__c FROM Hospital__c WHERE Id = :id];
 
-        if (hospitals.isEmpty()) {
-            hospital = new Hospital__c(Name = name, Country__C = country, Town__c = town, Street__c = street, Email__c = email);
-        } else {
-            hospital = hospitals[0];
-            hospital.Name = Name;
-            hospital.Country__c = country;
-            hospital.Town__c = town;
-            hospital.Street__c = street;
-            hospital.Email__c = email;
-        }
+        throwErrorIfEmptyBody(id, name, country, town, street, email);
+
+        Hospital__c hospital = new Hospital__c(Id = id,
+                Name = name,
+                Country__C = country,
+                Town__c = town,
+                Street__c = street,
+                Email__c = email
+        );
 
         Database.UpsertResult result = Database.upsert(hospital);
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
                         result.success,
-                        result.success ? '' : result.getErrors()[0].getMessage());
+                        result.success ? 'Success' : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
         return webServiceResponse;
     }
 
+    public static Boolean emptyParameters(Map<String, String> parameters) {
+        if (parameters.isEmpty()) {
+            return true;
+        }
+
+        for (String key : parameters.keySet()) {
+            if (String.isEmpty(parameters.get(key))) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

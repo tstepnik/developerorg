@@ -93,7 +93,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setEndpoint(requestEndpoint);
         HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 204) {
+        if (response.getStatusCode() == 200) {
             return 'Success';
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)

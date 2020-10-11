@@ -8,44 +8,36 @@ global with sharing class MH_HospitalRESTService {
         Map<String, String> parameters = request.params;
         System.debug('SERVICE params');
         System.debug(parameters);
-        List<Hospital__c> hospitals = Database.query(MH_HospitalRESTServiceHelper.generateQuery(parameters));
+        String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
+        List<Hospital__c> hospitals = Database.query(query);
 
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
-
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country, String town, String street, String email) {
-        System.debug('HTTP POST INSIDE');
 
-        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street, email)) {
-            return null;
-        } else {
-            try {
-                RestContext.response.statusCode = 201;
-                return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street, email);
-            } catch (Exception e) {
-                RestContext.response.statusCode = 409;
-                return new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
-            }
+        try {
+            MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
+            RestContext.response.statusCode = 201;
+            return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street, email);
+        } catch (Exception e) {
+            RestContext.response.statusCode = 400;
+            return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
         }
     }
 
-
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country, String town, String street, String email) {
-        if (MH_HospitalRESTServiceHelper.checkUpsertFieldsEmpty(null, name, country, town, street, email)) {
-            return null;
-        } else {
-            try {
-                RestContext.response.statusCode = 200;
-                MH_HospitalRESTWebServiceResponse webServiceResponse = MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street, email);
-                return webServiceResponse;
-            } catch (Exception e) {
-                MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
-                RestContext.response.statusCode = 204;
-                return webServiceResponse;
-            }
+
+        try {
+            MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
+            Hospital__c hospital = new Hospital__c(Id = id, Name = name, Country__c = country, Town__c = town, Street__c = street, Email__c = email);
+            Database.update(hospital);
+            return new MH_HospitalRESTWebServiceResponse(id, true, 'Success');
+        } catch (Exception e) {
+            RestContext.response.statusCode = 400;
+            return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
         }
     }
 
@@ -59,14 +51,13 @@ global with sharing class MH_HospitalRESTService {
             try {
                 Hospital__c hospital = new Hospital__c(Id = hospitalId);
                 Database.DeleteResult result = Database.delete(hospital);
-                RestContext.response.statusCode = 204;
                 return new MH_HospitalRESTWebServiceResponse(
                         hospitalId,
-                        result.isSuccess(),
-                        result.isSuccess() ? 'Success' : result.getErrors()[0].getMessage());
+                        true,
+                        'Success');
             } catch (Exception e) {
                 RestContext.response.statusCode = 400;
-                return new MH_HospitalRESTWebServiceResponse(null, false, e.getMessage());
+                return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
             }
         }
     }
