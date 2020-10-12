@@ -36,7 +36,7 @@ public with sharing class MH_DoctorDifferentOrgController {
             countries = soapService.getCountries();
         }
         countriesOptions = new List<SelectOption>();
-        countriesOptions.add(new SelectOption('', '--none--'));
+        countriesOptions.add(new SelectOption('', ''));
         if (countries != null && !countries.isEmpty()) {
             for (String country : countries) {
                 String cString = country.split(';')[0];

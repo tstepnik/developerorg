@@ -4,13 +4,13 @@
 
 public with sharing class MH_HospitalRESTHandler {
 
-    private final MH_ExternalOauth2Credentials__c credentials = MH_Utils.getExternalOauth2Credentials('MyCredentials');
+    private final MH_ExternalOauth2Credentials__c credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
     private final String clientId = credentials.client_id__c;
     private final String clientSecret = credentials.client_secret__c;
     private final String username = credentials.username__c;
     private final String password = credentials.password__c;
-    private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/v1/hospitals/';
-    private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/v1/utils/getCountriesList';
+    private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/';
+    private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries';
     private final String authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
             '&password=' + password + '&client_secret=' + clientSecret;
     private final String contentType = 'application/json';
@@ -19,7 +19,6 @@ public with sharing class MH_HospitalRESTHandler {
     public MH_HospitalRESTHandler() {
         token = getAccessToken();
     }
-
     public String getAccessToken() {
         HttpResponse responseFromHX = new HttpResponse();
         HttpRequest requestToHX = new HttpRequest();
