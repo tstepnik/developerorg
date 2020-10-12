@@ -14,9 +14,9 @@ public with sharing class MH_DoctorSOAPService {
             return '';
         }
 
-        ExternalServiceCredentials__c credentials = MH_Utils.getExternalServiceCredentials('kamilCredentials'); //todo 
+        MH_ExternalOauth2Credentials__c credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
         partnerSoapSforceCom.Soap sp = new partnerSoapSforceCom.Soap();
-        partnerSoapSforceCom.LoginResult loginResult = sp.login(credentials.Username__c, credentials.Password__c);
+        partnerSoapSforceCom.LoginResult loginResult = sp.login(credentials.username__c, credentials.password__c);
         return loginResult.sessionId;
     }
 

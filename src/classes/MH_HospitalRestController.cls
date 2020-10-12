@@ -13,9 +13,7 @@ public with sharing class MH_HospitalRestController {
         try {
             restService = new MH_HospitalRESTHandler();
         } catch (Exception e) {
-            System.debug(restService.token);
-            System.debug(e);
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, 'External Service Connection Error'));
+            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, Label.ExternalServiceError));
         }
         hospitalOperationItem = new MH_HospitalRESTResponseWrapper();
         hospitalSearchItem = new MH_HospitalRESTResponseWrapper();
@@ -41,9 +39,6 @@ public with sharing class MH_HospitalRestController {
         if (hospitalSearchItem.email != null) {
             parameters.put('email', hospitalSearchItem.email);
         }
-        System.debug('TESTY');
-        System.debug(hospitalSearchItem);
-        System.debug(parameters);
         searchedHospitals = restService.getHospitals(parameters);
     }
 

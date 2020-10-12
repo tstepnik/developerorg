@@ -32,7 +32,7 @@ global with sharing class MH_HospitalRESTService {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             Hospital__c hospital = new Hospital__c(Id = id, Name = name, Country__c = country, Town__c = town, Street__c = street, Email__c = email);
             Database.update(hospital);
-            return new MH_HospitalRESTWebServiceResponse(id, true, 'Success');
+            return new MH_HospitalRESTWebServiceResponse(id, true, Label.MH_Success_Message);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
@@ -52,7 +52,7 @@ global with sharing class MH_HospitalRESTService {
                 return new MH_HospitalRESTWebServiceResponse(
                         hospitalId,
                         true,
-                        'Success');
+                        Label.MH_Success_Message);
             } catch (Exception e) {
                 RestContext.response.statusCode = 400;
                 return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));

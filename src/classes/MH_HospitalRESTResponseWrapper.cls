@@ -24,6 +24,4 @@ global class MH_HospitalRESTResponseWrapper {
         this.street = street;
         this.email = email;
     }
-
-
 }

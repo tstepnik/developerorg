@@ -1,7 +1,3 @@
-/**
- * Created by BRITENET on 09.10.2020.
- */
-
 public with sharing class MH_HospitalRESTHandler {
 
     private final MH_ExternalOauth2Credentials__c credentials;
@@ -81,8 +77,6 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public List<MH_HospitalRESTResponseWrapper> getHospitals(Map<String, String> parameters) {
-        System.debug('parameters');
-        System.debug(parameters);
         String requestEndpoint = mainEndpoint;
 
         if (!parameters.isEmpty() && parameters.isEmpty() != null) {
@@ -95,8 +89,6 @@ public with sharing class MH_HospitalRESTHandler {
                     requestEndpoint += '&';
             }
         }
-        System.debug('requestEndpoint');
-        System.debug(requestEndpoint);
 
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
@@ -127,7 +119,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setEndpoint(requestEndpoint);
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 200) {
-            return 'Success';
+            return Label.MH_Success_Message;
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserializeStrict(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
@@ -147,7 +139,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 201) {
-            return 'Success';
+            return Label.MH_Success_Message;
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
@@ -167,7 +159,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setBody(JSONSerializerForUPDATEHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 200) {
-            return 'Success';
+            return Label.MH_Success_Message;
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);

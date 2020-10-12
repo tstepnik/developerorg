@@ -49,14 +49,6 @@ public with sharing class MH_Utils {
         return guid;
     }
 
-    public static ExternalServiceCredentials__c getExternalServiceCredentials(String credentialsName) {
-        return ExternalServiceCredentials__c.getInstance(credentialsName);
-    }
-    public static String getCUstoSettingValue(String settingName) {
-
-        return MH_HospitalRESTEndpoint__c.getInstance(settingName).Endpoint__c;
-    }
-
    public static List<String> getCountriesList() {
         Schema.DescribeFieldResult picklistDescribe = Doctor__c.fields.Country__c.getDescribe();
         Schema.sObjectField picklistField = picklistDescribe.getSObjectField();
