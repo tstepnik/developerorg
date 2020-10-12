@@ -10,6 +10,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         Map<String, String> params = new Map<String, String>();
+        params.put('id', 'Id');
         params.put('name', 'Name');
         params.put('country', 'Country__c');
         params.put('town', 'Town__c');
@@ -21,9 +22,18 @@ public with sharing class MH_HospitalRESTServiceHelper {
         for (String key : parameters.keySet()) {
             if (String.isNotEmpty(parameters.get(key))) {
                 if (!firstQuery) {
-                    query += ' AND ' + params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                    if (key == 'id') {
+                        query += ' AND ' + params.get(key) + ' = \'' + parameters.get(key) + '\'';
+
+                    } else {
+                        query += ' AND ' + params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                    }
                 } else {
-                    query += params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                    if (key == 'id') {
+                        query += params.get(key) + ' = \'' + parameters.get(key) + '\'';
+                    } else {
+                        query += params.get(key) + ' LIKE \'' + parameters.get(key) + '%\'';
+                    }
                     firstQuery = false;
                 }
             }
@@ -43,14 +53,16 @@ public with sharing class MH_HospitalRESTServiceHelper {
                 String.isBlank(street) &&
                 String.isBlank(email)
                 ) {
-            throw new DmlException('Object cannot be empty.');
+//            throw new DmlException('Object cannot be empty.');
+            throw new DmlException(Label.MH_EmptyHospital);
         }
     }
 
 
     public static void throwErrorIfEmptyName(String name) {
         if (String.isBlank(name)) {
-            throw new DmlException('Name field is required.');
+//            throw new DmlException('Name field is required.');
+            throw new DmlException(Label.MH_NameFieldRequired);
         }
     }
 
@@ -84,7 +96,8 @@ public with sharing class MH_HospitalRESTServiceHelper {
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
                         result.success,
-                        result.success ? 'Success' : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
+//                        result.success ? 'Success' : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
+                        result.success ? Label.MH_Success_Message : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
         return webServiceResponse;
     }
 

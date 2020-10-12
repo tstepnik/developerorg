@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c8ea2346-aa01-4b22-ad32-22cfe3fdcc18" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTHandler.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTHandler.cls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceMock.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceMock.cls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRestController.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRestController.cls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRestControllerTest.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRestControllerTest.cls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/MH_HospitalRESTServiceHelper.cls" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,73 +71,73 @@
                 <ConnectionWorkspaceSettings>
                   <option name="buildSuccessDatesBySourceRootRelativePath">
                     <map>
-                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTCONTROLLER.CLS" value="1602495455348" />
-                      <entry key="CLASSES/MH_HOSPITALRESTCONTROLLERTEST.CLS" value="1602495992902" />
-                      <entry key="CLASSES/MH_HOSPITALRESTHANDLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTRESPONSEWRAPPER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTSERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTSERVICEHELPER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTSERVICEMOCK.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITALRESTWEBSERVICERESPONSE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602494714000" />
+                      <entry key="CLASSES/MH_ATTACHMENT_SERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_CONTRACTBUILDER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_CONTRACTOVERLAPPINGHANDLERTEST.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_CONTRACTTRIGGERHANDLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_CONTRACT_SERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORBUILDER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTORGCONTROLLERTEST.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORDIFFERENTVIEWWRAPPER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOROVERLAPPINGHANDLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORSOAPSERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORTRIGGERHANDLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTORWEBSERVICEMOCK.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOR_EXTENSION.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOR_IMPORTCSVCONTROLLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOR_SEARCHCONTROLLER_TEST.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_DOCTOR_SERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALBUILDER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTCONTROLLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTCONTROLLERTEST.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTHANDLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTRESPONSEWRAPPER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTSERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTSERVICEHELPER.CLS" value="1602498954706" />
+                      <entry key="CLASSES/MH_HOSPITALRESTSERVICEMOCK.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITALRESTWEBSERVICERESPONSE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITAL_EXTENSION.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITAL_GOOGLEMAPCONTROLLER.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_HOSPITAL_SERVICE.CLS" value="1602497536000" />
                       <entry key="CLASSES/MH_TRIGGEREXCEPITON.CLS" value="1600417489000" />
-                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_UTILS.CLS" value="1602494714000" />
-                      <entry key="CLASSES/MH_UTILSRESTSERVICE.CLS" value="1602494714000" />
-                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602494714000" />
-                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602494714000" />
-                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602494715000" />
-                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_HOSPITAL_SEARCHRECORDDIFFERENTORG.PAGE" value="1602494715000" />
-                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602494715000" />
-                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602494715000" />
-                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602494715000" />
-                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602494715000" />
+                      <entry key="CLASSES/MH_TRIGGEREXCEPTION.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_UTILS.CLS" value="1602497536000" />
+                      <entry key="CLASSES/MH_UTILSRESTSERVICE.CLS" value="1602497536000" />
+                      <entry key="CLASSES/SOAPSFORCECOMSCHEMASCLASSHCSDOCTOR.CLS" value="1602497536000" />
+                      <entry key="CLASSES/TRIGGERHANDLER.CLS" value="1602497536000" />
+                      <entry key="COMPONENTS/MH_HOSPITAL_GOOGLEMAP.COMPONENT" value="1602497537000" />
+                      <entry key="COMPONENTS/MH_SPINNER.COMPONENT" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_DETAILS.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_EDITRECORD.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTCSV.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTJSON.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_EXPORTXLS.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_IMPORTCSV.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_NEWRECORD.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_POPUP.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_RANDOMDOCTORSTABLE.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORD.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_DOCTOR_SEARCHRECORDDIFFERENTORG.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_HOSPITAL_DETAILS.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_HOSPITAL_EDITRECORD.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_HOSPITAL_GOOGLEMAP.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_HOSPITAL_NEWRECORD.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_HOSPITAL_SEARCHRECORDDIFFERENTORG.PAGE" value="1602497537000" />
+                      <entry key="PAGES/MH_RANDOMDOCTORS.PAGE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/JQUERY.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/JQUERYUI.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/JQUERYUICSS.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/JQUERYUIJS.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/JQUERY_UI.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/MH_DOCTOR_DEFAULT_PHOTO.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/MH_SPINNER.RESOURCE" value="1602497537000" />
+                      <entry key="STATICRESOURCES/SITESAMPLES.RESOURCE" value="1602497537000" />
+                      <entry key="TRIGGERS/MH_CONTRACTTRIGGER.TRIGGER" value="1602497537000" />
+                      <entry key="TRIGGERS/MH_DOCTORTRIGGER.TRIGGER" value="1602497537000" />
                     </map>
                   </option>
                   <option name="lastBuildScope" value="CONTEXT" />

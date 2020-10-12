@@ -6,8 +6,6 @@ global with sharing class MH_HospitalRESTService {
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         Map<String, String> parameters = request.params;
-        System.debug('SERVICE params');
-        System.debug(parameters);
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
 
