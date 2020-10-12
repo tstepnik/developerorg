@@ -10,7 +10,6 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         Map<String, String> params = new Map<String, String>();
-
         params.put('name', 'Name');
         params.put('country', 'Country__c');
         params.put('town', 'Town__c');

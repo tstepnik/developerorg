@@ -2,21 +2,24 @@ public with sharing class MH_HospitalRestController {
     public List<MH_HospitalRESTResponseWrapper> searchedHospitals { get; set; }
     public MH_HospitalRESTResponseWrapper hospitalSearchItem { get; set; }
     public MH_HospitalRESTResponseWrapper hospitalOperationItem { get; set; }
+    public String resultMessage { get; set; }
     public String operationHospitalId { get; set; }
     public String upsertOperationType { get; set; }
     public List<SelectOption> options { get; set; }
     public List<String> countries { get; set; }
-    private MH_HospitalRESTHandler restService;
+    public MH_HospitalRESTHandler restService;
 
     public MH_HospitalRestController() {
         try {
             restService = new MH_HospitalRESTHandler();
         } catch (Exception e) {
+            System.debug(restService.token);
             System.debug(e);
             ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, 'External Service Connection Error'));
         }
         hospitalOperationItem = new MH_HospitalRESTResponseWrapper();
         hospitalSearchItem = new MH_HospitalRESTResponseWrapper();
+
         searchedHospitals = new List<MH_HospitalRESTResponseWrapper>();
         upsertOperationType = '';
         getCountryListItems();
@@ -38,6 +41,9 @@ public with sharing class MH_HospitalRestController {
         if (hospitalSearchItem.email != null) {
             parameters.put('email', hospitalSearchItem.email);
         }
+        System.debug('TESTY');
+        System.debug(hospitalSearchItem);
+        System.debug(parameters);
         searchedHospitals = restService.getHospitals(parameters);
     }
 
@@ -45,7 +51,7 @@ public with sharing class MH_HospitalRestController {
         refreshSearchedHospitals();
     }
     public void addHospital() {
-        String resultMessage = restService.addHospital(hospitalOperationItem);
+        resultMessage = restService.addHospital(hospitalOperationItem);
         if (resultMessage.contains('Success')) {
             clearUpsertItem();
         } else {
@@ -53,7 +59,7 @@ public with sharing class MH_HospitalRestController {
         }
     }
     public void updateHospital() {
-        String resultMessage = restService.updateHospital(hospitalOperationItem);
+       resultMessage = restService.updateHospital(hospitalOperationItem);
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
             clearUpsertItem();
@@ -62,7 +68,7 @@ public with sharing class MH_HospitalRestController {
         }
     }
     public void deleteHospital() {
-        String resultMessage = restService.deleteHospital(operationHospitalId);
+         resultMessage = restService.deleteHospital(operationHospitalId);
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
             clearUpsertItem();
@@ -98,8 +104,7 @@ public with sharing class MH_HospitalRestController {
         upsertOperationType = 'INSERT';
         clearUpsertItem();
     }
-    public void sendParam() {
-    }
+
     public List<SelectOption> getCountryListItems() {
         if (Test.isRunningTest()) {
             countries = new List<String>{

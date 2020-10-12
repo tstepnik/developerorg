@@ -4,30 +4,64 @@
 
 public with sharing class MH_HospitalRESTHandler {
 
-    private final MH_ExternalOauth2Credentials__c credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
-    private final String clientId = credentials.client_id__c;
-    private final String clientSecret = credentials.client_secret__c;
-    private final String username = credentials.username__c;
-    private final String password = credentials.password__c;
+    private final MH_ExternalOauth2Credentials__c credentials;
+    private final String clientId;
+    private final String clientSecret;
+    private final String username;
+    private final String password;
     private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/';
     private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries';
-    private final String authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
-            '&password=' + password + '&client_secret=' + clientSecret;
+    private final String authEndpoint;
     private final String contentType = 'application/json';
     public String token { get; set; }
+    private Cache.SessionPartition sessionPartition;
 
     public MH_HospitalRESTHandler() {
-        token = getAccessToken();
+        if (Test.isRunningTest()) {
+            clientId = '123';
+            clientSecret = '123';
+            username = '123';
+            password = '123';
+        } else {
+            credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
+            clientId = credentials.client_id__c;
+            clientSecret = credentials.client_secret__c;
+            username = credentials.username__c;
+            password = credentials.password__c;
+        }
+        authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
+                '&password=' + password + '&client_secret=' + clientSecret;
+
+        if (Test.isRunningTest()) {
+            token = '';
+        } else {
+            sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
+            token = getAccessToken();
+        }
     }
+
     public String getAccessToken() {
-        HttpResponse responseFromHX = new HttpResponse();
-        HttpRequest requestToHX = new HttpRequest();
-        requestToHX.setMethod('POST');
-        requestToHX.setEndpoint(authEndpoint);
-        responseFromHX = new Http().send(requestToHX);
-        DeserializeResponse deserializeResponse =
-                (DeserializeResponse) JSON.deserialize(responseFromHX.getBody(), DeserializeResponse.class);
-        return deserializeResponse.access_token;
+
+        String cachedToken;
+        if (Test.isRunningTest()) {
+            cachedToken = '';
+        } else {
+            cachedToken = (String) sessionPartition.get('token');
+        }
+        if (String.isBlank(cachedToken)) {
+            HttpResponse responseFromHX = new HttpResponse();
+            HttpRequest requestToHX = new HttpRequest();
+            requestToHX.setMethod('POST');
+            requestToHX.setEndpoint(authEndpoint);
+            responseFromHX = new Http().send(requestToHX);
+            DeserializeResponse deserializeResponse =
+                    (DeserializeResponse) JSON.deserialize(responseFromHX.getBody(), DeserializeResponse.class);
+            String reqestToken = deserializeResponse.access_token;
+            sessionPartition.put('token', reqestToken);
+            return reqestToken;
+        } else {
+            return cachedToken;
+        }
     }
     public class DeserializeResponse {
         public String Id;
@@ -116,7 +150,7 @@ public with sharing class MH_HospitalRESTHandler {
             return 'Success';
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
-                    JSON.deserialize( response.getBody(), MH_HospitalRESTWebServiceResponse.class );
+                    JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
             return responseWrapper.statusMessage;
 
         }
@@ -136,32 +170,32 @@ public with sharing class MH_HospitalRESTHandler {
             return 'Success';
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
-                    JSON.deserialize( response.getBody(), MH_HospitalRESTWebServiceResponse.class );
+                    JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
             return responseWrapper.statusMessage;
         }
     }
 
-    private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper){
-        Map<String,String> jsonMap = new Map<String, String>();
+    private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper) {
+        Map<String, String> jsonMap = new Map<String, String>();
 
-        jsonMap.put('name',wrapper.name);
-        jsonMap.put('country',wrapper.country);
-        jsonMap.put('town',wrapper.town);
-        jsonMap.put('street',wrapper.street);
-        jsonMap.put('email',wrapper.email);
+        jsonMap.put('name', wrapper.name);
+        jsonMap.put('country', wrapper.country);
+        jsonMap.put('town', wrapper.town);
+        jsonMap.put('street', wrapper.street);
+        jsonMap.put('email', wrapper.email);
 
         return JSON.serialize(jsonMap);
     }
 
-    private String JSONSerializerForUPDATEHospital(MH_HospitalRESTResponseWrapper wrapper){
-        Map<String,String> jsonMap = new Map<String, String>();
+    private String JSONSerializerForUPDATEHospital(MH_HospitalRESTResponseWrapper wrapper) {
+        Map<String, String> jsonMap = new Map<String, String>();
 
-        jsonMap.put('id',wrapper.id);
-        jsonMap.put('name',wrapper.name);
-        jsonMap.put('country',wrapper.country);
-        jsonMap.put('town',wrapper.town);
-        jsonMap.put('street',wrapper.street);
-        jsonMap.put('email',wrapper.email);
+        jsonMap.put('id', wrapper.id);
+        jsonMap.put('name', wrapper.name);
+        jsonMap.put('country', wrapper.country);
+        jsonMap.put('town', wrapper.town);
+        jsonMap.put('street', wrapper.street);
+        jsonMap.put('email', wrapper.email);
 
         return JSON.serialize(jsonMap);
     }
