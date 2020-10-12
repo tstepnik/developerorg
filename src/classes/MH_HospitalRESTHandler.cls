@@ -59,6 +59,7 @@ public with sharing class MH_HospitalRESTHandler {
             return cachedToken;
         }
     }
+
     public class DeserializeResponse {
         public String Id;
         public String access_token;
