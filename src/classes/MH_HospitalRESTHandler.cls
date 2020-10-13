@@ -1,5 +1,5 @@
 public with sharing class MH_HospitalRESTHandler {
-
+    private final MH_ExternalOauth2Credentials__c credentials;
     private final String clientId;
     private final String clientSecret;
     private final String username;
@@ -18,8 +18,9 @@ public with sharing class MH_HospitalRESTHandler {
             username = '123';
             password = '123';
         } else {
-            clientId =
-            clientSecret = credentials.client_secret__c;
+            credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
+            clientId = credentials.client_id__c;
+                    clientSecret = credentials.client_secret__c;
             username = credentials.username__c;
             password = credentials.password__c;
         }
@@ -97,9 +98,9 @@ public with sharing class MH_HospitalRESTHandler {
         request.setEndpoint(requestEndpoint);
         HttpResponse response = new HttpResponse();
 
-             response = httpProcess.send(request);
+        response = httpProcess.send(request);
 
-            List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
+        List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
         try {
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
                     response.getBody(), List<MH_HospitalRESTResponseWrapper>.class
