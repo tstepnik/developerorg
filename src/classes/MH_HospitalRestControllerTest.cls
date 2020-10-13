@@ -1,21 +1,51 @@
 @IsTest
 private with sharing class MH_HospitalRestControllerTest {
 
+    public static MH_HospitalRestMultiMock multiMock;
+
+
+    public static void setupData() {
+        String responseBody = '[{"town": "Lublin","street": "Zdrowa","name": "CENTRUM","id": "a012X00003kPBhbQAG","email": "centrum@gmail.com","country": "NL"}]';
+        Integer statusCode = 200;
+        MH_HospitalRESTServiceMock getMock = new MH_HospitalRESTServiceMock(responseBody, statusCode);
+
+        responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
+        statusCode = 201;
+        MH_HospitalRESTServiceMock postMock = new MH_HospitalRESTServiceMock(responseBody, statusCode);
+
+        responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
+        statusCode = 200;
+        MH_HospitalRESTServiceMock putMock = new MH_HospitalRESTServiceMock(responseBody, statusCode);
+
+        responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
+        statusCode = 200;
+        MH_HospitalRESTServiceMock deleteMock = new MH_HospitalRESTServiceMock(responseBody, statusCode);
+
+        Map<String, HttpCalloutMock> responses = new Map<String, HttpCalloutMock>();
+        String url = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/';
+        String urlGet = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/?name=CENTRUM&country=NL&town=Lublin&street=Zdrowa&email=centrum@gmail.com';
+        String urlDelete = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/?id=a057R000011D2OXQA0';
+        responses.put(urlGet, getMock);
+        responses.put(url, postMock);
+        responses.put(url, putMock);
+        responses.put(urlDelete, deleteMock);
+
+        multiMock = new MH_HospitalRestMultiMock(responses);
+    }
 
     //GET
     @IsTest
-    static void should_ReturnOK_WhenCallService() {
+    static void should_ReturnOneHospital_WhenInvokeGETRequest() {
         //Given
         MH_HospitalRestController controller = new MH_HospitalRestController();
-        controller.hospitalSearchItem.name = 'CENTRUM ONKOLOGII ZIEMI LUBELSKIEJ IM. ŚW JANA Z DUKLI';
+        controller.hospitalSearchItem.name = 'CENTRUM';
         controller.hospitalSearchItem.town = 'Lublin';
         controller.hospitalSearchItem.country = 'NL';
         controller.hospitalSearchItem.street = 'Zdrowa';
         controller.hospitalSearchItem.email = 'centrum@gmail.com';
 
-        String responseBody = '[{"town": "Lublin","street": "Zdrowa","name": "CENTRUM ONKOLOGII ZIEMI LUBELSKIEJ IM. ŚW JANA Z DUKLI","id": "a012X00003kPBhbQAG","email": "centrum@gmail.com","country": "NL"}]';
-        Integer statusCode = 200;
-        Test.setMock(HttpCalloutMock.class, new MH_HospitalRESTServiceMock(responseBody,statusCode));
+        setupData();
+        Test.setMock(HttpCalloutMock.class, multiMock);
 
         //When
         Test.startTest();
@@ -28,7 +58,9 @@ private with sharing class MH_HospitalRestControllerTest {
 
     //POST
     @IsTest
-    static void should_containsSameIDAndSuccessResponse_WhenAddHospital() {
+    static void should_ReturnSuccessMessage_WhenAddHospital() {
+
+        setupData();
         MH_HospitalRestController controller = new MH_HospitalRestController();
         controller.hospitalOperationItem.name = 'CENTRUM ONKOLOGII ZIEMI LUBELSKIEJ IM. ŚW JANA Z DUKLI';
         controller.hospitalOperationItem.town = 'Lublin';
@@ -37,17 +69,15 @@ private with sharing class MH_HospitalRestControllerTest {
         controller.hospitalOperationItem.email = 'centrum@gmail.com';
         controller.operationHospitalId = 'a057R000011D2OXQA0';
 
-        String responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
-        Integer statusCode = 201;
-        Test.setMock(HttpCalloutMock.class, new MH_HospitalRESTServiceMock(responseBody,statusCode));
+        Test.setMock(HttpCalloutMock.class, multiMock);
 
         Test.startTest();
         controller.prepareInsertModal();
         controller.upsertHospital();
         Test.stopTest();
 
-        System.assertEquals(controller.operationHospitalId,'a057R000011D2OXQA0');
-        System.assertEquals(controller.resultMessage,'Success');
+        System.assertEquals(controller.operationHospitalId, 'a057R000011D2OXQA0');
+        System.assertEquals(controller.resultMessage, 'Success');
     }
 
     //PUT
@@ -61,9 +91,8 @@ private with sharing class MH_HospitalRestControllerTest {
         controller.hospitalOperationItem.email = 'centrum@gmail.com';
         controller.hospitalOperationItem.id='a057R000011D2OXQA0';
 
-        String responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
-        Integer statusCode = 200;
-        Test.setMock(HttpCalloutMock.class, new MH_HospitalRESTServiceMock(responseBody,statusCode));
+        setupData();
+        Test.setMock(HttpCalloutMock.class, multiMock);
 
         Test.startTest();
         controller.prepareUpdateModal();
@@ -79,13 +108,14 @@ private with sharing class MH_HospitalRestControllerTest {
         MH_HospitalRestController controller = new MH_HospitalRestController();
         controller.operationHospitalId = 'a057R000011D2OXQA0';
 
-        String responseBody = '{"statusMessage": "Success","isSuccess": true,"hospitalId": "a057R000011D2OXQA0"}';
-        Integer statusCode = 200;
-        Test.setMock(HttpCalloutMock.class, new MH_HospitalRESTServiceMock(responseBody,statusCode));
+        setupData();
+        Test.setMock(HttpCalloutMock.class, multiMock);
 
         Test.startTest();
         controller.deleteHospital();
         Test.stopTest();
+
+        System.assertEquals(controller.resultMessage,'Success');
 
     }
 
@@ -100,6 +130,7 @@ private with sharing class MH_HospitalRestControllerTest {
         controller.hospitalSearchItem.country = 'NL';
         controller.hospitalSearchItem.street = 'Zdrowa';
         controller.hospitalSearchItem.email = 'centrum@gmail.com';
+
 
         Test.startTest();
         controller.clearSearchData();

@@ -139,6 +139,4 @@ global class MH_DoctorWebService {
         response.statusMessage = MH_Utils.rewordStatusMessage(errorMessage);
         return response;
     }
-
-
 }

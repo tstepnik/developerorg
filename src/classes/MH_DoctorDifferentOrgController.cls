@@ -51,11 +51,7 @@ public with sharing class MH_DoctorDifferentOrgController {
     }
 
     public void addDoctor() {
-        System.debug('Upserted Doctor');
-        System.debug(upsertedDoctor);
         statusMessage = soapService.addDoctor(upsertedDoctor);
-        System.debug('statusMessage');
-        System.debug(statusMessage);
         if (statusMessage.contains('Success')) {
             clearUpsertItem();
         } else {

@@ -5,8 +5,8 @@ public with sharing class MH_HospitalRESTHandler {
     private final String clientSecret;
     private final String username;
     private final String password;
-    private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/';
-    private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries';
+    private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/'; //todo custom sett
+    private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries'; //todo custom sett
     private final String authEndpoint;
     private final String contentType = 'application/json';
     public String token { get; set; }
@@ -25,6 +25,7 @@ public with sharing class MH_HospitalRESTHandler {
             username = credentials.username__c;
             password = credentials.password__c;
         }
+        //todo prefix
         authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
                 '&password=' + password + '&client_secret=' + clientSecret;
 
@@ -96,8 +97,11 @@ public with sharing class MH_HospitalRESTHandler {
         request.setMethod('GET');
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setEndpoint(requestEndpoint);
-        HttpResponse response = httpProcess.send(request);
-        List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
+        HttpResponse response = new HttpResponse();
+
+             response = httpProcess.send(request);
+
+            List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
         try {
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
                     response.getBody(), List<MH_HospitalRESTResponseWrapper>.class
