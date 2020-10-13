@@ -64,6 +64,10 @@ public with sharing class MH_Utils {
         return MH_ExternalOauth2Credentials__c.getInstance(customSetting);
     }
 
+    public static String getConfigurationsValue(String configName){
+        return MH_Configurations__c.getInstance(configName).value__c;
+    }
+
     public static String rewordStatusMessage(String statusMessage){
         if(statusMessage.contains('INVALID_EMAIL_ADDRESS')){
             statusMessage = System.Label.Invalid_Email_Address;
@@ -79,6 +83,4 @@ public with sharing class MH_Utils {
         }
         return statusMessage;
     }
-
-
 }

@@ -58,7 +58,7 @@ private with sharing class MH_HospitalRestControllerTest {
 
     //POST
     @IsTest
-    static void should_ReturnSuccessMessage_WhenAddHospital() {
+    static void should_AddHospital() {
 
         setupData();
         MH_HospitalRestController controller = new MH_HospitalRestController();

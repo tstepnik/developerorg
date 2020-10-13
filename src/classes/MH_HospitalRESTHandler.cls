@@ -1,6 +1,5 @@
 public with sharing class MH_HospitalRESTHandler {
 
-    private final MH_ExternalOauth2Credentials__c credentials;
     private final String clientId;
     private final String clientSecret;
     private final String username;
@@ -19,8 +18,7 @@ public with sharing class MH_HospitalRESTHandler {
             username = '123';
             password = '123';
         } else {
-            credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
-            clientId = credentials.client_id__c;
+            clientId =
             clientSecret = credentials.client_secret__c;
             username = credentials.username__c;
             password = credentials.password__c;

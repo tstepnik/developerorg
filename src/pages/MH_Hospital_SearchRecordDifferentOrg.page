@@ -345,10 +345,10 @@
                                                     value="X">
                                     <span class="slds-assistive-text">Close</span>
                                 </apex:commandButton>
-                                <apex:outputText styleClass="slds-text-heading--medium" value="Edit Doctor"
-                                />
-                                <apex:outputText styleClass="slds-text-heading--medium" value="Add Doctor"
-                                />
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Edit Hospital"
+                                                 rendered="{!upsertOperationType="UPDATE"}"/>
+                                <apex:outputText styleClass="slds-text-heading--medium" value="Add Hospital"
+                                                 rendered="{!upsertOperationType="INSERT"}"/>
                             </div>
 
                             <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
