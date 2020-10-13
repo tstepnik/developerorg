@@ -30,9 +30,10 @@ global with sharing class MH_HospitalRESTService {
 
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-            Hospital__c hospital = new Hospital__c(Id = id, Name = name, Country__c = country, Town__c = town, Street__c = street, Email__c = email);
-            Database.update(hospital);
-            return new MH_HospitalRESTWebServiceResponse(id, true, Label.MH_Success_Message);
+//            Hospital__c hospital = new Hospital__c(Id = id, Name = name, Country__c = country, Town__c = town, Street__c = street, Email__c = email);
+//            Database.update(hospital);
+//            return new MH_HospitalRESTWebServiceResponse(id, true, Label.MH_Success_Message);
+            return MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street, email);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));

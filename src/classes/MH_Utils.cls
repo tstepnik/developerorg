@@ -1,5 +1,7 @@
 public with sharing class MH_Utils {
 
+    static Boolean turnOnHospitalTrigger = true;
+
     public static Boolean isConfigurationEnabled(String configName, String value) {
         MH_Configuration__c configuration = MH_Configuration__c.getInstance(configName);
         if (configuration == null) {

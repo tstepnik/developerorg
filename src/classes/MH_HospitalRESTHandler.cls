@@ -41,8 +41,10 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             token = '';
         } else {
-            sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
-            token = getAccessToken();
+            if (! System.isQueueable()) {
+                sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
+            }
+                token = getAccessToken();
         }
     }
 
@@ -52,7 +54,9 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             cachedToken = '';
         } else {
-            cachedToken = (String) sessionPartition.get('token');
+            if (!System.isQueueable()) {
+                cachedToken = (String) sessionPartition.get('token');
+            }
         }
         if (String.isBlank(cachedToken)) {
             HttpResponse responseFromHX = new HttpResponse();
@@ -63,7 +67,9 @@ public with sharing class MH_HospitalRESTHandler {
             DeserializeResponse deserializeResponse =
                     (DeserializeResponse) JSON.deserialize(responseFromHX.getBody(), DeserializeResponse.class);
             String reqestToken = deserializeResponse.access_token;
-            sessionPartition.put('token', reqestToken);
+            if(!System.isQueueable()) {
+                sessionPartition.put('token', reqestToken);
+            }
             return reqestToken;
         } else {
             return cachedToken;

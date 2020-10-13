@@ -57,11 +57,8 @@ public with sharing class MH_HospitalRESTServiceHelper {
             throw new DmlException(Label.MH_EmptyHospital);
         }
     }
-
-
     public static void throwErrorIfEmptyName(String name) {
         if (String.isBlank(name)) {
-//            throw new DmlException('Name field is required.');
             throw new DmlException(Label.MH_NameFieldRequired);
         }
     }
