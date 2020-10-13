@@ -4,10 +4,11 @@ public with sharing class MH_HospitalRESTHandler {
     private final String clientSecret;
     private final String username;
     private final String password;
-    private final String mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/'; //todo custom sett
-    private final String countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries'; //todo custom sett
+    private final String prefix;
+    private final String mainEndpoint; //todo custom sett
+    private final String countriesEndpoint; //todo custom sett
     private final String authEndpoint;
-    private final String contentType = 'application/json';
+    private final String contentType;
     public String token { get; set; }
     private Cache.SessionPartition sessionPartition;
 
@@ -17,16 +18,28 @@ public with sharing class MH_HospitalRESTHandler {
             clientSecret = '123';
             username = '123';
             password = '123';
+            mainEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/hospitals/';
+            countriesEndpoint = 'https://eu45.salesforce.com//services/apexrest/hcs/v1/countries';
+            contentType = 'application/json';
         } else {
             credentials = MH_Utils.getExternalOauth2Credentials('KamilCredentials');
-            clientId = credentials.client_id__c;
-                    clientSecret = credentials.client_secret__c;
-            username = credentials.username__c;
-            password = credentials.password__c;
+            clientId = MH_Utils.getConfigurationsValue('MH_HospitalRestClientId');
+            clientSecret = MH_Utils.getConfigurationsValue('MH_HospitalRestClientSecret');
+            username = MH_Utils.getConfigurationsValue('MH_HospitalRestUsername');
+            password = MH_Utils.getConfigurationsValue('MH_HospitalRestPassword');
+            prefix = MH_Utils.getConfigurationsValue('MH_HospitalRestEndpointPrefix');
+            mainEndpoint = prefix + MH_Utils.getConfigurationsValue('MH_HospitalRestHospitalsEndpoint');
+            countriesEndpoint = prefix + MH_Utils.getConfigurationsValue('MH_HospitalRestCountriesEndpoint');
+            contentType = MH_Utils.getConfigurationsValue('MH_HospitalRestContentType');
         }
-        //todo prefix
-        authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
-                '&password=' + password + '&client_secret=' + clientSecret;
+        //todo pref
+        if (Test.isRunningTest()) {
+            authEndpoint = 'https://eu45.salesforce.com/services/oauth2/token?grant_type=password&client_id=' + clientId + '&username=' + username +
+                    '&password=' + password + '&client_secret=' + clientSecret;
+        } else {
+            authEndpoint = prefix + MH_Utils.getConfigurationsValue('MH_HospitalRestOAuthEndpoint') + clientId + '&username=' + username +
+                    '&password=' + password + '&client_secret=' + clientSecret;
+        }
 
         if (Test.isRunningTest()) {
             token = '';
