@@ -21,9 +21,6 @@ public with sharing class MH_HospitalRestController {
         searchedHospitals = new List<MH_HospitalRESTResponseWrapper>();
         upsertOperationType = '';
         getCountryListItems();
-        System.debug('Hospital Rest Controller');
-        System.debug(searchedHospitals);
-        System.debug(hospitalSearchItem);
     }
     private void refreshSearchedHospitals() {
         Map<String, String> parameters = new Map<String, String>();
@@ -85,6 +82,7 @@ public with sharing class MH_HospitalRestController {
     }
     public void clearUpsertItem() {
         hospitalOperationItem.Id = null;
+        hospitalOperationItem.externalId = null;
         hospitalOperationItem.email = null;
         hospitalOperationItem.name = null;
         hospitalOperationItem.street = null;

@@ -13,15 +13,11 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
 
     public List<MH_HospitalRESTResponseWrapper> convertToRequestWrappers(List<Hospital__c> hospitals) {
 
-        System.debug('HOSPITALS');
-        System.debug(hospitals);
         List<MH_HospitalRESTResponseWrapper> wrappers = new List<MH_HospitalRESTResponseWrapper>();
 
         for (Hospital__c hospital : hospitals) {
-            wrappers.add(new MH_HospitalRESTResponseWrapper(hospital.Id, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c));
+            wrappers.add(new MH_HospitalRESTResponseWrapper(hospital.Id, hospital.Id, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c));
         }
-        System.debug('HOSPITALS TO WRAPPERS');
-        System.debug(wrappers);
         return wrappers;
     }
 

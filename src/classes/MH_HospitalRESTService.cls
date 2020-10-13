@@ -13,12 +13,12 @@ global with sharing class MH_HospitalRESTService {
     }
 
     @HttpPost
-    global static MH_HospitalRESTWebServiceResponse createHospital(String name, String country, String town, String street, String email) {
+    global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email) {
 
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
-            return MH_HospitalRESTServiceHelper.upsertHospital(null, name, country, town, street, email);
+            return MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
@@ -26,14 +26,11 @@ global with sharing class MH_HospitalRESTService {
     }
 
     @HttpPut
-    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String name, String country, String town, String street, String email) {
+    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email) {
 
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-//            Hospital__c hospital = new Hospital__c(Id = id, Name = name, Country__c = country, Town__c = town, Street__c = street, Email__c = email);
-//            Database.update(hospital);
-//            return new MH_HospitalRESTWebServiceResponse(id, true, Label.MH_Success_Message);
-            return MH_HospitalRESTServiceHelper.upsertHospital(id, name, country, town, street, email);
+            return MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));

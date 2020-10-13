@@ -1,6 +1,6 @@
 public with sharing class MH_Utils {
 
-    static Boolean turnOnHospitalTrigger = true;
+    static Set<SObjectType> disabledTriggers = new Set<SObjectType>();
 
     public static Boolean isConfigurationEnabled(String configName, String value) {
         MH_Configuration__c configuration = MH_Configuration__c.getInstance(configName);
@@ -85,4 +85,32 @@ public with sharing class MH_Utils {
         }
         return statusMessage;
     }
+
+    public static Boolean isTriggerEnabled(Schema.sObjectType soType) {
+        String triggerObject = (String) soType.getDescribe().getName();
+        String searchedObject;
+        if (triggerObject.substring(triggerObject.length() - 3, triggerObject.length()).equals('__c')) {
+            searchedObject = triggerObject.substring(0, triggerObject.length() - 3) + 'Trigger__c';
+        } else {
+            searchedObject = triggerObject + 'Trigger__c';
+        }
+        Boolean isEnabled = false;
+        try {
+            isEnabled = (Boolean) MH_EnableTriggerConfiguration__c.getInstance().get(searchedObject);
+        } catch (SObjectException sObjectException) {
+            System.debug(sObjectException.getMessage());
+        }
+        return (isEnabled && !disabledTriggers.contains(soType));
+    }
+
+
+    public static void disableTrigger(SObjectType soType){
+        disabledTriggers.add(soType);
+    }
+
+    public static void enableTrigger(SObjectType soType){
+        disabledTriggers.remove(soType);
+    }
+
+
 }

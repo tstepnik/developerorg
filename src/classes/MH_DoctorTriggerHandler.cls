@@ -12,9 +12,9 @@ public with sharing class MH_DoctorTriggerHandler extends TriggerHandler {
     }
 
     public void runTrigger(){
-        if (MH_EnableTriggerConfiguration__c.getInstance().DoctorTrigger__c) {
+
             run();
-        }
+
     }
 
     protected override void beforeInsert() {

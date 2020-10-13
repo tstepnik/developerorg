@@ -190,6 +190,7 @@ public with sharing class MH_HospitalRESTHandler {
     private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper) {
         Map<String, String> jsonMap = new Map<String, String>();
 
+        jsonMap.put('externalId', wrapper.externalId);
         jsonMap.put('name', wrapper.name);
         jsonMap.put('country', wrapper.country);
         jsonMap.put('town', wrapper.town);
@@ -202,6 +203,7 @@ public with sharing class MH_HospitalRESTHandler {
     private String JSONSerializerForUPDATEHospital(MH_HospitalRESTResponseWrapper wrapper) {
         Map<String, String> jsonMap = new Map<String, String>();
 
+        jsonMap.put('externalId', wrapper.externalId);
         jsonMap.put('id', wrapper.id);
         jsonMap.put('name', wrapper.name);
         jsonMap.put('country', wrapper.country);

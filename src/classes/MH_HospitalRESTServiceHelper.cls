@@ -2,7 +2,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
 
     public static String generateQuery(Map <String, String> parameters) {
 
-        String query = 'SELECT Id,Name,Country__c,Town__c,Street__c,Email__c FROM Hospital__c ';
+        String query = 'SELECT Id,ExternalHospitalId__c,Name,Country__c,Town__c,Street__c,Email__c FROM Hospital__c ';
         Boolean firstQuery = true;
 
         if (emptyParameters(parameters)) {
@@ -11,6 +11,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
 
         Map<String, String> params = new Map<String, String>();
         params.put('id', 'Id');
+        params.put('externalId', 'ExternalHospitalId__c');
         params.put('name', 'Name');
         params.put('country', 'Country__c');
         params.put('town', 'Town__c');
@@ -45,8 +46,9 @@ public with sharing class MH_HospitalRESTServiceHelper {
     public static Boolean checkGetFieldsEmpty(String name, String country, String town, String street, String email) {
         return String.isBlank(name) && String.isBlank(country) && String.isBlank(town) && String.isBlank(street) && String.isBlank(email);
     }
-    public static void throwErrorIfEmptyBody(String id, String name, String country, String town, String street, String email) {
+    public static void throwErrorIfEmptyBody(String id,String externalId, String name, String country, String town, String street, String email) {
         if (String.isBlank(id) &&
+                String.isBlank(externalId) &&
                 String.isBlank(name) &&
                 String.isBlank(country) &&
                 String.isBlank(town) &&
@@ -71,17 +73,18 @@ public with sharing class MH_HospitalRESTServiceHelper {
         List<MH_HospitalRESTResponseWrapper> doctorsResponseWrappers = new List<MH_HospitalRESTResponseWrapper>();
         for (Hospital__c hospital : hospitals) {
             MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(
-                    hospital.Id, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c);
+                    hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c);
             doctorsResponseWrappers.add(doctorsResponseWrapper);
         }
         return doctorsResponseWrappers;
     }
 
-    public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String name, String country, String town, String street, String email) {
+    public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String externalId, String name, String country, String town, String street, String email) {
 
-        throwErrorIfEmptyBody(id, name, country, town, street, email);
+        throwErrorIfEmptyBody(id, externalId, name, country, town, street, email);
 
         Hospital__c hospital = new Hospital__c(Id = id,
+                ExternalHospitalId__c = externalId,
                 Name = name,
                 Country__C = country,
                 Town__c = town,

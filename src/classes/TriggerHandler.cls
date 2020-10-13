@@ -14,21 +14,8 @@ public virtual class TriggerHandler {
 
     public void run() {
         System.debug('WCHODZI DO TRIGGERA!!!!');
-//        String triggerObject = (String) Trigger.New.getSobjectType().getDescribe().getName();
-//        String searchedObject;
-//        if (triggerObject.substring(triggerObject.length() - 3, triggerObject.length()).equals('__c')) {
-//            searchedObject = triggerObject.substring(0, triggerObject.length() - 3) + 'Trigger__c';
-//        } else {
-//            searchedObject = triggerObject + 'Trigger__c';
-//        }
-//        Boolean isEnabled = false;
-//        try {
-//            isEnabled = (Boolean) MH_EnableTriggerConfiguration__c.getInstance().get(searchedObject);
-//        } catch (SObjectException sObjectException) {
-//            System.debug(sObjectException.getMessage());
-//        }
-//todo wszytkie sa enable teraz
-        run(true);
+       Boolean isEnabled = MH_Utils.isTriggerEnabled(Trigger.New.getSobjectType());
+        run(isEnabled);
     }
 //ee
     public void run(Boolean isEnabled) {
