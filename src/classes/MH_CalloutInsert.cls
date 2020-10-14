@@ -64,14 +64,15 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
                     MH_Utils.disableTrigger(Hospital__c.getSObjectType());
                 }
             }
-        } else if (method.equals('DELETE')) {
-            for (MH_HospitalRESTResponseWrapper wrapper : wrappers) {
-                String responseMessage = handler.deleteHospital(wrapper.id);
-                if (responseMessage.contains('Success')) {
-                    MH_Utils.disableTrigger(Hospital__c.getSObjectType());
-                }
-            }
         }
+//        else if (method.equals('DELETE')) {
+//            for (MH_HospitalRESTResponseWrapper wrapper : wrappers) {
+//                String responseMessage = handler.deleteHospital(wrapper.id);
+//                if (responseMessage.contains('Success')) {
+//                    MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+//                }
+//            }
+//        }
 
     }
 }

@@ -41,8 +41,8 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
         List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
         System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'UPDATE'));
     }
-    public void afterDelete(List<Hospital__c> hospitals) {
-        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
-        System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'DELETE'));
-    }
+//    public void afterDelete(List<Hospital__c> hospitals) {
+//        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
+//        System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'DELETE'));
+//    }
 }

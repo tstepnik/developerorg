@@ -13,32 +13,39 @@ global with sharing class MH_HospitalRESTService {
     }
 
     @HttpPost
-    global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email) {
+    global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
 //przed insertem wyłącz trigger
         System.debug('JEST W POSCIE');
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
             //wyyłącz
-            MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email);
+            MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email,isIntegration);
             //włącz trigger
             return response;
 
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+        } finally {
+            if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
+                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            }
         }
     }
-
     @HttpPut
-    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email) {
+    global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
 
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-            return MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email);
+            return MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email,isIntegration);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+        } finally {
+            if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
+                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            }
         }
     }
 

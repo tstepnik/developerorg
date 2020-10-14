@@ -46,7 +46,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
     public static Boolean checkGetFieldsEmpty(String name, String country, String town, String street, String email) {
         return String.isBlank(name) && String.isBlank(country) && String.isBlank(town) && String.isBlank(street) && String.isBlank(email);
     }
-    public static void throwErrorIfEmptyBody(String id,String externalId, String name, String country, String town, String street, String email) {
+    public static void throwErrorIfEmptyBody(String id, String externalId, String name, String country, String town, String street, String email) {
         if (String.isBlank(id) &&
                 String.isBlank(externalId) &&
                 String.isBlank(name) &&
@@ -79,7 +79,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
         return doctorsResponseWrappers;
     }
 
-    public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String externalId, String name, String country, String town, String street, String email) {
+    public static MH_HospitalRESTWebServiceResponse upsertHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
 
         throwErrorIfEmptyBody(id, externalId, name, country, town, street, email);
 
@@ -91,12 +91,15 @@ public with sharing class MH_HospitalRESTServiceHelper {
                 Street__c = street,
                 Email__c = email
         );
-
+        if (isIntegration) {
+            MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+        }
         Database.UpsertResult result = Database.upsert(hospital);
+//        MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
                         result.success,
-//                        result.success ? 'Success' : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
                         result.success ? Label.MH_Success_Message : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
         return webServiceResponse;
     }
