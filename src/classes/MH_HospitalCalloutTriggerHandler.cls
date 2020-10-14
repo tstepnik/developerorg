@@ -25,7 +25,7 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
         List<MH_HospitalRESTResponseWrapper> wrappers = new List<MH_HospitalRESTResponseWrapper>();
 
         for (Hospital__c hospital : hospitals) {
-            wrappers.add(new MH_HospitalRESTResponseWrapper(hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,true));
+            wrappers.add(new MH_HospitalRESTResponseWrapper(hospital.ExternalHospitalId__c, hospital.Id, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,true));
         }
         return wrappers;
     }
@@ -41,17 +41,21 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
 
 
     public void afterInsert(List<Hospital__c> hospitals) {
-        System.debug('AFTER INSERT');
         List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
         System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'POST'));
     }
 
     public void afterUpdate(List<Hospital__c> hospitals) {
-        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
+        System.debug('TRIGGWER CALLOUT HANDLER');
+        Hospital__c hospital = hospitals[0];
+        System.debug('Name: ' + hospital.Name);
+        System.debug('Id: ' + hospital.Id);
+        System.debug('ExternalId' + hospital.ExternalHospitalId__c);
+        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToUpdateWrappers(hospitals);
         System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'UPDATE'));
     }
-//    public void afterDelete(List<Hospital__c> hospitals) {
-//        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
-//        System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'DELETE'));
-//    }
+    public void afterDelete(List<Hospital__c> hospitals) {
+        List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToUpdateWrappers(hospitals);
+        System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'DELETE'));
+    }
 }

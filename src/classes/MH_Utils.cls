@@ -100,8 +100,6 @@ public with sharing class MH_Utils {
         } catch (SObjectException sObjectException) {
             System.debug(sObjectException.getMessage());
         }
-        System.debug('disabledTriggers.contains(soType)');
-        System.debug(disabledTriggers.contains(soType));
         return (isEnabled && !disabledTriggers.contains(soType));
     }
 

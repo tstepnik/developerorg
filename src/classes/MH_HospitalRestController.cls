@@ -63,7 +63,7 @@ public with sharing class MH_HospitalRestController {
         }
     }
     public void deleteHospital() {
-         resultMessage = restService.deleteHospital(operationHospitalId);
+         resultMessage = restService.deleteHospital(operationHospitalId, 'false');
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
             clearUpsertItem();

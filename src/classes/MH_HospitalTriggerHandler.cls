@@ -26,13 +26,11 @@ public with sharing class MH_HospitalTriggerHandler extends TriggerHandler {
     }
 
     protected override void afterUpdate() {
-        MH_HospitalCalloutTriggerHandler instance = new MH_HospitalCalloutTriggerHandler();
-        instance.afterUpdate(oldList);
+        MH_HospitalCalloutTriggerHandler.getInstance().afterUpdate(newList);
     }
 
     protected override void afterDelete() {
-//        MH_HospitalCalloutTriggerHandler instance = new MH_HospitalCalloutTriggerHandler();
-//        instance.afterDelete(newList);
+        MH_HospitalCalloutTriggerHandler.getInstance().afterDelete(oldList);
     }
 
 }

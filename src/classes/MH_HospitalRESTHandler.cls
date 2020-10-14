@@ -128,10 +128,11 @@ public with sharing class MH_HospitalRESTHandler {
         return hospitals;
     }
 
-    public String deleteHospital(String hospitalId) {
+    public String deleteHospital(String hospitalId, String isIntegration) {
         String resultJSON;
         String requestEndpoint = mainEndpoint;
         requestEndpoint += ('?id=' + hospitalId);
+        requestEndpoint += ('&isIntegration=' + isIntegration);
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
         request.setMethod('DELETE');
@@ -148,31 +149,24 @@ public with sharing class MH_HospitalRESTHandler {
         }
     }
 
-    //dodanie hospitala do Kamila orga
-    //Trigger włącza tą metode
     public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
+        System.debug('ADD HOSPITAL HANDLER');
+        System.debug(hospitalWrapper);
         String resultJSON;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
         request.setMethod('POST');
         request.setHeader('Authorization', 'Bearer ' + token);
-        System.debug('token');
-        System.debug(token);
         request.setHeader('Content-Type', contentType);
-        System.debug('contentType');
-        System.debug(contentType);
         request.setEndpoint(mainEndpoint);
-        System.debug('mainEndpoint');
-        System.debug(mainEndpoint);
         request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
-        System.debug('JSON WRAPPER');
-        System.debug(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
     }
 
     public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
+        System.debug('INSIDE UPDATE HOSPITAL HANDER METHOD');
         String resultJSON;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
@@ -180,7 +174,11 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setHeader('Content-Type', contentType);
         request.setEndpoint(mainEndpoint);
+        System.debug('HOSPITAL WRAPPER');
+        System.debug(hospitalWrapper);
+        System.debug(JSONSerializerForUPDATEHospital(hospitalWrapper));
         request.setBody(JSONSerializerForUPDATEHospital(hospitalWrapper));
+        System.debug(request.getBody());
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 200) {
             return Label.MH_Success_Message;
@@ -194,7 +192,6 @@ public with sharing class MH_HospitalRESTHandler {
     private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper) {
         Map<String, Object> jsonMap = new Map<String, Object>();
 
-//        jsonMap.put('isIntegration','true')
         jsonMap.put('externalId', wrapper.externalId);
         jsonMap.put('name', wrapper.name);
         jsonMap.put('country', wrapper.country);

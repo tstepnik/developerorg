@@ -8,14 +8,20 @@ global with sharing class MH_HospitalRESTService {
         Map<String, String> parameters = request.params;
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
+        System.debug('HOSPITAL KTORY JEST POBIERANY PRZEZ QUERY');
+        if (hospitals.size() > 0) {
+            System.debug(hospitals[0].Name);
+            System.debug(hospitals[0].Id);
+            System.debug(hospitals[0].ExternalHospitalId__c);
+        }
+        System.debug('LAST DEBUG //////////////////////////////////');
+        System.debug(MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals));
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-//przed insertem wyłącz trigger
 
-        System.debug('JEST W POSCIE');
         if (isIntegration == null) {
             isIntegration = false;
         }
@@ -38,6 +44,10 @@ global with sharing class MH_HospitalRESTService {
     }
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+        System.debug('SAVE WYWOWOLALO TA METODE');
+        System.debug('Name: ' + name);
+        System.debug('Id: ' + id);
+        System.debug('ExternalId: ' + externalId);
         if (isIntegration == null) {
             isIntegration = false;
         }
@@ -58,12 +68,18 @@ global with sharing class MH_HospitalRESTService {
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
-        String ExternalId = request.params.get('isIntegration');
+        String isIntegration = request.params.get('isIntegration');
         if (String.isBlank(hospitalId)) {
             return null;
         } else {
+
             try {
                 Hospital__c hospital = new Hospital__c(Id = hospitalId);
+
+                if (isIntegration.equals('true')) {
+                    MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+                }
+
                 Database.DeleteResult result = Database.delete(hospital);
                 return new MH_HospitalRESTWebServiceResponse(
                         hospitalId,
@@ -72,6 +88,10 @@ global with sharing class MH_HospitalRESTService {
             } catch (Exception e) {
                 RestContext.response.statusCode = 400;
                 return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+            } finally {
+                if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
+                    MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+                }
             }
         }
     }

@@ -73,8 +73,14 @@ public with sharing class MH_HospitalRESTServiceHelper {
         List<MH_HospitalRESTResponseWrapper> doctorsResponseWrappers = new List<MH_HospitalRESTResponseWrapper>();
         for (Hospital__c hospital : hospitals) {
             MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(
-                    hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c);
+                    hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,false);
+            System.debug('WRAPPER FROM DOCTOR WHICH SHOULD HAS EXTERNAL ID:');
+            System.debug(doctorsResponseWrapper);
             doctorsResponseWrappers.add(doctorsResponseWrapper);
+        }
+        System.debug('LISTA WRAPPEROW GET:');
+        for(MH_HospitalRESTResponseWrapper wrapper : doctorsResponseWrappers){
+            System.debug(wrapper);
         }
         return doctorsResponseWrappers;
     }
@@ -95,12 +101,9 @@ public with sharing class MH_HospitalRESTServiceHelper {
         if (isIntegration) {
             MH_Utils.disableTrigger(Hospital__c.getSObjectType());
         }
-        System.debug('HOSPITAL POWINIEN MIEC ID');
-        System.debug(hospital);
-//        Schema.SObjectField f = Hospital__c.Fields.ExternalHospitalId__c;
+
         Database.UpsertResult result = Database.upsert(hospital);
-        System.debug(result);
-//        MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
                         result.success,

@@ -61,10 +61,6 @@ public with sharing class MH_Hospital_Extension {
         contracts = MH_Hospital_Service.dismiss(contractId, hospital);
     }
 
-    public void consoleDismiss(){
-        System.debug('CONSOLE DISMISS');
-    }
-
     public void findSearchedDoctors() {
         searchedDoctors = MH_Doctor_Service.findDoctorsForHospital(searchedDoctor);
 
