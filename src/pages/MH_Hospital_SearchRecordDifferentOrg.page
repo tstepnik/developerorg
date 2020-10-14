@@ -280,7 +280,10 @@
                                                     assignTo="{!hospitalOperationItem.street}"/>
                                         <apex:param value="{!hospital.email}" name="email"
                                                     assignTo="{!hospitalOperationItem.email}"/>
+                                        <apex:param value="{!hospital.externalId}" name="externalId"
+                                                    assignTo="{!hospitalOperationItem.externalId}"/>
                                     </apex:commandButton>
+
                                     <apex:commandButton styleClass="slds-button slds-button_neutral"
                                                         value="Delete"
                                                         onClick="openDeleteDoctorModal()"

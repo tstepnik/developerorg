@@ -40,6 +40,8 @@ public with sharing class MH_HospitalRestController {
             parameters.put('email', hospitalSearchItem.email);
         }
         searchedHospitals = restService.getHospitals(parameters);
+        System.debug('SEARCHED HOSPITALS LIST');
+        System.debug(searchedHospitals);
     }
 
     public void searchForHospitals() {
@@ -54,6 +56,8 @@ public with sharing class MH_HospitalRestController {
         }
     }
     public void updateHospital() {
+        System.debug('HOSPITAL OPERATION ITEM');
+        System.debug(hospitalOperationItem);
        resultMessage = restService.updateHospital(hospitalOperationItem);
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
@@ -89,11 +93,15 @@ public with sharing class MH_HospitalRestController {
         hospitalOperationItem.town = null;
         hospitalOperationItem.country = null;
     }
+
     public void clearSearchData() {
         hospitalSearchItem = new MH_HospitalRESTResponseWrapper();
         searchedHospitals.clear();
     }
     public void prepareUpdateModal() {
+        System.debug('//////////////////////////////////////////////////hospital operation item///////////////////////////// ');
+        System.debug(searchedHospitals);
+        System.debug(hospitalOperationItem);
         upsertOperationType = 'UPDATE';
     }
     public void prepareInsertModal() {

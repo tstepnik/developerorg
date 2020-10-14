@@ -115,7 +115,8 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response = new HttpResponse();
 
         response = httpProcess.send(request);
-
+        System.debug('///////////////////GET RESPONSE BODY//////////////////');
+        System.debug(response.getBody());
         List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
         try {
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
