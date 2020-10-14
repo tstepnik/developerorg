@@ -24,10 +24,10 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
         }
         return wrappersWithExternalId;
     }
-    public List<MH_HospitalRESTResponseWrapper> setFlagAndIdsForWrappers(List<MH_HospitalRESTResponseWrapper> wrappers){
+    public List<MH_HospitalRESTResponseWrapper> setFlagAndIdsForWrappers(List<MH_HospitalRESTResponseWrapper> wrappers) {
         List<MH_HospitalRESTResponseWrapper> wrappersWithExternalId = new List<MH_HospitalRESTResponseWrapper>();
         for (MH_HospitalRESTResponseWrapper w : wrappers) {
-            MH_HospitalRESTResponseWrapper wrapperWithFlag= new MH_HospitalRESTResponseWrapper(
+            MH_HospitalRESTResponseWrapper wrapperWithFlag = new MH_HospitalRESTResponseWrapper(
                     w.id,
                     w.name,
                     w.country,
@@ -49,20 +49,11 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
                 //4. CALLOUT
                 MH_HospitalRESTWebServiceResponse responseWrapper = handler.addHospital(wrapper);
                 //9. DISABLE TRIGGER
-                System.debug('9 DISABLE TRIGGER');
-                System.debug('BEFORE DISABLE');
-                System.debug(MH_Utils.disabledTriggers);
                 MH_Utils.disableTrigger(Hospital__c.getSObjectType());
-                System.debug('AFTER DISABLE');
-                System.debug(MH_Utils.disabledTriggers);
                 //10. UPDATE HOSPITAL
-                System.debug('ID');
-                System.debug(wrapper.id);
-                System.debug('EXTERNAL ID');
-                System.debug(responseWrapper.hospitalId);
-                Hospital__c hospital = new Hospital__c(Id=wrapper.Id);
+                Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
                 hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
-                //11. ENABLE TRIGGER
+                Database.UpsertResult resDatabase = Database.upsert(hospital);
                 MH_Utils.enableTrigger(Hospital__c.getSObjectType());
 
             }

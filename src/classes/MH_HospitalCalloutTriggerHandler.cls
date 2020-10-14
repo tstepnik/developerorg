@@ -32,6 +32,7 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
 
 
     public void afterInsert(List<Hospital__c> hospitals) {
+        System.debug('AFTER INSERT');
         List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToRequestWrappers(hospitals);
         System.enqueueJob(new MH_CalloutInsert(wrappersToInsert,'POST'));
     }
