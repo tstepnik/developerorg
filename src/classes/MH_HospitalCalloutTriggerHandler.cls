@@ -20,6 +20,15 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
         }
         return wrappers;
     }
+    public List<MH_HospitalRESTResponseWrapper> convertToUpdateWrappers(List<Hospital__c> hospitals) {
+
+        List<MH_HospitalRESTResponseWrapper> wrappers = new List<MH_HospitalRESTResponseWrapper>();
+
+        for (Hospital__c hospital : hospitals) {
+            wrappers.add(new MH_HospitalRESTResponseWrapper(hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,true));
+        }
+        return wrappers;
+    }
 
     //todo external id
 //    public Boolean checkAllExternalIdsNull(List<Doctor__c> doctors){

@@ -8,19 +8,22 @@ global with sharing class MH_HospitalRESTService {
         Map<String, String> parameters = request.params;
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
-
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
 //przed insertem wyłącz trigger
+
         System.debug('JEST W POSCIE');
+        if (isIntegration == null) {
+            isIntegration = false;
+        }
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
             //wyyłącz
-            MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email,isIntegration);
+            MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email, isIntegration);
             //włącz trigger
             return response;
 
@@ -35,10 +38,12 @@ global with sharing class MH_HospitalRESTService {
     }
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-
+        if (isIntegration == null) {
+            isIntegration = false;
+        }
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-            return MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email,isIntegration);
+            return MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email, isIntegration);
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));

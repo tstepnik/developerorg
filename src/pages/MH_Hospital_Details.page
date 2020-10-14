@@ -33,6 +33,7 @@
                     <apex:outputField value="{!Hospital__c.Town__c}"/>
                     <apex:outputField value="{!Hospital__c.Country__c}"/>
                     <apex:outputField value="{!Hospital__c.Street__c}"/>
+                    <apex:outputField value="{!Hospital__c.ExternalHospitalId__c}"/>
                 </apex:pageBlockSection>
 
                 <apex:outputPanel >

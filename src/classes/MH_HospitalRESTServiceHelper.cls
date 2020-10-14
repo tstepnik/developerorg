@@ -86,17 +86,21 @@ public with sharing class MH_HospitalRESTServiceHelper {
         Hospital__c hospital = new Hospital__c(Id = id,
                 ExternalHospitalId__c = externalId,
                 Name = name,
-                Country__C = country,
+                Country__c = country,
                 Town__c = town,
                 Street__c = street,
                 Email__c = email
         );
+
         if (isIntegration) {
             MH_Utils.disableTrigger(Hospital__c.getSObjectType());
         }
+        System.debug('HOSPITAL POWINIEN MIEC ID');
+        System.debug(hospital);
+//        Schema.SObjectField f = Hospital__c.Fields.ExternalHospitalId__c;
         Database.UpsertResult result = Database.upsert(hospital);
+        System.debug(result);
 //        MH_Utils.disableTrigger(Hospital__c.getSObjectType());
-
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
                         result.success,
