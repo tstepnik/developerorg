@@ -74,11 +74,9 @@ public with sharing class MH_HospitalRESTServiceHelper {
         for (Hospital__c hospital : hospitals) {
             MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(
                     hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,false);
-            System.debug('WRAPPER FROM DOCTOR WHICH SHOULD HAS EXTERNAL ID:');
-            System.debug(doctorsResponseWrapper);
             doctorsResponseWrappers.add(doctorsResponseWrapper);
         }
-        System.debug('LISTA WRAPPEROW GET:');
+
         for(MH_HospitalRESTResponseWrapper wrapper : doctorsResponseWrappers){
             System.debug(wrapper);
         }

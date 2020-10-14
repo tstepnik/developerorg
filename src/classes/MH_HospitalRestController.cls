@@ -40,7 +40,7 @@ public with sharing class MH_HospitalRestController {
             parameters.put('email', hospitalSearchItem.email);
         }
         searchedHospitals = restService.getHospitals(parameters);
-        System.debug('SEARCHED HOSPITALS LIST');
+        System.debug('LISTA ZE STRONY POWINNA MIEC MAILE');
         System.debug(searchedHospitals);
     }
 
@@ -56,8 +56,6 @@ public with sharing class MH_HospitalRestController {
         }
     }
     public void updateHospital() {
-        System.debug('HOSPITAL OPERATION ITEM');
-        System.debug(hospitalOperationItem);
        resultMessage = restService.updateHospital(hospitalOperationItem);
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
@@ -99,9 +97,6 @@ public with sharing class MH_HospitalRestController {
         searchedHospitals.clear();
     }
     public void prepareUpdateModal() {
-        System.debug('//////////////////////////////////////////////////hospital operation item///////////////////////////// ');
-        System.debug(searchedHospitals);
-        System.debug(hospitalOperationItem);
         upsertOperationType = 'UPDATE';
     }
     public void prepareInsertModal() {

@@ -115,7 +115,7 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response = new HttpResponse();
 
         response = httpProcess.send(request);
-        System.debug('///////////////////GET RESPONSE BODY//////////////////');
+        System.debug('RESPONSE BODY');
         System.debug(response.getBody());
         List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
         try {
@@ -151,8 +151,6 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
-        System.debug('ADD HOSPITAL HANDLER');
-        System.debug(hospitalWrapper);
         String resultJSON;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
@@ -167,7 +165,7 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
-        System.debug('INSIDE UPDATE HOSPITAL HANDER METHOD');
+
         String resultJSON;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
@@ -175,11 +173,7 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setHeader('Content-Type', contentType);
         request.setEndpoint(mainEndpoint);
-        System.debug('HOSPITAL WRAPPER');
-        System.debug(hospitalWrapper);
-        System.debug(JSONSerializerForUPDATEHospital(hospitalWrapper));
         request.setBody(JSONSerializerForUPDATEHospital(hospitalWrapper));
-        System.debug(request.getBody());
         HttpResponse response = httpProcess.send(request);
         if (response.getStatusCode() == 200) {
             return Label.MH_Success_Message;

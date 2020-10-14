@@ -9,7 +9,8 @@ global class MH_HospitalRESTResponseWrapper {
     public String externalId { get; set; }
     public Boolean isIntegration { get; set; }
 
-    public MH_HospitalRESTResponseWrapper() {}
+    public MH_HospitalRESTResponseWrapper() {
+    }
 
     public MH_HospitalRESTResponseWrapper(String id, String externalId, String name, String country, String town, String street, String email) {
         this.id = id;
@@ -18,6 +19,7 @@ global class MH_HospitalRESTResponseWrapper {
         this.country = country;
         this.town = town;
         this.street = street;
+        this.email = email;
 
     }
 
@@ -37,6 +39,7 @@ global class MH_HospitalRESTResponseWrapper {
         this.country = country;
         this.town = town;
         this.street = street;
+        this.email = email;
         this.isIntegration = isIntegration;
 
     }

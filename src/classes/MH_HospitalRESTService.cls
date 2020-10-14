@@ -8,14 +8,7 @@ global with sharing class MH_HospitalRESTService {
         Map<String, String> parameters = request.params;
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
-        System.debug('HOSPITAL KTORY JEST POBIERANY PRZEZ QUERY');
-        if (hospitals.size() > 0) {
-            System.debug(hospitals[0].Name);
-            System.debug(hospitals[0].Id);
-            System.debug(hospitals[0].ExternalHospitalId__c);
-        }
-        System.debug('LAST DEBUG //////////////////////////////////');
-        System.debug(MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals));
+
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
@@ -44,10 +37,6 @@ global with sharing class MH_HospitalRESTService {
     }
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-        System.debug('SAVE WYWOWOLALO TA METODE');
-        System.debug('Name: ' + name);
-        System.debug('Id: ' + id);
-        System.debug('ExternalId: ' + externalId);
         if (isIntegration == null) {
             isIntegration = false;
         }
@@ -66,15 +55,10 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpDelete
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
-        System.debug('//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////');
-        System.debug('WCHODZI DO DELETE');
+
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
         String isIntegration = request.params.get('isIntegration');
-        System.debug('HOSPITAL ID');
-        System.debug(hospitalId);
-        System.debug('IS INTEGRATION');
-        System.debug(isIntegration);
         if (String.isBlank(hospitalId)) {
             return null;
         } else {
