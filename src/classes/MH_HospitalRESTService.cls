@@ -66,9 +66,15 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpDelete
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
+        System.debug('//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////');
+        System.debug('WCHODZI DO DELETE');
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
         String isIntegration = request.params.get('isIntegration');
+        System.debug('HOSPITAL ID');
+        System.debug(hospitalId);
+        System.debug('IS INTEGRATION');
+        System.debug(isIntegration);
         if (String.isBlank(hospitalId)) {
             return null;
         } else {
@@ -76,11 +82,13 @@ global with sharing class MH_HospitalRESTService {
             try {
                 Hospital__c hospital = new Hospital__c(Id = hospitalId);
 
-                if (isIntegration.equals('true')) {
+                if (String.isNotBlank(isIntegration) && isIntegration.equals('true')) {
                     MH_Utils.disableTrigger(Hospital__c.getSObjectType());
                 }
 
                 Database.DeleteResult result = Database.delete(hospital);
+                System.debug('DELETE RESULT');
+                System.debug(result);
                 return new MH_HospitalRESTWebServiceResponse(
                         hospitalId,
                         true,
