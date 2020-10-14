@@ -14,11 +14,16 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email) {
-
+//przed insertem wyłącz trigger
+        System.debug('JEST W POSCIE');
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
-            return MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email);
+            //wyyłącz
+            MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email);
+            //włącz trigger
+            return response;
+
         } catch (Exception e) {
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
@@ -41,6 +46,7 @@ global with sharing class MH_HospitalRESTService {
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
         RestRequest request = RestContext.request;
         String hospitalId = request.params.get('id');
+        String ExternalId = request.params.get('isIntegration');
         if (String.isBlank(hospitalId)) {
             return null;
         } else {

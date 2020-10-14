@@ -7,9 +7,10 @@ global class MH_HospitalRESTResponseWrapper {
     public String street { get; set; }
     public String email { get; set; }
     public String externalId { get; set; }
+    public Boolean isIntegration { get; set; }
 
-    public MH_HospitalRESTResponseWrapper() {
-    }
+    public MH_HospitalRESTResponseWrapper() {}
+
     public MH_HospitalRESTResponseWrapper(String id, String externalId, String name, String country, String town, String street, String email) {
         this.id = id;
         this.externalId = externalId;
@@ -17,6 +18,7 @@ global class MH_HospitalRESTResponseWrapper {
         this.country = country;
         this.town = town;
         this.street = street;
+
     }
 
     public MH_HospitalRESTResponseWrapper(String externalId, String name, String country, String town, String street, String email) {
@@ -26,6 +28,27 @@ global class MH_HospitalRESTResponseWrapper {
         this.town = town;
         this.street = street;
         this.email = email;
+    }
+
+    public MH_HospitalRESTResponseWrapper(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+        this.id = id;
+        this.externalId = externalId;
+        this.name = name;
+        this.country = country;
+        this.town = town;
+        this.street = street;
+        this.isIntegration = isIntegration;
+
+    }
+
+    public MH_HospitalRESTResponseWrapper(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+        this.externalId = externalId;
+        this.name = name;
+        this.country = country;
+        this.town = town;
+        this.street = street;
+        this.email = email;
+        this.isIntegration = isIntegration;
     }
 
 }

@@ -1,6 +1,6 @@
 public with sharing class MH_Utils {
 
-    static Set<SObjectType> disabledTriggers = new Set<SObjectType>();
+   public static Set<SObjectType> disabledTriggers = new Set<SObjectType>();
 
     public static Boolean isConfigurationEnabled(String configName, String value) {
         MH_Configuration__c configuration = MH_Configuration__c.getInstance(configName);
@@ -100,6 +100,8 @@ public with sharing class MH_Utils {
         } catch (SObjectException sObjectException) {
             System.debug(sObjectException.getMessage());
         }
+        System.debug('disabledTriggers.contains(soType)');
+        System.debug(disabledTriggers.contains(soType));
         return (isEnabled && !disabledTriggers.contains(soType));
     }
 

@@ -22,6 +22,7 @@ public with sharing class MH_HospitalTriggerHandler extends TriggerHandler {
     }
 
     protected override void afterInsert() {
+        System.debug('HOSPITAL TRIGGER HANDLER');
         MH_HospitalCalloutTriggerHandler.getInstance().afterInsert(newList);
     }
 

@@ -46,7 +46,7 @@ public with sharing class MH_HospitalRestController {
         refreshSearchedHospitals();
     }
     public void addHospital() {
-        resultMessage = restService.addHospital(hospitalOperationItem);
+        resultMessage = restService.addHospital(hospitalOperationItem).statusMessage;
         if (resultMessage.contains('Success')) {
             clearUpsertItem();
         } else {

@@ -11,10 +11,16 @@ public virtual class TriggerHandler {
     public TriggerHandler() {
         this.setTriggerContext();
     }
-
+    Boolean isEnabled;
     public void run() {
         System.debug('WCHODZI DO TRIGGERA!!!!');
-       Boolean isEnabled = MH_Utils.isTriggerEnabled(Trigger.New.getSobjectType());
+        System.debug(Trigger.new.getSobjectType());
+        if (Trigger.isDelete) {
+            isEnabled = MH_Utils.isTriggerEnabled(Trigger.old.getSobjectType());
+        } else {
+            isEnabled = MH_Utils.isTriggerEnabled(Trigger.new.getSobjectType());
+        }
+
         run(isEnabled);
     }
 //ee

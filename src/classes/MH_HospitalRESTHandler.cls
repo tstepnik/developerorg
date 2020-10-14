@@ -41,10 +41,10 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             token = '';
         } else {
-            if (! System.isQueueable()) {
+            if (!System.isQueueable()) {
                 sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
             }
-                token = getAccessToken();
+            token = getAccessToken();
         }
     }
 
@@ -67,7 +67,7 @@ public with sharing class MH_HospitalRESTHandler {
             DeserializeResponse deserializeResponse =
                     (DeserializeResponse) JSON.deserialize(responseFromHX.getBody(), DeserializeResponse.class);
             String reqestToken = deserializeResponse.access_token;
-            if(!System.isQueueable()) {
+            if (!System.isQueueable()) {
                 sessionPartition.put('token', reqestToken);
             }
             return reqestToken;
@@ -148,24 +148,28 @@ public with sharing class MH_HospitalRESTHandler {
         }
     }
 
-    public String addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
+    //dodanie hospitala do Kamila orga
+    //Trigger włącza tą metode
+    public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
         String resultJSON;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
         request.setMethod('POST');
         request.setHeader('Authorization', 'Bearer ' + token);
+        System.debug('token');
+        System.debug(token);
         request.setHeader('Content-Type', contentType);
+        System.debug('contentType');
+        System.debug(contentType);
         request.setEndpoint(mainEndpoint);
+        System.debug('mainEndpoint');
+        System.debug(mainEndpoint);
         request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
+        System.debug('JSON WRAPPER');
+        System.debug(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 201) {
-            return Label.MH_Success_Message;
-        } else {
-            MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
-                    JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
-            return responseWrapper.statusMessage;
+        return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
-        }
     }
 
     public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
@@ -188,20 +192,22 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     private String JSONSerializerForADDHospital(MH_HospitalRESTResponseWrapper wrapper) {
-        Map<String, String> jsonMap = new Map<String, String>();
+        Map<String, Object> jsonMap = new Map<String, Object>();
 
+//        jsonMap.put('isIntegration','true')
         jsonMap.put('externalId', wrapper.externalId);
         jsonMap.put('name', wrapper.name);
         jsonMap.put('country', wrapper.country);
         jsonMap.put('town', wrapper.town);
         jsonMap.put('street', wrapper.street);
         jsonMap.put('email', wrapper.email);
+        jsonMap.put('isIntegration', wrapper.isIntegration);
 
         return JSON.serialize(jsonMap);
     }
 
     private String JSONSerializerForUPDATEHospital(MH_HospitalRESTResponseWrapper wrapper) {
-        Map<String, String> jsonMap = new Map<String, String>();
+        Map<String, Object> jsonMap = new Map<String, Object>();
 
         jsonMap.put('externalId', wrapper.externalId);
         jsonMap.put('id', wrapper.id);
@@ -210,6 +216,7 @@ public with sharing class MH_HospitalRESTHandler {
         jsonMap.put('town', wrapper.town);
         jsonMap.put('street', wrapper.street);
         jsonMap.put('email', wrapper.email);
+        jsonMap.put('isIntegration', wrapper.isIntegration);
 
         return JSON.serialize(jsonMap);
     }
