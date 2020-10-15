@@ -9,38 +9,39 @@ global with sharing class MH_HospitalRESTService {
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
 
+        MH_ApexLog.Information info = new MH_ApexLog.Information(
+                MH_HospitalRESTService.class.getName(),
+                'getHospitals',
+                RestContext.request,
+                RestContext.response,
+                ' working on this feature'
+        );
+        new MH_ApexLog().createLog(info);
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-
+        String jsonBody = MH_Utils.fromParamsToJSON(externalId, name, country, town, street, externalId, isIntegration);
         if (isIntegration == null) {
             isIntegration = false;
         }
         try {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
-            //wyyłącz
             MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email, isIntegration);
-            //włącz trigger
-            System.debug('POWINNO DODAC LOGA');
-            System.debug('///////////////////////////////');
-            System.debug(RestContext.request);
-            System.debug(RestContext.response);
-            System.debug('/////////////////////////////////');
-            MH_ApexLog.Information error = new MH_ApexLog.Information(
+            MH_ApexLog.Information info = new MH_ApexLog.Information(
                     MH_HospitalRESTService.class.getName(),
-                    'MH_HospitalRESTWebServiceResponse',
+                    'createHospital',
                     RestContext.request,
-                    RestContext.response
+                    RestContext.response,
+                    jsonBody
             );
-            new MH_ApexLog().createLog(error);
+            new MH_ApexLog().createLog(info);
             return response;
 
         } catch (Exception e) {
-            System.debug('WCHODZI DO CACHE Z LOOGIME');
-            MH_ApexLog.Error error = new MH_ApexLog.Error(e.getMessage(),e.getLineNumber(),e.getStackTraceString());
+            MH_ApexLog.Error error = new MH_ApexLog.Error(e.getMessage(), e.getLineNumber(), e.getStackTraceString());
             new MH_ApexLog().createLog(error);
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));

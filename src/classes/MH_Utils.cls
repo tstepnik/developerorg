@@ -114,5 +114,17 @@ public with sharing class MH_Utils {
         disabledTriggers.remove(soType);
     }
 
+    public static String fromParamsToJSON(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration){
+        Map<String,Object> jsonMap = new Map<String, Object>();
+        jsonMap.put('externalId',externalId);
+        jsonMap.put('name',name);
+        jsonMap.put('country',country);
+        jsonMap.put('town',town);
+        jsonMap.put('street',street);
+        jsonMap.put('email',email);
+        jsonMap.put('isIntegration',isIntegration);
+        return JSON.serialize(jsonMap);
+    }
+
 
 }

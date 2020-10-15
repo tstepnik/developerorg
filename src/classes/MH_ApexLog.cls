@@ -61,12 +61,14 @@ global class MH_ApexLog {
             this.responseStatusCode = String.valueOf(response.getStatusCode());
         }
 
-        public Information(String apexClassName, String apexMethodName, RestRequest request, RestResponse response) {
+        public Information(String apexClassName, String apexMethodName, RestRequest request, RestResponse response, String jsonBody) {
             this.type = 'INFO';
             this.apexClassName = apexClassName;
             this.apexMethodName = apexMethodName;
-            if (request.requestBody != null) {
+            if (request.requestBody != null && !String.isBlank(request.requestBody.toString())) {
                 this.requestBody = request.requestBody.toString();
+            } else {
+                this.requestBody = jsonBody;
             }
             this.requestEndpoint = request.resourcePath;
             this.requestMethod = request.httpMethod;
