@@ -1,6 +1,4 @@
-/**
- * Created by BRITENET on 15.10.2020.
- */
+
 
 global class MH_ApexLog {
 

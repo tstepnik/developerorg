@@ -1,6 +1,7 @@
 @RestResource(urlMapping = '/v1/hospitals/*')
 global with sharing class MH_HospitalRESTService {
 
+
     @HttpGet
     global static List<MH_HospitalRESTResponseWrapper> getHospitals() {
         RestRequest request = RestContext.request;
@@ -9,14 +10,14 @@ global with sharing class MH_HospitalRESTService {
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
         List<Hospital__c> hospitals = Database.query(query);
 
-        MH_ApexLog.Information info = new MH_ApexLog.Information(
-                MH_HospitalRESTService.class.getName(),
-                'getHospitals',
-                RestContext.request,
-                RestContext.response,
-                ' working on this feature'
-        );
-        new MH_ApexLog().createLog(info);
+//        MH_ApexLog.Information info = new MH_ApexLog.Information(
+//                MH_HospitalRESTService.class.getName(),
+//                'getHospitals',
+//                RestContext.request,
+//                RestContext.response,
+//                ' working on this feature'
+//        );
+//        new MH_ApexLog().createLog(info);
         return MH_HospitalRESTServiceHelper.convertDoctorsToDoctorsServiceWrapper(hospitals);
     }
 
@@ -30,21 +31,37 @@ global with sharing class MH_HospitalRESTService {
             MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
             RestContext.response.statusCode = 201;
             MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email, isIntegration);
-            MH_ApexLog.Information info = new MH_ApexLog.Information(
+
+
+            MH_LogRestApi.Info info = new MH_LogRestApi.Info(
                     MH_HospitalRESTService.class.getName(),
                     'createHospital',
                     RestContext.request,
-                    RestContext.response,
-                    jsonBody
+                    RestContext.response
             );
-            new MH_ApexLog().createLog(info);
+            info.responseStatus = 'Created';
+            info.requestBody = jsonBody;
+            info.responseBody = JSON.serialize(response);
+            info.createLog();
             return response;
 
+
         } catch (Exception e) {
-            MH_ApexLog.Error error = new MH_ApexLog.Error(e.getMessage(), e.getLineNumber(), e.getStackTraceString());
-            new MH_ApexLog().createLog(error);
             RestContext.response.statusCode = 400;
-            return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+            MH_HospitalRESTWebServiceResponse errorResponse = new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+
+            MH_LogRestApi.Error error = new MH_LogRestApi.Error(
+                    MH_HospitalRESTService.class.getName(),
+                    'createHospital',
+                    e,
+                    RestContext.request,
+                    RestContext.response
+            );
+            error.responseStatus = 'Bad Request';
+            error.requestBody = jsonBody;
+            error.responseBody = JSON.serialize(errorResponse);
+            error.createLog();
+            return errorResponse;
         } finally {
             if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
                 MH_Utils.enableTrigger(Hospital__c.getSObjectType());
