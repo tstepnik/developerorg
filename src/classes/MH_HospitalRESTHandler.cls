@@ -160,6 +160,13 @@ public with sharing class MH_HospitalRESTHandler {
         request.setEndpoint(mainEndpoint);
         request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
+        System.debug('RESPONSE STATUS');
+        System.debug('RESPONSE STATUS');
+        System.debug('RESPONSE STATUS');
+        System.debug(response.getStatus());
+        System.debug('STATUS CODE');
+        System.debug(response.getStatusCode());
+
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
     }
