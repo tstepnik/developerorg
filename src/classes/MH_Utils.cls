@@ -1,5 +1,7 @@
 public with sharing class MH_Utils {
 
+
+
    public static Set<SObjectType> disabledTriggers = new Set<SObjectType>();
 
     public static Boolean isConfigurationEnabled(String configName, String value) {

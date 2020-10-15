@@ -24,9 +24,24 @@ global with sharing class MH_HospitalRESTService {
             //wyyłącz
             MH_HospitalRESTWebServiceResponse response = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email, isIntegration);
             //włącz trigger
+            System.debug('POWINNO DODAC LOGA');
+            System.debug('///////////////////////////////');
+            System.debug(RestContext.request);
+            System.debug(RestContext.response);
+            System.debug('/////////////////////////////////');
+            MH_ApexLog.Information error = new MH_ApexLog.Information(
+                    MH_HospitalRESTService.class.getName(),
+                    'MH_HospitalRESTWebServiceResponse',
+                    RestContext.request,
+                    RestContext.response
+            );
+            new MH_ApexLog().createLog(error);
             return response;
 
         } catch (Exception e) {
+            System.debug('WCHODZI DO CACHE Z LOOGIME');
+            MH_ApexLog.Error error = new MH_ApexLog.Error(e.getMessage(),e.getLineNumber(),e.getStackTraceString());
+            new MH_ApexLog().createLog(error);
             RestContext.response.statusCode = 400;
             return new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
         } finally {
