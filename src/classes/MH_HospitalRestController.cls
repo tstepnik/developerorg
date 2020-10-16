@@ -22,6 +22,7 @@ public with sharing class MH_HospitalRestController {
         upsertOperationType = '';
         getCountryListItems();
     }
+
     private void refreshSearchedHospitals() {
         Map<String, String> parameters = new Map<String, String>();
         if (hospitalSearchItem.name != null) {
@@ -39,33 +40,50 @@ public with sharing class MH_HospitalRestController {
         if (hospitalSearchItem.email != null) {
             parameters.put('email', hospitalSearchItem.email);
         }
-        searchedHospitals = restService.getHospitals(parameters);
-        System.debug('LISTA ZE STRONY POWINNA MIEC MAILE');
-        System.debug(searchedHospitals);
+        try {
+            searchedHospitals = restService.getHospitals(parameters);
+        } catch (CalloutException e) {
+            handleCalloutExcepiton(e);
+        }
     }
 
     public void searchForHospitals() {
         refreshSearchedHospitals();
     }
+
     public void addHospital() {
-        resultMessage = restService.addHospital(hospitalOperationItem).statusMessage;
-        if (resultMessage.contains('Success')) {
-            clearUpsertItem();
-        } else {
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+        try {
+            resultMessage = restService.addHospital(hospitalOperationItem).statusMessage;
+            if (resultMessage.contains('Success')) {
+                clearUpsertItem();
+            } else {
+                ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+            }
+        } catch (Exception e) {
+            if (e instanceof CalloutException) {
+                handleCalloutExcepiton(e);
+            }
         }
     }
+
     public void updateHospital() {
-       resultMessage = restService.updateHospital(hospitalOperationItem);
-        if (resultMessage.contains('Success')) {
-            refreshSearchedHospitals();
-            clearUpsertItem();
-        } else {
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+        try {
+            resultMessage = restService.updateHospital(hospitalOperationItem);
+            if (resultMessage.contains('Success')) {
+                refreshSearchedHospitals();
+                clearUpsertItem();
+            } else {
+                ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, resultMessage));
+            }
+        } catch (Exception e) {
+            if (e instanceof CalloutException) {
+                handleCalloutExcepiton(e);
+            }
         }
     }
+
     public void deleteHospital() {
-         resultMessage = restService.deleteHospital(operationHospitalId, 'false');
+        resultMessage = restService.deleteHospital(operationHospitalId, 'false');
         if (resultMessage.contains('Success')) {
             refreshSearchedHospitals();
             clearUpsertItem();
@@ -121,5 +139,10 @@ public with sharing class MH_HospitalRestController {
             }
         }
         return options;
+    }
+
+    private void handleCalloutExcepiton(CalloutException e) {
+        ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getTypeName() + ': Action takes to much time. Please try again or contact support.'));
+        System.debug(e.getMessage());
     }
 }

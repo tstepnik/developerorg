@@ -109,79 +109,89 @@ public with sharing class MH_HospitalRESTHandler {
         }
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
-        request.setMethod('GET');
-        request.setHeader('Authorization', 'Bearer ' + token);
-        request.setEndpoint(requestEndpoint);
-        HttpResponse response = new HttpResponse();
         List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
-
+        HttpResponse response = new HttpResponse();
         try {
+            request = setRequest('GET',requestEndpoint,null);
             response = httpProcess.send(request);
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
                     response.getBody(), List<MH_HospitalRESTResponseWrapper>.class);
-            log = new MH_LogExternalApi.Info(request,response,'getHospitals');
+            log = new MH_LogExternalApi.Info(request, response, 'getHospitals');
         } catch (Exception e) {
-            log = new MH_LogExternalApi.Error(request,e,'getHospitals');
-          log.createLog();
+            log =  catchLog(request,response,e,'getHospitals');
+            log.createLog();
             return null;
         }
         log.createLog();
         return hospitals;
     }
-
-
+    
     public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
-        String resultJSON;
+        MH_LogExternalApi log;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
-        request.setMethod('POST');
-        request.setHeader('Authorization', 'Bearer ' + token);
-        request.setHeader('Content-Type', contentType);
-        request.setEndpoint(mainEndpoint);
-        request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
-        HttpResponse response = httpProcess.send(request);
-
+        HttpResponse response;
+        try {
+            request = setRequest('POST',mainEndpoint, hospitalWrapper);
+            response = httpProcess.send(request);
+            log = new MH_LogExternalApi.Info(request, response, 'addHospital');
+        } catch (Exception e) {
+           log =  catchLog(request,response,e,'addHospital');
+            log.createLog();
+        }
+        log.createLog();
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
     }
 
     public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
-
-        String resultJSON;
+        MH_LogExternalApi log;
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
-        request.setMethod('PUT');
-        request.setHeader('Authorization', 'Bearer ' + token);
-        request.setHeader('Content-Type', contentType);
-        request.setEndpoint(mainEndpoint);
-        request.setBody(JSONSerializerForUPDATEHospital(hospitalWrapper));
-        HttpResponse response = httpProcess.send(request);
+        HttpResponse response;
+        try {
+            request = setRequest('PUT',mainEndpoint,hospitalWrapper);
+            response = httpProcess.send(request);
+            log = new MH_LogExternalApi.Info(request,response, 'updateHospital');
+        } catch (Exception e) {
+            log = catchLog(request,response,e,'updateHospital');
+            log.createLog();
+        }
+
         if (response.getStatusCode() == 200) {
+            log.createLog();
             return Label.MH_Success_Message;
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
+            log.createLog();
             return responseWrapper.statusMessage;
         }
     }
 
     public String deleteHospital(String hospitalId, String isIntegration) {
-        String resultJSON;
         String requestEndpoint = mainEndpoint;
+        MH_LogExternalApi log;
         requestEndpoint += ('?id=' + hospitalId);
         requestEndpoint += ('&isIntegration=' + isIntegration);
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
-        request.setMethod('DELETE');
-        request.setHeader('Authorization', 'Bearer ' + token);
-        request.setEndpoint(requestEndpoint);
-        HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 200) {
+        HttpResponse response;
+        try {
+            request = setRequest('DELETE',requestEndpoint,null);
+             response = httpProcess.send(request);
+            log = new MH_LogExternalApi.Info(request,response,'deleteHospital');
+        }catch (Exception e) {
+            log = catchLog(request,response,e,'deleteHospital');
+            log.createLog();
+        }
+            if (response.getStatusCode() == 200) {
+                log.createLog();
             return Label.MH_Success_Message;
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserializeStrict(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
-
+                log.createLog();
             return responseWrapper.statusMessage;
         }
     }
@@ -213,5 +223,35 @@ public with sharing class MH_HospitalRESTHandler {
         jsonMap.put('isIntegration', wrapper.isIntegration);
 
         return JSON.serialize(jsonMap);
+    }
+
+    private void handleCalloutError(Exception e) {
+        if (e.getMessage().contains('Read timed out') && e instanceof CalloutException) {
+            throw e;
+        }
+        System.debug(e.getMessage());
+    }
+
+    private MH_LogExternalApi catchLog(HttpRequest request, HttpResponse response, Exception e, String methodName){
+        MH_LogExternalApi log;
+        if (e instanceof CalloutException) {
+            log = new MH_LogExternalApi.Error(request, e, methodName);
+        } else {
+            log = new MH_LogExternalApi.Error(request, response, e, methodName);
+        }
+        handleCalloutError(e);
+        return log;
+    }
+
+    private HttpRequest setRequest(String method, String endpoint, MH_HospitalRESTResponseWrapper bodyWrapper){
+        HttpRequest request = new HttpRequest();
+        request.setMethod(method);
+        request.setHeader('Authorization', 'Bearer ' + token);
+        request.setEndpoint(endpoint);
+        if (method.equals('POST') || method.equals('PUT')) {
+            request.setHeader('Content-Type', contentType);
+            request.setBody(JSONSerializerForADDHospital(bodyWrapper));
+        }
+        return request;
     }
 }
