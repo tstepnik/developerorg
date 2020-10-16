@@ -95,6 +95,7 @@ public with sharing class MH_HospitalRESTHandler {
 
     public List<MH_HospitalRESTResponseWrapper> getHospitals(Map<String, String> parameters) {
         String requestEndpoint = mainEndpoint;
+        MH_LogExternalApi log;
 
         if (!parameters.isEmpty() && parameters.isEmpty() != null) {
             Iterator<String> iterator = parameters.keySet().Iterator();
@@ -106,49 +107,28 @@ public with sharing class MH_HospitalRESTHandler {
                     requestEndpoint += '&';
             }
         }
-
         Http httpProcess = new Http();
         HttpRequest request = new HttpRequest();
         request.setMethod('GET');
         request.setHeader('Authorization', 'Bearer ' + token);
         request.setEndpoint(requestEndpoint);
         HttpResponse response = new HttpResponse();
-
-        response = httpProcess.send(request);
-        System.debug('RESPONSE BODY');
-        System.debug(response.getBody());
         List<MH_HospitalRESTResponseWrapper> hospitals = new List<MH_HospitalRESTResponseWrapper>();
+
         try {
+            response = httpProcess.send(request);
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
-                    response.getBody(), List<MH_HospitalRESTResponseWrapper>.class
-            );
+                    response.getBody(), List<MH_HospitalRESTResponseWrapper>.class);
+            log = new MH_LogExternalApi.Info(request,response,'getHospitals');
         } catch (Exception e) {
-            System.debug(e.getMessage());
+            log = new MH_LogExternalApi.Error(request,e,'getHospitals');
+          log.createLog();
             return null;
         }
+        log.createLog();
         return hospitals;
     }
 
-    public String deleteHospital(String hospitalId, String isIntegration) {
-        String resultJSON;
-        String requestEndpoint = mainEndpoint;
-        requestEndpoint += ('?id=' + hospitalId);
-        requestEndpoint += ('&isIntegration=' + isIntegration);
-        Http httpProcess = new Http();
-        HttpRequest request = new HttpRequest();
-        request.setMethod('DELETE');
-        request.setHeader('Authorization', 'Bearer ' + token);
-        request.setEndpoint(requestEndpoint);
-        HttpResponse response = httpProcess.send(request);
-        if (response.getStatusCode() == 200) {
-            return Label.MH_Success_Message;
-        } else {
-            MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
-                    JSON.deserializeStrict(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
-
-            return responseWrapper.statusMessage;
-        }
-    }
 
     public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
         String resultJSON;
@@ -160,12 +140,6 @@ public with sharing class MH_HospitalRESTHandler {
         request.setEndpoint(mainEndpoint);
         request.setBody(JSONSerializerForADDHospital(hospitalWrapper));
         HttpResponse response = httpProcess.send(request);
-        System.debug('RESPONSE STATUS');
-        System.debug('RESPONSE STATUS');
-        System.debug('RESPONSE STATUS');
-        System.debug(response.getStatus());
-        System.debug('STATUS CODE');
-        System.debug(response.getStatusCode());
 
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
@@ -187,6 +161,27 @@ public with sharing class MH_HospitalRESTHandler {
         } else {
             MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                     JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
+            return responseWrapper.statusMessage;
+        }
+    }
+
+    public String deleteHospital(String hospitalId, String isIntegration) {
+        String resultJSON;
+        String requestEndpoint = mainEndpoint;
+        requestEndpoint += ('?id=' + hospitalId);
+        requestEndpoint += ('&isIntegration=' + isIntegration);
+        Http httpProcess = new Http();
+        HttpRequest request = new HttpRequest();
+        request.setMethod('DELETE');
+        request.setHeader('Authorization', 'Bearer ' + token);
+        request.setEndpoint(requestEndpoint);
+        HttpResponse response = httpProcess.send(request);
+        if (response.getStatusCode() == 200) {
+            return Label.MH_Success_Message;
+        } else {
+            MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
+                    JSON.deserializeStrict(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
+
             return responseWrapper.statusMessage;
         }
     }
