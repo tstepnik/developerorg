@@ -196,10 +196,6 @@
                             <option name="selected" value="true" />
                           </MetadataEntry>
                           <MetadataEntry>
-                            <option name="name" value="MH_ApexLog" />
-                            <option name="selected" value="true" />
-                          </MetadataEntry>
-                          <MetadataEntry>
                             <option name="name" value="MH_Log" />
                             <option name="selected" value="true" />
                           </MetadataEntry>

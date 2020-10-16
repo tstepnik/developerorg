@@ -1,5 +1,7 @@
 public abstract class MH_Log {
 
+    private final Integer STRING_MAX_LENGTH = 131072;
+
     public String type { get; set; }
     public String logGroup { get; set; }
     public String apexClassName { get; set; }
@@ -16,7 +18,7 @@ public abstract class MH_Log {
 
     public void createLog() {
         System.debug('LOG TO CREATE ');
-        System.debug(this);
+
         try {
             if (
                     (Limits.getDmlRows() < Limits.getLimitDmlRows()) &&
@@ -28,21 +30,43 @@ public abstract class MH_Log {
                         Apex_Class_Name__c = apexClassName,
                         Apex_Method_Name__c = apexMethodName,
                         Line_Number__c = lineNumber,
-                        Message__c = message,
-                        StackTrace__c = stackTrace,
-                        Request_Body__c = requestBody,
+                        Message__c = message == null ? message : largeStringCutter(message),
+                        StackTrace__c = stackTrace == null ? stackTrace : largeStringCutter(stackTrace),
+                        Request_Body__c = largeStringCutter(requestBody),
                         Request_Endpoint__c = requestEndpoint,
                         Request_Method__c = requestMethod,
-                        Response_Body__c = responseBody,
+                        Response_Body__c = largeStringCutter(responseBody),
                         Response_Status__c = responseStatus,
                         Response_Status_Code__c = String.valueOf(responseStatusCode)
                 );
-                Database.insert(apexLog, false);
+               Database.SaveResult  result = Database.insert(apexLog, false);
+                System.debug('RESULT');
+                System.debug(result);
             } else {
+
                 System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');
             }
+
         } catch (DmlException e) {
             System.debug('Something bad has ocure and hence failed to create a Log! Error: ' + e.getMessage());
         }
+    }
+
+    private String largeStringCutter(String str) {
+        Integer maxlength = STRING_MAX_LENGTH;
+        if(String.isNotBlank(str)) {
+            Integer stringSize = str.length();
+            String cautionInfo = '...REST OF THIS MESSAGE WAS CUTTED BEACUSE IT WAS TO LARGE.';
+            Integer cautionMsgLength = cautionInfo.length();
+            if (maxlength > cautionMsgLength) {
+                Integer acceptableLength = maxlength - cautionMsgLength - 1;
+                if (stringSize > acceptableLength) {
+                    return str.substring(0, acceptableLength) + cautionInfo;
+                }
+                return str;
+            }
+            return cautionInfo;
+        }
+        return 'EMPTY';
     }
 }

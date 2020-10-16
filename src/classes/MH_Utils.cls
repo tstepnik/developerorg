@@ -126,5 +126,31 @@ public with sharing class MH_Utils {
         return JSON.serialize(jsonMap);
     }
 
+    public static String fromParamsToJSON(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration){
+        Map<String,Object> jsonMap = new Map<String, Object>();
+        jsonMap.put('Id',id);
+        jsonMap.put('externalId',externalId);
+        jsonMap.put('name',name);
+        jsonMap.put('country',country);
+        jsonMap.put('town',town);
+        jsonMap.put('street',street);
+        jsonMap.put('email',email);
+        jsonMap.put('isIntegration',isIntegration);
+        return JSON.serialize(jsonMap);
+    }
+
+    public static String getFullGetResourcePath(RestRequest request){
+        if (request.params.isEmpty()) {
+            return request.resourcePath;
+        }
+        String resourcePath = 'services/apexrest' + request.requestURI + '?';
+
+        for(String s:request.params.keyset()){
+            resourcePath=resourcePath+s+'='+RestContext.request.params.get(s)+'&';
+        }
+        resourcePath=resourcePath.removeEnd('&');
+        return resourcePath;
+    }
+
 
 }

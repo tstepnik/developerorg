@@ -78,7 +78,6 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         for(MH_HospitalRESTResponseWrapper wrapper : doctorsResponseWrappers){
-            System.debug(wrapper);
         }
         return doctorsResponseWrappers;
     }
@@ -115,10 +114,10 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         for (String key : parameters.keySet()) {
-            if (String.isEmpty(parameters.get(key))) {
-                return true;
+            if (String.isNotBlank(parameters.get(key))) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

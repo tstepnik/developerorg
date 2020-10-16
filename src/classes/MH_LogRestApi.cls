@@ -4,36 +4,42 @@ public abstract class MH_LogRestApi extends MH_Log {
     private final String GROUP_INFO = 'INFO';
     private final String API_TYPE = 'REST API';
 
+    public MH_LogRestApi(){}
+
+    public MH_LogRestApi(String responseStatus,RestRequest request, RestResponse response){
+        this.type = API_TYPE;
+        this.responseStatus = responseStatus;
+        this.requestEndpoint = request.resourcePath;
+        this.requestMethod = request.httpMethod;
+        this.responseStatusCode = response.statusCode;
+    }
+
+    public MH_LogRestApi(String responseStatus,RestRequest request, RestResponse response, Exception e){
+        this.type = API_TYPE;
+        this.responseStatus = responseStatus;
+        this.requestEndpoint = request.resourcePath;
+        this.requestMethod = request.httpMethod;
+        this.responseStatusCode = response.statusCode;
+        this.message = e.getMessage();
+        this.lineNumber = e.getLineNumber();
+        this.stackTrace = e.getStackTraceString();
+    }
+
     public class Error extends MH_LogRestApi {
-    //POST ERROR
-        public Error( String className, String methodName, Exception e, RestRequest request, RestResponse response) {
-            this.type = API_TYPE;
+
+        //DELETE ERROR
+        public Error(String responseStatus, RestRequest request, RestResponse response, Exception e) {
+            super(responseStatus,request,response,e);
             this.logGroup = GROUP_ERROR;
-            this.apexClassName = className;
-            this.apexMethodName = methodName;
-            this.message = e.getMessage();
-            this.lineNumber = e.getLineNumber();
-            this.stackTrace = e.getStackTraceString();
-            this.requestBody = request.requestBody != null ? request.requestBody.toString() : '';
-            this.requestEndpoint = request.resourcePath;
-            this.requestMethod = request.httpMethod;
-            this.responseBody = response.responseBody != null ? response.responseBody.toString() : '';
-            this.responseStatusCode = response.statusCode;
         }
     }
 
     public class Info extends MH_LogRestApi {
-//POST SUCCESS
-        public Info(String className, String methodName, RestRequest request, RestResponse response) {
-            this.type = API_TYPE;
+
+        //DELETE SUCCEESS
+        public Info(String responseStatus, RestRequest request, RestResponse response) {
+            super(responseStatus,request,response);
             this.logGroup = GROUP_INFO;
-            this.apexClassName = className;
-            this.apexMethodName = methodName;
-            this.requestBody = request.requestBody != null ? request.requestBody.toString() : '';
-            this.requestEndpoint = request.resourcePath;
-            this.requestMethod = request.httpMethod;
-            this.responseBody = response.responseBody != null ? response.responseBody.toString() : '';
-            this.responseStatusCode = response.statusCode;
         }
 
     }
