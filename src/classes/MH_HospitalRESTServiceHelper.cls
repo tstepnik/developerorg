@@ -73,11 +73,11 @@ public with sharing class MH_HospitalRESTServiceHelper {
         List<MH_HospitalRESTResponseWrapper> doctorsResponseWrappers = new List<MH_HospitalRESTResponseWrapper>();
         for (Hospital__c hospital : hospitals) {
             MH_HospitalRESTResponseWrapper doctorsResponseWrapper = new MH_HospitalRESTResponseWrapper(
-                    hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c,false);
+                    hospital.Id, hospital.ExternalHospitalId__c, hospital.Name, hospital.Country__c, hospital.Town__c, hospital.Street__c, hospital.Email__c, false);
             doctorsResponseWrappers.add(doctorsResponseWrapper);
         }
 
-        for(MH_HospitalRESTResponseWrapper wrapper : doctorsResponseWrappers){
+        for (MH_HospitalRESTResponseWrapper wrapper : doctorsResponseWrappers) {
         }
         return doctorsResponseWrappers;
     }
@@ -119,5 +119,49 @@ public with sharing class MH_HospitalRESTServiceHelper {
             }
         }
         return true;
+    }
+
+    public static MH_HospitalRESTWebServiceResponse upsertServiceResponse(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+        String className = MH_HospitalRESTService.class.getName();
+        String methodName = 'updateHospital';
+        String responseStatus = 'OK';
+        Integer responseStatusCode = 200;
+        String requestBody = MH_Utils.fromParamsToJSON(id, externalId, name, country, town, street, externalId, isIntegration);
+        if (String.isBlank(id)) {
+            methodName = 'createHospital';
+            responseStatus = 'Created';
+            responseStatusCode = 201;
+            requestBody = MH_Utils.fromParamsToJSON(externalId, name, country, town, street, externalId, isIntegration);
+        }
+
+        MH_HospitalRESTWebServiceResponse serviceResponse;
+        MH_LogRestApi log;
+        RestRequest request = RestContext.request;
+        RestResponse response = RestContext.response;
+        if (isIntegration == null) {
+            isIntegration = false;
+        }
+        try {
+            MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
+            response.statusCode = responseStatusCode;
+            serviceResponse = upsertHospital(id, externalId, name, country, town, street, email, isIntegration);
+            log = new MH_LogRestApi.Info(responseStatus, request, response);
+
+        } catch (Exception e) {
+            response.statusCode = 400;
+            serviceResponse = new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
+            log = new MH_LogRestApi.Error('Bad Request', request, response, e);
+
+        } finally {
+            if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
+                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            }
+        }
+        log.apexClassName = className;
+        log.apexMethodName = methodName;
+        log.requestBody = requestBody;
+        log.responseBody = JSON.serialize(serviceResponse);
+        log.createLog();
+        return serviceResponse;
     }
 }

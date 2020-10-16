@@ -34,72 +34,11 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-        String methodName = 'createHospital';
-        String requestBody = MH_Utils.fromParamsToJSON(externalId, name, country, town, street, externalId, isIntegration);
-        MH_HospitalRESTWebServiceResponse serviceResponse;
-        MH_LogRestApi log;
-        RestRequest request = RestContext.request;
-        RestResponse response = RestContext.response;
-
-        if (isIntegration == null) {
-            isIntegration = false;
-        }
-        try {
-            MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-            response.statusCode = 201;
-            serviceResponse = MH_HospitalRESTServiceHelper.upsertHospital(null, externalId, name, country, town, street, email, isIntegration);
-            log = new MH_LogRestApi.Info('Created', request, response);
-
-        } catch (Exception e) {
-            response.statusCode = 400;
-            serviceResponse = new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
-            log = new MH_LogRestApi.Error('Bad Request', request, response, e);
-
-        } finally {
-            if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
-                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
-            }
-        }
-        log.apexClassName = className;
-        log.apexMethodName = methodName;
-        log.requestBody = requestBody;
-        log.responseBody = JSON.serialize(serviceResponse);
-        log.createLog();
-        return serviceResponse;
+       return MH_HospitalRESTServiceHelper.upsertServiceResponse(null,externalId,name,country,town,street,email,isIntegration);
     }
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-        String methodName = 'updateHospital';
-        String requestBody = MH_Utils.fromParamsToJSON(id, externalId, name, country, town, street, externalId, isIntegration);
-        MH_HospitalRESTWebServiceResponse serviceResponse;
-        MH_LogRestApi log;
-        RestRequest request = RestContext.request;
-        RestResponse response = RestContext.response;
-        if (isIntegration == null) {
-            isIntegration = false;
-        }
-        try {
-            MH_HospitalRESTServiceHelper.throwErrorIfEmptyName(name);
-            response.statusCode = 200;
-            serviceResponse = MH_HospitalRESTServiceHelper.upsertHospital(id, externalId, name, country, town, street, email, isIntegration);
-            log = new MH_LogRestApi.Info('OK', request, response);
-
-        } catch (Exception e) {
-            response.statusCode = 400;
-            serviceResponse = new MH_HospitalRESTWebServiceResponse(null, false, MH_Utils.rewordStatusMessage(e.getMessage()));
-            log = new MH_LogRestApi.Error('Bad Request', request, response, e);
-
-        } finally {
-            if (MH_Utils.disabledTriggers.contains(Hospital__c.getSObjectType())) {
-                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
-            }
-        }
-        log.apexClassName = className;
-        log.apexMethodName = methodName;
-        log.requestBody = requestBody;
-        log.responseBody = JSON.serialize(serviceResponse);
-        log.createLog();
-        return serviceResponse;
+        return MH_HospitalRESTServiceHelper.upsertServiceResponse(id,externalId,name,country,town,street,email,isIntegration);
     }
 
     @HttpDelete
