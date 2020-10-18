@@ -61,7 +61,7 @@ public with sharing class MH_HospitalRestController {
             }
         } catch (Exception e) {
             if (e instanceof CalloutException) {
-                handleCalloutExcepiton(e);
+                handleCalloutExcepiton((CalloutException)e);
             }
         }
     }
@@ -77,7 +77,7 @@ public with sharing class MH_HospitalRestController {
             }
         } catch (Exception e) {
             if (e instanceof CalloutException) {
-                handleCalloutExcepiton(e);
+                handleCalloutExcepiton((CalloutException)e);
             }
         }
     }

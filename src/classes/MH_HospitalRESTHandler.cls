@@ -44,7 +44,7 @@ public with sharing class MH_HospitalRESTHandler {
             if (!System.isQueueable()) {
                 sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
             }
-            token = getAccessToken();
+                token = getAccessToken();
         }
     }
 
@@ -55,10 +55,13 @@ public with sharing class MH_HospitalRESTHandler {
             cachedToken = '';
         } else {
             if (!System.isQueueable()) {
+//            if (false) {
                 cachedToken = (String) sessionPartition.get('token');
             }
         }
+
         if (String.isBlank(cachedToken)) {
+//        if (true) {
             HttpResponse responseFromHX = new HttpResponse();
             HttpRequest requestToHX = new HttpRequest();
             requestToHX.setMethod('POST');
@@ -82,13 +85,8 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public List<String> getCountryPicklistValues() {
-        HttpRequest requestToHX = new HttpRequest();
-        requestToHX.setEndpoint(countriesEndpoint);
-        requestToHX.setMethod('GET');
-        String accessToken = 'OAuth ' + token;
+        HttpRequest requestToHX = createRequest(countriesEndpoint,'GET');
         HttpResponse responseFromHX;
-        requestToHX.setHeader('Authorization', accessToken);
-        requestToHX.setHeader('Content-Type', contentType);
         responseFromHX = new Http().send(requestToHX);
         return (List<String>) JSON.deserialize(responseFromHX.getBody(), List<String>.class);
     }
@@ -246,12 +244,23 @@ public with sharing class MH_HospitalRESTHandler {
     private HttpRequest setRequest(String method, String endpoint, MH_HospitalRESTResponseWrapper bodyWrapper){
         HttpRequest request = new HttpRequest();
         request.setMethod(method);
-        request.setHeader('Authorization', 'Bearer ' + token);
+        request.setHeader('Authorization', 'OAuth ' + token);
+//        request.setHeader('Authorization', 'Bearer ' + token);
         request.setEndpoint(endpoint);
         if (method.equals('POST') || method.equals('PUT')) {
             request.setHeader('Content-Type', contentType);
             request.setBody(JSONSerializerForADDHospital(bodyWrapper));
         }
+        return request;
+    }
+
+    private HttpRequest createRequest(String endpoint, String methodType){
+        String accessToken = 'OAuth ' + token;
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod(methodType);
+        request.setHeader('Authorization', accessToken);
+        request.setHeader('Content-Type', contentType);
         return request;
     }
 }
