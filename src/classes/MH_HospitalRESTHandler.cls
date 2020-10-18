@@ -91,15 +91,24 @@ public with sharing class MH_HospitalRESTHandler {
         }
     }
 
+    //todo add catch for Callout
     public List<String> getCountryPicklistValues() {
-        HttpRequest requestToHX = createRequest(countriesEndpoint, 'GET', null);
-        HttpResponse responseFromHX;
-        responseFromHX = createResponse(requestToHX);
-        return (List<String>) JSON.deserialize(responseFromHX.getBody(), List<String>.class);
+        HttpResponse response;
+        HttpRequest request;
+        MH_LogExternalApi log;
+        try {
+            request = createRequest(countriesEndpoint, 'GET', null);
+            response = createResponse(request);
+            log = new MH_LogExternalApi.Info(request, response, 'getCountryPicklistValues');
+        } catch (Exception e) {
+            log = catchLog(request, response, e, 'getCountryPicklistValues');
+            log.createLog();
+        }
+        return (List<String>) JSON.deserialize(response.getBody(), List<String>.class);
     }
 
     public List<MH_HospitalRESTResponseWrapper> getHospitals(Map<String, String> parameters) {
-        String requestEndpoint = endpointBuilder(parameters,mainEndpoint);
+        String requestEndpoint = endpointBuilder(parameters, mainEndpoint);
         MH_LogExternalApi log;
 
         HttpRequest request = new HttpRequest();
@@ -138,6 +147,9 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
+        System.debug('HANDLER UPDATE HOSPITAL');
+        System.debug('HOSPITAL WRAPPER');
+        System.debug(hospitalWrapper);
         MH_LogExternalApi log;
         HttpRequest request = new HttpRequest();
         HttpResponse response;
@@ -234,19 +246,24 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     private HttpRequest createRequest(String endpoint, String methodType, MH_HospitalRESTResponseWrapper bodyWrapper) {
+        System.debug('HANDLER CREATE REQUEST');
+        System.debug(bodyWrapper);
         String accessToken = 'OAuth ' + token;
         HttpRequest request = new HttpRequest();
         request.setEndpoint(endpoint);
         request.setMethod(methodType);
         request.setHeader('Authorization', accessToken);
         request.setHeader('Content-Type', contentType);
-        if (methodType.equals('POST') || methodType.equals('PUT')) {
+        if (methodType.equals('POST')) {
             request.setBody(JSONSerializerForADDHospital(bodyWrapper));
+        }else if(methodType.equals('PUT')){
+            request.setBody(JSONSerializerForUPDATEHospital(bodyWrapper));
         }
         return request;
     }
-
     private HttpResponse createResponse(HttpRequest request) {
+        System.debug('REQUEST');
+        System.debug(request.getBody());
         HttpResponse response = new Http().send(request);
         Integer statusCode = response.getStatusCode();
         if (statusCode == 401) {
@@ -269,7 +286,7 @@ public with sharing class MH_HospitalRESTHandler {
         }
     }
 
-    private String endpointBuilder(Map<String, String> parameters, String mainEndpoint){
+    private String endpointBuilder(Map<String, String> parameters, String mainEndpoint) {
         String requestEndpoint = mainEndpoint;
         if (!parameters.isEmpty() && parameters.isEmpty() != null) {
             Iterator<String> iterator = parameters.keySet().Iterator();

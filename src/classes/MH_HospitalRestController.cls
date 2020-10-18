@@ -117,7 +117,9 @@ public with sharing class MH_HospitalRestController {
 
     public void clearSearchData() {
         hospitalSearchItem = new MH_HospitalRESTResponseWrapper();
-        searchedHospitals.clear();
+        if (searchedHospitals != null) {
+            searchedHospitals.clear();
+        }
     }
     public void prepareUpdateModal() {
         upsertOperationType = 'UPDATE';

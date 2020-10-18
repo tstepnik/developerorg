@@ -82,6 +82,10 @@ global with sharing class MH_HospitalRESTService {
         log.responseBody = JSON.serialize(serviceResponse);
         log.requestEndpoint = endpoint;
         log.createLog();
+        //FOR TEST todo REMOVE IT AFTER
+//        Integer start = System.Now().millisecond();
+//        while(System.Now().millisecond()< start+130000){
+//        }
         return serviceResponse;
     }
 }
