@@ -12,15 +12,20 @@ public with sharing class MH_HospitalRestController {
     public MH_HospitalRestController() {
         try {
             restService = new MH_HospitalRESTHandler();
+            getCountryListItems();
         } catch (Exception e) {
-            ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, Label.ExternalServiceError));
+            if (e instanceof MH_InvalidCredentialsException) {
+                ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+
+            } else {
+                ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, Label.ExternalServiceError));
+            }
         }
         hospitalOperationItem = new MH_HospitalRESTResponseWrapper();
         hospitalSearchItem = new MH_HospitalRESTResponseWrapper();
 
         searchedHospitals = new List<MH_HospitalRESTResponseWrapper>();
         upsertOperationType = '';
-        getCountryListItems();
     }
 
     private void refreshSearchedHospitals() {
@@ -61,7 +66,7 @@ public with sharing class MH_HospitalRestController {
             }
         } catch (Exception e) {
             if (e instanceof CalloutException) {
-                handleCalloutExcepiton((CalloutException)e);
+                handleCalloutExcepiton((CalloutException) e);
             }
         }
     }
@@ -77,7 +82,7 @@ public with sharing class MH_HospitalRestController {
             }
         } catch (Exception e) {
             if (e instanceof CalloutException) {
-                handleCalloutExcepiton((CalloutException)e);
+                handleCalloutExcepiton((CalloutException) e);
             }
         }
     }
@@ -128,7 +133,11 @@ public with sharing class MH_HospitalRestController {
                     'PL', 'UK', 'UA'
             };
         } else {
-            countries = restService.getCountryPicklistValues();
+            try {
+                countries = restService.getCountryPicklistValues();
+            } catch (Exception e) {
+                ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
+            }
         }
         options = new List<SelectOption>();
         options.add(new SelectOption('', ''));
