@@ -17,6 +17,7 @@ public abstract class MH_Log {
     public Integer responseStatusCode { get; set; }
 
     public void createLog() {
+        System.debug('JEST W CREATE LOG');
         try {
             if (
                     (Limits.getDmlRows() < Limits.getLimitDmlRows()) &&
@@ -37,6 +38,7 @@ public abstract class MH_Log {
                         Response_Status__c = responseStatus,
                         Response_Status_Code__c = String.valueOf(responseStatusCode)
                 );
+                System.debug('INSERTUJE LOGA W CREATE LOG');
                 insert apexLog;
             } else {
                 System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');

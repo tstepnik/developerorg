@@ -63,14 +63,12 @@ public with sharing class MH_HospitalRESTHandler {
             cachedToken = '';
         } else {
             if (!System.isQueueable() && !invalidSession) {
-//            if (false) {
                 cachedToken = (String) sessionPartition.get('token');
                 tokenLogInserted = false;
             }
         }
 
         if (String.isBlank(cachedToken)) {
-//        if (true) {
             tokenLogInserted = false;
             HttpResponse responseFromHX = new HttpResponse();
             HttpRequest requestToHX = new HttpRequest();
@@ -115,7 +113,7 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     private void insertTokenlog() {
-        if (!tokenLogInserted) {
+        if (!tokenLogInserted && tokenLog != null) {
             tokenLog.createLog();
             tokenLogInserted = true;
         }
@@ -151,10 +149,13 @@ public with sharing class MH_HospitalRESTHandler {
             request = createRequest(mainEndpoint, 'POST', hospitalWrapper);
             response = createResponse(request);
             log = new MH_LogExternalApi.Info(request, response, 'addHospital');
+            System.debug('ROBI LOGA');
+            System.debug(log);
         } catch (Exception e) {
             log = catchLog(request, response, e, 'addHospital');
             log.createLog();
         }
+        System.debug('INSERTUJE LOGA');
         log.createLog();
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 

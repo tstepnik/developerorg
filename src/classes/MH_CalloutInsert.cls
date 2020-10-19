@@ -42,18 +42,26 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
 
     public void execute(QueueableContext context) {
         Integer calloutCounter = 0;
+        Boolean isSuccess = false;
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
-        System.debug('CALLOUT');
+
         if (method.equals('POST')) {
-            System.debug('INSIDE POST');
+            System.debug('WCHODZI DO POSTA CALLOUT');
             MH_HospitalRESTWebServiceResponse responseWrapper;
-            while (calloutCounter < 3 && !responseWrapper.isSuccess) {
+            System.debug('(calloutCounter < 3 && !responseWrapper.isSuccess)');
+            while (calloutCounter < 3 && !isSuccess) {
+                System.debug('WCHODZI W WHILE');
+                System.debug(wrapper);
                 responseWrapper = handler.addHospital(wrapper);
-                System.debug('COUNTER');
+                System.debug('responseWrapper');
+                System.debug(responseWrapper);
+                isSuccess = (responseWrapper.statusMessage.equals('Success')) ? true : false;
+                System.debug('isSuccess');
+                System.debug(isSuccess);
                 calloutCounter++;
             }
             Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
-            if (responseWrapper.isSuccess) {
+            if (responseWrapper.statusMessage.equals('Success')) {
                 hospital.Integrated__c = true;
                 hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
             }
@@ -63,13 +71,16 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
 
             }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
-        } else if (method.equals('UPDATE')) {
+        }
+
+
+        else if (method.equals('UPDATE')) {
             MH_HospitalRESTWebServiceResponse response;
-            while (calloutCounter < 3 && !response.isSuccess) {
+            while (calloutCounter < 3 && !response.statusMessage.equals('Success')) {
                 response = handler.updateHospital(wrapper);
                 calloutCounter++;
             }
-            if(response.isSuccess){
+            if (response.statusMessage.equals('Success')) {
                 Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
                 MH_Utils.disableTrigger(Hospital__c.getSObjectType());
                 hospital.Integrated__c = true;
