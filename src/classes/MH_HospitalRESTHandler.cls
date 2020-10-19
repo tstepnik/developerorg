@@ -11,6 +11,8 @@ public with sharing class MH_HospitalRESTHandler {
     private Boolean invalidSession;
     public String token { get; set; }
     private Cache.SessionPartition sessionPartition;
+    private MH_LogExternalApi tokenLog;
+    private Boolean tokenLogInserted;
 
     public MH_HospitalRESTHandler() {
         invalidSession = false;
@@ -56,7 +58,6 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public String getAccessToken() {
-
         String cachedToken;
         if (Test.isRunningTest()) {
             cachedToken = '';
@@ -64,12 +65,13 @@ public with sharing class MH_HospitalRESTHandler {
             if (!System.isQueueable() && !invalidSession) {
 //            if (false) {
                 cachedToken = (String) sessionPartition.get('token');
+                tokenLogInserted = false;
             }
         }
 
-
         if (String.isBlank(cachedToken)) {
 //        if (true) {
+            tokenLogInserted = false;
             HttpResponse responseFromHX = new HttpResponse();
             HttpRequest requestToHX = new HttpRequest();
             requestToHX.setMethod('POST');
@@ -85,10 +87,12 @@ public with sharing class MH_HospitalRESTHandler {
                 token = requestToken;
                 sessionPartition.put('token', requestToken);
             }
+            tokenLog = new MH_LogExternalApi.Info(requestToHX, responseFromHX, 'getAccessToken');
             return requestToken;
         } else {
             return cachedToken;
         }
+
     }
 
     //todo add catch for Callout
@@ -100,11 +104,21 @@ public with sharing class MH_HospitalRESTHandler {
             request = createRequest(countriesEndpoint, 'GET', null);
             response = createResponse(request);
             log = new MH_LogExternalApi.Info(request, response, 'getCountryPicklistValues');
+            log.createLog();
+            insertTokenlog();
         } catch (Exception e) {
             log = catchLog(request, response, e, 'getCountryPicklistValues');
-            log.createLog();
+            insertTokenlog();
+
         }
         return (List<String>) JSON.deserialize(response.getBody(), List<String>.class);
+    }
+
+    private void insertTokenlog() {
+        if (!tokenLogInserted) {
+            tokenLog.createLog();
+            tokenLogInserted = true;
+        }
     }
 
     public List<MH_HospitalRESTResponseWrapper> getHospitals(Map<String, String> parameters) {
@@ -146,10 +160,7 @@ public with sharing class MH_HospitalRESTHandler {
 
     }
 
-    public String updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
-        System.debug('HANDLER UPDATE HOSPITAL');
-        System.debug('HOSPITAL WRAPPER');
-        System.debug(hospitalWrapper);
+    public MH_HospitalRESTWebServiceResponse updateHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
         MH_LogExternalApi log;
         HttpRequest request = new HttpRequest();
         HttpResponse response;
@@ -162,15 +173,10 @@ public with sharing class MH_HospitalRESTHandler {
             log.createLog();
         }
 
-        if (response.getStatusCode() == 200) {
-            log.createLog();
-            return Label.MH_Success_Message;
-        } else {
-            MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
-                    JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
-            log.createLog();
-            return responseWrapper.statusMessage;
-        }
+        MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
+                JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
+        log.createLog();
+        return responseWrapper;
     }
 
     public String deleteHospital(String hospitalId, String isIntegration) {
@@ -246,8 +252,6 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     private HttpRequest createRequest(String endpoint, String methodType, MH_HospitalRESTResponseWrapper bodyWrapper) {
-        System.debug('HANDLER CREATE REQUEST');
-        System.debug(bodyWrapper);
         String accessToken = 'OAuth ' + token;
         HttpRequest request = new HttpRequest();
         request.setEndpoint(endpoint);
@@ -256,14 +260,12 @@ public with sharing class MH_HospitalRESTHandler {
         request.setHeader('Content-Type', contentType);
         if (methodType.equals('POST')) {
             request.setBody(JSONSerializerForADDHospital(bodyWrapper));
-        }else if(methodType.equals('PUT')){
+        } else if (methodType.equals('PUT')) {
             request.setBody(JSONSerializerForUPDATEHospital(bodyWrapper));
         }
         return request;
     }
     private HttpResponse createResponse(HttpRequest request) {
-        System.debug('REQUEST');
-        System.debug(request.getBody());
         HttpResponse response = new Http().send(request);
         Integer statusCode = response.getStatusCode();
         if (statusCode == 401) {

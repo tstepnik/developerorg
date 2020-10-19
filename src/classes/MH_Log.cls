@@ -17,8 +17,6 @@ public abstract class MH_Log {
     public Integer responseStatusCode { get; set; }
 
     public void createLog() {
-        System.debug('LOG TO CREATE ');
-
         try {
             if (
                     (Limits.getDmlRows() < Limits.getLimitDmlRows()) &&
@@ -39,11 +37,8 @@ public abstract class MH_Log {
                         Response_Status__c = responseStatus,
                         Response_Status_Code__c = String.valueOf(responseStatusCode)
                 );
-               Database.SaveResult  result = Database.insert(apexLog, false);
-                System.debug('RESULT');
-                System.debug(result);
+                insert apexLog;
             } else {
-
                 System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');
             }
 
@@ -54,7 +49,7 @@ public abstract class MH_Log {
 
     private String largeStringCutter(String str) {
         Integer maxlength = STRING_MAX_LENGTH;
-        if(String.isNotBlank(str)) {
+        if (String.isNotBlank(str)) {
             Integer stringSize = str.length();
             String cautionInfo = '...REST OF THIS MESSAGE WAS CUTTED BEACUSE IT WAS TO LARGE.';
             Integer cautionMsgLength = cautionInfo.length();

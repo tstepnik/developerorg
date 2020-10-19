@@ -94,7 +94,6 @@ public without sharing class MH_Doctor_Extension {
         List<Attachment> attachments = MH_Attachment_Service.getDoctorAttachments(doctor);
         if (!attachments.isEmpty() && attachments != null) {
             attachment = attachments[0];
-            System.debug(attachment);
             hasAttachment = true;
         } else {
             hasAttachment = false;

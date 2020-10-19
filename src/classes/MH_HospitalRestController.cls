@@ -12,7 +12,6 @@ public with sharing class MH_HospitalRestController {
     public MH_HospitalRestController() {
         try {
             restService = new MH_HospitalRESTHandler();
-            getCountryListItems();
         } catch (Exception e) {
             if (e instanceof MH_InvalidCredentialsException) {
                 ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
@@ -72,9 +71,12 @@ public with sharing class MH_HospitalRestController {
     }
 
     public void updateHospital() {
+        MH_HospitalRESTWebServiceResponse response;
         try {
-            resultMessage = restService.updateHospital(hospitalOperationItem);
-            if (resultMessage.contains('Success')) {
+//            resultMessage = restService.updateHospital(hospitalOperationItem).statusMessage;
+            response = restService.updateHospital(hospitalOperationItem);
+
+            if (response.statusMessage.contains('Success') || response.isSuccess) {
                 refreshSearchedHospitals();
                 clearUpsertItem();
             } else {
@@ -129,7 +131,7 @@ public with sharing class MH_HospitalRestController {
         clearUpsertItem();
     }
 
-    public List<SelectOption> getCountryListItems() {
+    public void getCountryListItems() {
         if (Test.isRunningTest()) {
             countries = new List<String>{
                     'PL', 'UK', 'UA'
@@ -137,6 +139,8 @@ public with sharing class MH_HospitalRestController {
         } else {
             try {
                 countries = restService.getCountryPicklistValues();
+                System.debug('COUNTRIES');
+                System.debug(countries);
             } catch (Exception e) {
                 ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
             }
@@ -149,7 +153,6 @@ public with sharing class MH_HospitalRestController {
                 options.add(new SelectOption(cString, cString));
             }
         }
-        return options;
     }
 
     private void handleCalloutExcepiton(CalloutException e) {

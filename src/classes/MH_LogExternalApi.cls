@@ -49,7 +49,6 @@ public abstract class MH_LogExternalApi extends MH_Log {
 
     public class Error extends MH_LogExternalApi {
 
-//        DELETE ERROR
         public Error(HttpRequest request, Exception e, String methodName) {
             super(request, e, methodName);
             this.logGroup = GROUP_ERROR;
@@ -63,7 +62,6 @@ public abstract class MH_LogExternalApi extends MH_Log {
 
     public class Info extends MH_LogExternalApi {
 
-//        DELETE SUCCEESS
         public Info(HttpRequest request, HttpResponse response, String methodName) {
             super(request, response, methodName);
             this.logGroup = GROUP_INFO;

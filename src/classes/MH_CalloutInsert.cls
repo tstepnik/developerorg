@@ -41,28 +41,40 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
     }
 
     public void execute(QueueableContext context) {
-Integer calloutCounter = 0;
+        Integer calloutCounter = 0;
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
-
+        System.debug('CALLOUT');
         if (method.equals('POST')) {
+            System.debug('INSIDE POST');
             MH_HospitalRESTWebServiceResponse responseWrapper;
-            while(calloutCounter<3 && !responseWrapper.isSuccess){
+            while (calloutCounter < 3 && !responseWrapper.isSuccess) {
                 responseWrapper = handler.addHospital(wrapper);
+                System.debug('COUNTER');
                 calloutCounter++;
             }
             Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
-            if(responseWrapper.isSuccess){
+            if (responseWrapper.isSuccess) {
                 hospital.Integrated__c = true;
                 hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
             }
             MH_Utils.disableTrigger(Hospital__c.getSObjectType());
             Database.UpsertResult resDatabase = Database.upsert(hospital);
-            if(!resDatabase.isSuccess()){
+            if (!resDatabase.isSuccess()) {
 
             }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         } else if (method.equals('UPDATE')) {
-            String responseMessage = handler.updateHospital(wrapper);
+            MH_HospitalRESTWebServiceResponse response;
+            while (calloutCounter < 3 && !response.isSuccess) {
+                response = handler.updateHospital(wrapper);
+                calloutCounter++;
+            }
+            if(response.isSuccess){
+                Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
+                MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+                hospital.Integrated__c = true;
+                Database.upsert(hospital);
+            }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         } else if (method.equals('DELETE')) {
             String responseMessage = handler.deleteHospital(wrapper.id, 'true');
