@@ -45,7 +45,7 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             token = '';
         } else {
-            if (!System.isQueueable()) {
+            if (!System.isQueueable() && !System.isBatch()) {
                 try {
                     sessionPartition = Cache.Session.getPartition('local.ModernHospitalSystem');
                 } catch (Exception e) {
@@ -62,7 +62,7 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             cachedToken = '';
         } else {
-            if (!System.isQueueable() && !invalidSession) {
+            if (!System.isQueueable() && !invalidSession &&!System.isBatch()) {
                 cachedToken = (String) sessionPartition.get('token');
                 tokenLogInserted = false;
             }
@@ -79,7 +79,7 @@ public with sharing class MH_HospitalRESTHandler {
 
             Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseFromHX.getBody());
             String requestToken = (String) jsonMap.get('access_token');
-            if (!System.isQueueable()) {
+            if (!System.isQueueable() && !System.isBatch()) {
                 invalidSession = false;
                 //this line is nessesary when you lost session
                 token = requestToken;
