@@ -97,6 +97,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
 
         if (isIntegration) {
             MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+            hospital.Integrated__c = true;
         }
 
         Database.UpsertResult result = Database.upsert(hospital);
@@ -126,12 +127,12 @@ public with sharing class MH_HospitalRESTServiceHelper {
         String methodName = 'updateHospital';
         String responseStatus = 'OK';
         Integer responseStatusCode = 200;
-        String requestBody = MH_Utils.fromParamsToJSON(id, externalId, name, country, town, street, externalId, isIntegration);
+        String requestBody = MH_Utils.fromParamsToJSON(id, externalId, name, country, town, street, email, isIntegration);
         if (String.isBlank(id)) {
             methodName = 'createHospital';
             responseStatus = 'Created';
             responseStatusCode = 201;
-            requestBody = MH_Utils.fromParamsToJSON(externalId, name, country, town, street, externalId, isIntegration);
+            requestBody = MH_Utils.fromParamsToJSON(externalId, name, country, town, street, email, isIntegration);
         }
 
         MH_HospitalRESTWebServiceResponse serviceResponse;

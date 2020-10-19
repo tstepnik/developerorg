@@ -11,7 +11,6 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
     public MH_HospitalRESTResponseWrapper setExternalId(MH_HospitalRESTResponseWrapper wrappers) {
         MH_HospitalRESTResponseWrapper w = new MH_HospitalRESTResponseWrapper();
 
-
         MH_HospitalRESTResponseWrapper wrapperWithExternalId = new MH_HospitalRESTResponseWrapper(
                 w.id,
                 w.name,
@@ -20,7 +19,6 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
                 w.street,
                 w.email
         );
-
 
         return wrapperWithExternalId;
     }
@@ -46,20 +44,23 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
 
         if (method.equals('POST')) {
-            System.debug('WCHODZI DO POSTA CALLOUT');
             MH_HospitalRESTWebServiceResponse responseWrapper;
-            System.debug('(calloutCounter < 3 && !responseWrapper.isSuccess)');
+            System.debug('(calloutCounter < 3 && !isSuccess)' );
+            System.debug((calloutCounter < 3 && !isSuccess) );
             while (calloutCounter < 3 && !isSuccess) {
-                System.debug('WCHODZI W WHILE');
-                System.debug(wrapper);
+//            while (!isSuccess) {
                 responseWrapper = handler.addHospital(wrapper);
-                System.debug('responseWrapper');
-                System.debug(responseWrapper);
                 isSuccess = (responseWrapper.statusMessage.equals('Success')) ? true : false;
-                System.debug('isSuccess');
-                System.debug(isSuccess);
                 calloutCounter++;
+                System.debug(calloutCounter);
+                System.debug('STATUS MESSAGE');
+                System.debug(responseWrapper.statusMessage);
             }
+            System.debug('calloutCounter');
+            System.debug('/////////////////////');
+            System.debug(calloutCounter);
+            System.debug('/////////////////////');
+
             Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
             if (responseWrapper.statusMessage.equals('Success')) {
                 hospital.Integrated__c = true;
@@ -76,8 +77,9 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
 
         else if (method.equals('UPDATE')) {
             MH_HospitalRESTWebServiceResponse response;
-            while (calloutCounter < 3 && !response.statusMessage.equals('Success')) {
+            while (calloutCounter < 3 && !isSuccess) {
                 response = handler.updateHospital(wrapper);
+                isSuccess = (response.statusMessage.equals('Success')) ? true : false;
                 calloutCounter++;
             }
             if (response.statusMessage.equals('Success')) {

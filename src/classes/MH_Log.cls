@@ -39,7 +39,7 @@ public abstract class MH_Log {
                         Response_Status_Code__c = String.valueOf(responseStatusCode)
                 );
                 System.debug('INSERTUJE LOGA W CREATE LOG');
-                insert apexLog;
+//                insert apexLog;
             } else {
                 System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');
             }

@@ -18,7 +18,7 @@ public virtual class TriggerHandler {
         } else {
             isEnabled = MH_Utils.isTriggerEnabled(Trigger.new.getSobjectType());
         }
-
+        System.debug('TRIGGER SIE ODPALA ');
         run(isEnabled);
     }
 //ee
