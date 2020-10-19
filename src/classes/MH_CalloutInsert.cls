@@ -41,15 +41,25 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
     }
 
     public void execute(QueueableContext context) {
-
+Integer calloutCounter = 0;
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
 
         if (method.equals('POST')) {
-            MH_HospitalRESTWebServiceResponse responseWrapper = handler.addHospital(wrapper);
-            MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+            MH_HospitalRESTWebServiceResponse responseWrapper;
+            while(calloutCounter<3 && !responseWrapper.isSuccess){
+                responseWrapper = handler.addHospital(wrapper);
+                calloutCounter++;
+            }
             Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
-            hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
+            if(responseWrapper.isSuccess){
+                hospital.Integrated__c = true;
+                hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
+            }
+            MH_Utils.disableTrigger(Hospital__c.getSObjectType());
             Database.UpsertResult resDatabase = Database.upsert(hospital);
+            if(!resDatabase.isSuccess()){
+
+            }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         } else if (method.equals('UPDATE')) {
             String responseMessage = handler.updateHospital(wrapper);

@@ -100,10 +100,10 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         Database.UpsertResult result = Database.upsert(hospital);
-
+//todo change false to result.isSUccess
         MH_HospitalRESTWebServiceResponse webServiceResponse = new MH_HospitalRESTWebServiceResponse
                 ((String) hospital.Id,
-                        result.success,
+                        result.isSuccess(),
                         result.success ? Label.MH_Success_Message : MH_Utils.rewordStatusMessage(result.getErrors()[0].getMessage()));
         return webServiceResponse;
     }
