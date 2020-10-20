@@ -139,8 +139,6 @@ public with sharing class MH_HospitalRestController {
         } else {
             try {
                 countries = restService.getCountryPicklistValues();
-                System.debug('COUNTRIES');
-                System.debug(countries);
             } catch (Exception e) {
                 ApexPages.addMessage(new ApexPages.message(Apexpages.Severity.ERROR, e.getMessage()));
             }

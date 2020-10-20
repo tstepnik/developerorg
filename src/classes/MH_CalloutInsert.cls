@@ -45,22 +45,12 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
 
         if (method.equals('POST')) {
             MH_HospitalRESTWebServiceResponse responseWrapper;
-            System.debug('(calloutCounter < 3 && !isSuccess)' );
-            System.debug((calloutCounter < 3 && !isSuccess) );
+
             while (calloutCounter < 3 && !isSuccess) {
-//            while (!isSuccess) {
                 responseWrapper = handler.addHospital(wrapper);
                 isSuccess = (responseWrapper.statusMessage.equals('Success')) ? true : false;
                 calloutCounter++;
-                System.debug(calloutCounter);
-                System.debug('STATUS MESSAGE');
-                System.debug(responseWrapper.statusMessage);
             }
-            System.debug('calloutCounter');
-            System.debug('/////////////////////');
-            System.debug(calloutCounter);
-            System.debug('/////////////////////');
-
             Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
             if (responseWrapper.statusMessage.equals('Success')) {
                 hospital.Integrated__c = true;
@@ -73,7 +63,6 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
             }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         }
-
 
         else if (method.equals('UPDATE')) {
             MH_HospitalRESTWebServiceResponse response;
@@ -88,6 +77,7 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
                 hospital.Integrated__c = true;
                 Database.upsert(hospital);
             }
+
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         } else if (method.equals('DELETE')) {
             String responseMessage = handler.deleteHospital(wrapper.id, 'true');

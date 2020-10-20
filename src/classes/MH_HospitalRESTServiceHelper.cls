@@ -123,6 +123,8 @@ public with sharing class MH_HospitalRESTServiceHelper {
     }
 
     public static MH_HospitalRESTWebServiceResponse upsertServiceResponse(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+        Datetime requestTime = Datetime.now();
+        MH_LogRestApi log;
         String className = MH_HospitalRESTService.class.getName();
         String methodName = 'updateHospital';
         String responseStatus = 'OK';
@@ -136,7 +138,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
         }
 
         MH_HospitalRESTWebServiceResponse serviceResponse;
-        MH_LogRestApi log;
+
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
         if (isIntegration == null) {
@@ -162,7 +164,9 @@ public with sharing class MH_HospitalRESTServiceHelper {
         log.apexMethodName = methodName;
         log.requestBody = requestBody;
         log.responseBody = JSON.serialize(serviceResponse);
-        log.createLog();
+        log.requestTime = requestTime;
+        log.responseTime = Datetime.now();
+        log.insertLog();
         return serviceResponse;
     }
 }

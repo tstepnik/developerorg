@@ -62,7 +62,7 @@ public with sharing class MH_HospitalRESTHandler {
         if (Test.isRunningTest()) {
             cachedToken = '';
         } else {
-            if (!System.isQueueable() && !invalidSession &&!System.isBatch()) {
+            if (!System.isQueueable() && !invalidSession && !System.isBatch()) {
                 cachedToken = (String) sessionPartition.get('token');
                 tokenLogInserted = false;
             }
@@ -74,7 +74,9 @@ public with sharing class MH_HospitalRESTHandler {
             HttpRequest requestToHX = new HttpRequest();
             requestToHX.setMethod('POST');
             requestToHX.setEndpoint(authEndpoint);
+            Datetime requestTime = Datetime.now();
             responseFromHX = new Http().send(requestToHX);
+            Datetime responseTime = Datetime.now();
             hadnleAuthentication(responseFromHX);
 
             Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseFromHX.getBody());
@@ -85,7 +87,7 @@ public with sharing class MH_HospitalRESTHandler {
                 token = requestToken;
                 sessionPartition.put('token', requestToken);
             }
-            tokenLog = new MH_LogExternalApi.Info(requestToHX, responseFromHX, 'getAccessToken');
+            tokenLog = new MH_LogExternalApi.Info(requestToHX, responseFromHX, 'getAccessToken',requestTime,responseTime);
             return requestToken;
         } else {
             return cachedToken;
@@ -100,9 +102,7 @@ public with sharing class MH_HospitalRESTHandler {
         MH_LogExternalApi log;
         try {
             request = createRequest(countriesEndpoint, 'GET', null);
-            response = createResponse(request);
-            log = new MH_LogExternalApi.Info(request, response, 'getCountryPicklistValues');
-            log.createLog();
+            response = createResponse(request, 'getCountryPicklistValues');
             insertTokenlog();
         } catch (Exception e) {
             log = catchLog(request, response, e, 'getCountryPicklistValues');
@@ -128,16 +128,14 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response = new HttpResponse();
         try {
             request = createRequest(requestEndpoint, 'GET', null);
-            response = createResponse(request);
+            response = createResponse(request, 'getHospitals');
             hospitals = (List<MH_HospitalRESTResponseWrapper>) JSON.deserialize(
                     response.getBody(), List<MH_HospitalRESTResponseWrapper>.class);
-            log = new MH_LogExternalApi.Info(request, response, 'getHospitals');
         } catch (Exception e) {
             log = catchLog(request, response, e, 'getHospitals');
             log.createLog();
             return null;
         }
-        log.createLog();
         return hospitals;
     }
 
@@ -147,16 +145,11 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response;
         try {
             request = createRequest(mainEndpoint, 'POST', hospitalWrapper);
-            response = createResponse(request);
-            log = new MH_LogExternalApi.Info(request, response, 'addHospital');
-            System.debug('ROBI LOGA');
-            System.debug(log);
+            response = createResponse(request, 'addHospital');
         } catch (Exception e) {
             log = catchLog(request, response, e, 'addHospital');
             log.createLog();
         }
-        System.debug('INSERTUJE LOGA');
-        log.createLog();
         return (MH_HospitalRESTWebServiceResponse) JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
 
     }
@@ -167,8 +160,7 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response;
         try {
             request = createRequest(mainEndpoint, 'PUT', hospitalWrapper);
-            response = createResponse(request);
-            log = new MH_LogExternalApi.Info(request, response, 'updateHospital');
+            response = createResponse(request, 'updateHospital');
         } catch (Exception e) {
             log = catchLog(request, response, e, 'updateHospital');
             log.createLog();
@@ -176,7 +168,6 @@ public with sharing class MH_HospitalRESTHandler {
 
         MH_HospitalRESTWebServiceResponse responseWrapper = (MH_HospitalRESTWebServiceResponse)
                 JSON.deserialize(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
-        log.createLog();
         return responseWrapper;
     }
 
@@ -190,9 +181,7 @@ public with sharing class MH_HospitalRESTHandler {
         HttpResponse response;
         try {
             request = createRequest(requestEndpoint, 'DELETE', null);
-            response = createResponse(request);
-            log = new MH_LogExternalApi.Info(request, response, 'deleteHospital');
-            log.createLog();
+            response = createResponse(request, 'deleteHospital');
         } catch (Exception e) {
             log = catchLog(request, response, e, 'deleteHospital');
             log.createLog();
@@ -266,16 +255,28 @@ public with sharing class MH_HospitalRESTHandler {
         }
         return request;
     }
-    private HttpResponse createResponse(HttpRequest request) {
-        HttpResponse response = new Http().send(request);
+    private HttpResponse createResponse(HttpRequest request, String methodName) {
+        System.debug('CREATE RESPONSE');
+        MH_LogExternalApi log;
+        HttpResponse response;
+        Datetime beforeResponse;
+        Datetime afterResponse;
+
+        beforeResponse = Datetime.now();
+        response = new Http().send(request);
+        afterResponse = Datetime.now();
+        log = new MH_LogExternalApi.Info(request,response, methodName,beforeResponse,afterResponse);
+        System.debug(log);
         Integer statusCode = response.getStatusCode();
         if (statusCode == 401) {
+            log = new MH_LogExternalApi.Error(request, response, methodName,beforeResponse,afterResponse);
             invalidSession = true;
             getAccessToken();
             String accessToken = 'OAuth ' + token;
             request.setHeader('Authorization', accessToken);
             response = new Http().send(request);
         }
+        log.createLog();
         return response;
     }
 

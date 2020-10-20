@@ -1,6 +1,4 @@
-public abstract class MH_Log {
-
-    private final Integer STRING_MAX_LENGTH = 131072;
+global abstract class MH_Log {
 
     public String type { get; set; }
     public String logGroup { get; set; }
@@ -15,55 +13,51 @@ public abstract class MH_Log {
     public String responseBody { get; set; }
     public String responseStatus { get; set; }
     public Integer responseStatusCode { get; set; }
-
-    public void createLog() {
-        System.debug('JEST W CREATE LOG');
-        try {
-            if (
-                    (Limits.getDmlRows() < Limits.getLimitDmlRows()) &&
-                            (Limits.getDmlStatements() < Limits.getLimitDmlStatements())
-                    ) {
-                Apex_Log__c apexLog = new Apex_Log__c(
-                        Type__c = type,
-                        Group__c = logGroup,
-                        Apex_Class_Name__c = apexClassName,
-                        Apex_Method_Name__c = apexMethodName,
-                        Line_Number__c = lineNumber,
-                        Message__c = message == null ? message : largeStringCutter(message),
-                        StackTrace__c = stackTrace == null ? stackTrace : largeStringCutter(stackTrace),
-                        Request_Body__c = largeStringCutter(requestBody),
-                        Request_Endpoint__c = requestEndpoint,
-                        Request_Method__c = requestMethod,
-                        Response_Body__c = largeStringCutter(responseBody),
-                        Response_Status__c = responseStatus,
-                        Response_Status_Code__c = String.valueOf(responseStatusCode)
-                );
-                System.debug('INSERTUJE LOGA W CREATE LOG');
-//                insert apexLog;
-            } else {
-                System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');
+    public Datetime requestTime { get; set; }
+    public Datetime responseTime { get; set; }
+    public Integer responseDuration {
+        get {
+            if (this.responseDuration == null) {
+                countResponseDuration();
             }
-
-        } catch (DmlException e) {
-            System.debug('Something bad has ocure and hence failed to create a Log! Error: ' + e.getMessage());
+            return responseDuration;
         }
+        set;
     }
 
-    private String largeStringCutter(String str) {
-        Integer maxlength = STRING_MAX_LENGTH;
-        if (String.isNotBlank(str)) {
-            Integer stringSize = str.length();
-            String cautionInfo = '...REST OF THIS MESSAGE WAS CUTTED BEACUSE IT WAS TO LARGE.';
-            Integer cautionMsgLength = cautionInfo.length();
-            if (maxlength > cautionMsgLength) {
-                Integer acceptableLength = maxlength - cautionMsgLength - 1;
-                if (stringSize > acceptableLength) {
-                    return str.substring(0, acceptableLength) + cautionInfo;
-                }
-                return str;
-            }
-            return cautionInfo;
+    public void createLog() {
+        Map<String, Object> jsonMap = new Map<String, Object>();
+        jsonMap.put('type', this.type);
+        jsonMap.put('logGroup', logGroup);
+        jsonMap.put('apexClassName', this.apexClassName);
+        jsonMap.put('apexMethodName', this.apexMethodName);
+        jsonMap.put('message', this.message);
+        jsonMap.put('lineNumber', this.lineNumber);
+        jsonMap.put('stackTrace', this.stackTrace);
+        jsonMap.put('requestBody', this.requestBody);
+        jsonMap.put('requestEndpoint', this.requestEndpoint);
+        jsonMap.put('requestMethod', this.requestMethod);
+        jsonMap.put('responseBody', this.responseBody);
+        jsonMap.put('responseStatus', this.responseStatus);
+        jsonMap.put('responseStatusCode', this.responseStatusCode);
+        if (this.requestTime != null) {
+            jsonMap.put('requestTime', this.requestTime);
+        } else {
+            jsonMap.put('requestTime', Datetime.now());
         }
-        return 'EMPTY';
+        if (this.responseTime != null) {
+            jsonMap.put('responseTime', this.responseTime);
+        } else {
+            jsonMap.put('responseTime', Datetime.now());
+        }
+        countResponseDuration();
+        jsonMap.put('responseDuration', this.responseDuration);
+        MH_LogRESTHandler.getLogHandler().addLog(jsonMap);
+    }
+
+    public void countResponseDuration() {
+        if (responseTime != null && requestTime != null) {
+            this.responseDuration = responseTime.millisecond() - requestTime.millisecond();
+        }
     }
 }

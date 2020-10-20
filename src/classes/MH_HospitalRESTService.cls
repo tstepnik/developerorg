@@ -4,8 +4,11 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpGet
     global static List<MH_HospitalRESTResponseWrapper> getHospitals() {
+        Datetime requestTime = Datetime.now();
         RestRequest request = RestContext.request;
         RestResponse response = RestContext.response;
+
+
         Map<String, String> parameters = request.params;
         String endpoint = MH_Utils.getFullGetResourcePath(request);
         String query = MH_HospitalRESTServiceHelper.generateQuery(parameters);
@@ -28,13 +31,16 @@ global with sharing class MH_HospitalRESTService {
         log.requestBody = null;
         log.responseBody = JSON.serialize(responseWrappers);
         log.requestEndpoint = endpoint;
-        log.createLog();
+        log.requestTime = requestTime;
+        log.responseTime = Datetime.now();
+        log.insertLog();
         return responseWrappers;
     }
 
+
     @HttpPost
     global static MH_HospitalRESTWebServiceResponse createHospital(String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
-       return MH_HospitalRESTServiceHelper.upsertServiceResponse(null,externalId,name,country,town,street,email,isIntegration);
+        return MH_HospitalRESTServiceHelper.upsertServiceResponse(null,externalId,name,country,town,street,email,isIntegration);
     }
     @HttpPut
     global static MH_HospitalRESTWebServiceResponse updateHospital(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
@@ -43,6 +49,7 @@ global with sharing class MH_HospitalRESTService {
 
     @HttpDelete
     global static MH_HospitalRESTWebServiceResponse deleteHospital() {
+        Datetime requestTime = Datetime.now();
         MH_HospitalRESTWebServiceResponse serviceResponse;
         RestResponse response = RestContext.response;
         RestRequest request = RestContext.request;
@@ -81,7 +88,9 @@ global with sharing class MH_HospitalRESTService {
         log.requestBody = null;
         log.responseBody = JSON.serialize(serviceResponse);
         log.requestEndpoint = endpoint;
-        log.createLog();
+        log.requestTime = requestTime;
+        log.responseTime = Datetime.now();
+        log.insertLog();
         //FOR TEST todo REMOVE IT AFTER
 //        Integer start = System.Now().millisecond();
 //        while(System.Now().millisecond()< start+130000){

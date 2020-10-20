@@ -6,7 +6,6 @@ global class MH_HospitalBatch implements Database.Batchable<sObject>, Database.A
     }
 
     global void execute(Database.BatchableContext batchableContext, List<Hospital__c> scope) {
-        System.debug('WCHODZI DO SCOPE');
         List<Hospital__c>  hospitals = new List<Hospital__c>();
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
         for (Hospital__c hospital : scope) {
@@ -26,5 +25,4 @@ global class MH_HospitalBatch implements Database.Batchable<sObject>, Database.A
     global void finish(Database.BatchableContext batchableContext) {
 
     }
-
 }
