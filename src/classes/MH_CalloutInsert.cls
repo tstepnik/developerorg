@@ -39,49 +39,62 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
     }
 
     public void execute(QueueableContext context) {
-        Integer calloutCounter = 0;
         Boolean isSuccess = false;
         MH_HospitalRESTHandler handler = new MH_HospitalRESTHandler();
 
         if (method.equals('POST')) {
             MH_HospitalRESTWebServiceResponse responseWrapper;
-
-            while (calloutCounter < 3 && !isSuccess) {
                 responseWrapper = handler.addHospital(wrapper);
                 isSuccess = (responseWrapper.statusMessage.equals('Success')) ? true : false;
-                calloutCounter++;
-            }
-            Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
+            Hospital__c hospital = new Hospital__c(Id = wrapper.externalId);
             if (responseWrapper.statusMessage.equals('Success')) {
                 hospital.Integrated__c = true;
                 hospital.ExternalHospitalId__c = responseWrapper.hospitalId;
+            }else {
+                hospital.Integrated__c = false;
             }
             MH_Utils.disableTrigger(Hospital__c.getSObjectType());
             Database.UpsertResult resDatabase = Database.upsert(hospital);
-            if (!resDatabase.isSuccess()) {
-
-            }
             MH_Utils.enableTrigger(Hospital__c.getSObjectType());
         }
 
+
         else if (method.equals('UPDATE')) {
+            System.debug('UPDATE CALLOUT');
+            System.debug(wrapper);
             MH_HospitalRESTWebServiceResponse response;
-            while (calloutCounter < 3 && !isSuccess) {
                 response = handler.updateHospital(wrapper);
                 isSuccess = (response.statusMessage.equals('Success')) ? true : false;
-                calloutCounter++;
-            }
+            Hospital__c hospital = new Hospital__c(Id = wrapper.externalId);
+            System.debug(hospital);
             if (response.statusMessage.equals('Success')) {
-                Hospital__c hospital = new Hospital__c(Id = wrapper.Id);
-                MH_Utils.disableTrigger(Hospital__c.getSObjectType());
                 hospital.Integrated__c = true;
-                Database.upsert(hospital);
+            }else {
+                hospital.Integrated__c = false;
             }
+            MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+            Database.upsert(hospital);
+            MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+        }
 
-            MH_Utils.enableTrigger(Hospital__c.getSObjectType());
-        } else if (method.equals('DELETE')) {
+        else if (method.equals('DELETE')) {
+            System.debug('CALLOUT DELETE');
+            //todo zamieniłe id z externalid
+            System.debug(wrapper);
+            Hospital__c hospital = new Hospital__c(Id = wrapper.externalId, ExternalHospitalId__c = wrapper.id);
+            System.debug(hospital);
             String responseMessage = handler.deleteHospital(wrapper.id, 'true');
-            MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            isSuccess = (responseMessage.equals('Success')) ? true : false;
+            System.debug(isSuccess);
+            if (!isSuccess) {
+                MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+                undelete hospital;
+                hospital.Integrated__c = false;
+                update hospital;
+                delete hospital;
+                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            }
+//            Database.upsert(hospital);
         }
     }
 }

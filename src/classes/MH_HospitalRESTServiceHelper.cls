@@ -123,6 +123,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
     }
 
     public static MH_HospitalRESTWebServiceResponse upsertServiceResponse(String id, String externalId, String name, String country, String town, String street, String email, Boolean isIntegration) {
+
         Datetime requestTime = Datetime.now();
         MH_LogRestApi log;
         String className = MH_HospitalRESTService.class.getName();

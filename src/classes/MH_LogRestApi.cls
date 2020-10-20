@@ -78,18 +78,12 @@ public abstract class MH_LogRestApi extends MH_Log {
     }
 
     public void insertLog() {
-        System.debug('JEST W CREATE LOG');
+
         try {
             if (
                     (Limits.getDmlRows() < Limits.getLimitDmlRows()) &&
                             (Limits.getDmlStatements() < Limits.getLimitDmlStatements())
                     ) {
-                System.debug('//////////////////');
-                System.debug('//////////////////');
-                System.debug(requestTime);
-                System.debug(responseTime);
-                System.debug('//////////////////');
-                System.debug('//////////////////');
 
                 Apex_Log__c apexLog = new Apex_Log__c(
                         Type__c = type,
@@ -109,7 +103,7 @@ public abstract class MH_LogRestApi extends MH_Log {
                         ResponseTime__c = responseTime,
                         Response_duration__c = responseTime.getTime() - requestTime.getTime()
                 );
-                System.debug('INSERTUJE LOGA W CREATE LOG');
+
                 insert apexLog;
             } else {
                 System.debug('The Governor Limits have already been exhausted and hence failed to create a Log.');

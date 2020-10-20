@@ -3,6 +3,5 @@
  */
 
 trigger MH_HospitalTrigger on Hospital__c (after insert, after update, after delete) {
-
         new MH_HospitalTriggerHandler().run();
 }

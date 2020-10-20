@@ -60,9 +60,6 @@ public with sharing class MH_LogRESTHandler {
     }
 
     public void addLog(Map<String,Object> logMap){
-        System.debug('WCHODZI DO ADDLOG HANDLERA');
-        System.debug('WCHODZI DO ADDLOG HANDLERA');
-        System.debug('WCHODZI DO ADDLOG HANDLERA');
         String accessToken = 'OAuth ' + token;
         HttpRequest request = new HttpRequest();
         HttpResponse response;
@@ -72,8 +69,6 @@ public with sharing class MH_LogRESTHandler {
         request.setHeader('Content-Type', contentType);
         request.setBody(JSON.serialize(logMap));
         response = new Http().send(request);
-        System.debug(request.getBody());
-        System.debug(response.getBody());
     }
 
 }

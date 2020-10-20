@@ -13,12 +13,12 @@ public virtual class TriggerHandler {
     }
     Boolean isEnabled;
     public void run() {
+
         if (Trigger.isDelete) {
             isEnabled = MH_Utils.isTriggerEnabled(Trigger.old.getSobjectType());
         } else {
             isEnabled = MH_Utils.isTriggerEnabled(Trigger.new.getSobjectType());
         }
-        System.debug('TRIGGER SIE ODPALA ');
         run(isEnabled);
     }
 //ee

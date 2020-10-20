@@ -52,6 +52,7 @@ global abstract class MH_Log {
         }
         countResponseDuration();
         jsonMap.put('responseDuration', this.responseDuration);
+
         MH_LogRESTHandler.getLogHandler().addLog(jsonMap);
     }
 

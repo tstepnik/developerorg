@@ -152,5 +152,29 @@ public with sharing class MH_Utils {
         return resourcePath;
     }
 
+    public static void sendEmailToGroup(String groupName, String subject, String body) {
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        mail.setToAddresses(getEmailAddresses(groupName));
+        mail.setSubject(subject);
+        mail.setPlainTextBody(body);
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[]{
+                mail
+        });
+    }
+
+    private static List<String> getEmailAddresses(String groupName) {
+        List<String> idList = new List<String>();
+        List<String> mailToAddresses = new List<String>();
+        Group g = [SELECT (select userOrGroupId from groupMembers) FROM group WHERE name = :groupName];
+        for (GroupMember gm : g.groupMembers) {
+            idList.add(gm.userOrGroupId);
+        }
+        User[] usr = [SELECT email FROM user WHERE id IN :idList];
+        for (User u : usr) {
+            mailToAddresses.add(u.email);
+        }
+        return mailToAddresses;
+    }
+
 
 }

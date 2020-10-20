@@ -140,6 +140,7 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public MH_HospitalRESTWebServiceResponse addHospital(MH_HospitalRESTResponseWrapper hospitalWrapper) {
+
         MH_LogExternalApi log;
         HttpRequest request = new HttpRequest();
         HttpResponse response;
@@ -256,7 +257,7 @@ public with sharing class MH_HospitalRESTHandler {
         return request;
     }
     private HttpResponse createResponse(HttpRequest request, String methodName) {
-        System.debug('CREATE RESPONSE');
+
         MH_LogExternalApi log;
         HttpResponse response;
         Datetime beforeResponse;
@@ -266,7 +267,7 @@ public with sharing class MH_HospitalRESTHandler {
         response = new Http().send(request);
         afterResponse = Datetime.now();
         log = new MH_LogExternalApi.Info(request,response, methodName,beforeResponse,afterResponse);
-        System.debug(log);
+
         Integer statusCode = response.getStatusCode();
         if (statusCode == 401) {
             log = new MH_LogExternalApi.Error(request, response, methodName,beforeResponse,afterResponse);
