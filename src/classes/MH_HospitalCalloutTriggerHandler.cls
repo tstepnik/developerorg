@@ -44,11 +44,32 @@ public with sharing class MH_HospitalCalloutTriggerHandler {
         }
     }
 
-
     public void afterDelete(List<Hospital__c> hospitals) {
         List<MH_HospitalRESTResponseWrapper> wrappersToInsert = convertToUpdateWrappers(hospitals);
         for (MH_HospitalRESTResponseWrapper wrapper : wrappersToInsert) {
             System.enqueueJob(new MH_CalloutInsert(wrapper, 'DELETE'));
         }
+    }
+
+    public void beforeDelete(List<Hospital__c> hospitals) {
+        for(Hospital__c hospital : hospitals){
+            if (String.isBlank(hospital.ExternalHospitalId__c)) {
+                hospital.Integrated__c = true;
+            }
+        }
+        MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+        update hospitals;
+        MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+    }
+
+    public void afterUndelete(List<Hospital__c> hospitals){
+        for(Hospital__c hospital : hospitals){
+            if (String.isBlank(hospital.ExternalHospitalId__c)) {
+                hospital.Integrated__c = false;
+            }
+        }
+        MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+        update hospitals;
+        MH_Utils.enableTrigger(Hospital__c.getSObjectType());
     }
 }

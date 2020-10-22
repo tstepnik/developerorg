@@ -60,13 +60,11 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
 
 
         else if (method.equals('UPDATE')) {
-            System.debug('UPDATE CALLOUT');
-            System.debug(wrapper);
             MH_HospitalRESTWebServiceResponse response;
                 response = handler.updateHospital(wrapper);
                 isSuccess = (response.statusMessage.equals('Success')) ? true : false;
             Hospital__c hospital = new Hospital__c(Id = wrapper.externalId);
-            System.debug(hospital);
+
             if (response.statusMessage.equals('Success')) {
                 hospital.Integrated__c = true;
             }else {
@@ -78,14 +76,10 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
         }
 
         else if (method.equals('DELETE')) {
-            System.debug('CALLOUT DELETE');
-            //todo zamieniłe id z externalid
-            System.debug(wrapper);
             Hospital__c hospital = new Hospital__c(Id = wrapper.externalId, ExternalHospitalId__c = wrapper.id);
-            System.debug(hospital);
             String responseMessage = handler.deleteHospital(wrapper.id, 'true');
             isSuccess = (responseMessage.equals('Success')) ? true : false;
-            System.debug(isSuccess);
+
             if (!isSuccess) {
                 MH_Utils.disableTrigger(Hospital__c.getSObjectType());
                 undelete hospital;

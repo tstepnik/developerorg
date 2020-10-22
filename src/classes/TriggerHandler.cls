@@ -21,7 +21,7 @@ public virtual class TriggerHandler {
         }
         run(isEnabled);
     }
-//ee
+
     public void run(Boolean isEnabled) {
         if (isEnabled) {
             if (this.context == TriggerContext.BEFORE_INSERT) {

@@ -18,7 +18,10 @@ public with sharing class MH_HospitalTriggerHandler extends TriggerHandler {
 
     }
 
+
     protected override void beforeDelete() {
+//        MH_HospitalCalloutTriggerHandler.getInstance().beforeDelete(oldList);
+
     }
 
     protected override void afterInsert() {
@@ -32,5 +35,10 @@ public with sharing class MH_HospitalTriggerHandler extends TriggerHandler {
     protected override void afterDelete() {
         MH_HospitalCalloutTriggerHandler.getInstance().afterDelete(oldList);
     }
+    protected override void afterUndelete() {
+//        MH_HospitalCalloutTriggerHandler.getInstance().afterUndelete(oldList);
+    }
+
+
 
 }
