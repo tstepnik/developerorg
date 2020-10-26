@@ -173,6 +173,7 @@ public with sharing class MH_HospitalRESTHandler {
     }
 
     public String deleteHospital(String hospitalId, String isIntegration) {
+        System.debug('WCHODZI DO DELETE HOSPITAL');
         MH_HospitalRESTWebServiceResponse responseWrapper;
         String requestEndpoint = mainEndpoint;
         MH_LogExternalApi log;
@@ -185,6 +186,32 @@ public with sharing class MH_HospitalRESTHandler {
             response = createResponse(request, 'deleteHospital');
         } catch (Exception e) {
             log = catchLog(request, response, e, 'deleteHospital');
+            log.createLog();
+        }
+        if (response.getStatusCode() == 200) {
+            return Label.MH_Success_Message;
+        } else {
+            responseWrapper = (MH_HospitalRESTWebServiceResponse)
+                    JSON.deserializeStrict(response.getBody(), MH_HospitalRESTWebServiceResponse.class);
+            return responseWrapper.statusMessage;
+        }
+    }
+
+
+    public String undeleteHospital(String hospitalId, String isIntegration, String isUndelete) {
+        MH_HospitalRESTWebServiceResponse responseWrapper;
+        String requestEndpoint = mainEndpoint;
+        MH_LogExternalApi log;
+        requestEndpoint += ('?id=' + hospitalId);
+        requestEndpoint += ('&isIntegration=' + isIntegration);
+        requestEndpoint += ('&isUndelete=' + isUndelete);
+        HttpRequest request = new HttpRequest();
+        HttpResponse response;
+        try {
+            request = createRequest(requestEndpoint, 'PATCH', null);
+            response = createResponse(request, 'undeleteHospital');
+        } catch (Exception e) {
+            log = catchLog(request, response, e, 'undeleteHospital');
             log.createLog();
         }
         if (response.getStatusCode() == 200) {
@@ -256,6 +283,7 @@ public with sharing class MH_HospitalRESTHandler {
         }
         return request;
     }
+
     private HttpResponse createResponse(HttpRequest request, String methodName) {
 
         MH_LogExternalApi log;
@@ -305,4 +333,6 @@ public with sharing class MH_HospitalRESTHandler {
         }
         return requestEndpoint;
     }
+
+
 }

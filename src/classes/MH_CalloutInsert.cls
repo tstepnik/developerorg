@@ -88,7 +88,17 @@ public with sharing class MH_CalloutInsert implements Queueable, Database.Allows
                 delete hospital;
                 MH_Utils.enableTrigger(Hospital__c.getSObjectType());
             }
-//            Database.upsert(hospital);
+        } else if (method.equals('UNDELETE')) {
+            Hospital__c hospital = new Hospital__c(Id = wrapper.externalId, ExternalHospitalId__c = wrapper.id);
+            String responseMessage = handler.undeleteHospital(wrapper.id, 'true','true');
+            isSuccess = (responseMessage.equals('Success')) ? true : false;
+
+            if (!isSuccess) {
+                MH_Utils.disableTrigger(Hospital__c.getSObjectType());
+                hospital.Integrated__c = false;
+                update hospital;
+                MH_Utils.enableTrigger(Hospital__c.getSObjectType());
+            }
         }
     }
 }

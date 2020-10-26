@@ -4,9 +4,8 @@
     <option name="connections">
       <list>
         <IlluminatedCloudConnection>
-          <option name="connectionName" value="Dev1.org" />
+          <option name="connectionName" value="VisualForce" />
           <option name="defaultModuleName" value="Developer.org" />
-          <option name="offlineSymbolTablePath" value="$PROJECT_DIR$/IlluminatedCloud/Dev1_org/OfflineSymbolTable.zip" />
         </IlluminatedCloudConnection>
       </list>
     </option>

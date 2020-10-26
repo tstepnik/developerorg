@@ -9,6 +9,7 @@ public with sharing class MH_HospitalRESTServiceHelper {
             return query;
         }
 
+
         Map<String, String> params = new Map<String, String>();
         params.put('id', 'Id');
         params.put('externalId', 'ExternalHospitalId__c');

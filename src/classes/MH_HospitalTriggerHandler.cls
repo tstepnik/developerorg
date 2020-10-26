@@ -36,7 +36,7 @@ public with sharing class MH_HospitalTriggerHandler extends TriggerHandler {
         MH_HospitalCalloutTriggerHandler.getInstance().afterDelete(oldList);
     }
     protected override void afterUndelete() {
-//        MH_HospitalCalloutTriggerHandler.getInstance().afterUndelete(oldList);
+        MH_HospitalCalloutTriggerHandler.getInstance().afterUndelete(newList);
     }
 
 
